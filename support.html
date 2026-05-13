@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Website Support | Cary Park Solutions</title>
+<meta name="description" content="SLA-backed website support. Outages resolved in under 1 hour. Submit a ticket and get a CPS ticket ID instantly.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--a:#00c8ff;--bg:#070d1a;--bgc:#0d1525;--t:#e8e8e8;--m:#9ca3af;--nh:72px;--r:12px}
+html{scroll-behavior:smooth;background:var(--bg)}
+body{font-family:'Inter',sans-serif;background:var(--bg);background-image:linear-gradient(rgba(255,255,255,.05)1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.05)1px,transparent 1px),linear-gradient(rgba(255,255,255,.02)1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.02)1px,transparent 1px);background-size:50px 50px,50px 50px,12px 12px,12px 12px;background-attachment:fixed;color:var(--t);line-height:1.6;overflow-x:hidden}
+canvas{position:fixed;inset:0;z-index:1;pointer-events:none}
+nav{position:fixed;top:0;left:0;right:0;height:var(--nh);background:rgba(7,13,26,.92);backdrop-filter:blur(16px);border-bottom:1px solid rgba(255,255,255,.06);z-index:1000;display:flex;align-items:center;justify-content:center}
+.ni{width:100%;max-width:1200px;padding:0 24px;display:flex;align-items:center;justify-content:space-between}
+.logo{font-size:1.15rem;font-weight:700;color:#fff;text-decoration:none;letter-spacing:-.02em}.logo span{color:var(--a)}
+.nl{display:flex;align-items:center;gap:4px;list-style:none}
+.nl a{color:var(--m);text-decoration:none;font-size:.875rem;font-weight:500;padding:7px 13px;border-radius:6px;transition:color .2s,background .2s}
+.nl a:hover{color:#fff;background:rgba(255,255,255,.05)}
+.nl .cta{background:var(--a);color:#000!important;padding:9px 20px;border-radius:8px;font-weight:600;margin-left:8px}
+.nl .cta:hover{background:#22d4ff}
+.mb{display:none;background:none;border:none;cursor:pointer;padding:4px}
+.mb span{display:block;width:24px;height:2px;background:#fff;margin:5px 0}
+section{position:relative;z-index:2;padding:100px 24px}
+.container{max-width:900px;margin:0 auto}
+.lbl{text-transform:uppercase;font-size:.72rem;font-weight:600;letter-spacing:.15em;color:var(--a);margin-bottom:10px}
+.ttl{font-size:clamp(1.8rem,3.5vw,2.6rem);font-weight:800;letter-spacing:-.03em;margin-bottom:14px;line-height:1.15}
+.sub{color:var(--m);font-size:1rem;max-width:600px;margin-bottom:36px;line-height:1.7}
+/* SLA STRIP */
+.sla-strip{background:rgba(0,200,255,.06);border:1px solid rgba(0,200,255,.15);border-radius:var(--r);padding:20px 28px;display:flex;gap:32px;flex-wrap:wrap;margin-bottom:40px}
+.sla-item{display:flex;flex-direction:column;gap:3px}
+.sla-label{font-size:.65rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--m)}
+.sla-val{font-size:.95rem;font-weight:700;color:var(--a)}
+/* SEVERITY PILLS */
+.severity-row{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:28px}
+.sev{padding:8px 18px;border-radius:100px;font-size:.78rem;font-weight:700;cursor:pointer;border:2px solid transparent;transition:all .2s;display:flex;align-items:center;gap:6px}
+.sev.s1{background:rgba(239,68,68,.1);border-color:rgba(239,68,68,.3);color:#f87171}
+.sev.s2{background:rgba(249,115,22,.1);border-color:rgba(249,115,22,.3);color:#fb923c}
+.sev.s3{background:rgba(234,179,8,.1);border-color:rgba(234,179,8,.3);color:#facc15}
+.sev.s4{background:rgba(34,197,94,.1);border-color:rgba(34,197,94,.3);color:#4ade80}
+.sev.active{opacity:1}
+.sev:not(.active){opacity:.5}
+.sev-dot{width:7px;height:7px;border-radius:50%}
+.s1 .sev-dot{background:#f87171}
+.s2 .sev-dot{background:#fb923c}
+.s3 .sev-dot{background:#facc15}
+.s4 .sev-dot{background:#4ade80}
+/* FORM */
+.ticket-form{background:var(--bgc);border:1px solid rgba(255,255,255,.07);border-radius:16px;padding:40px}
+.fg{margin-bottom:16px}
+.fg label{display:block;font-size:.75rem;font-weight:600;margin-bottom:5px;color:var(--m);text-transform:uppercase;letter-spacing:.06em}
+.fg input,.fg textarea,.fg select{width:100%;padding:11px 14px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:8px;color:#fff;font-size:.88rem;font-family:inherit;outline:none;transition:border-color .25s}
+.fg input:focus,.fg textarea:focus,.fg select:focus{border-color:var(--a)}
+.fg textarea{min-height:90px;resize:vertical}
+.fg select{cursor:pointer}
+.fr{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.submit-btn{width:100%;padding:14px;background:var(--a);color:#000;font-weight:800;font-size:1rem;border:none;border-radius:10px;cursor:pointer;font-family:inherit;margin-top:8px;transition:background .2s,transform .2s}
+.submit-btn:hover{background:#22d4ff;transform:translateY(-1px)}
+/* SUCCESS */
+.success{display:none;text-align:center;padding:40px 20px}
+.ticket-id{font-family:'Courier New',monospace;font-size:1.5rem;font-weight:700;color:var(--a);background:rgba(0,200,255,.08);border:1px solid rgba(0,200,255,.2);border-radius:10px;padding:12px 24px;display:inline-block;margin:16px 0;letter-spacing:.08em}
+/* SUPPORT TIERS */
+.tier-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;margin-top:0}
+.tier{background:var(--bgc);border:1px solid rgba(255,255,255,.06);border-radius:var(--r);padding:26px 22px;transition:border-color .25s,transform .25s}
+.tier:hover{border-color:rgba(0,200,255,.3);transform:translateY(-3px)}
+.tier-name{font-size:.95rem;font-weight:700;margin-bottom:6px}
+.tier-price{font-size:1.4rem;font-weight:800;color:var(--a);margin-bottom:4px}
+.tier-period{font-size:.72rem;color:var(--m);margin-bottom:14px}
+.tier-desc{font-size:.84rem;color:var(--m);line-height:1.65}
+/* CHATBOT */
+.cl{position:fixed;bottom:26px;right:26px;z-index:2000;width:56px;height:56px;border-radius:50%;background:var(--a);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 24px rgba(0,200,255,.3);transition:transform .2s}
+.cl:hover{transform:scale(1.08)}
+.cl svg{width:24px;height:24px;fill:#000}
+.cw{position:fixed;bottom:96px;right:26px;z-index:2000;width:360px;max-height:500px;background:#0d1525;border:1px solid rgba(0,200,255,.15);border-radius:16px;display:flex;flex-direction:column;overflow:hidden;box-shadow:0 12px 60px rgba(0,0,0,.7);transform:translateY(20px) scale(.95);opacity:0;pointer-events:none;transition:transform .3s,opacity .3s}
+.cw.open{transform:translateY(0) scale(1);opacity:1;pointer-events:auto}
+.ch{padding:14px 18px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid rgba(255,255,255,.07);background:rgba(0,200,255,.05)}
+.chi{display:flex;align-items:center;gap:10px}
+.cav{width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,var(--a),#7c3aed);display:flex;align-items:center;justify-content:center;font-size:.85rem}
+.ch h4{font-size:.85rem;font-weight:700}.ch p{font-size:.65rem;color:var(--a)}
+.cc{background:none;border:none;color:var(--m);font-size:1.1rem;cursor:pointer}.cc:hover{color:#fff}
+.cb{flex:1;overflow-y:auto;padding:14px;display:flex;flex-direction:column;gap:9px;min-height:200px}
+.cm{max-width:88%;padding:9px 13px;border-radius:12px;font-size:.83rem;line-height:1.55;white-space:pre-wrap}
+.cm.bot{background:rgba(255,255,255,.07);align-self:flex-start;border-bottom-left-radius:3px}
+.cm.user{background:var(--a);color:#000;align-self:flex-end;border-bottom-right-radius:3px;font-weight:600}
+.co{display:flex;flex-wrap:wrap;gap:6px;padding:0 14px 10px}
+.co button{padding:7px 13px;border-radius:20px;background:transparent;border:1px solid rgba(0,200,255,.3);color:var(--a);font-size:.78rem;font-weight:600;cursor:pointer;font-family:inherit;transition:all .2s}
+.co button:hover{background:var(--a);color:#000}
+footer{position:relative;z-index:2;border-top:1px solid rgba(255,255,255,.06);padding:28px 24px}
+.fi{max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px}
+.fl a{font-size:.8rem;color:var(--m);text-decoration:none;margin-left:18px;transition:color .2s}
+.fl a:hover{color:var(--a)}
+@media(max-width:768px){
+  .nl{position:fixed;top:var(--nh);right:0;width:260px;height:calc(100vh - var(--nh));background:rgba(7,13,26,.98);flex-direction:column;padding:28px 20px;gap:2px;transform:translateX(100%);transition:transform .3s;border-left:1px solid rgba(255,255,255,.06);overflow-y:auto}
+  .nl.open{transform:translateX(0)}
+  .mb{display:block}
+  .fr{grid-template-columns:1fr}
+  .ticket-form{padding:24px 18px}
+  .cw{right:10px;left:10px;width:auto;bottom:84px}
+  .cl{bottom:18px;right:14px}
+  section{padding:80px 18px}
+}
+</style>
+</head>
+<body>
+<canvas id="c"></canvas>
+<nav>
+  <div class="ni">
+    <a href="/" class="logo">Cary Park <span>Solutions</span></a>
+    <ul class="nl" id="nl">
+      <li><a href="/">Home</a></li>
+      <li><a href="web.html">Web Services</a></li>
+      <li><a href="travel.html">Travel</a></li>
+      <li><a href="mailto:support@caryparksolutions.com" class="cta">Email Support</a></li>
+    </ul>
+    <button class="mb" id="mb"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+
+<section style="padding-top:calc(var(--nh) + 60px)">
+  <div class="container">
+    <p class="lbl">Website Support</p>
+    <h2 class="ttl">Open a Support Ticket</h2>
+    <p class="sub">Submit your issue below and receive a ticket ID instantly. Our team responds according to severity — outages within 1 hour.</p>
+
+    <div class="sla-strip">
+      <div class="sla-item"><div class="sla-label">Severity 1 — Site Down</div><div class="sla-val">< 1 hour response</div></div>
+      <div class="sla-item"><div class="sla-label">Severity 2 — Major Issue</div><div class="sla-val">< 4 hours response</div></div>
+      <div class="sla-item"><div class="sla-label">Severity 3 — Minor Issue</div><div class="sla-val">1 business day</div></div>
+      <div class="sla-item"><div class="sla-label">Severity 4 — Question / Edit</div><div class="sla-val">1–2 business days</div></div>
+    </div>
+
+    <div class="ticket-form" id="ticketForm">
+      <p style="font-size:.82rem;font-weight:700;margin-bottom:16px;text-transform:uppercase;letter-spacing:.1em;color:var(--m)">Select Severity</p>
+      <div class="severity-row" id="sevRow">
+        <div class="sev s1 active" onclick="setSev(1)"><div class="sev-dot"></div>S1 · Site is down</div>
+        <div class="sev s2" onclick="setSev(2)"><div class="sev-dot"></div>S2 · Major issue</div>
+        <div class="sev s3" onclick="setSev(3)"><div class="sev-dot"></div>S3 · Minor issue</div>
+        <div class="sev s4" onclick="setSev(4)"><div class="sev-dot"></div>S4 · Question / Edit</div>
+      </div>
+      <div class="fr">
+        <div class="fg"><label>Your Name *</label><input id="tn" type="text" placeholder="Your name" required/></div>
+        <div class="fg"><label>Email *</label><input id="te" type="email" placeholder="you@yoursite.com" required/></div>
+      </div>
+      <div class="fg"><label>Website URL</label><input id="tu" type="url" placeholder="https://yoursite.com"/></div>
+      <div class="fg"><label>Issue Summary *</label><input id="ts" type="text" placeholder="One-line description of the issue" required/></div>
+      <div class="fg"><label>Details</label><textarea id="td" placeholder="Describe what's happening, when it started, steps to reproduce, any error messages…"></textarea></div>
+      <div class="fg"><label>How urgent is this?</label>
+        <select id="turg">
+          <option value="">Select…</option>
+          <option>Blocking my business entirely</option>
+          <option>Affecting customers / revenue</option>
+          <option>Annoying but site is functional</option>
+          <option>When you get a chance</option>
+        </select>
+      </div>
+      <button class="submit-btn" onclick="submitTicket()">Submit Ticket →</button>
+    </div>
+
+    <div class="success" id="ticketSuccess">
+      <div style="font-size:3rem;margin-bottom:16px">✅</div>
+      <h3 style="font-size:1.4rem;font-weight:800;margin-bottom:8px">Ticket Submitted</h3>
+      <p style="color:var(--m);margin-bottom:16px">Your ticket ID is:</p>
+      <div class="ticket-id" id="ticketIdDisplay"></div>
+      <p style="color:var(--m);font-size:.9rem;margin-top:16px;line-height:1.7">We've sent a confirmation to your email.<br/>Response time is based on severity level shown above.<br/><br/>Reply to <a href="mailto:support@caryparksolutions.com" style="color:var(--a)">support@caryparksolutions.com</a> to add information to this ticket.</p>
+    </div>
+  </div>
+</section>
+
+<section style="padding-top:0">
+  <div class="container">
+    <p class="lbl">Support Plans</p>
+    <h2 class="ttl">Ongoing Website Support</h2>
+    <p class="sub" style="margin-bottom:28px">For businesses that need regular updates, monitoring, and priority response — without paying for a full web retainer.</p>
+    <div class="tier-grid">
+      <div class="tier">
+        <div class="tier-name">Basic</div>
+        <div class="tier-price">$99<span style="font-size:.9rem;font-weight:500">/mo</span></div>
+        <div class="tier-period">Month-to-month</div>
+        <div class="tier-desc">Up to 2 hours of edits/month. S3 and S4 ticket priority. Ideal for simple sites.</div>
+      </div>
+      <div class="tier" style="border-color:rgba(0,200,255,.25)">
+        <div class="tier-name">Standard</div>
+        <div class="tier-price">$249<span style="font-size:.9rem;font-weight:500">/mo</span></div>
+        <div class="tier-period">Month-to-month</div>
+        <div class="tier-desc">Up to 5 hours/month. S1–S4 priority response. Monthly performance check. Best for active businesses.</div>
+      </div>
+      <div class="tier">
+        <div class="tier-name">Priority</div>
+        <div class="tier-price">$499<span style="font-size:.9rem;font-weight:500">/mo</span></div>
+        <div class="tier-period">Month-to-month</div>
+        <div class="tier-desc">Up to 10 hours/month. Phone + email support. Dedicated point of contact. For mission-critical sites.</div>
+      </div>
+    </div>
+    <p style="font-size:.78rem;color:var(--m);margin-top:20px">Interested in a support plan? Email <a href="mailto:info@caryparksolutions.com" style="color:var(--a)">info@caryparksolutions.com</a> or use the chat widget.</p>
+  </div>
+</section>
+
+<footer>
+  <div class="fi">
+    <span style="font-size:.8rem;color:var(--m)">© 2026 <strong style="color:#fff">Cary Park Solutions</strong> · Support</span>
+    <div class="fl"><a href="/">Home</a><a href="web.html">Web Services</a><a href="travel.html">Travel</a><a href="mailto:support@caryparksolutions.com">support@caryparksolutions.com</a></div>
+  </div>
+</footer>
+
+<button class="cl" onclick="toggleChat()">
+  <svg viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"/></svg>
+</button>
+<div class="cw" id="cw">
+  <div class="ch">
+    <div class="chi"><div class="cav">🛡️</div><div><h4>Support Assistant</h4><p>Ticket routing</p></div></div>
+    <button class="cc" onclick="toggleChat()">✕</button>
+  </div>
+  <div class="cb" id="cb"></div>
+  <div id="ctrl"></div>
+</div>
+
+<script>
+const cv=document.getElementById('c'),cx=cv.getContext('2d');let pts=[],mo={x:-999,y:-999};
+function rsz(){cv.width=innerWidth;cv.height=innerHeight}rsz();window.addEventListener('resize',rsz);
+window.addEventListener('mousemove',e=>{mo.x=e.clientX;mo.y=e.clientY});
+for(let i=0;i<150;i++)pts.push({x:Math.random()*innerWidth,y:Math.random()*innerHeight,r:Math.random()*1.4+.3,vx:(Math.random()-.5)*.2,vy:(Math.random()-.5)*.2,a:Math.random()*.6+.2});
+function draw(){cx.clearRect(0,0,cv.width,cv.height);pts.forEach(p=>{const dx=mo.x-p.x,dy=mo.y-p.y,d=Math.sqrt(dx*dx+dy*dy);if(d<120){p.x+=dx*.005;p.y+=dy*.005}p.x+=p.vx;p.y+=p.vy;if(p.x<0)p.x=cv.width;if(p.x>cv.width)p.x=0;if(p.y<0)p.y=cv.height;if(p.y>cv.height)p.y=0;cx.beginPath();cx.arc(p.x,p.y,p.r,0,Math.PI*2);cx.fillStyle=`rgba(255,255,255,${p.a})`;cx.fill()});requestAnimationFrame(draw)}draw();
+document.getElementById('mb').addEventListener('click',()=>document.getElementById('nl').classList.toggle('open'));
+
+let currentSev=1;
+function setSev(n){
+  currentSev=n;
+  document.querySelectorAll('.sev').forEach((el,i)=>el.classList.toggle('active',i===n-1));
+}
+
+function genTicketId(){
+  const now=new Date();
+  const yymm=String(now.getFullYear()).slice(2)+String(now.getMonth()+1).padStart(2,'0');
+  const rand=String(Math.floor(Math.random()*9000)+1000);
+  return `CPS-${yymm}-${rand}`;
+}
+
+function submitTicket(){
+  const n=document.getElementById('tn').value.trim(),e=document.getElementById('te').value.trim(),s=document.getElementById('ts').value.trim();
+  if(!n||!e||!s){alert('Name, email, and issue summary are required.');return}
+  const tid=genTicketId();
+  const u=document.getElementById('tu').value.trim(),d=document.getElementById('td').value.trim(),urg=document.getElementById('turg').value;
+  const sevLabels=['','S1 — Site Down','S2 — Major Issue','S3 — Minor Issue','S4 — Question/Edit'];
+  const body=`Ticket ID: ${tid}\nSeverity: ${sevLabels[currentSev]}\nName: ${n}\nEmail: ${e}\nURL: ${u||'—'}\nUrgency: ${urg||'—'}\n\nIssue: ${s}\n\nDetails:\n${d||'—'}\n\nSubmitted: ${new Date().toLocaleString()}`;
+  window.location.href=`mailto:support@caryparksolutions.com?subject=[${tid}] ${sevLabels[currentSev]} — ${s}&body=${encodeURIComponent(body)}`;
+  document.getElementById('ticketForm').style.display='none';
+  document.getElementById('ticketIdDisplay').textContent=tid;
+  document.getElementById('ticketSuccess').style.display='block';
+}
+
+// Chat
+let chatOpen=false;
+const cb=document.getElementById('cb'),ctrl=document.getElementById('ctrl');
+function toggleChat(){chatOpen=!chatOpen;document.getElementById('cw').classList.toggle('open',chatOpen);if(chatOpen&&cb.children.length===0)setTimeout(startFlow,300)}
+function bot(m){const d=document.createElement('div');d.className='cm bot';d.innerHTML=m;cb.appendChild(d);cb.scrollTop=cb.scrollHeight}
+function opts(os,fn){ctrl.innerHTML='';const w=document.createElement('div');w.className='co';os.forEach(o=>{const b=document.createElement('button');b.textContent=o;b.onclick=()=>{const d=document.createElement('div');d.className='cm user';d.textContent=o;cb.appendChild(d);cb.scrollTop=cb.scrollHeight;ctrl.innerHTML='';fn(o)};w.appendChild(b)});ctrl.appendChild(w)}
+function closeBtn(){ctrl.innerHTML='';const w=document.createElement('div');w.className='co';const b=document.createElement('button');b.textContent='Close';b.onclick=toggleChat;w.appendChild(b);ctrl.appendChild(w)}
+
+function startFlow(){
+  bot("Hi — I'm the Cary Park Support assistant. What's going on with your site?");
+  opts(['Site is completely down','Something is broken / not working','I need a content update or edit','I have a question','I want to ask about a support plan'],p=>{
+    if(/down/i.test(p)){bot("That's a Severity 1 — fill out the ticket form on this page and mark S1. We target a response under 1 hour.\n\nDo you need anything else?");closeBtn()}
+    else if(/broken|working/i.test(p)){bot("Got it — Severity 2 or 3 depending on impact. Use the ticket form on this page and describe what's broken. We'll be in touch today.\n\nAnything else?");closeBtn()}
+    else if(/update|edit/i.test(p)){bot("For edits and updates, submit a Severity 4 ticket using the form on this page. We target 1–2 business days for S4 items.\n\nAnything else?");closeBtn()}
+    else if(/question/i.test(p)){bot("For questions, you can submit an S4 ticket or email <a href='mailto:support@caryparksolutions.com'>support@caryparksolutions.com</a> directly.\n\nAnything else?");closeBtn()}
+    else{bot("Support plans start at $99/mo for up to 2 hours of edits per month, with priority response. Scroll down to see the tier breakdown or email <a href='mailto:info@caryparksolutions.com'>info@caryparksolutions.com</a> to get started.\n\nAnything else?");closeBtn()}
+  });
+}
+</script>
+</body>
+</html>

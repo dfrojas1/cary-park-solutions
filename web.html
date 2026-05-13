@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Web Services | Cary Park Solutions</title>
+<meta name="description" content="Fixed-price websites for local businesses. Starter from $1,200. Bilingual EN/ES. Launched in 1–4 weeks.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--a:#00c8ff;--bg:#070d1a;--bgc:#0d1525;--t:#e8e8e8;--m:#9ca3af;--nh:72px;--r:12px}
+html{scroll-behavior:smooth;background:var(--bg)}
+body{font-family:'Inter',sans-serif;background:var(--bg);background-image:linear-gradient(rgba(255,255,255,.05)1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.05)1px,transparent 1px),linear-gradient(rgba(255,255,255,.02)1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.02)1px,transparent 1px);background-size:50px 50px,50px 50px,12px 12px,12px 12px;background-attachment:fixed;color:var(--t);line-height:1.6;overflow-x:hidden}
+canvas{position:fixed;inset:0;z-index:1;pointer-events:none}
+nav{position:fixed;top:0;left:0;right:0;height:var(--nh);background:rgba(7,13,26,.92);backdrop-filter:blur(16px);border-bottom:1px solid rgba(255,255,255,.06);z-index:1000;display:flex;align-items:center;justify-content:center}
+.ni{width:100%;max-width:1200px;padding:0 24px;display:flex;align-items:center;justify-content:space-between}
+.logo{font-size:1.15rem;font-weight:700;color:#fff;text-decoration:none;letter-spacing:-.02em}.logo span{color:var(--a)}
+.nl{display:flex;align-items:center;gap:4px;list-style:none}
+.nl a{color:var(--m);text-decoration:none;font-size:.875rem;font-weight:500;padding:7px 13px;border-radius:6px;transition:color .2s,background .2s;white-space:nowrap}
+.nl a:hover,.nl a.active{color:#fff;background:rgba(255,255,255,.05)}
+.nl .cta{background:var(--a);color:#000!important;padding:9px 20px;border-radius:8px;font-weight:600;margin-left:8px}
+.nl .cta:hover{background:#22d4ff}
+.mb{display:none;background:none;border:none;cursor:pointer;padding:4px}
+.mb span{display:block;width:24px;height:2px;background:#fff;margin:5px 0}
+section{position:relative;z-index:2;padding:100px 24px}
+.container{max-width:1200px;margin:0 auto}
+.lbl{text-transform:uppercase;font-size:.72rem;font-weight:600;letter-spacing:.15em;color:var(--a);margin-bottom:10px}
+.ttl{font-size:clamp(1.8rem,3.5vw,2.8rem);font-weight:800;letter-spacing:-.03em;margin-bottom:14px;line-height:1.15}
+.sub{color:var(--m);font-size:1rem;max-width:600px;margin-bottom:40px;line-height:1.7}
+.hero{min-height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;padding-top:calc(var(--nh)+60px)}
+.badge{display:inline-flex;align-items:center;gap:8px;background:rgba(0,200,255,.08);border:1px solid rgba(0,200,255,.2);border-radius:100px;padding:5px 14px;font-size:.7rem;font-weight:600;color:var(--a);letter-spacing:.06em;text-transform:uppercase;margin-bottom:24px}
+.dot{width:5px;height:5px;border-radius:50%;background:var(--a);animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(1.5)}}
+h1{font-size:clamp(2.4rem,5.5vw,4rem);font-weight:800;letter-spacing:-.04em;line-height:1.1;margin-bottom:20px}
+h1 .hl{color:var(--a)}
+.hp{color:var(--m);font-size:clamp(.95rem,2vw,1.1rem);max-width:560px;margin:0 auto 36px;line-height:1.7}
+.btns{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;justify-content:center;padding:12px 26px;border-radius:10px;font-size:.9rem;font-weight:600;text-decoration:none;transition:all .25s;cursor:pointer;border:none;font-family:inherit}
+.bp{background:var(--a);color:#000;box-shadow:0 0 24px rgba(0,200,255,.15)}.bp:hover{transform:translateY(-2px);box-shadow:0 0 36px rgba(0,200,255,.3);background:#22d4ff}
+.bo{background:transparent;color:#fff;border:1px solid rgba(255,255,255,.2)}.bo:hover{border-color:rgba(255,255,255,.5);background:rgba(255,255,255,.05)}
+.pgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px;align-items:start}
+.pc{background:var(--bgc);border:1px solid rgba(255,255,255,.06);border-radius:var(--r);padding:36px 28px;position:relative;transition:border-color .25s,transform .25s,box-shadow .25s}
+.pc:hover{border-color:rgba(0,200,255,.35);transform:translateY(-4px);box-shadow:0 8px 40px rgba(0,200,255,.08)}
+.pc.pop{border-color:var(--a);box-shadow:0 0 40px rgba(0,200,255,.1)}
+.pbadge{position:absolute;top:-12px;left:50%;transform:translateX(-50%);background:var(--a);color:#000;font-size:.66rem;font-weight:700;padding:4px 14px;border-radius:20px;text-transform:uppercase;letter-spacing:.08em;white-space:nowrap}
+.pname{font-size:1rem;font-weight:700;margin-bottom:6px}
+.pprice{font-size:2rem;font-weight:800;color:var(--a);margin-bottom:4px;line-height:1}
+.psub{font-size:.76rem;color:var(--m);margin-bottom:16px}
+.pdesc{color:var(--m);font-size:.86rem;line-height:1.65;margin-bottom:20px}
+.pf{list-style:none;margin-bottom:24px;display:flex;flex-direction:column;gap:7px}
+.pf li{font-size:.82rem;color:var(--m);display:flex;gap:7px;align-items:flex-start}
+.pf li::before{content:'✓';color:var(--a);font-weight:700;flex-shrink:0;margin-top:1px}
+.pc .btn{width:100%;text-align:center}
+.process-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:20px}
+.step{background:var(--bgc);border:1px solid rgba(255,255,255,.06);border-radius:var(--r);padding:28px 22px;position:relative;overflow:hidden}
+.step-num{font-size:3rem;font-weight:900;color:rgba(0,200,255,.07);line-height:1;margin-bottom:14px}
+.step h3{font-size:.95rem;font-weight:700;margin-bottom:8px}
+.step p{font-size:.84rem;color:var(--m);line-height:1.6}
+.faq-list{max-width:720px;display:flex;flex-direction:column;gap:10px}
+.faq{background:var(--bgc);border:1px solid rgba(255,255,255,.06);border-radius:var(--r);overflow:hidden}
+.faq-q{display:flex;justify-content:space-between;align-items:center;padding:16px 22px;cursor:pointer;font-size:.9rem;font-weight:600;transition:color .2s}
+.faq-q:hover{color:var(--a)}
+.faq-icon{color:var(--a);font-size:.8rem;transition:transform .25s;flex-shrink:0}
+.faq-a{padding:0 22px;max-height:0;overflow:hidden;font-size:.84rem;color:var(--m);line-height:1.65;transition:max-height .3s,padding .3s}
+.faq.open .faq-a{max-height:200px;padding:0 22px 16px}
+.faq.open .faq-icon{transform:rotate(45deg)}
+footer{position:relative;z-index:2;border-top:1px solid rgba(255,255,255,.06);padding:28px 24px}
+.fi{max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px}
+.fl a{font-size:.8rem;color:var(--m);text-decoration:none;margin-left:18px;transition:color .2s}
+.fl a:hover{color:var(--a)}
+.cl{position:fixed;bottom:26px;right:26px;z-index:2000;width:56px;height:56px;border-radius:50%;background:var(--a);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 24px rgba(0,200,255,.3);transition:transform .2s,box-shadow .2s}
+.cl:hover{transform:scale(1.08)}
+.cl svg{width:24px;height:24px;fill:#000}
+.cw{position:fixed;bottom:96px;right:26px;z-index:2000;width:360px;max-height:520px;background:#0d1525;border:1px solid rgba(0,200,255,.15);border-radius:16px;display:flex;flex-direction:column;overflow:hidden;box-shadow:0 12px 60px rgba(0,0,0,.7);transform:translateY(20px) scale(.95);opacity:0;pointer-events:none;transition:transform .3s,opacity .3s}
+.cw.open{transform:translateY(0) scale(1);opacity:1;pointer-events:auto}
+.ch{padding:14px 18px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid rgba(255,255,255,.07);background:rgba(0,200,255,.05)}
+.chi{display:flex;align-items:center;gap:10px}
+.cav{width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,var(--a),#7c3aed);display:flex;align-items:center;justify-content:center;font-size:.85rem}
+.ch h4{font-size:.85rem;font-weight:700}
+.ch p{font-size:.65rem;color:var(--a);display:flex;align-items:center;gap:4px}
+.od{width:5px;height:5px;border-radius:50%;background:#22c55e;animation:pulse 2s infinite}
+.cc{background:none;border:none;color:var(--m);font-size:1.1rem;cursor:pointer}
+.cc:hover{color:#fff}
+.cb{flex:1;overflow-y:auto;padding:14px;display:flex;flex-direction:column;gap:9px;min-height:240px}
+.cb::-webkit-scrollbar{width:3px}
+.cb::-webkit-scrollbar-thumb{background:#333}
+.cm{max-width:88%;padding:9px 13px;border-radius:12px;font-size:.83rem;line-height:1.55;white-space:pre-wrap}
+.cm.bot{background:rgba(255,255,255,.07);align-self:flex-start;border-bottom-left-radius:3px}
+.cm.user{background:var(--a);color:#000;align-self:flex-end;border-bottom-right-radius:3px;font-weight:600}
+.co{display:flex;flex-wrap:wrap;gap:6px;padding:0 14px 10px}
+.co button{padding:7px 13px;border-radius:20px;background:transparent;border:1px solid rgba(0,200,255,.3);color:var(--a);font-size:.78rem;font-weight:600;cursor:pointer;font-family:inherit;transition:all .2s}
+.co button:hover{background:var(--a);color:#000}
+.cf{padding:0 14px 10px;display:flex;flex-direction:column;gap:7px}
+.cf input,.cf textarea{padding:9px 12px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);border-radius:8px;color:#fff;font-size:.83rem;font-family:inherit;outline:none;transition:border-color .2s}
+.cf input:focus,.cf textarea:focus{border-color:var(--a)}
+.cf textarea{min-height:70px;resize:none}
+.cf button{padding:9px;border-radius:8px;background:var(--a);color:#000;font-weight:700;border:none;cursor:pointer;font-size:.85rem;font-family:inherit}
+.ct{display:flex;gap:7px;padding:0 14px 10px}
+.ct input{flex:1;padding:9px 12px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);border-radius:8px;color:#fff;font-size:.83rem;font-family:inherit;outline:none}
+.ct input:focus{border-color:var(--a)}
+.ct button{padding:9px 13px;border-radius:8px;background:var(--a);color:#000;font-weight:700;border:none;cursor:pointer;font-size:.8rem;font-family:inherit}
+@media(max-width:768px){
+  .nl{position:fixed;top:var(--nh);right:0;width:260px;height:calc(100vh - var(--nh));background:rgba(7,13,26,.98);flex-direction:column;padding:28px 20px;gap:2px;transform:translateX(100%);transition:transform .3s;border-left:1px solid rgba(255,255,255,.06);overflow-y:auto}
+  .nl.open{transform:translateX(0)}
+  .mb{display:block}
+  .cw{right:10px;left:10px;width:auto;bottom:84px;max-height:68vh}
+  .cl{bottom:18px;right:14px}
+  section{padding:80px 18px}
+}
+</style>
+</head>
+<body>
+<canvas id="c"></canvas>
+<nav>
+  <div class="ni">
+    <a href="/" class="logo">Cary Park <span>Solutions</span></a>
+    <ul class="nl" id="nl">
+      <li><a href="/">Home</a></li>
+      <li><a href="#pricing">Pricing</a></li>
+      <li><a href="#process">Process</a></li>
+      <li><a href="support.html">Support</a></li>
+      <li><a href="travel.html">Travel</a></li>
+      <li><a href="#start" class="cta">Start a Project</a></li>
+    </ul>
+    <button class="mb" id="mb"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+
+<section class="hero">
+  <div style="max-width:800px">
+    <div class="badge"><span class="dot"></span>Fixed Pricing · No Surprises</div>
+    <h1>A Website That<br/><span class="hl">Actually Works</span></h1>
+    <p class="hp">Modern, mobile-first websites for local businesses. Fixed pricing, fast delivery, and bilingual support in English and Spanish. No subscriptions, no hourly billing surprises.</p>
+    <div class="btns">
+      <a href="#pricing" class="btn bp">View Pricing</a>
+      <button class="btn bo" onclick="toggleChat()">Talk to Us First</button>
+    </div>
+  </div>
+</section>
+
+<section id="pricing">
+  <div class="container">
+    <p class="lbl">Web Pricing</p>
+    <h2 class="ttl">Simple, Fixed Prices</h2>
+    <p class="sub">No hourly billing. No scope creep surprises. One flat rate, clearly scoped before we start.</p>
+    <div class="pgrid">
+      <div class="pc">
+        <div class="pname">Starter</div>
+        <div class="pprice">$1,200</div>
+        <div class="psub">One-time · Delivered in ~1 week</div>
+        <div class="pdesc">For local businesses that need a clean, credible web presence fast. Perfect for service providers, contractors, and solo operators.</div>
+        <ul class="pf">
+          <li>Up to 4 pages</li>
+          <li>Mobile-responsive design</li>
+          <li>Contact form</li>
+          <li>Google Maps embed</li>
+          <li>Basic SEO setup</li>
+          <li>Bilingual EN/ES available</li>
+          <li>2 rounds of revisions</li>
+        </ul>
+        <button class="btn bo" onclick="toggleChat()">Get Started</button>
+      </div>
+      <div class="pc pop">
+        <div class="pbadge">Most Popular</div>
+        <div class="pname">Growth</div>
+        <div class="pprice">$3,500</div>
+        <div class="psub">One-time · Delivered in 2–3 weeks</div>
+        <div class="pdesc">For growing businesses that need a full marketing site with booking, lead capture, and content management.</div>
+        <ul class="pf">
+          <li>Up to 10 pages</li>
+          <li>Custom design system</li>
+          <li>Booking / scheduling integration</li>
+          <li>Blog or news section</li>
+          <li>Lead capture forms</li>
+          <li>Full bilingual EN/ES</li>
+          <li>SEO optimization</li>
+          <li>3 rounds of revisions</li>
+          <li>30-day post-launch support</li>
+        </ul>
+        <button class="btn bp" onclick="toggleChat()">Get Started</button>
+      </div>
+      <div class="pc">
+        <div class="pname">Add-Ons</div>
+        <div class="pprice">+$800</div>
+        <div class="psub">Per add-on module</div>
+        <div class="pdesc">Extend any package with additional functionality. Add-ons can be bundled at project start or added after launch.</div>
+        <ul class="pf">
+          <li>E-commerce / online store</li>
+          <li>AI chatbot integration</li>
+          <li>Customer portal / login</li>
+          <li>Email marketing setup</li>
+          <li>Advanced analytics dashboard</li>
+          <li>Additional language support</li>
+        </ul>
+        <button class="btn bo" onclick="toggleChat()">Ask About Add-Ons</button>
+      </div>
+    </div>
+    <p style="text-align:center;font-size:.78rem;color:var(--m);margin-top:24px">Hosting and domain costs not included. We recommend Cloudflare Pages (free) + a domain registrar of your choice (~$10–15/yr).</p>
+  </div>
+</section>
+
+<section id="process" style="padding-top:0">
+  <div class="container">
+    <p class="lbl">How It Works</p>
+    <h2 class="ttl">From Intake to Launch</h2>
+    <p class="sub">A simple, fast process with no unnecessary meetings.</p>
+    <div class="process-grid">
+      <div class="step"><div class="step-num">01</div><h3>Chat Intake</h3><p>Tell us about your business, goals, and timeline through our chatbot. No phone call required to get started.</p></div>
+      <div class="step"><div class="step-num">02</div><h3>Scope & Quote</h3><p>We confirm your package in writing within 1 business day. No surprises — you know exactly what you're getting.</p></div>
+      <div class="step"><div class="step-num">03</div><h3>Design & Build</h3><p>We design and build your site. You review and request revisions. We iterate until you're satisfied.</p></div>
+      <div class="step"><div class="step-num">04</div><h3>Launch</h3><p>We handle deployment, DNS setup, and post-launch testing. You get a live site and a support handoff doc.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="start" style="padding-top:0">
+  <div class="container">
+    <p class="lbl">Get Started</p>
+    <h2 class="ttl">Start Your Project</h2>
+    <p class="sub">Use our chat intake or fill out the form below. We'll follow up within one business day.</p>
+    <div style="max-width:560px">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px">
+        <div><label style="display:block;font-size:.76rem;font-weight:600;color:var(--m);text-transform:uppercase;letter-spacing:.06em;margin-bottom:5px">Name</label><input id="wn" type="text" placeholder="Your name" style="width:100%;padding:11px 14px;background:var(--bgc);border:1px solid rgba(255,255,255,.1);border-radius:8px;color:#fff;font-size:.88rem;font-family:inherit;outline:none;transition:border-color .25s" onfocus="this.style.borderColor='var(--a)'" onblur="this.style.borderColor='rgba(255,255,255,.1)'"/></div>
+        <div><label style="display:block;font-size:.76rem;font-weight:600;color:var(--m);text-transform:uppercase;letter-spacing:.06em;margin-bottom:5px">Email</label><input id="we" type="email" placeholder="you@company.com" style="width:100%;padding:11px 14px;background:var(--bgc);border:1px solid rgba(255,255,255,.1);border-radius:8px;color:#fff;font-size:.88rem;font-family:inherit;outline:none;transition:border-color .25s" onfocus="this.style.borderColor='var(--a)'" onblur="this.style.borderColor='rgba(255,255,255,.1)'"/></div>
+      </div>
+      <div style="margin-bottom:14px"><label style="display:block;font-size:.76rem;font-weight:600;color:var(--m);text-transform:uppercase;letter-spacing:.06em;margin-bottom:5px">Business Name</label><input id="wb" type="text" placeholder="Your business name" style="width:100%;padding:11px 14px;background:var(--bgc);border:1px solid rgba(255,255,255,.1);border-radius:8px;color:#fff;font-size:.88rem;font-family:inherit;outline:none"/></div>
+      <div style="margin-bottom:14px"><label style="display:block;font-size:.76rem;font-weight:600;color:var(--m);text-transform:uppercase;letter-spacing:.06em;margin-bottom:5px">Package</label><select id="wp" style="width:100%;padding:11px 14px;background:var(--bgc);border:1px solid rgba(255,255,255,.1);border-radius:8px;color:#fff;font-size:.88rem;font-family:inherit;outline:none;cursor:pointer"><option value="">Select…</option><option>Starter ($1,200)</option><option>Growth ($3,500)</option><option>Not sure yet</option></select></div>
+      <div style="margin-bottom:20px"><label style="display:block;font-size:.76rem;font-weight:600;color:var(--m);text-transform:uppercase;letter-spacing:.06em;margin-bottom:5px">What does the site need to do?</label><textarea id="wm" placeholder="Describe your business, goals, and any specific needs…" style="width:100%;padding:11px 14px;background:var(--bgc);border:1px solid rgba(255,255,255,.1);border-radius:8px;color:#fff;font-size:.88rem;font-family:inherit;outline:none;min-height:90px;resize:vertical"></textarea></div>
+      <button class="btn bp" style="width:100%" onclick="submitWeb()">Submit Project Request →</button>
+      <p style="font-size:.72rem;color:var(--m);text-align:center;margin-top:10px">Or use the chat widget below-right to tell us more</p>
+    </div>
+  </div>
+</section>
+
+<section style="padding-top:0">
+  <div class="container">
+    <p class="lbl">FAQ</p>
+    <h2 class="ttl">Common Questions</h2>
+    <div class="faq-list">
+      <div class="faq"><div class="faq-q" onclick="this.parentElement.classList.toggle('open')">Do you offer payment plans?<span class="faq-icon">+</span></div><div class="faq-a">Yes — 50% upfront, 50% on launch. For Growth packages we can discuss a 3-payment structure.</div></div>
+      <div class="faq"><div class="faq-q" onclick="this.parentElement.classList.toggle('open')">What do I need to provide?<span class="faq-icon">+</span></div><div class="faq-a">Your logo (if you have one), any brand colors or preferences, the content you want on each page, and a list of what the site needs to accomplish. We'll guide you through the rest.</div></div>
+      <div class="faq"><div class="faq-q" onclick="this.parentElement.classList.toggle('open')">How fast can you launch?<span class="faq-icon">+</span></div><div class="faq-a">Starter sites typically launch in 5–7 business days from content approval. Growth sites take 2–3 weeks. Rush delivery is available — ask us.</div></div>
+      <div class="faq"><div class="faq-q" onclick="this.parentElement.classList.toggle('open')">Do you offer bilingual (EN/ES) sites?<span class="faq-icon">+</span></div><div class="faq-a">Yes — bilingual support is available on all packages. We're natively bilingual and can write, translate, or adapt your content in both languages.</div></div>
+      <div class="faq"><div class="faq-q" onclick="this.parentElement.classList.toggle('open')">What about ongoing support after launch?<span class="faq-icon">+</span></div><div class="faq-a">We offer SLA-backed website support plans. Visit the Support page to open a ticket or inquire about a support retainer.</div></div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="fi">
+    <span style="font-size:.8rem;color:var(--m)">© 2026 <strong style="color:#fff">Cary Park Solutions</strong> · Web Services</span>
+    <div class="fl">
+      <a href="/">Home</a><a href="support.html">Support</a><a href="travel.html">Travel</a><a href="mailto:info@caryparksolutions.com">Contact</a>
+    </div>
+  </div>
+</footer>
+
+<button class="cl" onclick="toggleChat()">
+  <svg viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"/></svg>
+</button>
+<div class="cw" id="cw">
+  <div class="ch">
+    <div class="chi"><div class="cav">🌐</div><div><h4>Web Services</h4><p><span class="od"></span>Web intake</p></div></div>
+    <button class="cc" onclick="toggleChat()">✕</button>
+  </div>
+  <div class="cb" id="cb"></div>
+  <div id="ctrl"></div>
+</div>
+
+<script>
+const cv=document.getElementById('c'),cx=cv.getContext('2d');let pts=[],mo={x:-999,y:-999};
+function rsz(){cv.width=innerWidth;cv.height=innerHeight}rsz();window.addEventListener('resize',rsz);
+window.addEventListener('mousemove',e=>{mo.x=e.clientX;mo.y=e.clientY});
+for(let i=0;i<150;i++)pts.push({x:Math.random()*innerWidth,y:Math.random()*innerHeight,r:Math.random()*1.4+.3,vx:(Math.random()-.5)*.2,vy:(Math.random()-.5)*.2,a:Math.random()*.6+.2});
+function draw(){cx.clearRect(0,0,cv.width,cv.height);pts.forEach(p=>{const dx=mo.x-p.x,dy=mo.y-p.y,d=Math.sqrt(dx*dx+dy*dy);if(d<120){p.x+=dx*.005;p.y+=dy*.005}p.x+=p.vx;p.y+=p.vy;if(p.x<0)p.x=cv.width;if(p.x>cv.width)p.x=0;if(p.y<0)p.y=cv.height;if(p.y>cv.height)p.y=0;cx.beginPath();cx.arc(p.x,p.y,p.r,0,Math.PI*2);cx.fillStyle=`rgba(255,255,255,${p.a})`;cx.fill()});requestAnimationFrame(draw)}draw();
+document.getElementById('mb').addEventListener('click',()=>document.getElementById('nl').classList.toggle('open'));
+
+function submitWeb(){
+  const n=document.getElementById('wn').value.trim(),e=document.getElementById('we').value.trim();
+  if(!n||!e){alert('Name and email required.');return}
+  const b=document.getElementById('wb').value.trim(),p=document.getElementById('wp').value,m=document.getElementById('wm').value.trim();
+  const body=`Name: ${n}\nEmail: ${e}\nBusiness: ${b||'—'}\nPackage: ${p||'—'}\n\nProject details:\n${m}`;
+  window.location.href=`mailto:info@caryparksolutions.com?subject=[Web Project] ${b||n}&body=${encodeURIComponent(body)}`;
+}
+
+let chatOpen=false,convo={answers:{}};
+const cb=document.getElementById('cb'),ctrl=document.getElementById('ctrl');
+function toggleChat(){chatOpen=!chatOpen;document.getElementById('cw').classList.toggle('open',chatOpen);if(chatOpen&&cb.children.length===0)setTimeout(startFlow,300)}
+function bot(m){const d=document.createElement('div');d.className='cm bot';d.innerHTML=m;cb.appendChild(d);cb.scrollTop=cb.scrollHeight}
+function user(m){const d=document.createElement('div');d.className='cm user';d.textContent=m;cb.appendChild(d);cb.scrollTop=cb.scrollHeight}
+function clr(){ctrl.innerHTML=''}
+function opts(os,fn){clr();const w=document.createElement('div');w.className='co';os.forEach(o=>{const b=document.createElement('button');b.textContent=o;b.onclick=()=>{user(o);clr();fn(o)};w.appendChild(b)});ctrl.appendChild(w)}
+function typed(ph,fn){clr();const w=document.createElement('div');w.className='ct';w.innerHTML=`<input type="text" placeholder="${ph}"/><button>Send</button>`;const i=w.querySelector('input'),b=w.querySelector('button');const go=()=>{const v=i.value.trim();if(!v)return;user(v);clr();fn(v)};b.onclick=go;i.addEventListener('keydown',e=>{if(e.key==='Enter')go()});ctrl.appendChild(w);i.focus()}
+function cform(fn){clr();const f=document.createElement('div');f.className='cf';f.innerHTML=`<input type="text" placeholder="Your name" id="fn"><input type="email" placeholder="Email address" id="fe"><input type="tel" placeholder="Phone (optional)" id="fp"><button>Submit</button>`;f.querySelector('button').onclick=()=>{const n=f.querySelector('#fn').value.trim(),em=f.querySelector('#fe').value.trim(),ph=f.querySelector('#fp').value.trim();if(!n||!em)return;user(`${n} · ${em}`);clr();fn({name:n,email:em,phone:ph})};ctrl.appendChild(f)}
+function closeBtn(){clr();const w=document.createElement('div');w.className='co';const b=document.createElement('button');b.textContent='Close';b.onclick=toggleChat;w.appendChild(b);ctrl.appendChild(w)}
+
+function startFlow(){
+  bot("Hi — I handle web project intake for Cary Park Solutions. Let's get a few details so we can put together your quote.\n\nWhat's the name of your business?");
+  typed('e.g. Smith Roofing',biz=>{convo.answers.biz=biz;
+    bot(`Nice. What does ${biz} need a website to accomplish?`);
+    opts(['Generate leads / inquiries','Look more professional / credible','Online booking or scheduling','Sell products online','Bilingual EN/ES presence','Other'],goal=>{convo.answers.goal=goal;
+      bot("Which package interests you?");
+      opts(['Starter ($1,200) — up to 4 pages','Growth ($3,500) — full marketing site','Not sure yet — help me decide'],pkg=>{convo.answers.pkg=pkg;
+        bot("How fast do you need it live?");
+        opts(['ASAP — this week','2–4 weeks','Flexible'],urg=>{convo.answers.urgency=urg;
+          bot("Last step — your contact info so we can send a formal scope:");
+          cform(c=>{Object.assign(convo.answers,c);finish()});
+        });
+      });
+    });
+  });
+}
+function finish(){
+  const a=convo.answers;
+  const subj=encodeURIComponent(`[Web Project] ${a.biz||'New inquiry'}`);
+  const body=encodeURIComponent(`Business: ${a.biz}\nGoal: ${a.goal}\nPackage: ${a.pkg}\nTimeline: ${a.urgency}\nName: ${a.name}\nEmail: ${a.email}\nPhone: ${a.phone||'—'}`);
+  bot(`Thanks, ${a.name?a.name.split(' ')[0]:''}. Sending your details to the team now — we'll have a formal scope to you within 1 business day. Prices do not include hosting or domain.`);
+  setTimeout(()=>window.location.href=`mailto:info@caryparksolutions.com?subject=${subj}&body=${body}`,800);
+  closeBtn();
+}
+</script>
+</body>
+</html>
