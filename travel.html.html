@@ -1,0 +1,2316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cary Park Solutions | Your Triangle Technology Partner</title>
+  <meta name="description" content="Cary Park Solutions — Managed IT, reselling, program management, and strategic consulting for RDU small and mid-size businesses." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    /* ============================================================
+       RESET & BASE
+    ============================================================ */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg-0:       #0a0b0d;
+      --bg-1:       #0f1114;
+      --bg-2:       #14171c;
+      --bg-3:       #1a1e25;
+      --bg-card:    #161920;
+      --border:     rgba(255,255,255,.07);
+      --teal:       #00c8b8;
+      --teal-dim:   #009e91;
+      --blue:       #1a9fd4;
+      --blue-bright:#2ab8f5;
+      --accent-grd: linear-gradient(135deg, #00c8b8 0%, #1a9fd4 100%);
+      --text-primary:   #eef0f4;
+      --text-secondary: #8b93a5;
+      --text-muted:     #535c6e;
+      --radius-sm: 6px;
+      --radius-md: 12px;
+      --radius-lg: 20px;
+      --shadow-card: 0 4px 32px rgba(0,0,0,.45);
+      --transition: .25s cubic-bezier(.4,0,.2,1);
+    }
+
+    html { scroll-behavior: smooth; font-size: 16px; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg-0);
+      color: var(--text-primary);
+      line-height: 1.6;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    img { display: block; max-width: 100%; }
+
+    /* ============================================================
+       UTILITIES
+    ============================================================ */
+    .container {
+      width: 100%;
+      max-width: 1160px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    .section-label {
+      display: inline-block;
+      font-size: .72rem;
+      font-weight: 700;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--teal);
+      margin-bottom: 14px;
+    }
+
+    .section-title {
+      font-size: clamp(1.75rem, 3.5vw, 2.6rem);
+      font-weight: 800;
+      line-height: 1.18;
+      letter-spacing: -.02em;
+      color: var(--text-primary);
+    }
+
+    .section-sub {
+      font-size: 1.05rem;
+      color: var(--text-secondary);
+      max-width: 560px;
+      margin-top: 12px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 13px 28px;
+      border-radius: var(--radius-sm);
+      font-size: .9rem;
+      font-weight: 600;
+      letter-spacing: .01em;
+      cursor: pointer;
+      border: none;
+      transition: var(--transition);
+      white-space: nowrap;
+    }
+
+    .btn-primary {
+      background: var(--accent-grd);
+      color: #000;
+    }
+    .btn-primary:hover { filter: brightness(1.12); transform: translateY(-1px); }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--text-primary);
+      border: 1.5px solid rgba(255,255,255,.18);
+    }
+    .btn-outline:hover {
+      border-color: var(--teal);
+      color: var(--teal);
+      background: rgba(0,200,184,.06);
+      transform: translateY(-1px);
+    }
+
+    /* ============================================================
+       CANVAS PARTICLES
+    ============================================================ */
+    #particle-canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: 0;
+      pointer-events: none;
+      opacity: .45;
+    }
+
+    /* ============================================================
+       NAVBAR
+    ============================================================ */
+    #navbar {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 1000;
+      transition: background var(--transition), box-shadow var(--transition);
+    }
+
+    #navbar.scrolled {
+      background: rgba(10,11,13,.92);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      box-shadow: 0 1px 0 var(--border);
+    }
+
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 68px;
+    }
+
+    .nav-logo {
+      display: flex;
+      flex-direction: column;
+      line-height: 1.1;
+    }
+    .nav-logo-name {
+      font-size: 1.1rem;
+      font-weight: 800;
+      background: var(--accent-grd);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .nav-logo-tag {
+      font-size: .62rem;
+      font-weight: 500;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 36px;
+      list-style: none;
+    }
+    .nav-links a {
+      font-size: .85rem;
+      font-weight: 500;
+      color: var(--text-secondary);
+      transition: color var(--transition);
+      letter-spacing: .01em;
+    }
+    .nav-links a:hover { color: var(--text-primary); }
+
+    .nav-cta {
+      background: var(--accent-grd);
+      color: #000 !important;
+      padding: 9px 20px;
+      border-radius: var(--radius-sm);
+      font-weight: 700 !important;
+      font-size: .82rem !important;
+    }
+    .nav-cta:hover { filter: brightness(1.12); color: #000 !important; }
+
+    /* Hamburger */
+    .nav-hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      padding: 4px;
+      background: none;
+      border: none;
+    }
+    .nav-hamburger span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: var(--text-primary);
+      border-radius: 2px;
+      transition: var(--transition);
+    }
+    .nav-hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .nav-hamburger.open span:nth-child(2) { opacity: 0; }
+    .nav-hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    /* Mobile menu */
+    #mobile-menu {
+      display: none;
+      position: fixed;
+      top: 68px; left: 0; right: 0;
+      background: rgba(10,11,13,.97);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+      z-index: 999;
+      padding: 20px 24px 28px;
+      flex-direction: column;
+      gap: 0;
+    }
+    #mobile-menu.open { display: flex; }
+    #mobile-menu a {
+      display: block;
+      padding: 13px 0;
+      font-size: 1rem;
+      font-weight: 500;
+      color: var(--text-secondary);
+      border-bottom: 1px solid var(--border);
+      transition: color var(--transition);
+    }
+    #mobile-menu a:last-child { border-bottom: none; }
+    #mobile-menu a:hover { color: var(--teal); }
+    #mobile-menu .mob-cta {
+      margin-top: 16px;
+      background: var(--accent-grd);
+      color: #000;
+      text-align: center;
+      padding: 13px;
+      border-radius: var(--radius-sm);
+      font-weight: 700;
+      border-bottom: none !important;
+    }
+
+    /* ============================================================
+       HERO
+    ============================================================ */
+    #hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding-top: 68px;
+      overflow: hidden;
+    }
+
+    .hero-grid-overlay {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(0,200,184,.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0,200,184,.035) 1px, transparent 1px);
+      background-size: 60px 60px;
+      z-index: 1;
+    }
+
+    .hero-glow {
+      position: absolute;
+      width: 700px;
+      height: 700px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(0,200,184,.13) 0%, transparent 70%);
+      top: -120px;
+      right: -180px;
+      z-index: 1;
+      pointer-events: none;
+    }
+    .hero-glow-2 {
+      position: absolute;
+      width: 500px;
+      height: 500px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(26,159,212,.1) 0%, transparent 70%);
+      bottom: 0;
+      left: -100px;
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 760px;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(0,200,184,.08);
+      border: 1px solid rgba(0,200,184,.2);
+      border-radius: 100px;
+      padding: 6px 16px;
+      font-size: .78rem;
+      font-weight: 600;
+      color: var(--teal);
+      letter-spacing: .04em;
+      margin-bottom: 28px;
+    }
+    .hero-badge-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--teal);
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50%       { opacity: .5; transform: scale(1.4); }
+    }
+
+    .hero-title {
+      font-size: clamp(2.6rem, 6vw, 4.6rem);
+      font-weight: 800;
+      line-height: 1.06;
+      letter-spacing: -.03em;
+      margin-bottom: 10px;
+    }
+    .hero-title .grad {
+      background: var(--accent-grd);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero-sub {
+      font-size: clamp(1rem, 2vw, 1.2rem);
+      color: var(--text-secondary);
+      max-width: 560px;
+      margin-bottom: 40px;
+      font-weight: 400;
+      line-height: 1.65;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      align-items: center;
+    }
+
+    .hero-stat-row {
+      margin-top: 64px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 40px;
+    }
+    .hero-stat {}
+    .hero-stat-num {
+      font-size: 1.9rem;
+      font-weight: 800;
+      background: var(--accent-grd);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      line-height: 1;
+    }
+    .hero-stat-label {
+      font-size: .78rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: .06em;
+      margin-top: 4px;
+    }
+
+    /* ============================================================
+       SERVICES
+    ============================================================ */
+    #services {
+      position: relative;
+      z-index: 2;
+      padding: 100px 0;
+      background: var(--bg-1);
+    }
+
+    .services-header {
+      margin-bottom: 56px;
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 20px;
+    }
+
+    .service-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 36px 32px;
+      position: relative;
+      overflow: hidden;
+      transition: border-color var(--transition), transform var(--transition), box-shadow var(--transition);
+      cursor: default;
+    }
+
+    .service-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: var(--accent-grd);
+      opacity: 0;
+      transition: opacity var(--transition);
+      z-index: 0;
+    }
+
+    .service-card:hover {
+      border-color: rgba(0,200,184,.35);
+      transform: translateY(-5px);
+      box-shadow: 0 20px 48px rgba(0,200,184,.08), var(--shadow-card);
+    }
+    .service-card:hover::before { opacity: .04; }
+
+    .service-card > * { position: relative; z-index: 1; }
+
+    .service-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: var(--radius-sm);
+      background: rgba(0,200,184,.1);
+      border: 1px solid rgba(0,200,184,.18);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 24px;
+    }
+    .service-icon svg { width: 22px; height: 22px; stroke: var(--teal); fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+
+    .service-card-title {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 10px;
+      letter-spacing: -.01em;
+    }
+    .service-card-desc {
+      font-size: .88rem;
+      color: var(--text-secondary);
+      line-height: 1.7;
+    }
+
+    .service-card-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 20px;
+    }
+    .tag {
+      font-size: .68rem;
+      font-weight: 600;
+      letter-spacing: .05em;
+      text-transform: uppercase;
+      padding: 4px 10px;
+      border-radius: 100px;
+      background: rgba(255,255,255,.05);
+      color: var(--text-muted);
+      border: 1px solid var(--border);
+    }
+
+    /* ============================================================
+       ABOUT
+    ============================================================ */
+    #about {
+      position: relative;
+      z-index: 2;
+      padding: 100px 0;
+      background: var(--bg-0);
+    }
+
+    .about-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      align-items: start;
+    }
+
+    .about-left {}
+
+    .about-points {
+      margin-top: 28px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+    .about-point {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      font-size: .9rem;
+      color: var(--text-secondary);
+    }
+    .about-point-icon {
+      width: 20px;
+      height: 20px;
+      flex-shrink: 0;
+      border-radius: 50%;
+      background: rgba(0,200,184,.12);
+      border: 1px solid rgba(0,200,184,.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 1px;
+    }
+    .about-point-icon svg { width: 10px; height: 10px; stroke: var(--teal); stroke-width: 2.5; }
+
+    .about-marketing {
+      margin-top: 28px;
+      padding: 18px 20px;
+      background: var(--bg-3);
+      border: 1px solid var(--border);
+      border-left: 3px solid var(--teal);
+      border-radius: var(--radius-sm);
+      font-size: .85rem;
+      color: var(--text-secondary);
+      line-height: 1.65;
+    }
+    .about-marketing strong { color: var(--teal); }
+
+    .about-right {
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    .team-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 28px;
+      display: flex;
+      gap: 18px;
+      align-items: flex-start;
+      transition: border-color var(--transition), box-shadow var(--transition);
+    }
+    .team-card:hover {
+      border-color: rgba(0,200,184,.3);
+      box-shadow: 0 8px 32px rgba(0,0,0,.3);
+    }
+
+    .team-avatar {
+      width: 54px;
+      height: 54px;
+      flex-shrink: 0;
+      border-radius: 50%;
+      background: var(--accent-grd);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.3rem;
+      font-weight: 800;
+      color: #000;
+      letter-spacing: -.02em;
+    }
+
+    .team-info {}
+    .team-name {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 2px;
+    }
+    .team-role {
+      font-size: .76rem;
+      font-weight: 600;
+      color: var(--teal);
+      text-transform: uppercase;
+      letter-spacing: .06em;
+      margin-bottom: 8px;
+    }
+    .team-bio {
+      font-size: .83rem;
+      color: var(--text-secondary);
+      line-height: 1.65;
+    }
+    .team-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 5px;
+      margin-top: 10px;
+    }
+
+    /* ============================================================
+       PARTNERS
+    ============================================================ */
+    #partners {
+      position: relative;
+      z-index: 2;
+      padding: 70px 0;
+      background: var(--bg-2);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .partners-label {
+      text-align: center;
+      font-size: .72rem;
+      font-weight: 700;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 36px;
+    }
+
+    .partners-logos {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .partner-logo {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 16px 28px;
+      background: var(--bg-3);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      transition: border-color var(--transition), box-shadow var(--transition), transform var(--transition);
+      min-width: 140px;
+    }
+    .partner-logo:hover {
+      border-color: rgba(0,200,184,.25);
+      box-shadow: 0 4px 24px rgba(0,200,184,.06);
+      transform: translateY(-2px);
+    }
+
+    .partner-logo-text {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--text-secondary);
+      letter-spacing: -.01em;
+    }
+    .partner-logo svg {
+      fill: var(--text-secondary);
+      transition: fill var(--transition);
+    }
+    .partner-logo:hover svg { fill: var(--text-primary); }
+    .partner-logo:hover .partner-logo-text { color: var(--text-primary); }
+
+    .travel-note {
+      text-align: center;
+      margin-top: 32px;
+      font-size: .75rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+    .travel-note a { color: var(--teal-dim); text-decoration: underline; text-underline-offset: 3px; }
+
+    /* ============================================================
+       CONTACT
+    ============================================================ */
+    #contact {
+      position: relative;
+      z-index: 2;
+      padding: 100px 0;
+      background: var(--bg-1);
+    }
+
+    .contact-layout {
+      display: grid;
+      grid-template-columns: 1fr 1.3fr;
+      gap: 64px;
+      align-items: start;
+    }
+
+    .contact-info {}
+    .contact-info-items {
+      margin-top: 28px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+    .contact-info-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+    }
+    .contact-info-icon {
+      width: 38px;
+      height: 38px;
+      flex-shrink: 0;
+      border-radius: var(--radius-sm);
+      background: rgba(0,200,184,.08);
+      border: 1px solid rgba(0,200,184,.15);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .contact-info-icon svg { width: 16px; height: 16px; stroke: var(--teal); fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+    .contact-info-label { font-size: .72rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: .08em; margin-bottom: 2px; }
+    .contact-info-val { font-size: .9rem; color: var(--text-secondary); }
+
+    /* Form */
+    .contact-form-wrap {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 40px;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      margin-bottom: 14px;
+    }
+    .form-group.full { grid-column: 1 / -1; }
+
+    label {
+      font-size: .76rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: .06em;
+    }
+
+    input, textarea {
+      background: var(--bg-3);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 12px 14px;
+      font-family: 'Inter', sans-serif;
+      font-size: .88rem;
+      color: var(--text-primary);
+      outline: none;
+      transition: border-color var(--transition), box-shadow var(--transition);
+      width: 100%;
+    }
+    input::placeholder, textarea::placeholder { color: var(--text-muted); }
+    input:focus, textarea:focus {
+      border-color: var(--teal);
+      box-shadow: 0 0 0 3px rgba(0,200,184,.1);
+    }
+    textarea { resize: vertical; min-height: 110px; }
+
+    .form-submit {
+      width: 100%;
+      margin-top: 6px;
+      padding: 15px;
+      font-size: .9rem;
+    }
+
+    #form-thanks {
+      display: none;
+      text-align: center;
+      padding: 36px 20px;
+    }
+    #form-thanks .thanks-icon {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      background: rgba(0,200,184,.12);
+      border: 2px solid var(--teal);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 18px;
+    }
+    #form-thanks .thanks-icon svg { width: 24px; height: 24px; stroke: var(--teal); stroke-width: 2.5; fill: none; }
+    #form-thanks h3 { font-size: 1.3rem; font-weight: 700; margin-bottom: 8px; }
+    #form-thanks p { color: var(--text-secondary); font-size: .9rem; }
+
+    /* ============================================================
+       FOOTER
+    ============================================================ */
+    footer {
+      position: relative;
+      z-index: 2;
+      background: var(--bg-0);
+      border-top: 1px solid var(--border);
+      padding: 36px 0;
+    }
+
+    .footer-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .footer-brand {
+      font-size: .9rem;
+      color: var(--text-muted);
+    }
+    .footer-brand strong {
+      font-weight: 700;
+      background: var(--accent-grd);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 24px;
+    }
+    .footer-links a {
+      font-size: .8rem;
+      color: var(--text-muted);
+      transition: color var(--transition);
+    }
+    .footer-links a:hover { color: var(--teal); }
+
+    .footer-built {
+      font-size: .75rem;
+      color: var(--text-muted);
+      text-align: right;
+    }
+
+    /* ============================================================
+       DIVIDER / SECTION FADE
+    ============================================================ */
+    .section-divider {
+      width: 48px;
+      height: 3px;
+      background: var(--accent-grd);
+      border-radius: 2px;
+      margin: 16px 0 0;
+    }
+
+    /* ============================================================
+       SCROLL REVEAL
+    ============================================================ */
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity .6s ease, transform .6s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: none;
+    }
+
+    /* ============================================================
+       RESPONSIVE
+    ============================================================ */
+    @media (max-width: 900px) {
+      .about-layout,
+      .contact-layout {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+      .nav-links { display: none; }
+      .nav-hamburger { display: flex; }
+    }
+
+    @media (max-width: 600px) {
+      .form-row { grid-template-columns: 1fr; }
+      .hero-stat-row { gap: 24px; }
+      .contact-form-wrap { padding: 24px; }
+      .services-grid { grid-template-columns: 1fr; }
+      .footer-inner { flex-direction: column; align-items: flex-start; }
+      .footer-built { text-align: left; }
+    }
+
+    /* Scroll-to-top btn */
+    #scroll-top {
+      position: fixed;
+      bottom: 30px;
+      right: 28px;
+      z-index: 500;
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      background: var(--accent-grd);
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transform: translateY(12px);
+      transition: opacity var(--transition), transform var(--transition);
+      box-shadow: 0 4px 20px rgba(0,200,184,.3);
+    }
+    #scroll-top.visible { opacity: 1; transform: none; }
+    #scroll-top svg { width: 16px; height: 16px; stroke: #000; stroke-width: 2.5; fill: none; }
+
+    /* ============================================================
+       ACCENT COLOR ROTATION
+    ============================================================ */
+    @property --accent-color {
+      syntax: '<color>';
+      inherits: true;
+      initial-value: #00c8ff;
+    }
+    @property --accent-color-2 {
+      syntax: '<color>';
+      inherits: true;
+      initial-value: #1a9fd4;
+    }
+
+    /* Pure CSS 45-second color cycle — no JS interaction */
+    :root {
+      --accent-color:  #00c8ff;
+      --accent-color-2:#1a9fd4;
+      --accent-grd: linear-gradient(135deg, var(--accent-color) 0%, var(--accent-color-2) 100%);
+      animation: accentCycle 45s linear infinite;
+    }
+
+    @keyframes accentCycle {
+      0%      { --accent-color: #00c8ff; --accent-color-2: #1a9fd4; }
+      33.33%  { --accent-color: #7c3aed; --accent-color-2: #5b21b6; }
+      66.66%  { --accent-color: #e11d48; --accent-color-2: #be123c; }
+      100%    { --accent-color: #00c8ff; --accent-color-2: #1a9fd4; }
+    }
+
+    /* Override all hardcoded teal references to follow accent cycle */
+    .section-label                { color: var(--accent-color); }
+    .section-divider              { background: var(--accent-grd); }
+    .hero-badge                   { border-color: color-mix(in srgb, var(--accent-color) 22%, transparent); color: var(--accent-color); }
+    .hero-badge-dot               { background: var(--accent-color); }
+    .service-icon                 { background: color-mix(in srgb, var(--accent-color) 10%, transparent); border-color: color-mix(in srgb, var(--accent-color) 20%, transparent); }
+    .service-icon svg             { stroke: var(--accent-color); }
+    .service-card:hover           { border-color: color-mix(in srgb, var(--accent-color) 38%, transparent); box-shadow: 0 20px 48px color-mix(in srgb, var(--accent-color) 9%, transparent), var(--shadow-card); }
+    .about-point-icon             { background: color-mix(in srgb, var(--accent-color) 12%, transparent); border-color: color-mix(in srgb, var(--accent-color) 22%, transparent); }
+    .about-point-icon svg         { stroke: var(--accent-color); }
+    .about-marketing              { border-left-color: var(--accent-color); }
+    .about-marketing strong       { color: var(--accent-color); }
+    .team-role                    { color: var(--accent-color); }
+    .team-card:hover              { border-color: color-mix(in srgb, var(--accent-color) 32%, transparent); }
+    .contact-info-icon            { background: color-mix(in srgb, var(--accent-color) 9%, transparent); border-color: color-mix(in srgb, var(--accent-color) 17%, transparent); }
+    .contact-info-icon svg        { stroke: var(--accent-color); }
+    input:focus, textarea:focus   { border-color: var(--accent-color); box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent-color) 10%, transparent); }
+    #form-thanks .thanks-icon     { background: color-mix(in srgb, var(--accent-color) 12%, transparent); border-color: var(--accent-color); }
+    #form-thanks .thanks-icon svg { stroke: var(--accent-color); }
+    .btn-outline:hover            { border-color: var(--accent-color); color: var(--accent-color); background: color-mix(in srgb, var(--accent-color) 6%, transparent); }
+    .partner-logo:hover           { border-color: color-mix(in srgb, var(--accent-color) 28%, transparent); box-shadow: 0 4px 24px color-mix(in srgb, var(--accent-color) 7%, transparent); }
+    #mobile-menu a:hover          { color: var(--accent-color); }
+    .footer-links a:hover         { color: var(--accent-color); }
+    .travel-note a                { color: color-mix(in srgb, var(--accent-color) 70%, white); }
+
+    /* ============================================================
+       CHATBOT WIDGET
+    ============================================================ */
+    #chat-widget {
+      position: fixed;
+      bottom: 86px;
+      right: 28px;
+      z-index: 600;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 12px;
+    }
+
+    #chat-launcher {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      background: var(--accent-grd);
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 24px color-mix(in srgb, var(--accent-color) 40%, transparent);
+      transition: transform .22s ease, box-shadow .22s ease;
+      flex-shrink: 0;
+      position: relative;
+    }
+    #chat-launcher:hover {
+      transform: scale(1.1);
+      box-shadow: 0 6px 34px color-mix(in srgb, var(--accent-color) 55%, transparent);
+    }
+    #chat-launcher svg {
+      width: 24px; height: 24px;
+      stroke: #000; fill: none; stroke-width: 2.2;
+      stroke-linecap: round; stroke-linejoin: round;
+      position: absolute;
+      transition: opacity .18s, transform .18s;
+    }
+    #chat-launcher .ico-open  { opacity: 1; transform: scale(1); }
+    #chat-launcher .ico-close { opacity: 0; transform: scale(.7); }
+    #chat-widget.open #chat-launcher .ico-open  { opacity: 0; transform: scale(.7); }
+    #chat-widget.open #chat-launcher .ico-close { opacity: 1; transform: scale(1); }
+
+    /* Unread badge */
+    #chat-badge {
+      position: absolute;
+      top: -2px; right: -2px;
+      width: 16px; height: 16px;
+      border-radius: 50%;
+      background: #e11d48;
+      border: 2px solid var(--bg-0);
+      font-size: .6rem; font-weight: 800; color: #fff;
+      display: flex; align-items: center; justify-content: center;
+      transition: opacity .2s;
+    }
+    #chat-widget.open #chat-badge { opacity: 0; pointer-events: none; }
+
+    #chat-window {
+      width: 348px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      box-shadow: 0 24px 64px rgba(0,0,0,.65);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      transform: translateY(18px) scale(.96);
+      opacity: 0;
+      pointer-events: none;
+      transition: transform .32s cubic-bezier(.34,1.56,.64,1), opacity .22s ease;
+      max-height: 540px;
+    }
+    #chat-widget.open #chat-window {
+      transform: none;
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    .chat-header {
+      padding: 14px 16px;
+      background: var(--bg-3);
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-shrink: 0;
+    }
+    .chat-header-info {
+      display: flex; align-items: center; gap: 10px;
+    }
+    .chat-av {
+      width: 34px; height: 34px;
+      border-radius: 50%;
+      background: var(--accent-grd);
+      display: flex; align-items: center; justify-content: center;
+      font-size: .58rem; font-weight: 800; color: #000;
+      flex-shrink: 0;
+    }
+    .chat-header-title {
+      font-size: .84rem; font-weight: 700; color: var(--text-primary); line-height: 1.2;
+    }
+    .chat-header-status {
+      display: flex; align-items: center; gap: 5px;
+      font-size: .68rem; color: var(--text-muted); margin-top: 1px;
+    }
+    .chat-online-dot {
+      width: 6px; height: 6px; border-radius: 50%;
+      background: #22c55e;
+      animation: pulse 2s infinite;
+    }
+    .chat-x {
+      background: none; border: none; cursor: pointer;
+      color: var(--text-muted); font-size: 1.25rem; line-height: 1;
+      padding: 3px 7px; border-radius: 4px;
+      transition: color .15s, background .15s;
+      font-family: 'Inter', sans-serif;
+    }
+    .chat-x:hover { color: var(--text-primary); background: rgba(255,255,255,.06); }
+
+    #chat-messages {
+      flex: 1;
+      overflow-y: auto;
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      min-height: 160px;
+      max-height: 300px;
+      scroll-behavior: smooth;
+    }
+    #chat-messages::-webkit-scrollbar { width: 3px; }
+    #chat-messages::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+
+    .cmsg-row { display: flex; align-items: flex-end; gap: 7px; }
+    .cmsg-av {
+      width: 24px; height: 24px; border-radius: 50%;
+      background: var(--accent-grd);
+      display: flex; align-items: center; justify-content: center;
+      font-size: .48rem; font-weight: 800; color: #000;
+      flex-shrink: 0;
+    }
+    .cmsg-bubble {
+      background: var(--bg-3);
+      border: 1px solid var(--border);
+      border-radius: 14px 14px 14px 3px;
+      padding: 9px 13px;
+      font-size: .82rem; color: var(--text-secondary); line-height: 1.5;
+      max-width: 230px;
+    }
+    .cmsg-user { justify-content: flex-end; }
+    .cmsg-user .cmsg-bubble {
+      background: var(--accent-grd);
+      color: #000; font-weight: 600; border: none;
+      border-radius: 14px 14px 3px 14px;
+    }
+
+    /* Typing indicator */
+    .chat-typing {
+      display: flex; align-items: center; gap: 4px;
+      padding: 10px 14px;
+      background: var(--bg-3);
+      border: 1px solid var(--border);
+      border-radius: 14px 14px 14px 3px;
+      width: fit-content;
+    }
+    .chat-typing span {
+      width: 5px; height: 5px; border-radius: 50%;
+      background: var(--text-muted);
+      animation: typingDot 1.2s infinite;
+    }
+    .chat-typing span:nth-child(2) { animation-delay: .2s; }
+    .chat-typing span:nth-child(3) { animation-delay: .4s; }
+    @keyframes typingDot {
+      0%, 80%, 100% { transform: scale(1); opacity: .4; }
+      40%           { transform: scale(1.4); opacity: 1; }
+    }
+
+    #chat-footer { flex-shrink: 0; }
+
+    .chat-options {
+      display: flex; flex-direction: column; gap: 7px;
+      padding: 8px 16px 16px;
+    }
+    .copt {
+      background: transparent;
+      border: 1px solid color-mix(in srgb, var(--accent-color) 32%, transparent);
+      border-radius: 20px;
+      padding: 9px 16px;
+      font-family: 'Inter', sans-serif;
+      font-size: .8rem; font-weight: 600;
+      color: var(--accent-color);
+      cursor: pointer; text-align: left;
+      transition: background .18s, border-color .18s, transform .12s;
+    }
+    .copt:hover {
+      background: color-mix(in srgb, var(--accent-color) 10%, transparent);
+      border-color: var(--accent-color);
+      transform: translateX(3px);
+    }
+
+    .chat-lead-form {
+      padding: 8px 16px 16px;
+      display: flex; flex-direction: column; gap: 8px;
+    }
+    .chat-lead-form input {
+      background: var(--bg-3);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 9px 12px;
+      font-family: 'Inter', sans-serif;
+      font-size: .82rem; color: var(--text-primary);
+      outline: none; width: 100%;
+      transition: border-color .18s;
+    }
+    .chat-lead-form input:focus { border-color: var(--accent-color); }
+    .chat-lead-form input.invalid { border-color: #e11d48; }
+    .chat-lead-submit {
+      background: var(--accent-grd);
+      color: #000; border: none;
+      border-radius: 20px; padding: 10px;
+      font-family: 'Inter', sans-serif;
+      font-size: .82rem; font-weight: 700;
+      cursor: pointer; margin-top: 2px;
+      transition: filter .18s, transform .12s;
+    }
+    .chat-lead-submit:hover { filter: brightness(1.1); transform: translateY(-1px); }
+
+    .chat-done-wrap {
+      padding: 14px 16px 18px;
+      text-align: center;
+    }
+    .chat-done-close {
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--text-secondary);
+      border-radius: 20px;
+      padding: 8px 28px;
+      font-family: 'Inter', sans-serif;
+      font-size: .8rem; cursor: pointer;
+      transition: border-color .18s, color .18s;
+    }
+    .chat-done-close:hover { border-color: var(--accent-color); color: var(--accent-color); }
+
+    @media (max-width: 420px) {
+      #chat-window { width: calc(100vw - 24px); }
+      #chat-widget { right: 12px; bottom: 80px; }
+    }
+
+    /* ============================================================
+       SCANLINE TEXTURE OVERLAY
+    ============================================================ */
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      z-index: 9998;
+      pointer-events: none;
+      background: repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 3px,
+        rgba(0,0,0,.03) 3px,
+        rgba(0,0,0,.03) 4px
+      );
+    }
+
+    /* ============================================================
+       HERO WORD UNITS
+    ============================================================ */
+    .wu {
+      display: inline-block;
+      opacity: 0;
+      transform: translateY(36px);
+      transition: opacity .6s cubic-bezier(.2,0,0,1),
+                  transform .65s cubic-bezier(.2,0,0,1);
+      transition-delay: calc(var(--wd,0) * .12s + .15s);
+    }
+    .hero-words-go .wu { opacity: 1; transform: none; }
+
+    /* ============================================================
+       SERVICE CARD ANIMATIONS
+    ============================================================ */
+    .card-anim {
+      opacity: 0;
+      transform: translateX(-56px) rotate(-2.5deg);
+      transition: opacity .65s cubic-bezier(.2,0,0,1),
+                  transform .7s cubic-bezier(.2,0,0,1);
+    }
+    .card-anim[data-side="right"] { transform: translateX(56px) rotate(2.5deg); }
+    .card-anim.card-go  { opacity: 1; transform: none; }
+
+    /* Inner bloom on hover */
+    .service-card::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      background: radial-gradient(circle at 50% 40%,
+        color-mix(in srgb, var(--accent-color) 10%, transparent) 0%,
+        transparent 65%);
+      opacity: 0;
+      transition: opacity .35s;
+      z-index: 0;
+      pointer-events: none;
+    }
+    .service-card:hover::after { opacity: 1; }
+
+    /* ============================================================
+       TEAM CARD FLIP
+    ============================================================ */
+    .flip-anim {
+      opacity: 0;
+      transform: perspective(600px) rotateY(-38deg) translateX(-24px);
+      transition: opacity .6s ease, transform .72s cubic-bezier(.34,1.4,.64,1);
+    }
+    .flip-anim[data-delay="1"] { transition-delay: .2s; }
+    .flip-anim.flip-go { opacity: 1; transform: none; }
+
+    /* ============================================================
+       ABOUT BULLET POINTS
+    ============================================================ */
+    .about-point > span { opacity: 0; transition: opacity .2s; }
+    .about-point > span.tw-done { opacity: 1; }
+
+    /* ============================================================
+       MARKETING CALLOUT PULSE
+    ============================================================ */
+    @keyframes mktgPulse {
+      0%   { box-shadow: 0 0 0 0 color-mix(in srgb, var(--accent-color) 35%, transparent); }
+      55%  { box-shadow: 0 0 0 14px transparent; }
+      100% { box-shadow: 0 0 0 0 transparent; }
+    }
+    .about-marketing.mktg-pulse { animation: mktgPulse .9s ease-out forwards; }
+    .about-marketing { opacity: 0; transform: translateY(14px); transition: opacity .5s ease, transform .5s ease; }
+    .about-marketing.mktg-pulse { opacity: 1; transform: none; }
+
+    /* ============================================================
+       PARTNER LOGO ANIMATIONS
+    ============================================================ */
+    .logo-anim {
+      opacity: 0;
+      transform: scale(.84);
+      transition: opacity .5s ease, transform .55s cubic-bezier(.34,1.4,.64,1);
+    }
+    .logo-anim.logo-go { opacity: 1; transform: none; }
+
+    .travel-anim {
+      opacity: 0;
+      transform: translateY(16px);
+      transition: opacity .5s ease .4s, transform .5s ease .4s;
+    }
+    .travel-anim.logo-go { opacity: 1; transform: none; }
+
+    /* ============================================================
+       FORM FIELD STAGGER
+    ============================================================ */
+    .field-anim {
+      opacity: 0;
+      transform: translateY(18px);
+      transition: opacity .45s ease, transform .45s ease;
+    }
+    .field-anim.field-go { opacity: 1; transform: none; }
+
+    /* Submit button pulse */
+    @keyframes submitPulse {
+      0%, 100% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--accent-color) 45%, transparent); }
+      55%       { box-shadow: 0 0 0 9px transparent; }
+    }
+    .form-submit { animation: submitPulse 2.6s infinite 1.5s; }
+
+    /* ============================================================
+       CHATBOT LAUNCHER BOUNCE
+    ============================================================ */
+    @keyframes chatBounce {
+      0%   { transform: scale(0) translateY(16px); opacity: 0; }
+      55%  { transform: scale(1.18) translateY(-4px); opacity: 1; }
+      78%  { transform: scale(0.93); }
+      100% { transform: scale(1); }
+    }
+    #chat-launcher { animation: chatBounce .72s cubic-bezier(.34,1.56,.64,1) 1.8s both; }
+
+    /* ============================================================
+       HERO PARALLAX CONTAINER
+    ============================================================ */
+    .hero-content { will-change: transform; }
+  </style>
+</head>
+<body>
+
+  <!-- Particle Canvas -->
+  <canvas id="particle-canvas"></canvas>
+
+  <!-- Scroll to Top -->
+  <button id="scroll-top" aria-label="Back to top" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+    <svg viewBox="0 0 24 24"><polyline points="18 15 12 9 6 15"></polyline></svg>
+  </button>
+
+  <!-- ============================================================
+       NAVBAR
+  ============================================================ -->
+  <nav id="navbar">
+    <div class="container nav-inner">
+      <a href="#hero" class="nav-logo">
+        <span class="nav-logo-name">Cary Park Solutions</span>
+        <span class="nav-logo-tag">Triangle Technology Partner</span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="#services">Services</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#partners">Partners</a></li>
+        <li><a href="#contact" class="nav-cta">Get in Touch</a></li>
+      </ul>
+      <button class="nav-hamburger" id="hamburger" aria-label="Open menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Mobile Menu -->
+  <div id="mobile-menu">
+    <a href="#services" onclick="closeMobile()">Services</a>
+    <a href="#about" onclick="closeMobile()">About</a>
+    <a href="#partners" onclick="closeMobile()">Partners</a>
+    <a href="#contact" class="mob-cta" onclick="closeMobile()">Schedule a Consultation</a>
+  </div>
+
+  <!-- ============================================================
+       HERO
+  ============================================================ -->
+  <section id="hero">
+    <div class="hero-grid-overlay"></div>
+    <div class="hero-glow"></div>
+    <div class="hero-glow-2"></div>
+    <div class="container">
+      <div class="hero-content">
+        <div class="hero-badge">
+          <span class="hero-badge-dot"></span>
+          Serving the Raleigh-Durham Triangle
+        </div>
+        <h1 class="hero-title">
+          <span class="wu" style="--wd:0">Your</span>
+          <span class="wu grad" style="--wd:1">Triangle</span><br/>
+          <span class="wu" style="--wd:2">Technology</span>
+          <span class="wu" style="--wd:3">Partner</span>
+        </h1>
+        <p class="hero-sub">
+          Enterprise-grade managed IT, strategic consulting, and technology reselling — purpose-built for small and mid-size businesses across the RDU area.
+        </p>
+        <div class="hero-actions">
+          <a href="#services" class="btn btn-primary">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><polyline points="8 21 12 17 16 21"/></svg>
+            Explore Services
+          </a>
+          <a href="#contact" class="btn btn-outline">
+            Schedule a Consultation
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </a>
+        </div>
+        <div class="hero-stat-row reveal">
+          <div class="hero-stat">
+            <div class="hero-stat-num">RDU</div>
+            <div class="hero-stat-label">Triangle Focus</div>
+          </div>
+          <div class="hero-stat">
+            <div class="hero-stat-num" data-count="4">4+</div>
+            <div class="hero-stat-label">Practice Areas</div>
+          </div>
+          <div class="hero-stat">
+            <div class="hero-stat-num">SMB</div>
+            <div class="hero-stat-label">Specialized</div>
+          </div>
+          <div class="hero-stat">
+            <div class="hero-stat-num">ES</div>
+            <div class="hero-stat-label">Bilingual Support</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       SERVICES
+  ============================================================ -->
+  <section id="services">
+    <div class="container">
+      <div class="services-header reveal">
+        <span class="section-label">What We Do</span>
+        <h2 class="section-title">Capabilities Built<br/>for the Modern Business</h2>
+        <div class="section-divider"></div>
+        <p class="section-sub">From day-to-day IT operations to high-impact strategic initiatives — we cover the full technology lifecycle so you can focus on growth.</p>
+      </div>
+      <div class="services-grid">
+
+        <!-- Card 1 -->
+        <div class="service-card card-anim" data-side="left">
+          <div class="service-icon">
+            <svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="8" rx="2" ry="2"/><rect x="2" y="14" width="20" height="8" rx="2" ry="2"/><line x1="6" y1="6" x2="6.01" y2="6"/><line x1="6" y1="18" x2="6.01" y2="18"/></svg>
+          </div>
+          <div class="service-card-title">Managed IT Services</div>
+          <div class="service-card-desc">
+            Proactive monitoring, helpdesk support, endpoint management, and security hardening — delivered as a predictable monthly investment. We become your outsourced IT department.
+          </div>
+          <div class="service-card-tags">
+            <span class="tag">Helpdesk</span>
+            <span class="tag">Monitoring</span>
+            <span class="tag">Security</span>
+            <span class="tag">Endpoint</span>
+          </div>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="service-card card-anim" data-side="right">
+          <div class="service-icon">
+            <svg viewBox="0 0 24 24"><polyline points="16 3 21 3 21 8"/><line x1="4" y1="20" x2="21" y2="3"/><polyline points="21 16 21 21 16 21"/><line x1="15" y1="15" x2="21" y2="21"/></svg>
+          </div>
+          <div class="service-card-title">Technology Partner Reselling</div>
+          <div class="service-card-desc">
+            Authorized reseller bringing enterprise hardware, networking, and software to SMBs at competitive price points. Deep background in Lenovo end-user computing and Cisco networking.
+          </div>
+          <div class="service-card-tags">
+            <span class="tag">Lenovo</span>
+            <span class="tag">Cisco</span>
+            <span class="tag">EUC / VDI</span>
+            <span class="tag">Networking</span>
+          </div>
+        </div>
+
+        <!-- Card 3 -->
+        <div class="service-card card-anim" data-side="left">
+          <div class="service-icon">
+            <svg viewBox="0 0 24 24"><path d="M3 3h18v18H3z" rx="2"/><polyline points="3 9 21 9"/><polyline points="9 21 9 9"/></svg>
+          </div>
+          <div class="service-card-title">Program &amp; Project Management</div>
+          <div class="service-card-desc">
+            Structured delivery for technology rollouts, migrations, and transformation initiatives. Rigorous scope, schedule, and budget discipline — from kickoff through go-live and beyond.
+          </div>
+          <div class="service-card-tags">
+            <span class="tag">PMO</span>
+            <span class="tag">Agile</span>
+            <span class="tag">Migrations</span>
+            <span class="tag">Delivery</span>
+          </div>
+        </div>
+
+        <!-- Card 4 -->
+        <div class="service-card card-anim" data-side="right">
+          <div class="service-icon">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+          </div>
+          <div class="service-card-title">Strategic Consulting</div>
+          <div class="service-card-desc">
+            Technology roadmapping, vendor evaluation, and digital strategy aligned to your business objectives. We translate enterprise best practices into decisions your leadership team can act on.
+          </div>
+          <div class="service-card-tags">
+            <span class="tag">Roadmap</span>
+            <span class="tag">Vendor Advisory</span>
+            <span class="tag">Digital Strategy</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       ABOUT
+  ============================================================ -->
+  <section id="about">
+    <div class="container">
+      <div class="about-layout">
+
+        <div class="about-left reveal">
+          <span class="section-label">About Us</span>
+          <h2 class="section-title">Triangle Operators.<br/>Enterprise Experience.</h2>
+          <div class="section-divider"></div>
+          <p class="section-sub">
+            Cary Park Solutions was founded in the Raleigh-Durham area by technology professionals who have spent careers at the intersection of enterprise sales, program delivery, and infrastructure. We combine that depth with the agility and accountability of a local partner.
+          </p>
+          <div class="about-points">
+            <div class="about-point">
+              <div class="about-point-icon">
+                <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+              </div>
+              <span>Hands-on practitioners — not just advisors</span>
+            </div>
+            <div class="about-point">
+              <div class="about-point-icon">
+                <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+              </div>
+              <span>Deeply rooted in the Triangle business community</span>
+            </div>
+            <div class="about-point">
+              <div class="about-point-icon">
+                <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+              </div>
+              <span>Bilingual English / Spanish capabilities</span>
+            </div>
+            <div class="about-point">
+              <div class="about-point-icon">
+                <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+              </div>
+              <span>Cross-industry experience from life sciences to manufacturing</span>
+            </div>
+          </div>
+          <div class="about-marketing" id="mktg-callout">
+            <strong>Integrated Marketing &amp; SEO.</strong> Beyond technology, Cary Park Solutions offers digital marketing and search engine optimization services to help your business grow its online presence in the competitive Triangle market — end-to-end, under one roof.
+          </div>
+        </div>
+
+        <div class="about-right reveal">
+
+          <!-- Team Card: David -->
+          <div class="team-card flip-anim" data-delay="0">
+            <div class="team-avatar">DR</div>
+            <div class="team-info">
+              <div class="team-name">David Rojas</div>
+              <div class="team-role">Co-Founder &mdash; Technology Sales &amp; Solutions</div>
+              <div class="team-bio">
+                Seasoned IT sales professional with a track record at Lenovo and Cisco. Specializes in security, end-user computing (EUC), and virtual desktop infrastructure (VDI). Bilingual in English and Spanish — uniquely positioned to serve the Triangle's growing Hispanic business community.
+              </div>
+              <div class="team-chips">
+                <span class="tag">Lenovo</span>
+                <span class="tag">Cisco</span>
+                <span class="tag">Security</span>
+                <span class="tag">EUC / VDI</span>
+                <span class="tag">Bilingual ES/EN</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Team Card: Lauren -->
+          <div class="team-card flip-anim" data-delay="1">
+            <div class="team-avatar">LR</div>
+            <div class="team-info">
+              <div class="team-name">Lauren</div>
+              <div class="team-role">Senior Consultant &mdash; Program Management</div>
+              <div class="team-bio">
+                Enterprise program manager with extensive experience in pharmaceutical and life sciences environments. Deep expertise in FDA-regulated project delivery, large-scale budget governance, and cross-functional stakeholder management.
+              </div>
+              <div class="team-chips">
+                <span class="tag">Pharma</span>
+                <span class="tag">FDA</span>
+                <span class="tag">Program Mgmt</span>
+                <span class="tag">Budget Gov.</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       PARTNERS
+  ============================================================ -->
+  <section id="partners">
+    <div class="container">
+      <div class="partners-label reveal">Technology Partners &amp; Affiliates</div>
+      <div class="partners-logos reveal">
+
+        <!-- Microsoft -->
+        <div class="partner-logo logo-anim" style="transition-delay:.0s" title="Microsoft">
+          <svg width="96" height="32" viewBox="0 0 96 32" xmlns="http://www.w3.org/2000/svg">
+            <rect x="0" y="0" width="14" height="14" fill="#f25022" rx="1"/>
+            <rect x="16" y="0" width="14" height="14" fill="#7fba00" rx="1"/>
+            <rect x="0" y="16" width="14" height="14" fill="#00a4ef" rx="1"/>
+            <rect x="16" y="16" width="14" height="14" fill="#ffb900" rx="1"/>
+            <text x="36" y="21" font-family="Inter,sans-serif" font-size="13" font-weight="700" fill="#8b93a5">Microsoft</text>
+          </svg>
+        </div>
+
+        <!-- Cisco -->
+        <div class="partner-logo logo-anim" style="transition-delay:.13s" title="Cisco">
+          <svg width="88" height="32" viewBox="0 0 88 32" xmlns="http://www.w3.org/2000/svg">
+            <rect x="4" y="8" width="5" height="16" rx="2" fill="#00bceb"/>
+            <rect x="12" y="4" width="5" height="24" rx="2" fill="#00bceb"/>
+            <rect x="20" y="8" width="5" height="16" rx="2" fill="#00bceb"/>
+            <text x="32" y="21" font-family="Inter,sans-serif" font-size="13" font-weight="700" fill="#8b93a5">Cisco</text>
+          </svg>
+        </div>
+
+        <!-- Lenovo -->
+        <div class="partner-logo logo-anim" style="transition-delay:.26s" title="Lenovo">
+          <svg width="96" height="32" viewBox="0 0 96 32" xmlns="http://www.w3.org/2000/svg">
+            <rect x="2" y="6" width="20" height="20" rx="3" fill="#e2171e"/>
+            <text x="6" y="21" font-family="Inter,sans-serif" font-size="11" font-weight="800" fill="#fff">L</text>
+            <text x="28" y="21" font-family="Inter,sans-serif" font-size="13" font-weight="700" fill="#8b93a5">Lenovo</text>
+          </svg>
+        </div>
+
+      </div>
+
+      <div class="travel-note travel-anim">
+        <svg style="display:inline;vertical-align:middle;margin-right:6px;" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" color="#535c6e"><path d="M21 3L3 10.53v.98l6.84 2.65L12.48 21h.98L21 3z"/></svg>
+        Travel partnerships and company retreat planning available via
+        <strong style="color:#8b93a5;">Karabinos Rojas &amp; Associates</strong> by Dream Vacations —
+        seamlessly coordinating corporate travel alongside your technology services.
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       CONTACT
+  ============================================================ -->
+  <section id="contact">
+    <div class="container">
+      <div class="contact-layout">
+
+        <div class="contact-info reveal">
+          <span class="section-label">Contact Us</span>
+          <h2 class="section-title">Let's Start<br/>a Conversation</h2>
+          <div class="section-divider"></div>
+          <p class="section-sub">
+            Ready to modernize your IT environment or tackle a complex program? Reach out and we'll respond within one business day.
+          </p>
+          <div class="contact-info-items">
+            <div class="contact-info-item">
+              <div class="contact-info-icon">
+                <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              </div>
+              <div>
+                <div class="contact-info-label">Location</div>
+                <div class="contact-info-val">Cary, NC &mdash; Serving the Greater RDU Triangle</div>
+              </div>
+            </div>
+            <div class="contact-info-item">
+              <div class="contact-info-icon">
+                <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+              </div>
+              <div>
+                <div class="contact-info-label">Email</div>
+                <div class="contact-info-val">info@caryparksolutions.com</div>
+              </div>
+            </div>
+            <div class="contact-info-item">
+              <div class="contact-info-icon">
+                <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1.27h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9a16 16 0 0 0 6.29 6.29l.91-.91a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+              </div>
+              <div>
+                <div class="contact-info-label">Service Area</div>
+                <div class="contact-info-val">Raleigh · Durham · Cary · Chapel Hill · Research Triangle Park</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="contact-form-wrap reveal">
+          <form id="contact-form" novalidate>
+            <div class="form-row">
+              <div class="form-group field-anim" style="transition-delay:.0s">
+                <label for="f-name">Full Name *</label>
+                <input type="text" id="f-name" name="name" placeholder="Jane Smith" required />
+              </div>
+              <div class="form-group field-anim" style="transition-delay:.08s">
+                <label for="f-company">Company</label>
+                <input type="text" id="f-company" name="company" placeholder="Acme Corp" />
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group field-anim" style="transition-delay:.16s">
+                <label for="f-email">Email Address *</label>
+                <input type="email" id="f-email" name="email" placeholder="jane@acme.com" required />
+              </div>
+              <div class="form-group field-anim" style="transition-delay:.24s">
+                <label for="f-phone">Phone Number</label>
+                <input type="tel" id="f-phone" name="phone" placeholder="(919) 555-0100" />
+              </div>
+            </div>
+            <div class="form-group full field-anim" style="transition-delay:.32s">
+              <label for="f-message">How Can We Help? *</label>
+              <textarea id="f-message" name="message" placeholder="Tell us about your IT challenges, a project you're planning, or simply that you'd like to connect..." required></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary form-submit">
+              Send Message
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+            </button>
+          </form>
+          <div id="form-thanks">
+            <div class="thanks-icon">
+              <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+            </div>
+            <h3>Message Received!</h3>
+            <p>Thank you for reaching out. A member of the Cary Park Solutions team will be in touch within one business day.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       FOOTER
+  ============================================================ -->
+  <footer>
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        &copy; 2025 <strong>Cary Park Solutions</strong> &mdash; Raleigh-Durham, NC
+      </div>
+      <div class="footer-links">
+        <a href="#services">Services</a>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
+      </div>
+      <div class="footer-built">Built in the Triangle&nbsp;&nbsp;&#9670;&nbsp;&nbsp;Cary, NC</div>
+    </div>
+  </footer>
+
+  <!-- ============================================================
+       CHAT WIDGET
+  ============================================================ -->
+  <div id="chat-widget">
+    <!-- Launcher button -->
+    <button id="chat-launcher" aria-label="Open chat">
+      <span id="chat-badge">1</span>
+      <!-- Open icon: chat bubble -->
+      <svg class="ico-open" viewBox="0 0 24 24">
+        <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+      </svg>
+      <!-- Close icon: X -->
+      <svg class="ico-close" viewBox="0 0 24 24">
+        <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+      </svg>
+    </button>
+
+    <!-- Chat window -->
+    <div id="chat-window">
+      <div class="chat-header">
+        <div class="chat-header-info">
+          <div class="chat-av">CPS</div>
+          <div>
+            <div class="chat-header-title">Cary Park Solutions</div>
+            <div class="chat-header-status">
+              <span class="chat-online-dot"></span> We&rsquo;re here to help
+            </div>
+          </div>
+        </div>
+        <button class="chat-x" onclick="window._chatToggle()" aria-label="Close chat">&times;</button>
+      </div>
+      <div id="chat-messages"></div>
+      <div id="chat-footer"></div>
+    </div>
+  </div>
+
+  <!-- ============================================================
+       JAVASCRIPT
+  ============================================================ -->
+  <script>
+    /* ============================================================
+       PARTICLES — CSS color, fixed canvas, 2%/1% lerp follow
+    ============================================================ */
+    (function () {
+      const canvas = document.getElementById('particle-canvas');
+      const ctx    = canvas.getContext('2d');
+      let W, H;
+      let particles = [];
+      let rings     = [];
+      let mouse     = { x: null, y: null };
+
+      const COUNT    = 90;
+      const MAX_DIST = 128;
+      const ATTRACT  = 180;  /* px — magnetic radius */
+
+      function resize() {
+        W = canvas.width  = window.innerWidth;
+        H = canvas.height = window.innerHeight;
+      }
+
+      function Particle() {
+        this.homeX = this.x = Math.random() * W;
+        this.homeY = this.y = Math.random() * H;
+        this.r  = Math.random() * 1.5 + 0.55;
+        this.a2 = Math.random() > 0.55;
+      }
+
+      /* Exact spec: 2% toward cursor if within 180px, else 1% toward home */
+      Particle.prototype.update = function () {
+        if (mouse.x !== null) {
+          const dx   = mouse.x - this.x;
+          const dy   = mouse.y - this.y;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+          if (dist < ATTRACT) {
+            /* Move 2% of the remaining distance to cursor each frame */
+            this.x += dx * 0.02;
+            this.y += dy * 0.02;
+          } else {
+            /* Move 1% of the remaining distance back to home each frame */
+            this.x += (this.homeX - this.x) * 0.01;
+            this.y += (this.homeY - this.y) * 0.01;
+          }
+        } else {
+          /* No cursor present — drift home */
+          this.x += (this.homeX - this.x) * 0.01;
+          this.y += (this.homeY - this.y) * 0.01;
+        }
+      };
+
+      function spawnRing() {
+        rings.push({
+          x: Math.random() * W, y: Math.random() * H,
+          r: 0, maxR: 65 + Math.random() * 75,
+          spd: 0.32 + Math.random() * 0.22,
+          a2: Math.random() > 0.5
+        });
+        setTimeout(spawnRing, 2400 + Math.random() * 4200);
+      }
+
+      /* Read accent colors from CSS (tracks the 45s keyframe animation) */
+      let accentCache = '#00c8ff', accent2Cache = '#1a9fd4', tick = 0;
+      function readAccent() {
+        const cs = getComputedStyle(document.documentElement);
+        accentCache  = cs.getPropertyValue('--accent-color').trim()   || '#00c8ff';
+        accent2Cache = cs.getPropertyValue('--accent-color-2').trim() || '#1a9fd4';
+      }
+
+      function draw() {
+        /* Sync accent color from CSS every 20 frames */
+        tick++;
+        if (tick % 20 === 0) readAccent();
+
+        ctx.clearRect(0, 0, W, H);
+
+        /* Pulse rings */
+        for (let i = rings.length - 1; i >= 0; i--) {
+          const rg = rings[i];
+          rg.r += rg.spd;
+          const op = 0.2 * (1 - rg.r / rg.maxR);
+          if (op <= 0) { rings.splice(i, 1); continue; }
+          ctx.beginPath();
+          ctx.arc(rg.x, rg.y, rg.r, 0, Math.PI * 2);
+          ctx.strokeStyle = rg.a2 ? accent2Cache : accentCache;
+          ctx.globalAlpha = op;
+          ctx.lineWidth   = 1.1;
+          ctx.stroke();
+          ctx.globalAlpha = 1;
+        }
+
+        /* Stars */
+        particles.forEach(p => {
+          p.update();
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+          ctx.globalAlpha = 0.62;
+          ctx.fillStyle   = p.a2 ? accent2Cache : accentCache;
+          ctx.fill();
+          ctx.globalAlpha = 1;
+        });
+
+        /* Connection lines */
+        for (let i = 0; i < particles.length; i++) {
+          for (let j = i + 1; j < particles.length; j++) {
+            const dx = particles[i].x - particles[j].x;
+            const dy = particles[i].y - particles[j].y;
+            const d  = Math.sqrt(dx * dx + dy * dy);
+            if (d < MAX_DIST) {
+              ctx.beginPath();
+              ctx.moveTo(particles[i].x, particles[i].y);
+              ctx.lineTo(particles[j].x, particles[j].y);
+              ctx.strokeStyle = accentCache;
+              ctx.globalAlpha = 0.14 * (1 - d / MAX_DIST);
+              ctx.lineWidth   = 0.55;
+              ctx.stroke();
+              ctx.globalAlpha = 1;
+            }
+          }
+        }
+
+        requestAnimationFrame(draw);
+      }
+
+      window.addEventListener('resize', resize);
+      window.addEventListener('mousemove', e => {
+        mouse.x = e.clientX;
+        mouse.y = e.clientY;
+      }, { passive: true });
+      window.addEventListener('mouseleave', () => { mouse.x = null; mouse.y = null; });
+
+      resize();
+      for (let i = 0; i < COUNT; i++) particles.push(new Particle());
+      setTimeout(spawnRing, 1000);
+      draw();
+    })();
+
+    /* ---- Navbar scroll ---- */
+    const navbar = document.getElementById('navbar');
+    const scrollTop = document.getElementById('scroll-top');
+    window.addEventListener('scroll', () => {
+      const y = window.scrollY;
+      navbar.classList.toggle('scrolled', y > 20);
+      scrollTop.classList.toggle('visible', y > 400);
+    });
+
+    /* ---- Hamburger ---- */
+    const hamburger   = document.getElementById('hamburger');
+    const mobileMenu  = document.getElementById('mobile-menu');
+    hamburger.addEventListener('click', () => {
+      const open = mobileMenu.classList.toggle('open');
+      hamburger.classList.toggle('open', open);
+    });
+    function closeMobile() {
+      mobileMenu.classList.remove('open');
+      hamburger.classList.remove('open');
+    }
+
+    /* ============================================================
+       HERO PARALLAX
+    ============================================================ */
+    (function () {
+      const hc = document.querySelector('.hero-content');
+      if (!hc) return;
+      window.addEventListener('scroll', () => {
+        const y = window.scrollY;
+        hc.style.transform = `translateY(${y * 0.28}px)`;
+      }, { passive: true });
+    })();
+
+    /* ============================================================
+       HERO WORD ANIMATION — triggers on page load
+    ============================================================ */
+    (function () {
+      const title = document.querySelector('.hero-title');
+      if (title) setTimeout(() => title.classList.add('hero-words-go'), 180);
+
+      /* Badge + sub + actions also stagger in */
+      const badge   = document.querySelector('.hero-badge');
+      const sub     = document.querySelector('.hero-sub');
+      const actions = document.querySelector('.hero-actions');
+      [badge, sub, actions].forEach((el, i) => {
+        if (!el) return;
+        el.style.cssText += `opacity:0;transform:translateY(22px);transition:opacity .55s ease ${.6 + i*.14}s,transform .55s ease ${.6 + i*.14}s`;
+        setTimeout(() => { el.style.opacity = '1'; el.style.transform = 'none'; }, 10);
+      });
+    })();
+
+    /* ============================================================
+       BASE SCROLL REVEAL (.reveal)
+    ============================================================ */
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          observer.unobserve(e.target);
+        }
+      });
+    }, { threshold: .1, rootMargin: '0px 0px -30px 0px' });
+    reveals.forEach(r => observer.observe(r));
+
+    /* ============================================================
+       STAT ROW COUNT-UP
+    ============================================================ */
+    (function () {
+      const statRow = document.querySelector('.hero-stat-row');
+      if (!statRow) return;
+      let fired = false;
+      const io = new IntersectionObserver(entries => {
+        if (!entries[0].isIntersecting || fired) return;
+        fired = true;
+        io.disconnect();
+        /* Animate the numeric stat "4+" */
+        const numEl = document.querySelector('.hero-stat-num[data-count]');
+        if (!numEl) return;
+        const target = parseInt(numEl.dataset.count, 10);
+        let cur = 0;
+        const step = () => {
+          cur++;
+          numEl.textContent = cur + '+';
+          if (cur < target) requestAnimationFrame(step);
+        };
+        requestAnimationFrame(step);
+      }, { threshold: .5 });
+      io.observe(statRow);
+    })();
+
+    /* ============================================================
+       SERVICE CARD ANIMATIONS
+    ============================================================ */
+    (function () {
+      const cards = document.querySelectorAll('.card-anim');
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach(e => {
+          if (!e.isIntersecting) return;
+          e.target.classList.add('card-go');
+          io.unobserve(e.target);
+        });
+      }, { threshold: .12, rootMargin: '0px 0px -20px 0px' });
+      cards.forEach((c, i) => {
+        c.style.transitionDelay = `${i * 0.13}s`;
+        io.observe(c);
+      });
+    })();
+
+    /* ============================================================
+       TEAM CARD FLIP + BULLET TYPEWRITE + MARKETING PULSE
+    ============================================================ */
+    (function () {
+      /* Team card flip */
+      const flips = document.querySelectorAll('.flip-anim');
+      const flipIO = new IntersectionObserver(entries => {
+        entries.forEach(e => {
+          if (!e.isIntersecting) return;
+          const d = parseInt(e.target.dataset.delay || '0', 10);
+          setTimeout(() => e.target.classList.add('flip-go'), d * 200);
+          flipIO.unobserve(e.target);
+        });
+      }, { threshold: .15 });
+      flips.forEach(f => flipIO.observe(f));
+
+      /* Bullet typewrite — fires when about section enters view */
+      let twFired = false;
+      const aboutSec = document.getElementById('about');
+      if (aboutSec) {
+        const twIO = new IntersectionObserver(entries => {
+          if (!entries[0].isIntersecting || twFired) return;
+          twFired = true;
+          twIO.disconnect();
+          const spans = aboutSec.querySelectorAll('.about-point > span');
+          spans.forEach((span, idx) => {
+            const fullText = span.textContent;
+            span.textContent = '';
+            span.classList.add('tw-done'); /* make visible immediately */
+            let ci = 0;
+            setTimeout(() => {
+              const iv = setInterval(() => {
+                span.textContent = fullText.slice(0, ++ci);
+                if (ci >= fullText.length) clearInterval(iv);
+              }, 14);
+            }, idx * 380);
+          });
+        }, { threshold: .25 });
+        twIO.observe(aboutSec);
+      }
+
+      /* Marketing callout pulse */
+      const mktg = document.getElementById('mktg-callout');
+      if (mktg) {
+        const mIO = new IntersectionObserver(entries => {
+          if (!entries[0].isIntersecting) return;
+          mIO.disconnect();
+          mktg.classList.add('mktg-pulse');
+        }, { threshold: .6 });
+        mIO.observe(mktg);
+      }
+    })();
+
+    /* ============================================================
+       PARTNER LOGO SEQUENTIAL REVEAL
+    ============================================================ */
+    (function () {
+      const logos = document.querySelectorAll('.logo-anim, .travel-anim');
+      const io = new IntersectionObserver(entries => {
+        entries.forEach(e => {
+          if (!e.isIntersecting) return;
+          e.target.classList.add('logo-go');
+          io.unobserve(e.target);
+        });
+      }, { threshold: .2 });
+      logos.forEach(l => io.observe(l));
+    })();
+
+    /* ============================================================
+       FORM FIELD STAGGER
+    ============================================================ */
+    (function () {
+      const fields = document.querySelectorAll('.field-anim');
+      const io = new IntersectionObserver(entries => {
+        entries.forEach(e => {
+          if (!e.isIntersecting) return;
+          e.target.classList.add('field-go');
+          io.unobserve(e.target);
+        });
+      }, { threshold: .15 });
+      fields.forEach(f => io.observe(f));
+    })();
+
+    /* ---- Chatbot ---- */
+    (function () {
+      const widget   = document.getElementById('chat-widget');
+      const launcher = document.getElementById('chat-launcher');
+      const msgEl    = document.getElementById('chat-messages');
+      const footerEl = document.getElementById('chat-footer');
+      let isOpen = false;
+      let step   = 0;
+
+      const flow = [
+        {
+          bot: "Hi! I'm the Cary Park Solutions assistant. What brings you here today?",
+          options: ['IT Support', 'Technology Consulting', 'Project Management', 'Just Exploring']
+        },
+        {
+          bot: "Great. How many employees does your company have?",
+          options: ['1\u201310', '11\u201350', '51\u2013200', '200+']
+        },
+        {
+          bot: "What\u2019s your timeline for getting started?",
+          options: ['Immediately', 'Within 30 days', 'Within 90 days', 'Just researching']
+        },
+        {
+          bot: "Last step \u2014 what\u2019s the best way to reach you?",
+          type: 'form'
+        }
+      ];
+
+      function toggle() {
+        isOpen = !isOpen;
+        widget.classList.toggle('open', isOpen);
+        if (isOpen && step === 0) {
+          step = 1;
+          setTimeout(() => showTypingThen(flow[0].bot, () => renderFooter()), 350);
+        }
+      }
+
+      function showTypingThen(text, cb) {
+        /* Typing indicator */
+        const typRow = document.createElement('div');
+        typRow.className = 'cmsg-row';
+        typRow.innerHTML = `<div class="cmsg-av">CPS</div><div class="chat-typing"><span></span><span></span><span></span></div>`;
+        msgEl.appendChild(typRow);
+        scrollBottom();
+        setTimeout(() => {
+          typRow.remove();
+          addBot(text);
+          if (cb) cb();
+        }, 820);
+      }
+
+      function addBot(text) {
+        const row = document.createElement('div');
+        row.className = 'cmsg-row';
+        row.innerHTML = `<div class="cmsg-av">CPS</div><div class="cmsg-bubble">${text}</div>`;
+        msgEl.appendChild(row);
+        scrollBottom();
+      }
+
+      function addUser(text) {
+        const row = document.createElement('div');
+        row.className = 'cmsg-row cmsg-user';
+        row.innerHTML = `<div class="cmsg-bubble">${text}</div>`;
+        msgEl.appendChild(row);
+        scrollBottom();
+      }
+
+      function scrollBottom() {
+        requestAnimationFrame(() => { msgEl.scrollTop = msgEl.scrollHeight; });
+      }
+
+      function clearFooter() { footerEl.innerHTML = ''; }
+
+      function renderFooter() {
+        clearFooter();
+        const cur = flow[step - 1];
+        if (!cur) return;
+
+        if (cur.type === 'form') {
+          const wrap = document.createElement('div');
+          wrap.className = 'chat-lead-form';
+          wrap.innerHTML = `
+            <input type="text"  id="cl-name"  placeholder="Your name *" autocomplete="name" />
+            <input type="email" id="cl-email" placeholder="Email address *" autocomplete="email" />
+            <input type="tel"   id="cl-phone" placeholder="Phone (optional)" autocomplete="tel" />
+            <button class="chat-lead-submit" id="cl-send">Send &#8212; Let\u2019s Connect</button>
+          `;
+          footerEl.appendChild(wrap);
+          document.getElementById('cl-send').addEventListener('click', submitLead);
+          /* Allow enter key in inputs */
+          wrap.querySelectorAll('input').forEach(inp => {
+            inp.addEventListener('keydown', e => { if (e.key === 'Enter') submitLead(); });
+          });
+        } else {
+          const wrap = document.createElement('div');
+          wrap.className = 'chat-options';
+          cur.options.forEach(opt => {
+            const btn = document.createElement('button');
+            btn.className = 'copt';
+            btn.textContent = opt;
+            btn.addEventListener('click', () => pickOption(opt));
+            wrap.appendChild(btn);
+          });
+          footerEl.appendChild(wrap);
+        }
+      }
+
+      function pickOption(val) {
+        addUser(val);
+        clearFooter();
+        step++;
+        if (step <= flow.length) {
+          setTimeout(() => showTypingThen(flow[step - 1].bot, () => renderFooter()), 450);
+        }
+      }
+
+      function submitLead() {
+        const nameEl  = document.getElementById('cl-name');
+        const emailEl = document.getElementById('cl-email');
+        const name    = nameEl.value.trim();
+        const email   = emailEl.value.trim();
+        let ok = true;
+        if (!name)  { nameEl.classList.add('invalid');  ok = false; } else { nameEl.classList.remove('invalid'); }
+        if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+          emailEl.classList.add('invalid'); ok = false;
+        } else { emailEl.classList.remove('invalid'); }
+        if (!ok) return;
+
+        addUser(name + ' \u2022 ' + email);
+        clearFooter();
+        setTimeout(() => {
+          showTypingThen(
+            "Thanks! A member of our team will be in touch shortly. In the meantime, feel free to explore our services.",
+            () => {
+              const done = document.createElement('div');
+              done.className = 'chat-done-wrap';
+              done.innerHTML = `<button class="chat-done-close" id="cdone">Close Chat</button>`;
+              footerEl.appendChild(done);
+              document.getElementById('cdone').addEventListener('click', toggle);
+            }
+          );
+        }, 500);
+      }
+
+      launcher.addEventListener('click', toggle);
+      /* Expose for close button in header */
+      window._chatToggle = toggle;
+    })();
+
+    /* ---- Contact form ---- */
+    document.getElementById('contact-form').addEventListener('submit', function (e) {
+      e.preventDefault();
+      const name    = document.getElementById('f-name').value.trim();
+      const email   = document.getElementById('f-email').value.trim();
+      const message = document.getElementById('f-message').value.trim();
+      if (!name || !email || !message) {
+        alert('Please fill in your name, email, and message.');
+        return;
+      }
+      const emailRx = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRx.test(email)) {
+        alert('Please enter a valid email address.');
+        return;
+      }
+      this.style.display = 'none';
+      document.getElementById('form-thanks').style.display = 'block';
+    });
+  </script>
+</body>
+</html>
