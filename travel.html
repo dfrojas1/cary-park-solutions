@@ -133,6 +133,7 @@ h2.stitle em{font-style:italic;color:var(--goldlt)}
 .ph{padding:24px 26px 16px;border-bottom:1px solid var(--border2);display:flex;align-items:flex-start;justify-content:space-between}
 .pht{font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-weight:400;margin-bottom:3px}
 .phs{font-size:.62rem;font-weight:300;letter-spacing:.18em;text-transform:uppercase;color:var(--gold)}
+#chatNav{min-height:20px;border-bottom:1px solid rgba(245,240,232,.06);padding-bottom:6px;margin-bottom:4px}
 .pclose{background:none;border:none;cursor:pointer;color:var(--muted);font-size:1.2rem;line-height:1;padding:4px;font-family:'Jost',sans-serif}
 .pclose:hover{color:var(--cream)}
 #pmsg{flex:1;overflow-y:auto;padding:18px;display:flex;flex-direction:column;gap:10px;scroll-behavior:smooth}
@@ -188,6 +189,7 @@ footer{position:relative;z-index:2;background:var(--black2);border-top:1px solid
 .mapboxgl-popup-tip{border-top-color:rgba(10,12,15,.97)!important;border-bottom-color:rgba(10,12,15,.97)!important}
 .mapboxgl-popup-close-button{color:var(--muted)!important}
 .mapboxgl-ctrl-bottom-left,.mapboxgl-ctrl-bottom-right{opacity:.2}
+#tripCompareOverlay.open{display:flex!important}
 .rpill.active{border-color:var(--gold)!important;color:var(--gold)!important;background:rgba(201,168,76,.06)!important}
 .rpill:hover{border-color:rgba(201,168,76,.4)!important;color:var(--cream)!important}
 </style>
@@ -507,6 +509,7 @@ footer{position:relative;z-index:2;background:var(--black2);border-top:1px solid
       <div id="routeStrip" style="display:flex;gap:0;overflow-x:auto;border-top:1px solid var(--border);background:rgba(8,9,10,.9);backdrop-filter:blur(10px)">
       </div>
       <!-- Animate btn -->
+      <button onclick="openCompare()" style="padding:8px 18px;background:rgba(0,200,255,.08);border:1px solid rgba(0,200,255,.2);color:#00c8ff;font-size:.62rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;cursor:pointer;font-family:'Jost',sans-serif;border-radius:2px">⚖ Compare All Routes</button>
       <button onclick="animMap()" id="routeAnimBtn" style="position:absolute;bottom:70px;right:16px;background:var(--gold);border:none;color:#000;padding:8px 16px;font-size:.6rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;cursor:pointer;font-family:'Jost',sans-serif;z-index:5;border-radius:2px;box-shadow:0 4px 16px rgba(201,168,76,.3)">▶ Animate Route</button>
     </div>
   </div>
@@ -561,6 +564,9 @@ footer{position:relative;z-index:2;background:var(--black2);border-top:1px solid
     <div><div class="pht">Your Travel Advisor</div><div class="phs">✦ Cary Park Travel · Your Personal Advisor</div></div>
     <button class="pclose" onclick="closePanel()">✕</button>
   </div>
+  <div id="chatNav" style="display:flex;gap:6px;padding:6px 14px 0;flex-wrap:wrap">
+  </div>
+  <div id="chatNav" style="display:flex;gap:6px;padding:6px 14px 0;flex-wrap:wrap">
   <div id="pmsg"></div>
   <div id="ctrl"></div>
   <div class="pinput" id="pinputRow" style="display:none">
@@ -649,101 +655,176 @@ function closeBtn(){
   w.appendChild(b);ctrl.appendChild(w);
 }
 
-// opts with "Something else" free-text fallback
-function optsOrType(os,placeholder,fn){
-  clr();const w=document.createElement('div');w.className='co';
+// ── PIVOT CONTROLS ────────────────────────────────────────────────────────────
+// Stack: tracks {fn, label} so Back can retrace steps
+let stack=[];
+
+function push(label,fn){ stack.push({label,label2:label,fn}); }
+
+function renderNav(){
+  const nav=document.getElementById('chatNav');
+  if(!nav)return;
+  nav.innerHTML='';
+  if(stack.length>1){
+    const back=document.createElement('button');
+    back.textContent='← Back';
+    back.style.cssText='padding:4px 10px;background:none;border:1px solid rgba(245,240,232,.15);color:rgba(245,240,232,.45);font-size:.62rem;font-family:Jost,sans-serif;cursor:pointer;border-radius:2px';
+    back.onclick=()=>{
+      stack.pop(); // remove current
+      const prev=stack.pop(); // remove previous (will re-push when called)
+      pmsg.lastChild && pmsg.removeChild(pmsg.lastChild); // remove last bot message
+      clr();
+      if(prev) prev.fn();
+    };
+    nav.appendChild(back);
+  }
+  if(stack.length>0){
+    const restart=document.createElement('button');
+    restart.textContent='↩ Start over';
+    restart.style.cssText='padding:4px 10px;background:none;border:1px solid rgba(245,240,232,.1);color:rgba(245,240,232,.3);font-size:.62rem;font-family:Jost,sans-serif;cursor:pointer;border-radius:2px';
+    restart.onclick=()=>{ stack=[];convo={answers:{}};pmsg.innerHTML='';clr();startFlow(); };
+    nav.appendChild(restart);
+  }
+}
+
+// ── CORE HELPERS ─────────────────────────────────────────────────────────────
+function clr(){
+  ctrl.innerHTML='';
+  document.getElementById('pinputRow').style.display='none';
+}
+
+function bot(m){
+  const w=document.createElement('div');w.className='msg madv';
+  const s=document.createElement('div');s.className='msndr';s.textContent='Ava · Cary Park Travel';
+  const b=document.createElement('div');b.innerHTML=m.replace(/\n/g,'<br/>');
+  w.appendChild(s);w.appendChild(b);pmsg.appendChild(w);pmsg.scrollTop=pmsg.scrollHeight;
+}
+function user(m){
+  const w=document.createElement('div');w.className='msg muser';
+  const s=document.createElement('div');s.className='msndr';s.textContent='You';
+  const b=document.createElement('div');b.textContent=m;
+  w.appendChild(s);w.appendChild(b);pmsg.appendChild(w);pmsg.scrollTop=pmsg.scrollHeight;
+}
+
+// opts: buttons + inline text field side by side
+function opts(os,fn,stepFn){
+  clr();
+  const w=document.createElement('div');w.className='co';
   os.forEach(o=>{
     const b=document.createElement('button');b.textContent=o;
-    b.onclick=()=>{user(o);clr();fn(o)};w.appendChild(b);
+    b.onclick=()=>{ user(o);clr();if(stepFn)push(o,stepFn);renderNav();fn(o); };
+    w.appendChild(b);
   });
-  // Something else row
-  const row=document.createElement('div');row.style.cssText='display:flex;gap:6px;margin-top:4px;width:100%';
+  ctrl.appendChild(w);
+  renderNav();
+}
+
+// optsOrType: preset buttons PLUS a live text field visible at the same time
+function optsOrType(os,placeholder,fn,stepFn){
+  clr();
+  const w=document.createElement('div');w.className='co';
+  // Buttons
+  os.forEach(o=>{
+    const b=document.createElement('button');b.textContent=o;
+    b.onclick=()=>{ user(o);clr();if(stepFn)push(o,stepFn);renderNav();fn(o); };
+    w.appendChild(b);
+  });
+  // Text field always visible below buttons
+  const row=document.createElement('div');
+  row.style.cssText='display:flex;gap:6px;margin-top:6px;width:100%';
   const inp=document.createElement('input');
-  inp.type='text';inp.placeholder=placeholder||'Something else…';
+  inp.type='text';inp.placeholder=placeholder||'Or type your own…';
   inp.style.cssText='flex:1;padding:8px 10px;background:rgba(255,255,255,.06);border:1px solid rgba(201,168,76,.25);color:#f5f0e8;font-size:.78rem;font-family:inherit;outline:none;border-radius:2px';
   const sb=document.createElement('button');sb.textContent='→';
-  sb.style.cssText='padding:8px 12px;background:rgba(201,168,76,.15);border:1px solid rgba(201,168,76,.3);color:#c9a84c;font-size:.8rem;cursor:pointer;border-radius:2px';
-  const go=()=>{const v=inp.value.trim();if(!v)return;user(v);clr();fn(v)};
+  sb.style.cssText='padding:8px 12px;background:rgba(201,168,76,.15);border:1px solid rgba(201,168,76,.3);color:#c9a84c;font-size:.8rem;cursor:pointer;border-radius:2px;flex-shrink:0';
+  const go=()=>{ const v=inp.value.trim();if(!v)return;user(v);clr();if(stepFn)push(v,stepFn);renderNav();fn(v); };
   sb.onclick=go;inp.addEventListener('keydown',e=>{if(e.key==='Enter')go()});
   row.appendChild(inp);row.appendChild(sb);
   w.appendChild(row);ctrl.appendChild(w);
+  renderNav();
 }
 
-// Trip comparison card before form submit
-function showComparison(tripA,tripB,fn){
-  clr();
-  const trips={
-    'Ocean Cruise':    {icon:'🚢',price:'$899–$2,500',dur:'5–10 nights',inc:'Entertainment, most meals, ports',best:'Value, variety, onboard amenities'},
-    'River Cruise':    {icon:'⚓',price:'$2,400–$4,500',dur:'5–8 nights',inc:'Shore excursions, all meals, wine',best:'Scenery, culture, intimate experience'},
-    'All-Inclusive':   {icon:'🏖️',price:'$649–$2,500',dur:'4–7 nights',inc:'Meals, drinks, entertainment',best:'Families, couples, zero planning'},
-    'Guided Tour':     {icon:'🗺️',price:'$2,200–$5,000',dur:'7–14 nights',inc:'Hotels, guide, most meals',best:'Culture, history, first-timers'},
-    'Safari/Adventure':{icon:'🦁',price:'$3,500–$10,000',dur:'7–14 nights',inc:'Lodge, game drives, meals',best:'Wildlife, bucket list'},
-    'Luxury Escape':   {icon:'✨',price:'$3,000–$15,000',dur:'5–14 nights',inc:'Private transfers, butler, spa',best:'Honeymoon, milestone anniversary'},
-    'Honeymoon':       {icon:'💍',price:'$2,500–$8,000',dur:'7–14 nights',inc:'Romance packages, upgrades',best:'Couples, privacy, memories'},
-    'Family Vacation': {icon:'👨‍👩‍👧',price:'$800–$3,500',dur:'5–10 nights',inc:'Kids clubs, flexible dining',best:'Kids, multi-gen groups'},
+function typed(ph,fn){
+  clr();const w=document.createElement('div');w.className='ct';
+  w.innerHTML=`<input type="text" placeholder="${ph}"/><button>Send</button>`;
+  const i=w.querySelector('input'),b=w.querySelector('button');
+  const go=()=>{const v=i.value.trim();if(!v)return;user(v);clr();fn(v)};
+  b.onclick=go;i.addEventListener('keydown',e=>{if(e.key==='Enter')go()});
+  ctrl.appendChild(w);setTimeout(()=>i.focus(),100);
+  renderNav();
+}
+
+function cform(fn){
+  clr();const f=document.createElement('div');f.className='cf';
+  f.innerHTML=`<input type="text" placeholder="Your name" id="fn2"><input type="email" placeholder="Email address" id="fe2"><input type="tel" placeholder="Phone (optional)" id="fp2"><textarea placeholder="Anything else we should know?" id="fnotes2"></textarea><button>Send to Advisor →</button>`;
+  f.querySelector('button').onclick=()=>{
+    const n=f.querySelector('#fn2').value.trim(),em=f.querySelector('#fe2').value.trim();
+    if(!n||!em){f.querySelector('#fn2').style.borderColor='#f87171';return;}
+    user(`${n} · ${em}`);clr();
+    fn({name:n,email:em,phone:f.querySelector('#fp2').value.trim(),notes:f.querySelector('#fnotes2').value.trim()});
   };
-  const tripAData=trips[tripA]||{icon:'✈️',price:'Custom',dur:'Flexible',inc:'TBD',best:'Advisor curated'};
-  const tripBData=trips[tripB]||{icon:'🌍',price:'Custom',dur:'Flexible',inc:'TBD',best:'Advisor curated'};
-
-  bot(`Here's a quick comparison of the two options you're weighing:`);
-
-  const card=document.createElement('div');
-  card.style.cssText='display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:8px 0;font-size:.72rem';
-  card.innerHTML=`
-    <div style="background:rgba(201,168,76,.06);border:1px solid rgba(201,168,76,.2);padding:12px;border-radius:2px">
-      <div style="font-size:1.2rem;margin-bottom:4px">${tripAData.icon}</div>
-      <div style="font-weight:600;color:#e8cc8a;margin-bottom:6px">${tripA}</div>
-      <div style="color:rgba(245,240,232,.5);margin-bottom:2px">From ${tripAData.price} pp</div>
-      <div style="color:rgba(245,240,232,.5);margin-bottom:2px">${tripAData.dur}</div>
-      <div style="color:rgba(245,240,232,.7);margin-top:6px;line-height:1.5">${tripAData.inc}</div>
-      <div style="color:#c9a84c;margin-top:6px;font-size:.66rem">Best for: ${tripAData.best}</div>
-    </div>
-    <div style="background:rgba(0,200,255,.04);border:1px solid rgba(0,200,255,.15);padding:12px;border-radius:2px">
-      <div style="font-size:1.2rem;margin-bottom:4px">${tripBData.icon}</div>
-      <div style="font-weight:600;color:#00c8ff;margin-bottom:6px">${tripB}</div>
-      <div style="color:rgba(245,240,232,.5);margin-bottom:2px">From ${tripBData.price} pp</div>
-      <div style="color:rgba(245,240,232,.5);margin-bottom:2px">${tripBData.dur}</div>
-      <div style="color:rgba(245,240,232,.7);margin-top:6px;line-height:1.5">${tripBData.inc}</div>
-      <div style="color:#00c8ff;margin-top:6px;font-size:.66rem">Best for: ${tripBData.best}</div>
-    </div>`;
-  pmsg.appendChild(card);pmsg.scrollTop=pmsg.scrollHeight;
-
-  setTimeout(()=>{
-    bot("Which feels closer to what you're picturing?");
-    opts([tripA, tripB, 'Either — advisor decides', 'Actually something different'],pick=>{
-      convo.answers.tripCompare=`Compared ${tripA} vs ${tripB} → picked: ${pick}`;
-      if(pick==='Actually something different'){
-        leisureBranch();
-      } else {
-        if(pick!=='Either — advisor decides') convo.answers.type=pick;
-        fn();
-      }
-    });
-  },400);
+  ctrl.appendChild(f);
 }
 
+// ── COMPARISON OVERLAY ────────────────────────────────────────────────────────
+function openCompare(){
+  document.getElementById('tripCompareOverlay').classList.add('open');
+  buildCompareChart();
+}
+function closeCompare(){ document.getElementById('tripCompareOverlay').classList.remove('open'); }
+
+function buildCompareChart(){
+  const area=document.getElementById('bca');
+  if(!area||area.dataset.built)return;
+  area.dataset.built='1';
+  const colors=['#c9a84c','#e8cc8a','#00c8ff','#f59e0b','#60a5fa'];
+  const names=['Danube','Seine','Rhine','Douro','Med'];
+  const metrics=[
+    {l:'Overall',v:[88,84,91,86,82]},
+    {l:'Luxury',v:[95,82,88,94,78]},
+    {l:'Scenery',v:[92,86,97,93,88]},
+    {l:'Value',v:[78,84,86,72,90]},
+    {l:'Family',v:[72,74,88,65,84]},
+  ];
+  area.innerHTML=metrics.map(m=>`
+    <div style="margin-bottom:14px">
+      <div style="font-size:.56rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:rgba(245,240,232,.4);margin-bottom:7px">${m.l}</div>
+      <div style="display:flex;gap:3px;align-items:flex-end;height:44px">
+        ${m.v.map((v,i)=>`
+          <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:2px">
+            <div style="font-size:.56rem;font-weight:600;color:${colors[i]}">${v}</div>
+            <div style="width:100%;background:rgba(255,255,255,.06);border-radius:2px 2px 0 0;overflow:hidden;flex:1;display:flex;align-items:flex-end">
+              <div class="bbar" style="width:100%;height:0%;background:${colors[i]};opacity:.85;border-radius:2px 2px 0 0;transition:height .9s cubic-bezier(.16,1,.3,1)" data-h="${v}%"></div>
+            </div>
+          </div>`).join('')}
+      </div>
+    </div>`).join('');
+  setTimeout(()=>area.querySelectorAll('.bbar').forEach(b=>b.style.height=b.dataset.h),100);
+}
+
+// ── FLOW ─────────────────────────────────────────────────────────────────────
 function startFlow(){
+  stack=[];convo={answers:{}};
+  renderNav();
   bot("Hi — I'm Ava, your Cary Park Travel advisor. Let's find you the perfect trip.\n\nIs this travel for business or leisure?");
-  opts(['Personal / Leisure','Corporate / Business Travel','Both — mixing work and leisure'],purpose=>{
+  optsOrType(['Personal / Leisure','Corporate / Business Travel','Both — work and leisure'],'Or describe your trip…',purpose=>{
     convo.answers.purpose=purpose;
-    const isCorp=/Corporate|Business/i.test(purpose);
-    if(isCorp) corpBranch();
-    else leisureBranch();
-  });
+    /Corporate|Business/i.test(purpose)?corpBranch():leisureBranch();
+  },startFlow);
 }
 
 function corpBranch(){
-  bot("Let's get this dialed in. What's the nature of the trip?");
-  optsOrType(['Client entertainment','Executive retreat','Team offsite','Conference or event','Incentive travel','Site visit / roadshow'],'Describe your trip type…',corpType=>{
+  bot("What's the nature of the trip?");
+  optsOrType(['Client entertainment','Executive retreat','Team offsite','Conference or event','Incentive travel','Site visit / roadshow'],'Describe the trip…',corpType=>{
     convo.answers.corpType=corpType;
     bot("How many travelers?");
     optsOrType(['1–2 executives','3–9 people','10–25 people','25+ people'],'Enter number…',pax=>{
       convo.answers.pax=pax;
-      bot("Destination preference?");
-      optsOrType(['Domestic US','Caribbean / Latin America','Europe','Asia Pacific','Middle East / Africa','Flexible — best option'],'Specific city or country…',dest=>{
+      bot("Destination?");
+      optsOrType(['Domestic US','Caribbean / Latin America','Europe','Asia Pacific','Middle East / Africa','Flexible'],'Specific city or region…',dest=>{
         convo.answers.dest=dest;
-        bot("Approximate per-person budget?");
-        optsOrType(['Under $2,000','$2,000–$5,000','$5,000–$10,000','$10,000+','Needs internal approval'],'Enter budget range…',budget=>{
+        bot("Per-person budget?");
+        optsOrType(['Under $2,000','$2,000–$5,000','$5,000–$10,000','$10,000+','Needs approval'],'Budget range…',budget=>{
           convo.answers.budget=budget;
           askFlightPrefsCorpo();
         });
@@ -753,11 +834,11 @@ function corpBranch(){
 }
 
 function askFlightPrefsCorpo(){
-  bot("Any flight preferences for the group?");
-  optsOrType(['Business class required','Economy plus / premium economy','Economy is fine','Private charter needed','Mixed — varies by traveler'],'Describe requirements…',fp=>{
+  bot("Flight class preference for the group?");
+  optsOrType(['Business class required','Premium economy','Economy is fine','Private charter','Mixed — varies by traveler'],'Describe requirements…',fp=>{
     convo.answers.flightClass=fp;
-    bot("Preferred airlines or alliances?");
-    optsOrType(['No preference','American / AA','Delta','United','Delta or United only','Star Alliance','Oneworld','No domestic legs needed'],'Enter airline name or preference…',airline=>{
+    bot("Preferred airline or loyalty program?");
+    optsOrType(['No preference','American (AAdvantage)','Delta (SkyMiles)','United (MileagePlus)','International carrier','Star Alliance','Oneworld','SkyTeam'],'Enter airline…',airline=>{
       convo.answers.airline=airline;
       askCorpUpsells();
     });
@@ -765,16 +846,16 @@ function askFlightPrefsCorpo(){
 }
 
 function askCorpUpsells(){
-  bot("Any of these needed for the group?");
-  optsOrType(['Business class flights','Private transfers','Executive lounge access','Group meeting space / AV','Dedicated event coordinator','Branded welcome packages','Dietary accommodations','None — keep it standard'],'Other requirement…',upsell=>{
+  bot("Any upgrades needed for the group?");
+  optsOrType(['Business class flights','Private transfers','Executive lounge access','Group meeting space / AV','Event coordinator','Branded welcome packages','No special upgrades'],'Other requirement…',upsell=>{
     convo.answers.corpUpsells=upsell;
-    bot("Any confidentiality or policy constraints I should note?");
+    bot("Any constraints I should note?");
     opts(['Strict corporate travel policy','NDAs / confidentiality required','Expense reporting format needed','No special constraints'],reqs=>{
       convo.answers.corpReqs=reqs;
-      bot("Last thing — anything else about this trip the advisor should know?");
-      typed('Special notes, previous trips, VIP status…',notes=>{
+      bot("Last thing — anything else the advisor should know?");
+      typed('Special notes, VIP status, past trips…',notes=>{
         convo.answers.extraNotes=notes;
-        bot("Got it. Last step — your contact info and I'll get a full proposal started:");
+        bot("Last step — your contact info:");
         cform(c=>{Object.assign(convo.answers,c);finish()});
       });
     });
@@ -784,24 +865,20 @@ function askCorpUpsells(){
 function leisureBranch(){
   bot("What kind of trip are you dreaming of?");
   optsOrType(['Ocean Cruise','River Cruise','All-Inclusive Resort','Guided Tour','Safari / Adventure','Luxury Escape','Honeymoon / Romance','Family Vacation','Not sure — surprise me'],'Describe your ideal trip…',type=>{
-    convo.answers.type=type;
-    if(/not sure|surprise/i.test(type)){
-      bot("No problem — I'll ask a few questions and our advisor will put together the perfect match.");
-      convo.answers.type='Advisor curated';
-    }
+    convo.answers.type=/not sure|surprise/i.test(type)?'Advisor curated':type;
     askDestination();
   });
 }
 
 function askDestination(){
   bot("Where in the world are you thinking?");
-  optsOrType(['Caribbean','Europe','Mediterranean','Asia','Africa / Safari','Central / South America','Hawaii','Alaska / Canada','Anywhere — best value for my budget'],'Specific country, city, or region…',dest=>{
+  optsOrType(['Caribbean','Europe','Mediterranean','Asia','Africa','Central / South America','Hawaii','Alaska / Canada','Anywhere — best value'],'Specific country, city, or region…',dest=>{
     convo.answers.dest=dest;
     bot("How many travelers?");
     optsOrType(['Just me','2 adults','Couple + another couple','Family with young kids','Family with teens','Group of friends (4+)','Multi-generational group'],'Number of people…',pax=>{
       convo.answers.pax=pax;
-      bot("What's your per-person budget?");
-      optsOrType(['Under $1,000','$1,000–$2,500','$2,500–$5,000','$5,000–$10,000','$10,000+','Flexible — show me options'],'Enter your budget…',budget=>{
+      bot("Per-person budget?");
+      optsOrType(['Under $1,000','$1,000–$2,500','$2,500–$5,000','$5,000–$10,000','$10,000+','Flexible — show me options'],'Enter budget…',budget=>{
         convo.answers.budget=budget;
         askDuration();
       });
@@ -811,50 +888,30 @@ function askDestination(){
 
 function askDuration(){
   bot("How long are you looking to travel?");
-  optsOrType(['3–4 nights (long weekend)','5–7 nights','8–10 nights','11–14 nights','2+ weeks','Flexible'],'Enter number of nights…',dur=>{
+  optsOrType(['3–4 nights','5–7 nights','8–10 nights','11–14 nights','2+ weeks','Flexible'],'Enter number of nights…',dur=>{
     convo.answers.duration=dur;
-    askTripDepth();
+    askVibe();
   });
 }
 
-function askTripDepth(){
-  bot("What does your ideal experience look like day-to-day?");
-  optsOrType([
-    'Relaxed — beaches, pool, minimal planning',
-    'Active — excursions, hiking, exploring each day',
-    'Cultural — history, food, local immersion',
-    'Ultra-luxury — only the best, no compromises',
-    'Adventure — off the beaten path',
-    'Balance of everything'
-  ],'Describe your vibe…',vibe=>{
+function askVibe(){
+  bot("What does your ideal experience look like?");
+  optsOrType(['Relaxed — beaches, pool, minimal planning','Active — excursions, hiking, exploring','Cultural — history, food, local immersion','Ultra-luxury — only the best','Adventure — off the beaten path','Balance of everything'],'Describe your vibe…',vibe=>{
     convo.answers.vibe=vibe;
     askFlightPrefs();
   });
 }
 
 function askFlightPrefs(){
-  bot("Let's talk flights. What cabin class are you looking for?");
-  optsOrType(['Economy — best value','Premium economy','Business class','First class','No flights needed — already have flights'],'Other preference…',fc=>{
+  bot("What cabin class are you looking for?");
+  optsOrType(['Economy — best value','Premium economy','Business class','First class','No flights needed — already have them'],'Other preference…',fc=>{
     convo.answers.flightClass=fc;
-    if(/no flights|already have/i.test(fc)){
-      askLuxuryUpsells();
-      return;
-    }
-    bot("Any airline preferences or loyalty programs I should know about?");
-    optsOrType([
-      'No preference',
-      'American Airlines (AAdvantage)',
-      'Delta (SkyMiles)',
-      'United (MileagePlus)',
-      'Southwest (Rapid Rewards)',
-      'International preferred (Air France, Lufthansa, etc.)',
-      'Alliance: Star Alliance',
-      'Alliance: Oneworld',
-      'Alliance: SkyTeam'
-    ],'Enter airline or program…',airline=>{
+    if(/no flights|already have/i.test(fc)){ askLuxuryUpsells(); return; }
+    bot("Preferred airline or loyalty program?");
+    optsOrType(['No preference','American Airlines (AAdvantage)','Delta (SkyMiles)','United (MileagePlus)','Southwest (Rapid Rewards)','International preferred','Star Alliance','Oneworld','SkyTeam'],'Enter airline or program…',airline=>{
       convo.answers.airline=airline;
-      bot("Nonstop flights only, or are connections okay?");
-      opts(['Nonstop only','One connection is fine','Open to whatever is cheapest'],stops=>{
+      bot("Nonstop only, or are connections okay?");
+      opts(['Nonstop only','One connection is fine','Open to cheapest option'],stops=>{
         convo.answers.stops=stops;
         askLuxuryUpsells();
       });
@@ -864,32 +921,15 @@ function askFlightPrefs(){
 
 function askLuxuryUpsells(){
   bot("Any of these on your wish list?");
-  optsOrType([
-    'Cabin / room upgrade',
-    'Private shore excursions',
-    'Spa & wellness package',
-    'Champagne / celebration setup',
-    'Private transfers throughout',
-    'Travel insurance',
-    'Early boarding / priority access',
-    'None of the above'
-  ],'Other wish list item…',upsell=>{
+  optsOrType(['Cabin / room upgrade','Private shore excursions','Spa & wellness package','Champagne / celebration setup','Private transfers throughout','Travel insurance','Early boarding / priority access','None of the above'],'Other wish list item…',upsell=>{
     convo.answers.upsells=upsell;
-    if(!/None/i.test(upsell)) askMoreUpsells();
-    else askDates();
+    if(!/None/i.test(upsell)) askMoreUpsells(); else askDates();
   });
 }
 
 function askMoreUpsells(){
-  bot("Anything else to add?");
-  optsOrType([
-    'Private chef / dining experience',
-    'Photography / videography package',
-    'Helicopter or yacht excursion',
-    'VIP event or show access',
-    'Kids club / childcare onboard',
-    'Nothing else'
-  ],'Other…',extra=>{
+  bot("Anything else?");
+  optsOrType(['Private chef / dining','Photography package','Helicopter or yacht excursion','VIP event access','Kids club / childcare onboard','Nothing else'],'Other…',extra=>{
     convo.answers.extras=extra;
     askDates();
   });
@@ -897,10 +937,10 @@ function askMoreUpsells(){
 
 function askDates(){
   bot("When are you hoping to travel?");
-  optsOrType(['Within 30 days','1–3 months out','3–6 months out','6–12 months out','Next summer (2027)','Flexible / no rush'],'Specific month or date range…',timing=>{
+  optsOrType(['Within 30 days','1–3 months out','3–6 months out','6–12 months out','Next summer','Flexible / no rush'],'Specific month or date range…',timing=>{
     convo.answers.timing=timing;
-    bot("Any special occasions for this trip?");
-    optsOrType(['Anniversary','Birthday milestone','Honeymoon','First time traveling internationally','Repeat traveler — want something new','Surprise trip for someone','No special occasion'],'Tell me about it…',occasion=>{
+    bot("Any special occasions?");
+    optsOrType(['Anniversary','Birthday milestone','Honeymoon','First time international','Repeat traveler — want something new','Surprise trip for someone','No special occasion'],'Tell me about it…',occasion=>{
       convo.answers.occasion=occasion;
       askComparison();
     });
@@ -910,57 +950,91 @@ function askDates(){
 function askComparison(){
   const t=convo.answers.type||'';
   const compMap={
-    'Ocean Cruise':'River Cruise',
-    'River Cruise':'Ocean Cruise',
-    'All-Inclusive Resort':'Guided Tour',
-    'Guided Tour':'All-Inclusive Resort',
-    'Safari / Adventure':'Luxury Escape',
-    'Luxury Escape':'Safari / Adventure',
-    'Honeymoon / Romance':'Luxury Escape',
-    'Family Vacation':'All-Inclusive Resort',
+    'Ocean Cruise':'River Cruise','River Cruise':'Ocean Cruise',
+    'All-Inclusive Resort':'Guided Tour','Guided Tour':'All-Inclusive Resort',
+    'Safari / Adventure':'Luxury Escape','Luxury Escape':'Safari / Adventure',
+    'Honeymoon / Romance':'Luxury Escape','Family Vacation':'All-Inclusive Resort',
   };
   const alt=compMap[t];
-  if(alt && !/Advisor curated|not sure/i.test(t)){
-    bot(`Before I pull your advisor in — would you like to see a quick comparison of ${t} vs ${alt}? Helps make sure we're pointed in the right direction.`);
-    opts([`Yes — compare ${t} vs ${alt}`,'No — I know what I want'],choice=>{
-      if(/yes/i.test(choice)){
-        showComparison(t,alt,()=>preSubmit());
-      } else {
-        preSubmit();
-      }
+  if(alt&&!/Advisor curated/i.test(t)){
+    bot(`Want to see a quick comparison of ${t} vs ${alt} before we finalize?`);
+    opts([`Yes — compare them`,`No — I know what I want`],choice=>{
+      if(/yes/i.test(choice)) showComparison(t,alt,()=>preSubmit());
+      else preSubmit();
     });
-  } else {
-    preSubmit();
-  }
+  } else preSubmit();
+}
+
+function showComparison(tripA,tripB,fn){
+  const trips={
+    'Ocean Cruise':     {icon:'🚢',price:'$899–$2,500',dur:'5–10 nights',inc:'Entertainment, most meals, ports',best:'Value, variety, onboard life'},
+    'River Cruise':     {icon:'⚓',price:'$2,400–$4,500',dur:'5–8 nights',inc:'Shore excursions, all meals, wine',best:'Scenery, culture, intimacy'},
+    'All-Inclusive':    {icon:'🏖️',price:'$649–$2,500',dur:'4–7 nights',inc:'Meals, drinks, entertainment',best:'Families, couples, zero planning'},
+    'Guided Tour':      {icon:'🗺️',price:'$2,200–$5,000',dur:'7–14 nights',inc:'Hotels, guide, most meals',best:'Culture, history, first-timers'},
+    'Safari / Adventure':{icon:'🦁',price:'$3,500–$10,000',dur:'7–14 nights',inc:'Lodge, game drives, meals',best:'Wildlife, bucket list'},
+    'Luxury Escape':    {icon:'✨',price:'$3,000–$15,000',dur:'5–14 nights',inc:'Private transfers, butler, spa',best:'Honeymoon, milestone trip'},
+    'Honeymoon / Romance':{icon:'💍',price:'$2,500–$8,000',dur:'7–14 nights',inc:'Romance packages, upgrades',best:'Couples, privacy, memories'},
+    'Family Vacation':  {icon:'👨‍👩‍👧',price:'$800–$3,500',dur:'5–10 nights',inc:'Kids clubs, flexible dining',best:'Kids, multi-gen groups'},
+  };
+  const da=trips[tripA]||{icon:'✈️',price:'Custom',dur:'Flexible',inc:'TBD',best:'Advisor curated'};
+  const db=trips[tripB]||{icon:'🌍',price:'Custom',dur:'Flexible',inc:'TBD',best:'Advisor curated'};
+  bot(`Here is a quick breakdown:`);
+  const card=document.createElement('div');
+  card.style.cssText='display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:8px 0;font-size:.72rem';
+  card.innerHTML=`
+    <div style="background:rgba(201,168,76,.06);border:1px solid rgba(201,168,76,.2);padding:12px;border-radius:2px">
+      <div style="font-size:1.2rem;margin-bottom:4px">${da.icon}</div>
+      <div style="font-weight:600;color:#e8cc8a;margin-bottom:6px">${tripA}</div>
+      <div style="color:rgba(245,240,232,.5);margin-bottom:2px">From ${da.price} pp</div>
+      <div style="color:rgba(245,240,232,.5);margin-bottom:2px">${da.dur}</div>
+      <div style="color:rgba(245,240,232,.7);margin-top:6px;line-height:1.5">${da.inc}</div>
+      <div style="color:#c9a84c;margin-top:6px;font-size:.64rem">Best for: ${da.best}</div>
+    </div>
+    <div style="background:rgba(0,200,255,.04);border:1px solid rgba(0,200,255,.15);padding:12px;border-radius:2px">
+      <div style="font-size:1.2rem;margin-bottom:4px">${db.icon}</div>
+      <div style="font-weight:600;color:#00c8ff;margin-bottom:6px">${tripB}</div>
+      <div style="color:rgba(245,240,232,.5);margin-bottom:2px">From ${db.price} pp</div>
+      <div style="color:rgba(245,240,232,.5);margin-bottom:2px">${db.dur}</div>
+      <div style="color:rgba(245,240,232,.7);margin-top:6px;line-height:1.5">${db.inc}</div>
+      <div style="color:#00c8ff;margin-top:6px;font-size:.64rem">Best for: ${db.best}</div>
+    </div>`;
+  pmsg.appendChild(card);pmsg.scrollTop=pmsg.scrollHeight;
+  setTimeout(()=>{
+    bot("Which direction feels right?");
+    opts([tripA,tripB,'Either — advisor decides','Actually something different'],pick=>{
+      convo.answers.tripCompare=`Compared ${tripA} vs ${tripB} picked: ${pick}`;
+      if(pick==='Actually something different') leisureBranch();
+      else { if(pick!=='Either — advisor decides') convo.answers.type=pick; fn(); }
+    });
+  },400);
 }
 
 function preSubmit(){
   const a=convo.answers;
-  const summary=`Here's what I have for you:\n\n` +
-    `✦ Trip: ${a.type||'Advisor curated'}\n` +
-    `✦ Destination: ${a.dest||'—'}\n` +
-    `✦ Travelers: ${a.pax||'—'}\n` +
-    `✦ Budget: ${a.budget||'—'} pp\n` +
-    `✦ Duration: ${a.duration||'—'}\n` +
-    `✦ Flights: ${a.flightClass||'—'} · ${a.airline||'—'}\n` +
-    `✦ Timing: ${a.timing||'—'}\n\nDoes this look right?`;
-  bot(summary);
-  opts(['Yes — send to advisor','Let me change something'],confirm=>{
+  bot(`Here is what I have:\n\n` +
+    `Trip: ${a.type||'Advisor curated'}\n` +
+    `Destination: ${a.dest||'—'}\n` +
+    `Travelers: ${a.pax||'—'}\n` +
+    `Budget: ${a.budget||'—'} pp\n` +
+    `Duration: ${a.duration||'—'}\n` +
+    `Flights: ${a.flightClass||'—'}${a.airline?' · '+a.airline:''}\n` +
+    `Timing: ${a.timing||'—'}\n\nDoes this look right?`);
+  opts(['Yes — send to advisor','Change something'],confirm=>{
     if(/yes/i.test(confirm)){
-      bot("Perfect. Last step — your contact info:");
+      bot("Last step — your contact info:");
       cform(c=>{Object.assign(convo.answers,c);finish()});
     } else {
-      bot("No problem — which part would you like to update?");
-      opts(['Trip type','Destination','Budget','Travelers','Flights / airline','Dates / timing'],part=>{
-        const reRoutes={
+      bot("What would you like to update?");
+      opts(['Trip type','Destination','Budget','Travelers','Flights','Dates'],part=>{
+        const map={
           'Trip type':leisureBranch,
           'Destination':askDestination,
-          'Budget':()=>{ bot("What's your updated budget?"); optsOrType(['Under $1,000','$1,000–$2,500','$2,500–$5,000','$5,000+','Flexible'],'New budget…',b=>{convo.answers.budget=b;preSubmit()})},
-          'Travelers':()=>{ bot("How many travelers?"); optsOrType(['Just me','2 adults','Family with kids','Group of 4+'],'Number…',p=>{convo.answers.pax=p;preSubmit()})},
-          'Flights / airline':askFlightPrefs,
-          'Dates / timing':askDates
+          'Budget':()=>{bot("Updated budget?");optsOrType(['Under $1,000','$1,000–$2,500','$2,500–$5,000','$5,000+','Flexible'],'New budget…',b=>{convo.answers.budget=b;preSubmit()})},
+          'Travelers':()=>{bot("How many travelers?");optsOrType(['Just me','2 adults','Family with kids','Group of 4+'],'Number…',p=>{convo.answers.pax=p;preSubmit()})},
+          'Flights':askFlightPrefs,
+          'Dates':askDates
         };
-        (reRoutes[part]||preSubmit)();
+        (map[part]||preSubmit)();
       });
     }
   });
@@ -971,13 +1045,12 @@ function finish(){
   const isCorp=/Corporate|Business/i.test(a.purpose||'');
   const tag=isCorp?'[Corporate Travel]':'[Leisure Travel]';
   const subj=encodeURIComponent(`${tag} ${a.type||a.corpType||'Inquiry'} — ${a.dest||''} — ${a.name||'New lead'}`);
-  const bodyText=isCorp
-    ?`CORPORATE TRAVEL INQUIRY\n\nName: ${a.name}\nEmail: ${a.email}\nPhone: ${a.phone||'—'}\n\nType: ${a.corpType}\nTravelers: ${a.pax}\nDestination: ${a.dest}\nBudget: ${a.budget} pp\nFlight class: ${a.flightClass||'—'}\nAirline pref: ${a.airline||'—'}\nUpgrades: ${a.corpUpsells||'—'}\nRequirements: ${a.corpReqs||'—'}\nExtra notes: ${a.extraNotes||'—'}\nNotes: ${a.notes||'—'}`
-    :`LEISURE TRAVEL INQUIRY\n\nName: ${a.name}\nEmail: ${a.email}\nPhone: ${a.phone||'—'}\n\nTrip type: ${a.type}\nDestination: ${a.dest}\nTravelers: ${a.pax}\nBudget: ${a.budget} pp\nDuration: ${a.duration||'—'}\nVibe: ${a.vibe||'—'}\nFlight class: ${a.flightClass||'—'}\nAirline pref: ${a.airline||'—'}\nStops: ${a.stops||'—'}\nUpsells: ${a.upsells||'—'}\nExtras: ${a.extras||'—'}\nTiming: ${a.timing||'—'}\nOccasion: ${a.occasion||'—'}\nComparison: ${a.tripCompare||'—'}\nNotes: ${a.notes||'—'}`;
-  const body=encodeURIComponent(bodyText+`\n\nSubmitted: ${new Date().toLocaleString()}`);
+  const body=isCorp
+    ?`CORPORATE TRAVEL INQUIRY\n\nName: ${a.name}\nEmail: ${a.email}\nPhone: ${a.phone||'—'}\n\nType: ${a.corpType}\nTravelers: ${a.pax}\nDestination: ${a.dest}\nBudget: ${a.budget} pp\nFlight class: ${a.flightClass||'—'}\nAirline: ${a.airline||'—'}\nUpgrades: ${a.corpUpsells||'—'}\nRequirements: ${a.corpReqs||'—'}\nNotes: ${a.extraNotes||''} ${a.notes||''}`
+    :`LEISURE TRAVEL INQUIRY\n\nName: ${a.name}\nEmail: ${a.email}\nPhone: ${a.phone||'—'}\n\nTrip: ${a.type}\nDestination: ${a.dest}\nTravelers: ${a.pax}\nBudget: ${a.budget} pp\nDuration: ${a.duration||'—'}\nVibe: ${a.vibe||'—'}\nFlights: ${a.flightClass||'—'} · ${a.airline||'—'} · ${a.stops||'—'}\nUpsells: ${a.upsells||'—'} ${a.extras||''}\nTiming: ${a.timing||'—'}\nOccasion: ${a.occasion||'—'}\nComparison: ${a.tripCompare||'—'}\nNotes: ${a.notes||'—'}`;
   const fname=a.name?a.name.split(' ')[0]:'';
-  bot(`Thanks${fname?', '+fname:''}! Your inquiry is on its way to our advisor team.\n\nExpect a reply within 1 business day with curated options matched to your preferences.`);
-  setTimeout(()=>window.location.href=`mailto:info@caryparksolutions.com?subject=${subj}&body=${body}`,900);
+  bot(`Thanks${fname?', '+fname:''}! Your inquiry is on its way.\n\nExpect a reply within 1 business day.`);
+  setTimeout(()=>window.location.href=`mailto:info@caryparksolutions.com?subject=${subj}&body=${encodeURIComponent(body+'\n\nSubmitted: '+new Date().toLocaleString())}`,900);
   closeBtn();
 }
 
@@ -986,12 +1059,11 @@ function bookAdvisor(context){
   openPanel();
   if(pmsg.children.length===0){
     setTimeout(()=>{
-      bot(`I see you're interested in ${context}.\n\nIs this for personal travel or a corporate / business trip?`);
+      bot(`I see you are interested in ${context}.\n\nIs this for personal travel or a corporate trip?`);
       opts(['Personal / Leisure','Corporate / Business'],p=>{
         convo.answers.purpose=p;
         convo.answers.type=context;
-        if(/Corporate/i.test(p)) askFlightPrefsCorpo();
-        else { askDestination(); }
+        /Corporate/i.test(p)?askFlightPrefsCorpo():askDestination();
       });
     },300);
   }
@@ -1000,7 +1072,7 @@ function bookAdvisor(context){
 function sendFree(){
   const v=document.getElementById('pinp').value.trim();
   if(!v)return;document.getElementById('pinp').value='';
-  user(v);bot("Got it — I've noted that for our advisor.");
+  user(v);bot("Got it — noted for your advisor.");
 }
 </script>
 <script>
@@ -1164,5 +1236,114 @@ function animMap() {
   setTimeout(next,1400);
 }
 </script>
+
+<!-- TRIP COMPARISON OVERLAY -->
+<div id="tripCompareOverlay" style="position:fixed;inset:0;z-index:900;display:none;flex-direction:column;background:radial-gradient(ellipse 70% 60% at 25% 40%,rgba(201,168,76,.07),transparent 55%),radial-gradient(ellipse 50% 70% at 75% 60%,rgba(0,200,255,.05),transparent 55%),rgba(6,7,8,.97);overflow-y:auto">
+  <div style="padding:20px 28px 14px;border-bottom:1px solid rgba(201,168,76,.18);display:flex;align-items:center;justify-content:space-between;flex-shrink:0;position:sticky;top:0;background:rgba(6,7,8,.95);backdrop-filter:blur(12px);z-index:10">
+    <div style="font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-weight:300;color:#f5f0e8">Route Comparison</div>
+    <button onclick="closeCompare()" style="background:none;border:1px solid rgba(245,240,232,.1);color:rgba(245,240,232,.5);padding:5px 12px;cursor:pointer;font-size:.62rem;font-weight:500;letter-spacing:.12em;text-transform:uppercase;font-family:'Jost',sans-serif;transition:all .2s">✕ Close</button>
+  </div>
+  <div style="padding:20px 28px 32px;max-width:1100px;width:100%">
+    <!-- FIFA CARDS -->
+    <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-bottom:24px">
+      <div style="padding:14px 10px;text-align:center;border:1px solid rgba(201,168,76,.3);background:rgba(8,9,10,.5);backdrop-filter:blur(12px);position:relative;border-radius:2px">
+        <div style="font-family:'Cormorant Garamond',serif;font-size:2.2rem;font-weight:400;line-height:1;color:#c9a84c;margin-bottom:1px">88</div>
+        <div style="font-size:.44rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:rgba(245,240,232,.4);margin-bottom:6px">OVR</div>
+        <div style="font-size:.68rem;font-weight:500;color:#f5f0e8;margin-bottom:8px">Danube</div>
+        <div style="display:flex;flex-direction:column;gap:3px;text-align:left;font-size:.58rem">
+          <div style="display:flex;justify-content:space-between"><span style="color:rgba(245,240,232,.4)">LUX</span><span style="font-weight:600;color:#c9a84c">95</span></div>
+          <div style="display:flex;justify-content:space-between"><span style="color:rgba(245,240,232,.4)">SCN</span><span style="font-weight:600;color:#c9a84c">92</span></div>
+          <div style="display:flex;justify-content:space-between"><span style="color:rgba(245,240,232,.4)">VAL</span><span style="font-weight:600;color:#c9a84c">78</span></div>
+          <div style="display:flex;justify-content:space-between"><span style="color:rgba(245,240,232,.4)">FAM</span><span style="font-weight:600;color:#c9a84c">72</span></div>
+        </div>
+        <div style="position:absolute;top:5px;right:5px;font-size:.44rem;font-weight:700;padding:2px 4px;background:rgba(201,168,76,.1);color:#c9a84c;border:1px solid rgba(201,168,76,.2)">RVR</div>
+      </div>
+      <div style="padding:14px 10px;text-align:center;border:1px solid rgba(232,204,138,.2);background:rgba(8,9,10,.5);backdrop-filter:blur(12px);position:relative;border-radius:2px">
+        <div style="font-family:'Cormorant Garamond',serif;font-size:2.2rem;font-weight:400;line-height:1;color:#e8cc8a;margin-bottom:1px">84</div>
+        <div style="font-size:.44rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:rgba(245,240,232,.4);margin-bottom:6px">OVR</div>
+        <div style="font-size:.68rem;font-weight:500;color:#f5f0e8;margin-bottom:8px">Seine</div>
+        <div style="display:flex;flex-direction:column;gap:3px;text-align:left;font-size:.58rem">
+          <div style="display:flex;justify-content:space-between"><span style="color:rgba(245,240,232,.4)">LUX</span><span style="font-weight:600;color:#e8cc8a">82</span></div>
+          <div style="display:flex;justify-content:space-between"><span style="color:rgba(245,240,232,.4)">SCN</span><span style="font-weight:600;color:#e8cc8a">86</span></div>
+          <div style="display:flex;justify-content:space-between"><span style="color:rgba(245,240,232,.4)">VAL</span><span style="font-weight:600;color:#e8cc8a">84</span></div>
+          <div style="display:flex;justify-content:space-between"><span style="color:rgba(245,240,232,.4)">FAM</span><span style="font-weight:600;color:#e8cc8a">74</span></div>
+        </div>
+        <div style="position:absolute;top:5px;right:5px;font-size:.44rem;font-weight:700;padding:2px 4px;background:rgba(201,168,76,.1);color:#e8cc8a;border:1px solid rgba(232,204,138,.2)">RVR</div>
+      </div>
+      <div style="padding:14px 10px;text-align:center;border:1px solid rgba(0,200,255,.4);background:rgba(8,9,10,.5);backdrop-filter:blur(12px);position:relative;border-radius:2px">
+        <div style="position:absolute;top:-1px;left:50%;transform:translateX(-50%);background:#00c8ff;color:#000;font-size:.44rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:2px 6px;white-space:nowrap">TOP PICK</div>
+        <div style="font-family:'Cormorant Garamond',serif;font-size:2.2rem;font-weight:400;line-height:1;color:#00c8ff;margin-bottom:1px">91</div>
+        <div style="font-size:.44rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:rgba(245,240,232,.4);margin-bottom:6px">OVR</div>
+        <div style="font-size:.68rem;font-weight:500;color:#f5f0e8;margin-bottom:8px">Rhine</div>
+        <div style="display:flex;flex-direction:column;gap:3px;text-align:left;font-size:.58rem">
+          <div style="display:flex;justify-content:space-between"><span style="color:rgba(245,240,232,.4)">LUX</span><span style="font-weight:600;color:#00c8ff">88</span></div>
+          <div style="display:flex;justify-content:space-between"><span style="color:rgba(245,240,232,.4)">SCN</span><span style="font-weight:600;color:#00c8ff">97</span></div>
+          <div style="display:flex;justify-content:space-between"><span style="color:rgba(245,240,232,.4)">VAL</span><span style="font-weight:600;color:#00c8ff">86</span></div>
+          <div style="display:flex;justify-content:space-between"><span style="color:rgba(245,240,232,.4)">FAM</span><span style="font-weight:600;color:#00c8ff">88</span></div>
+        </div>
+        <div style="position:absolute;top:5px;right:5px;font-size:.44rem;font-weight:700;padding:2px 4px;background:rgba(0,200,255,.1);color:#00c8ff;border:1px solid rgba(0,200,255,.2)">RVR</div>
+      </div>
+      <div style="padding:14px 10px;text-align:center;border:1px solid rgba(245,158,11,.2);background:rgba(8,9,10,.5);backdrop-filter:blur(12px);position:relative;border-radius:2px">
+        <div style="font-family:'Cormorant Garamond',serif;font-size:2.2rem;font-weight:400;line-height:1;color:#f59e0b;margin-bottom:1px">86</div>
+        <div style="font-size:.44rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:rgba(245,240,232,.4);margin-bottom:6px">OVR</div>
+        <div style="font-size:.68rem;font-weight:500;color:#f5f0e8;margin-bottom:8px">Douro</div>
+        <div style="display:flex;flex-direction:column;gap:3px;text-align:left;font-size:.58rem">
+          <div style="display:flex;justify-content:space-between"><span style="color:rgba(245,240,232,.4)">LUX</span><span style="font-weight:600;color:#f59e0b">94</span></div>
+          <div style="display:flex;justify-content:space-between"><span style="color:rgba(245,240,232,.4)">SCN</span><span style="font-weight:600;color:#f59e0b">93</span></div>
+          <div style="display:flex;justify-content:space-between"><span style="color:rgba(245,240,232,.4)">VAL</span><span style="font-weight:600;color:#f59e0b">72</span></div>
+          <div style="display:flex;justify-content:space-between"><span style="color:rgba(245,240,232,.4)">FAM</span><span style="font-weight:600;color:#f59e0b">65</span></div>
+        </div>
+        <div style="position:absolute;top:5px;right:5px;font-size:.44rem;font-weight:700;padding:2px 4px;background:rgba(245,158,11,.1);color:#f59e0b;border:1px solid rgba(245,158,11,.2)">RVR</div>
+      </div>
+      <div style="padding:14px 10px;text-align:center;border:1px solid rgba(96,165,250,.2);background:rgba(8,9,10,.5);backdrop-filter:blur(12px);position:relative;border-radius:2px">
+        <div style="font-family:'Cormorant Garamond',serif;font-size:2.2rem;font-weight:400;line-height:1;color:#60a5fa;margin-bottom:1px">82</div>
+        <div style="font-size:.44rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:rgba(245,240,232,.4);margin-bottom:6px">OVR</div>
+        <div style="font-size:.68rem;font-weight:500;color:#f5f0e8;margin-bottom:8px">Med</div>
+        <div style="display:flex;flex-direction:column;gap:3px;text-align:left;font-size:.58rem">
+          <div style="display:flex;justify-content:space-between"><span style="color:rgba(245,240,232,.4)">LUX</span><span style="font-weight:600;color:#60a5fa">78</span></div>
+          <div style="display:flex;justify-content:space-between"><span style="color:rgba(245,240,232,.4)">SCN</span><span style="font-weight:600;color:#60a5fa">88</span></div>
+          <div style="display:flex;justify-content:space-between"><span style="color:rgba(245,240,232,.4)">VAL</span><span style="font-weight:600;color:#60a5fa">90</span></div>
+          <div style="display:flex;justify-content:space-between"><span style="color:rgba(245,240,232,.4)">FAM</span><span style="font-weight:600;color:#60a5fa">84</span></div>
+        </div>
+        <div style="position:absolute;top:5px;right:5px;font-size:.44rem;font-weight:700;padding:2px 4px;background:rgba(96,165,250,.1);color:#60a5fa;border:1px solid rgba(96,165,250,.2)">OCN</div>
+      </div>
+    </div>
+    <!-- COMPARISON TABLE -->
+    <div style="overflow-x:auto;margin-bottom:24px">
+      <table style="width:100%;border-collapse:collapse;min-width:560px">
+        <thead><tr>
+          <th style="padding:8px 12px;font-size:.54rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:#c9a84c;border-bottom:1px solid rgba(201,168,76,.18);text-align:left;background:rgba(8,9,10,.4)">Feature</th>
+          <th style="padding:8px 12px;font-size:.8rem;font-weight:400;font-family:'Cormorant Garamond',serif;color:#f5f0e8;border-bottom:1px solid rgba(201,168,76,.18);text-align:center;background:rgba(8,9,10,.4)">Danube</th>
+          <th style="padding:8px 12px;font-size:.8rem;font-weight:400;font-family:'Cormorant Garamond',serif;color:#f5f0e8;border-bottom:1px solid rgba(201,168,76,.18);text-align:center;background:rgba(8,9,10,.4)">Seine</th>
+          <th style="padding:8px 12px;font-size:.8rem;font-weight:400;font-family:'Cormorant Garamond',serif;color:#f5f0e8;border-bottom:1px solid rgba(201,168,76,.18);text-align:center;background:rgba(8,9,10,.4)">Rhine</th>
+          <th style="padding:8px 12px;font-size:.8rem;font-weight:400;font-family:'Cormorant Garamond',serif;color:#f5f0e8;border-bottom:1px solid rgba(201,168,76,.18);text-align:center;background:rgba(8,9,10,.4)">Douro</th>
+          <th style="padding:8px 12px;font-size:.8rem;font-weight:400;font-family:'Cormorant Garamond',serif;color:#f5f0e8;border-bottom:1px solid rgba(201,168,76,.18);text-align:center;background:rgba(8,9,10,.4)">Mediterranean</th>
+        </tr></thead>
+        <tbody>
+          <tr><td style="padding:9px 12px;font-size:.76rem;font-weight:300;border-bottom:1px solid rgba(245,240,232,.04);color:#f5f0e8">Price (from)</td><td style="padding:9px 12px;font-size:.9rem;font-weight:600;color:#e8cc8a;text-align:center;border-bottom:1px solid rgba(245,240,232,.04)">$2,900</td><td style="padding:9px 12px;font-size:.9rem;font-weight:600;color:#e8cc8a;text-align:center;border-bottom:1px solid rgba(245,240,232,.04)">$2,400</td><td style="padding:9px 12px;font-size:.9rem;font-weight:600;color:#e8cc8a;text-align:center;border-bottom:1px solid rgba(245,240,232,.04)">$2,600</td><td style="padding:9px 12px;font-size:.9rem;font-weight:600;color:#e8cc8a;text-align:center;border-bottom:1px solid rgba(245,240,232,.04)">$3,100</td><td style="padding:9px 12px;font-size:.9rem;font-weight:600;color:#e8cc8a;text-align:center;border-bottom:1px solid rgba(245,240,232,.04)">$1,299 <span style="font-size:.52rem;font-weight:700;padding:1px 5px;background:rgba(201,168,76,.1);border:1px solid rgba(201,168,76,.18);color:#c9a84c">Lowest</span></td></tr>
+          <tr><td style="padding:9px 12px;font-size:.76rem;font-weight:300;border-bottom:1px solid rgba(245,240,232,.04);color:#f5f0e8">Duration</td><td style="padding:9px 12px;font-size:.76rem;font-weight:300;text-align:center;border-bottom:1px solid rgba(245,240,232,.04);color:rgba(245,240,232,.7)">7 nights</td><td style="padding:9px 12px;font-size:.76rem;font-weight:300;text-align:center;border-bottom:1px solid rgba(245,240,232,.04);color:rgba(245,240,232,.7)">5 nights</td><td style="padding:9px 12px;font-size:.76rem;font-weight:300;text-align:center;border-bottom:1px solid rgba(245,240,232,.04);color:rgba(245,240,232,.7)">7 nights</td><td style="padding:9px 12px;font-size:.76rem;font-weight:300;text-align:center;border-bottom:1px solid rgba(245,240,232,.04);color:rgba(245,240,232,.7)">8 nights</td><td style="padding:9px 12px;font-size:.76rem;font-weight:300;text-align:center;border-bottom:1px solid rgba(245,240,232,.04);color:rgba(245,240,232,.7)">7 nights</td></tr>
+          <tr><td style="padding:9px 12px;font-size:.76rem;font-weight:300;border-bottom:1px solid rgba(245,240,232,.04);color:#f5f0e8">Best Season</td><td style="padding:9px 12px;font-size:.72rem;text-align:center;border-bottom:1px solid rgba(245,240,232,.04);color:rgba(245,240,232,.5)">Apr–Oct</td><td style="padding:9px 12px;font-size:.72rem;text-align:center;border-bottom:1px solid rgba(245,240,232,.04);color:rgba(245,240,232,.5)">Apr–Oct</td><td style="padding:9px 12px;font-size:.72rem;text-align:center;border-bottom:1px solid rgba(245,240,232,.04);color:rgba(245,240,232,.5)">Apr–Nov</td><td style="padding:9px 12px;font-size:.72rem;text-align:center;border-bottom:1px solid rgba(245,240,232,.04);color:rgba(245,240,232,.5)">Mar–Oct</td><td style="padding:9px 12px;font-size:.72rem;text-align:center;border-bottom:1px solid rgba(245,240,232,.04);color:rgba(245,240,232,.5)">May–Oct</td></tr>
+          <tr><td style="padding:9px 12px;font-size:.76rem;font-weight:300;border-bottom:1px solid rgba(245,240,232,.04);color:#f5f0e8">Family-Friendly</td><td style="padding:9px 12px;font-size:.72rem;text-align:center;border-bottom:1px solid rgba(245,240,232,.04);color:#f59e0b">~ Couples</td><td style="padding:9px 12px;font-size:.72rem;text-align:center;border-bottom:1px solid rgba(245,240,232,.04);color:#f59e0b">~ Couples</td><td style="padding:9px 12px;font-size:.72rem;text-align:center;border-bottom:1px solid rgba(245,240,232,.04);color:#4ade80">✓ Yes</td><td style="padding:9px 12px;font-size:.72rem;text-align:center;border-bottom:1px solid rgba(245,240,232,.04);color:#f87171">Adults best</td><td style="padding:9px 12px;font-size:.72rem;text-align:center;border-bottom:1px solid rgba(245,240,232,.04);color:#4ade80">✓ Yes</td></tr>
+          <tr><td style="padding:9px 12px;font-size:.76rem;font-weight:300;border-bottom:1px solid rgba(245,240,232,.04);color:#f5f0e8">Wine Focus</td><td style="padding:9px 12px;font-size:.72rem;text-align:center;border-bottom:1px solid rgba(245,240,232,.04);color:#4ade80">✓</td><td style="padding:9px 12px;font-size:.72rem;text-align:center;border-bottom:1px solid rgba(245,240,232,.04);color:#4ade80">✓ Normandy</td><td style="padding:9px 12px;font-size:.72rem;text-align:center;border-bottom:1px solid rgba(245,240,232,.04);color:#4ade80">✓ Alsace</td><td style="padding:9px 12px;font-size:.72rem;text-align:center;border-bottom:1px solid rgba(245,240,232,.04);color:#4ade80">✓ Port wine</td><td style="padding:9px 12px;font-size:.72rem;text-align:center;border-bottom:1px solid rgba(245,240,232,.04);color:#f87171">—</td></tr>
+          <tr><td style="padding:9px 12px;font-size:.76rem;font-weight:300;color:#f5f0e8">Best For</td><td style="padding:9px 12px;font-size:.72rem;text-align:center;color:#e8cc8a">History &amp; culture</td><td style="padding:9px 12px;font-size:.72rem;text-align:center;color:#e8cc8a">Art &amp; WWII</td><td style="padding:9px 12px;font-size:.72rem;text-align:center;color:#e8cc8a">Castles &amp; wine</td><td style="padding:9px 12px;font-size:.72rem;text-align:center;color:#e8cc8a">Wine &amp; romance</td><td style="padding:9px 12px;font-size:.72rem;text-align:center;color:#e8cc8a">Islands &amp; beach</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <!-- BAR CHART -->
+    <div style="font-size:.58rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:rgba(245,240,232,.4);margin-bottom:12px;display:flex;align-items:center;gap:8px"><span style="display:inline-block;width:20px;height:1px;background:#c9a84c"></span>Metric Breakdown</div>
+    <div style="display:flex;gap:14px;margin-bottom:14px;flex-wrap:wrap">
+      <div style="display:flex;align-items:center;gap:5px;font-size:.6rem;color:rgba(245,240,232,.45)"><div style="width:8px;height:8px;border-radius:1px;background:#c9a84c"></div>Danube</div>
+      <div style="display:flex;align-items:center;gap:5px;font-size:.6rem;color:rgba(245,240,232,.45)"><div style="width:8px;height:8px;border-radius:1px;background:#e8cc8a"></div>Seine</div>
+      <div style="display:flex;align-items:center;gap:5px;font-size:.6rem;color:rgba(245,240,232,.45)"><div style="width:8px;height:8px;border-radius:1px;background:#00c8ff"></div>Rhine</div>
+      <div style="display:flex;align-items:center;gap:5px;font-size:.6rem;color:rgba(245,240,232,.45)"><div style="width:8px;height:8px;border-radius:1px;background:#f59e0b"></div>Douro</div>
+      <div style="display:flex;align-items:center;gap:5px;font-size:.6rem;color:rgba(245,240,232,.45)"><div style="width:8px;height:8px;border-radius:1px;background:#60a5fa"></div>Med</div>
+    </div>
+    <div id="bca"></div>
+    <div style="margin-top:28px;padding:16px 20px;background:rgba(201,168,76,.05);border:1px solid rgba(201,168,76,.18);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:14px">
+      <p style="font-size:.8rem;font-weight:300;color:rgba(245,240,232,.5);max-width:400px;line-height:1.6">Ready to book one of these? Our advisor will find current pricing and availability.</p>
+      <button onclick="closeCompare();openPanel()" style="background:#c9a84c;color:#000;border:none;padding:10px 24px;font-size:.66rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;cursor:pointer;font-family:'Jost',sans-serif">Speak With an Advisor →</button>
+    </div>
+  </div>
+</div>
 </body>
 </html>
