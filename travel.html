@@ -4,8 +4,10 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Cary Park Travel — Curated Journeys Worldwide</title>
-<meta name="description" content="Bespoke travel planning worldwide. Cruises, river cruises, all-inclusives, luxury villas, and adventures — live pricing, real advisors. Powered by Dream Vacations.">
+<meta name="description" content="Bespoke travel planning worldwide. Cruises, river journeys, all-inclusives, luxury villas, and adventures — real advisors, live pricing.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://api.mapbox.com/mapbox-gl-js/v3.3.0/mapbox-gl.css" rel="stylesheet">
+<script src="https://api.mapbox.com/mapbox-gl-js/v3.3.0/mapbox-gl.js"></script>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@200;300;400;500;600&display=swap" rel="stylesheet">
 <style>
 :root{
@@ -178,7 +180,16 @@ footer{position:relative;z-index:2;background:var(--black2);border-top:1px solid
 .flegal{font-size:.6rem;font-weight:300;color:var(--muted);line-height:1.7}
 @media(max-width:768px){.fgrid{grid-template-columns:1fr 1fr}footer{padding:40px 22px 28px}.container{padding:0 22px}.explorer{padding:70px 0}}
 @media(max-width:480px){.fgrid{grid-template-columns:1fr}}
-@media(max-width:768px){section.how{padding:0}.how-grid{grid-template-columns:1fr}.hc{padding:0 22px 52px}}
+/* DEEP SPACE PANEL BACKGROUND */
+#panel{background:radial-gradient(ellipse 70% 60% at 25% 40%,rgba(201,168,76,.07),transparent 55%),radial-gradient(ellipse 50% 70% at 75% 60%,rgba(0,200,255,.05),transparent 55%),#06070a !important}
+#panelStars{position:absolute;inset:0;z-index:0;pointer-events:none}
+#panel .ph,#panel #pmsg,#panel #ctrl,#panel .pinput{position:relative;z-index:2}
+.mapboxgl-popup-content{background:rgba(10,12,15,.97)!important;border:1px solid var(--border)!important;border-radius:3px!important;padding:12px 16px!important;box-shadow:0 8px 32px rgba(0,0,0,.8)!important;color:var(--cream);font-family:'Jost',sans-serif;font-weight:300}
+.mapboxgl-popup-tip{border-top-color:rgba(10,12,15,.97)!important;border-bottom-color:rgba(10,12,15,.97)!important}
+.mapboxgl-popup-close-button{color:var(--muted)!important}
+.mapboxgl-ctrl-bottom-left,.mapboxgl-ctrl-bottom-right{opacity:.2}
+.rpill.active{border-color:var(--gold)!important;color:var(--gold)!important;background:rgba(201,168,76,.06)!important}
+.rpill:hover{border-color:rgba(201,168,76,.4)!important;color:var(--cream)!important}
 </style>
 </head>
 <body>
@@ -187,7 +198,7 @@ footer{position:relative;z-index:2;background:var(--black2);border-top:1px solid
 <nav id="nav">
   <div class="nw">
     <div class="nt">Cary Park Travel</div>
-    <div class="ns">Karabinos, Rojas &amp; Associates · Dream Vacations</div>
+    <div class="ns">Real Advisors · Live Pricing</div>
   </div>
   <div class="nl">
     <a href="/">Home</a>
@@ -210,7 +221,7 @@ footer{position:relative;z-index:2;background:var(--black2);border-top:1px solid
     <div class="hbtns">
       <button class="bgold" onclick="openPanel()">Talk to an Advisor</button>
       <a href="#explorer" class="bghost">Browse Destinations →</a>
-      <a href="https://mkarabinos.dreamvacations.com/home-page" target="_blank" class="bghost" style="border-color:rgba(0,200,255,.3);color:rgba(0,200,255,.7)">🔴 Live Deals ↗</a>
+      <button class="bghost" onclick="openPanel()" style="border-color:rgba(0,200,255,.3);color:rgba(0,200,255,.7)">🔴 Talk to an Advisor</button>
     </div>
   </div>
 </section>
@@ -430,7 +441,7 @@ footer{position:relative;z-index:2;background:var(--black2);border-top:1px solid
     </div>
 
     <div style="text-align:center;margin-top:32px">
-      <a href="https://mkarabinos.dreamvacations.com/home-page" target="_blank" class="bghost" style="display:inline-flex">Browse All Destinations on Dream Vacations ↗</a>
+      <button class="bghost" onclick="openPanel()" style="display:inline-flex">Speak With an Advisor ↗</button>
       <p style="font-size:.7rem;color:var(--muted);margin-top:12px;font-weight:300">Prices shown are estimates based on typical market rates. For current availability and exact pricing, speak with an advisor or browse live inventory above.</p>
     </div>
   </div>
@@ -450,7 +461,7 @@ footer{position:relative;z-index:2;background:var(--black2);border-top:1px solid
       <div class="rdi"><div class="rdl">Lines</div><div class="rdv">Viking · AmaWaterways · Scenic</div></div>
     </div>
     <div style="display:flex;gap:14px;flex-wrap:wrap">
-      <a href="https://mkarabinos.dreamvacations.com/vacation/cruises/river-cruise-lines" target="_blank" class="bgold">Browse River Cruises ↗</a>
+      <button class="bgold" onclick="openPanel()">Plan a River Cruise ↗</button>
       <button class="bghost" onclick="bookAdvisor('European river cruise options — I want to compare routes and pricing')">Talk to an Advisor</button>
     </div>
   </div>
@@ -463,10 +474,40 @@ footer{position:relative;z-index:2;background:var(--black2);border-top:1px solid
     <h2 class="stitle">Browse, Plan,<br/><em>Book — Properly.</em></h2>
     <p class="ssub" style="margin-bottom:44px">Live inventory to explore. A real advisor to finalize. That's the difference.</p>
     <div class="how-grid">
-      <div class="how-item"><div class="how-num">01</div><div class="how-title">Browse Live Inventory</div><div class="how-desc">Explore real-time deals on Dream Vacations — hundreds of cruises, resorts, and tours with current pricing.</div></div>
+      <div class="how-item"><div class="how-num">01</div><div class="how-title">Browse Live Inventory</div><div class="how-desc">Browse curated options across hundreds of cruises, resorts, river journeys, and tours — with current market pricing.</div></div>
       <div class="how-item"><div class="how-num">02</div><div class="how-title">Tell Us What You Love</div><div class="how-desc">Chat with our advisor, share your shortlist, and describe your ideal trip. We'll refine it to fit your budget and style.</div></div>
       <div class="how-item"><div class="how-num">03</div><div class="how-title">We Handle the Details</div><div class="how-desc">Flights, transfers, shore excursions, travel insurance, and special requests — coordinated by your advisor.</div></div>
-      <div class="how-item"><div class="how-num">04</div><div class="how-title">Book with Confidence</div><div class="how-desc">All bookings handled by your licensed Dream Vacations advisor. Full transaction support, no self-service guesswork.</div></div>
+      <div class="how-item"><div class="how-num">04</div><div class="how-title">Book with Confidence</div><div class="how-desc">All bookings handled by your licensed travel advisor. Full transaction support, no self-service guesswork.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ROUTE EXPLORER -->
+<section id="routes" style="padding:90px 0;background:var(--black2);border-top:1px solid var(--border2)">
+  <div style="max-width:1200px;margin:0 auto;padding:0 48px">
+    <div style="display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:32px;flex-wrap:wrap;gap:16px">
+      <div>
+        <div style="font-size:.6rem;font-weight:400;letter-spacing:.3em;text-transform:uppercase;color:var(--gold);display:flex;align-items:center;gap:12px;margin-bottom:14px"><span style="display:inline-block;width:32px;height:1px;background:var(--gold)"></span>Interactive Route Map</div>
+        <h2 style="font-family:'Cormorant Garamond',serif;font-size:clamp(1.8rem,3.5vw,3rem);font-weight:300;line-height:1.1;letter-spacing:-.01em">Explore the <em style="font-style:italic;color:var(--goldlt)">Journey</em></h2>
+        <p style="font-size:.88rem;font-weight:300;color:var(--muted);margin-top:10px;max-width:480px;line-height:1.8">Select any cruise route and watch the ship trace the path port by port. Click any stop for details.</p>
+      </div>
+      <div style="display:flex;gap:8px;flex-wrap:wrap">
+        <button class="rpill active" onclick="switchRoute('danube',this)" style="padding:7px 16px;border:1px solid var(--border);font-size:.62rem;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);cursor:pointer;background:rgba(201,168,76,.06);font-family:'Jost',sans-serif;transition:all .2s">Danube</button>
+        <button class="rpill" onclick="switchRoute('seine',this)" style="padding:7px 16px;border:1px solid var(--border2);font-size:.62rem;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);cursor:pointer;background:none;font-family:'Jost',sans-serif;transition:all .2s">Seine</button>
+        <button class="rpill" onclick="switchRoute('rhine',this)" style="padding:7px 16px;border:1px solid var(--border2);font-size:.62rem;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);cursor:pointer;background:none;font-family:'Jost',sans-serif;transition:all .2s">Rhine</button>
+        <button class="rpill" onclick="switchRoute('douro',this)" style="padding:7px 16px;border:1px solid var(--border2);font-size:.62rem;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);cursor:pointer;background:none;font-family:'Jost',sans-serif;transition:all .2s">Douro</button>
+        <button class="rpill" onclick="switchRoute('med',this)" style="padding:7px 16px;border:1px solid var(--border2);font-size:.62rem;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);cursor:pointer;background:none;font-family:'Jost',sans-serif;transition:all .2s">Mediterranean</button>
+        <button class="rpill" onclick="switchRoute('caribbean',this)" style="padding:7px 16px;border:1px solid var(--border2);font-size:.62rem;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);cursor:pointer;background:none;font-family:'Jost',sans-serif;transition:all .2s">Caribbean</button>
+      </div>
+    </div>
+    <!-- Map container -->
+    <div style="position:relative;border:1px solid var(--border);border-radius:4px;overflow:hidden">
+      <div id="routeMap" style="height:460px;width:100%"></div>
+      <!-- Itinerary strip -->
+      <div id="routeStrip" style="display:flex;gap:0;overflow-x:auto;border-top:1px solid var(--border);background:rgba(8,9,10,.9);backdrop-filter:blur(10px)">
+      </div>
+      <!-- Animate btn -->
+      <button onclick="animMap()" id="routeAnimBtn" style="position:absolute;bottom:70px;right:16px;background:var(--gold);border:none;color:#000;padding:8px 16px;font-size:.6rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;cursor:pointer;font-family:'Jost',sans-serif;z-index:5;border-radius:2px;box-shadow:0 4px 16px rgba(201,168,76,.3)">▶ Animate Route</button>
     </div>
   </div>
 </section>
@@ -474,9 +515,9 @@ footer{position:relative;z-index:2;background:var(--black2);border-top:1px solid
 <!-- CTA BAND -->
 <div class="cta-band">
   <h3>Ready to <em>Go Anywhere?</em></h3>
-  <p>Browse live deals on Dream Vacations, then speak with your Cary Park Travel advisor to finalize and book.</p>
+  <p>Tell us where you want to go. Our advisors handle the rest — research, pricing, booking, and everything in between.</p>
   <div class="cta-btns">
-    <a href="https://mkarabinos.dreamvacations.com/home-page" target="_blank" class="bgold">Browse Live Deals ↗</a>
+    <button class="bgold" onclick="openPanel()">Talk to an Advisor ↗</button>
     <button class="bghost" onclick="openPanel()">Speak With an Advisor</button>
   </div>
 </div>
@@ -486,15 +527,15 @@ footer{position:relative;z-index:2;background:var(--black2);border-top:1px solid
   <div class="fgrid">
     <div>
       <div class="fbname">Cary Park Travel</div>
-      <div class="fbtag">Karabinos, Rojas &amp; Associates · Dream Vacations</div>
+      <div class="fbtag">Real Advisors · Live Pricing</div>
       <p class="fbody">Curated travel planning worldwide. Cruises, river journeys, resorts, all-inclusives, and adventures — booked right.</p>
     </div>
     <div><div class="fct">Browse</div><div class="flinks">
-      <a href="https://mkarabinos.dreamvacations.com/results.do?clp=1&places=ALL&c=ALL&v=ALL&days=ALL&p=ALL" target="_blank">All Cruises ↗</a>
-      <a href="https://mkarabinos.dreamvacations.com/vacation/cruises/river-cruise-lines" target="_blank">River Cruises ↗</a>
-      <a href="https://mkarabinos.dreamvacations.com/vacation/resorts/find-a-resort" target="_blank">Resorts ↗</a>
-      <a href="https://mkarabinos.dreamvacations.com/vacation/tours/all" target="_blank">Tours ↗</a>
-      <a href="https://mkarabinos.dreamvacations.com/promotion/cruise-deals.do" target="_blank">Deals ↗</a>
+      <a href="#explorer">All Destinations</a>
+      <a href="#river">River Cruises</a>
+      <a href="#explorer">Resorts</a>
+      <a href="#explorer">Tours</a>
+      <a href="#explorer">Current Deals</a>
     </div></div>
     <div><div class="fct">Company</div><div class="flinks">
       <a href="/">Cary Park Solutions</a>
@@ -509,7 +550,7 @@ footer{position:relative;z-index:2;background:var(--black2);border-top:1px solid
     </div></div>
   </div>
   <div class="fbot">
-    <p class="flegal">© 2026 Cary Park Travel · Cary Park Solutions · Clayton, NC<br/>Affiliated with Dream Vacations / World Travel Holdings. Prices are estimates; confirm at booking.</p>
+    <p class="flegal">© 2026 Cary Park Travel · Cary Park Solutions · Clayton, NC · (984) 258-2028<br/>Travel planning service. Prices shown are estimates based on typical market rates; confirm current pricing and availability with your advisor.</p>
     <p class="flegal">Serving the Triangle · Worldwide</p>
   </div>
 </footer>
@@ -517,7 +558,7 @@ footer{position:relative;z-index:2;background:var(--black2);border-top:1px solid
 <!-- ADVISOR PANEL -->
 <div id="panel">
   <div class="ph">
-    <div><div class="pht">Your Travel Advisor</div><div class="phs">✦ Cary Park Travel · Dream Vacations</div></div>
+    <div><div class="pht">Your Travel Advisor</div><div class="phs">✦ Cary Park Travel · Your Personal Advisor</div></div>
     <button class="pclose" onclick="closePanel()">✕</button>
   </div>
   <div id="pmsg"></div>
@@ -608,8 +649,81 @@ function closeBtn(){
   w.appendChild(b);ctrl.appendChild(w);
 }
 
+// opts with "Something else" free-text fallback
+function optsOrType(os,placeholder,fn){
+  clr();const w=document.createElement('div');w.className='co';
+  os.forEach(o=>{
+    const b=document.createElement('button');b.textContent=o;
+    b.onclick=()=>{user(o);clr();fn(o)};w.appendChild(b);
+  });
+  // Something else row
+  const row=document.createElement('div');row.style.cssText='display:flex;gap:6px;margin-top:4px;width:100%';
+  const inp=document.createElement('input');
+  inp.type='text';inp.placeholder=placeholder||'Something else…';
+  inp.style.cssText='flex:1;padding:8px 10px;background:rgba(255,255,255,.06);border:1px solid rgba(201,168,76,.25);color:#f5f0e8;font-size:.78rem;font-family:inherit;outline:none;border-radius:2px';
+  const sb=document.createElement('button');sb.textContent='→';
+  sb.style.cssText='padding:8px 12px;background:rgba(201,168,76,.15);border:1px solid rgba(201,168,76,.3);color:#c9a84c;font-size:.8rem;cursor:pointer;border-radius:2px';
+  const go=()=>{const v=inp.value.trim();if(!v)return;user(v);clr();fn(v)};
+  sb.onclick=go;inp.addEventListener('keydown',e=>{if(e.key==='Enter')go()});
+  row.appendChild(inp);row.appendChild(sb);
+  w.appendChild(row);ctrl.appendChild(w);
+}
+
+// Trip comparison card before form submit
+function showComparison(tripA,tripB,fn){
+  clr();
+  const trips={
+    'Ocean Cruise':    {icon:'🚢',price:'$899–$2,500',dur:'5–10 nights',inc:'Entertainment, most meals, ports',best:'Value, variety, onboard amenities'},
+    'River Cruise':    {icon:'⚓',price:'$2,400–$4,500',dur:'5–8 nights',inc:'Shore excursions, all meals, wine',best:'Scenery, culture, intimate experience'},
+    'All-Inclusive':   {icon:'🏖️',price:'$649–$2,500',dur:'4–7 nights',inc:'Meals, drinks, entertainment',best:'Families, couples, zero planning'},
+    'Guided Tour':     {icon:'🗺️',price:'$2,200–$5,000',dur:'7–14 nights',inc:'Hotels, guide, most meals',best:'Culture, history, first-timers'},
+    'Safari/Adventure':{icon:'🦁',price:'$3,500–$10,000',dur:'7–14 nights',inc:'Lodge, game drives, meals',best:'Wildlife, bucket list'},
+    'Luxury Escape':   {icon:'✨',price:'$3,000–$15,000',dur:'5–14 nights',inc:'Private transfers, butler, spa',best:'Honeymoon, milestone anniversary'},
+    'Honeymoon':       {icon:'💍',price:'$2,500–$8,000',dur:'7–14 nights',inc:'Romance packages, upgrades',best:'Couples, privacy, memories'},
+    'Family Vacation': {icon:'👨‍👩‍👧',price:'$800–$3,500',dur:'5–10 nights',inc:'Kids clubs, flexible dining',best:'Kids, multi-gen groups'},
+  };
+  const a=trips[tripA]||{icon:'✈️',price:'Custom',dur:'Flexible',inc:'TBD',best:'Advisor curated'};
+  const b=trips[tripB]||{icon:'🌍',price:'Custom',dur:'Flexible',inc:'TBD',best:'Advisor curated'};
+
+  bot(`Here's a quick comparison of the two options you're weighing:`);
+
+  const card=document.createElement('div');
+  card.style.cssText='display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:8px 0;font-size:.72rem';
+  card.innerHTML=`
+    <div style="background:rgba(201,168,76,.06);border:1px solid rgba(201,168,76,.2);padding:12px;border-radius:2px">
+      <div style="font-size:1.2rem;margin-bottom:4px">${a.icon}</div>
+      <div style="font-weight:600;color:#e8cc8a;margin-bottom:6px">${tripA}</div>
+      <div style="color:rgba(245,240,232,.5);margin-bottom:2px">From ${a.price} pp</div>
+      <div style="color:rgba(245,240,232,.5);margin-bottom:2px">${a.dur}</div>
+      <div style="color:rgba(245,240,232,.7);margin-top:6px;line-height:1.5">${a.inc}</div>
+      <div style="color:#c9a84c;margin-top:6px;font-size:.66rem">Best for: ${a.best}</div>
+    </div>
+    <div style="background:rgba(0,200,255,.04);border:1px solid rgba(0,200,255,.15);padding:12px;border-radius:2px">
+      <div style="font-size:1.2rem;margin-bottom:4px">${b.icon}</div>
+      <div style="font-weight:600;color:#00c8ff;margin-bottom:6px">${tripB}</div>
+      <div style="color:rgba(245,240,232,.5);margin-bottom:2px">From ${b.price} pp</div>
+      <div style="color:rgba(245,240,232,.5);margin-bottom:2px">${b.dur}</div>
+      <div style="color:rgba(245,240,232,.7);margin-top:6px;line-height:1.5">${b.inc}</div>
+      <div style="color:#00c8ff;margin-top:6px;font-size:.66rem">Best for: ${b.best}</div>
+    </div>`;
+  pmsg.appendChild(card);pmsg.scrollTop=pmsg.scrollHeight;
+
+  setTimeout(()=>{
+    bot("Which feels closer to what you're picturing?");
+    opts([tripA, tripB, 'Either — advisor decides', 'Actually something different'],pick=>{
+      convo.answers.tripCompare=`Compared ${tripA} vs ${tripB} → picked: ${pick}`;
+      if(pick==='Actually something different'){
+        leisureBranch();
+      } else {
+        if(pick!=='Either — advisor decides') convo.answers.type=pick;
+        fn();
+      }
+    });
+  },400);
+}
+
 function startFlow(){
-  bot("Hi — I'm Ava, your Cary Park Travel advisor. Let's build your perfect trip.\n\nIs this travel for business or leisure?");
+  bot("Hi — I'm Ava, your Cary Park Travel advisor. Let's find you the perfect trip.\n\nIs this travel for business or leisure?");
   opts(['Personal / Leisure','Corporate / Business Travel','Both — mixing work and leisure'],purpose=>{
     convo.answers.purpose=purpose;
     const isCorp=/Corporate|Business/i.test(purpose);
@@ -619,79 +733,163 @@ function startFlow(){
 }
 
 function corpBranch(){
-  bot("Great — let's get you set up right. What's the nature of the trip?");
-  opts(['Client entertainment','Executive retreat','Team offsite','Conference or event','Incentive travel (reward trip)','Site visit or roadshow'],corpType=>{
+  bot("Let's get this dialed in. What's the nature of the trip?");
+  optsOrType(['Client entertainment','Executive retreat','Team offsite','Conference or event','Incentive travel','Site visit / roadshow'],'Describe your trip type…',corpType=>{
     convo.answers.corpType=corpType;
-    bot("How many travelers in your group?");
-    opts(['1–2 executives','3–9 people','10–25 people','25+ people'],pax=>{
+    bot("How many travelers?");
+    optsOrType(['1–2 executives','3–9 people','10–25 people','25+ people'],'Enter number…',pax=>{
       convo.answers.pax=pax;
-      bot("What's your destination preference?");
-      opts(['Domestic US','Caribbean / Latin America','Europe','Asia Pacific','Flexible — advisor chooses'],dest=>{
+      bot("Destination preference?");
+      optsOrType(['Domestic US','Caribbean / Latin America','Europe','Asia Pacific','Middle East / Africa','Flexible — best option'],'Specific city or country…',dest=>{
         convo.answers.dest=dest;
-        bot("What's the approximate per-person budget?");
-        opts(['Under $2,000','$2,000–$5,000','$5,000–$10,000','$10,000+','Needs approval — get quote first'],budget=>{
+        bot("Approximate per-person budget?");
+        optsOrType(['Under $2,000','$2,000–$5,000','$5,000–$10,000','$10,000+','Needs internal approval'],'Enter budget range…',budget=>{
           convo.answers.budget=budget;
-          askCorpUpsells();
+          askFlightPrefsCorpo();
         });
       });
     });
   });
 }
 
+function askFlightPrefsCorpo(){
+  bot("Any flight preferences for the group?");
+  optsOrType(['Business class required','Economy plus / premium economy','Economy is fine','Private charter needed','Mixed — varies by traveler'],'Describe requirements…',fp=>{
+    convo.answers.flightClass=fp;
+    bot("Preferred airlines or alliances?");
+    optsOrType(['No preference','American / AA','Delta','United','Delta or United only','Star Alliance','Oneworld','No domestic legs needed'],'Enter airline name or preference…',airline=>{
+      convo.answers.airline=airline;
+      askCorpUpsells();
+    });
+  });
+}
+
 function askCorpUpsells(){
-  bot("Would any of these corporate upgrades be relevant? (select all that apply)");
-  opts(['Business class flights','Private transfers','Executive lounge access','Group meeting space','Dedicated event coordinator','Branded welcome packages','None — keep it standard'],upsell=>{
+  bot("Any of these needed for the group?");
+  optsOrType(['Business class flights','Private transfers','Executive lounge access','Group meeting space / AV','Dedicated event coordinator','Branded welcome packages','Dietary accommodations','None — keep it standard'],'Other requirement…',upsell=>{
     convo.answers.corpUpsells=upsell;
-    bot("Last question — any specific requirements?");
-    opts(['Dietary restrictions for group','AV / presentation needs','Strict travel policy limits','Need NDAs / confidentiality','No special requirements'],reqs=>{
+    bot("Any confidentiality or policy constraints I should note?");
+    opts(['Strict corporate travel policy','NDAs / confidentiality required','Expense reporting format needed','No special constraints'],reqs=>{
       convo.answers.corpReqs=reqs;
-      bot("Perfect. Our corporate travel team will put together a full proposal. Last step — your contact info:");
-      cform(c=>{Object.assign(convo.answers,c);finish()});
+      bot("Last thing — anything else about this trip the advisor should know?");
+      typed('Special notes, previous trips, VIP status…',notes=>{
+        convo.answers.extraNotes=notes;
+        bot("Got it. Last step — your contact info and I'll get a full proposal started:");
+        cform(c=>{Object.assign(convo.answers,c);finish()});
+      });
     });
   });
 }
 
 function leisureBranch(){
   bot("What kind of trip are you dreaming of?");
-  opts(['Ocean Cruise','River Cruise','All-Inclusive Resort','Guided Tour','Safari / Adventure','Luxury Escape','Honeymoon / Romance','Family Vacation','Not sure — surprise me'],type=>{
+  optsOrType(['Ocean Cruise','River Cruise','All-Inclusive Resort','Guided Tour','Safari / Adventure','Luxury Escape','Honeymoon / Romance','Family Vacation','Not sure — surprise me'],'Describe your ideal trip…',type=>{
     convo.answers.type=type;
-    bot("Where in the world do you want to go?");
-    opts(['Caribbean','Europe','Mediterranean','Asia','Africa','Central / South America','Hawaii','Alaska / Canada','Anywhere — best deals'],dest=>{
-      convo.answers.dest=dest;
-      bot("How many travelers?");
-      opts(['Just me','2 adults','Family with kids','Group of 4+'],pax=>{
-        convo.answers.pax=pax;
-        bot("What's your approximate per-person budget?");
-        opts(['Under $1,000','$1,000–$2,500','$2,500–$5,000','$5,000+','Flexible'],budget=>{
-          convo.answers.budget=budget;
-          askExperience();
-        });
+    if(/not sure|surprise/i.test(type)){
+      bot("No problem — I'll ask a few questions and our advisor will put together the perfect match.");
+      convo.answers.type='Advisor curated';
+    }
+    askDestination();
+  });
+}
+
+function askDestination(){
+  bot("Where in the world are you thinking?");
+  optsOrType(['Caribbean','Europe','Mediterranean','Asia','Africa / Safari','Central / South America','Hawaii','Alaska / Canada','Anywhere — best value for my budget'],'Specific country, city, or region…',dest=>{
+    convo.answers.dest=dest;
+    bot("How many travelers?");
+    optsOrType(['Just me','2 adults','Couple + another couple','Family with young kids','Family with teens','Group of friends (4+)','Multi-generational group'],'Number of people…',pax=>{
+      convo.answers.pax=pax;
+      bot("What's your per-person budget?");
+      optsOrType(['Under $1,000','$1,000–$2,500','$2,500–$5,000','$5,000–$10,000','$10,000+','Flexible — show me options'],'Enter your budget…',budget=>{
+        convo.answers.budget=budget;
+        askDuration();
       });
     });
   });
 }
 
-function askExperience(){
-  bot("How would you describe your ideal travel experience?");
-  opts(['Relaxed — beaches, pool, minimal planning','Active — excursions, hiking, exploring','Cultural — history, food, local immersion','Ultra-luxury — only the best','Adventure — off the beaten path','Mix of everything'],vibe=>{
+function askDuration(){
+  bot("How long are you looking to travel?");
+  optsOrType(['3–4 nights (long weekend)','5–7 nights','8–10 nights','11–14 nights','2+ weeks','Flexible'],'Enter number of nights…',dur=>{
+    convo.answers.duration=dur;
+    askTripDepth();
+  });
+}
+
+function askTripDepth(){
+  bot("What does your ideal experience look like day-to-day?");
+  optsOrType([
+    'Relaxed — beaches, pool, minimal planning',
+    'Active — excursions, hiking, exploring each day',
+    'Cultural — history, food, local immersion',
+    'Ultra-luxury — only the best, no compromises',
+    'Adventure — off the beaten path',
+    'Balance of everything'
+  ],'Describe your vibe…',vibe=>{
     convo.answers.vibe=vibe;
-    askLuxuryUpsells();
+    askFlightPrefs();
+  });
+}
+
+function askFlightPrefs(){
+  bot("Let's talk flights. What cabin class are you looking for?");
+  optsOrType(['Economy — best value','Premium economy','Business class','First class','No flights needed — I'm driving / already have flights'],'Other preference…',fc=>{
+    convo.answers.flightClass=fc;
+    if(/no flights|already have/i.test(fc)){
+      askLuxuryUpsells();
+      return;
+    }
+    bot("Any airline preferences or loyalty programs I should know about?");
+    optsOrType([
+      'No preference',
+      'American Airlines (AAdvantage)',
+      'Delta (SkyMiles)',
+      'United (MileagePlus)',
+      'Southwest (Rapid Rewards)',
+      'International preferred (Air France, Lufthansa, etc.)',
+      'Alliance: Star Alliance',
+      'Alliance: Oneworld',
+      'Alliance: SkyTeam'
+    ],'Enter airline or program…',airline=>{
+      convo.answers.airline=airline;
+      bot("Nonstop flights only, or are connections okay?");
+      opts(['Nonstop only','One connection is fine','Open to whatever is cheapest'],stops=>{
+        convo.answers.stops=stops;
+        askLuxuryUpsells();
+      });
+    });
   });
 }
 
 function askLuxuryUpsells(){
-  bot("Are any of these on your wish list? I'll make sure our advisor factors them in:");
-  opts(['Cabin / room upgrade','Private shore excursions','Business or first class flights','Spa & wellness packages','Champagne / celebration setup','Travel insurance','Private transfers throughout','None of the above'],upsell=>{
+  bot("Any of these on your wish list?");
+  optsOrType([
+    'Cabin / room upgrade',
+    'Private shore excursions',
+    'Spa & wellness package',
+    'Champagne / celebration setup',
+    'Private transfers throughout',
+    'Travel insurance',
+    'Early boarding / priority access',
+    'None of the above'
+  ],'Other wish list item…',upsell=>{
     convo.answers.upsells=upsell;
-    const wantsMore=/None/i.test(upsell)?false:true;
-    if(wantsMore) askMoreUpsells();
+    if(!/None/i.test(upsell)) askMoreUpsells();
     else askDates();
   });
 }
 
 function askMoreUpsells(){
-  bot("Anything else you'd like included?");
-  opts(['Private chef / dining experience','Photography package','Helicopter or yacht excursion','VIP event access','Kids club / childcare onboard','Early boarding / priority disembark','Nothing else'],extra=>{
+  bot("Anything else to add?");
+  optsOrType([
+    'Private chef / dining experience',
+    'Photography / videography package',
+    'Helicopter or yacht excursion',
+    'VIP event or show access',
+    'Kids club / childcare onboard',
+    'Nothing else'
+  ],'Other…',extra=>{
     convo.answers.extras=extra;
     askDates();
   });
@@ -699,14 +897,72 @@ function askMoreUpsells(){
 
 function askDates(){
   bot("When are you hoping to travel?");
-  opts(['Within 30 days','1–3 months out','3–6 months out','6–12 months out','Flexible / no rush'],timing=>{
+  optsOrType(['Within 30 days','1–3 months out','3–6 months out','6–12 months out','Next summer (2027)','Flexible / no rush'],'Specific month or date range…',timing=>{
     convo.answers.timing=timing;
-    bot("Almost done — any special occasions or things I should tell the advisor?");
-    opts(['Anniversary / birthday','Honeymoon','First time cruising','Repeat traveler — want something new','Surprise trip for someone','No special occasion'],occasion=>{
+    bot("Any special occasions for this trip?");
+    optsOrType(['Anniversary','Birthday milestone','Honeymoon','First time traveling internationally','Repeat traveler — want something new','Surprise trip for someone','No special occasion'],'Tell me about it…',occasion=>{
       convo.answers.occasion=occasion;
-      bot("Perfect — you're all set. One last step, your contact info so our advisor can reach you:");
-      cform(c=>{Object.assign(convo.answers,c);finish()});
+      askComparison();
     });
+  });
+}
+
+function askComparison(){
+  const t=convo.answers.type||'';
+  const compMap={
+    'Ocean Cruise':'River Cruise',
+    'River Cruise':'Ocean Cruise',
+    'All-Inclusive Resort':'Guided Tour',
+    'Guided Tour':'All-Inclusive Resort',
+    'Safari / Adventure':'Luxury Escape',
+    'Luxury Escape':'Safari / Adventure',
+    'Honeymoon / Romance':'Luxury Escape',
+    'Family Vacation':'All-Inclusive Resort',
+  };
+  const alt=compMap[t];
+  if(alt && !/Advisor curated|not sure/i.test(t)){
+    bot(`Before I pull your advisor in — would you like to see a quick comparison of ${t} vs ${alt}? Helps make sure we're pointed in the right direction.`);
+    opts([`Yes — compare ${t} vs ${alt}`,'No — I know what I want'],choice=>{
+      if(/yes/i.test(choice)){
+        showComparison(t,alt,()=>preSubmit());
+      } else {
+        preSubmit();
+      }
+    });
+  } else {
+    preSubmit();
+  }
+}
+
+function preSubmit(){
+  const a=convo.answers;
+  const summary=`Here's what I have for you:\n\n` +
+    `✦ Trip: ${a.type||'Advisor curated'}\n` +
+    `✦ Destination: ${a.dest||'—'}\n` +
+    `✦ Travelers: ${a.pax||'—'}\n` +
+    `✦ Budget: ${a.budget||'—'} pp\n` +
+    `✦ Duration: ${a.duration||'—'}\n` +
+    `✦ Flights: ${a.flightClass||'—'} · ${a.airline||'—'}\n` +
+    `✦ Timing: ${a.timing||'—'}\n\nDoes this look right?`;
+  bot(summary);
+  opts(['Yes — send to advisor','Let me change something'],confirm=>{
+    if(/yes/i.test(confirm)){
+      bot("Perfect. Last step — your contact info:");
+      cform(c=>{Object.assign(convo.answers,c);finish()});
+    } else {
+      bot("No problem — which part would you like to update?");
+      opts(['Trip type','Destination','Budget','Travelers','Flights / airline','Dates / timing'],part=>{
+        const reRoutes={
+          'Trip type':leisureBranch,
+          'Destination':askDestination,
+          'Budget':()=>{ bot("What's your updated budget?"); optsOrType(['Under $1,000','$1,000–$2,500','$2,500–$5,000','$5,000+','Flexible'],'New budget…',b=>{convo.answers.budget=b;preSubmit()})},
+          'Travelers':()=>{ bot("How many travelers?"); optsOrType(['Just me','2 adults','Family with kids','Group of 4+'],'Number…',p=>{convo.answers.pax=p;preSubmit()})},
+          'Flights / airline':askFlightPrefs,
+          'Dates / timing':askDates
+        };
+        (reRoutes[part]||preSubmit)();
+      });
+    }
   });
 }
 
@@ -716,11 +972,11 @@ function finish(){
   const tag=isCorp?'[Corporate Travel]':'[Leisure Travel]';
   const subj=encodeURIComponent(`${tag} ${a.type||a.corpType||'Inquiry'} — ${a.dest||''} — ${a.name||'New lead'}`);
   const bodyText=isCorp
-    ? `CORPORATE TRAVEL INQUIRY\n\nName: ${a.name}\nEmail: ${a.email}\nPhone: ${a.phone||'—'}\n\nType: ${a.corpType}\nTravelers: ${a.pax}\nDestination: ${a.dest}\nBudget: ${a.budget} pp\nUpgrades: ${a.corpUpsells||'—'}\nRequirements: ${a.corpReqs||'—'}\nNotes: ${a.notes||'—'}`
-    : `LEISURE TRAVEL INQUIRY\n\nName: ${a.name}\nEmail: ${a.email}\nPhone: ${a.phone||'—'}\n\nTrip: ${a.type}\nDestination: ${a.dest}\nTravelers: ${a.pax}\nBudget: ${a.budget} pp\nVibe: ${a.vibe||'—'}\nUpsells wanted: ${a.upsells||'—'}\nExtras: ${a.extras||'—'}\nTiming: ${a.timing||'—'}\nOccasion: ${a.occasion||'—'}\nNotes: ${a.notes||'—'}`;
+    ?`CORPORATE TRAVEL INQUIRY\n\nName: ${a.name}\nEmail: ${a.email}\nPhone: ${a.phone||'—'}\n\nType: ${a.corpType}\nTravelers: ${a.pax}\nDestination: ${a.dest}\nBudget: ${a.budget} pp\nFlight class: ${a.flightClass||'—'}\nAirline pref: ${a.airline||'—'}\nUpgrades: ${a.corpUpsells||'—'}\nRequirements: ${a.corpReqs||'—'}\nExtra notes: ${a.extraNotes||'—'}\nNotes: ${a.notes||'—'}`
+    :`LEISURE TRAVEL INQUIRY\n\nName: ${a.name}\nEmail: ${a.email}\nPhone: ${a.phone||'—'}\n\nTrip type: ${a.type}\nDestination: ${a.dest}\nTravelers: ${a.pax}\nBudget: ${a.budget} pp\nDuration: ${a.duration||'—'}\nVibe: ${a.vibe||'—'}\nFlight class: ${a.flightClass||'—'}\nAirline pref: ${a.airline||'—'}\nStops: ${a.stops||'—'}\nUpsells: ${a.upsells||'—'}\nExtras: ${a.extras||'—'}\nTiming: ${a.timing||'—'}\nOccasion: ${a.occasion||'—'}\nComparison: ${a.tripCompare||'—'}\nNotes: ${a.notes||'—'}`;
   const body=encodeURIComponent(bodyText+`\n\nSubmitted: ${new Date().toLocaleString()}`);
   const fname=a.name?a.name.split(' ')[0]:'';
-  bot(`Thanks${fname?', '+fname:''}! Your inquiry is on its way to our advisor team.\n\nThey'll search current inventory${isCorp?' and prepare a corporate proposal':' and find your best options'} — expect a reply within 1 business day.\n\n<a href="https://mkarabinos.dreamvacations.com/home-page" target="_blank">Browse live deals while you wait ↗</a>`);
+  bot(`Thanks${fname?', '+fname:''}! Your inquiry is on its way to our advisor team.\n\nExpect a reply within 1 business day with curated options matched to your preferences.`);
   setTimeout(()=>window.location.href=`mailto:info@caryparksolutions.com?subject=${subj}&body=${body}`,900);
   closeBtn();
 }
@@ -734,18 +990,178 @@ function bookAdvisor(context){
       opts(['Personal / Leisure','Corporate / Business'],p=>{
         convo.answers.purpose=p;
         convo.answers.type=context;
-        if(/Corporate/i.test(p)) askCorpUpsells();
-        else askExperience();
+        if(/Corporate/i.test(p)) askFlightPrefsCorpo();
+        else { askDestination(); }
       });
     },300);
   }
 }
 
-// Free text input (for panel use)
 function sendFree(){
   const v=document.getElementById('pinp').value.trim();
   if(!v)return;document.getElementById('pinp').value='';
-  user(v);bot("Thanks — I've noted that. Our advisor will factor it in when searching options for you.");
+  user(v);bot("Got it — I've noted that for our advisor.");
+}
+</script>
+<script>
+// ===================== PANEL STARS (Deep Space) =====================
+function initPanelStars() {
+  const panel = document.getElementById('panel');
+  if(!panel) return;
+  const c = document.createElement('canvas');
+  c.id = 'panelStars'; c.style.cssText = 'position:absolute;inset:0;z-index:0;pointer-events:none';
+  panel.insertBefore(c, panel.firstChild);
+  const cx = c.getContext('2d');
+  function rsz() { c.width = panel.offsetWidth; c.height = panel.offsetHeight; }
+  rsz();
+  const pts = Array.from({length:100}, () => ({
+    x: Math.random()*c.width, y: Math.random()*c.height,
+    r: Math.random()*.9+.2, vx: (Math.random()-.5)*.05, vy: (Math.random()-.5)*.05,
+    a: Math.random()*.35+.1
+  }));
+  function draw() {
+    cx.clearRect(0,0,c.width,c.height);
+    pts.forEach(p => {
+      p.x+=p.vx; p.y+=p.vy;
+      if(p.x<0)p.x=c.width; if(p.x>c.width)p.x=0;
+      if(p.y<0)p.y=c.height; if(p.y>c.height)p.y=0;
+      cx.beginPath(); cx.arc(p.x,p.y,p.r,0,Math.PI*2);
+      cx.fillStyle=`rgba(255,255,255,${p.a})`; cx.fill();
+    });
+    requestAnimationFrame(draw);
+  }
+  draw();
+}
+// Init stars when panel first opens
+const _origOpen = window.openPanel;
+window.openPanel = function() {
+  if(_origOpen) _origOpen();
+  if(!document.getElementById('panelStars')) initPanelStars();
+};
+
+// ===================== MAPBOX ROUTE MAP =====================
+mapboxgl.accessToken = 'pk.eyJ1IjoiZGZyb2phczEiLCJhIjoiY21wNHNhYW5xMHZhbjJybzRsczdqZWk4OCJ9.b3fZVoDaLuU0K_j48lw5ZA';
+
+const ROUTE_DATA = {
+  danube:{title:'Danube — Vienna to Budapest',color:'#c9a84c',dur:'7 nights',
+    coords:[[16.3738,48.2082],[15.3317,48.2306],[17.1077,48.1486],[18.7406,47.7951],[19.0402,47.4979]],
+    ports:[{n:'Vienna',d:'Day 1',t:'Embark · Schönbrunn Palace'},{n:'Melk',d:'Day 2',t:'Melk Abbey · Wachau Valley'},{n:'Bratislava',d:'Day 3',t:'Old Town · Castle Hill'},{n:'Esztergom',d:'Day 5',t:"Hungary's oldest city"},{n:'Budapest',d:'Day 7',t:'Disembark · Buda Castle'}]},
+  seine:{title:'Seine — Paris to Normandy',color:'#e8cc8a',dur:'5 nights',
+    coords:[[2.3522,48.8566],[1.0993,49.4432],[1.4132,49.2404],[0.2318,49.4183],[-0.5506,49.3425]],
+    ports:[{n:'Paris',d:'Day 1',t:'Embark · Eiffel Tower'},{n:'Rouen',d:'Day 2',t:'Gothic cathedral'},{n:'Les Andelys',d:'Day 3',t:'Château Gaillard'},{n:'Honfleur',d:'Day 4',t:'Impressionist harbor'},{n:'Normandy',d:'Day 5',t:'D-Day beaches'}]},
+  rhine:{title:'Rhine — Amsterdam to Basel',color:'#00c8ff',dur:'7 nights',
+    coords:[[4.9041,52.3676],[6.9500,50.9333],[7.9167,49.9800],[7.7521,48.5734],[7.5886,47.5596]],
+    ports:[{n:'Amsterdam',d:'Day 1',t:'Embark · Canals'},{n:'Cologne',d:'Day 2',t:'Gothic cathedral'},{n:'Rüdesheim',d:'Day 3',t:'Rhine Gorge · Wine'},{n:'Strasbourg',d:'Day 5',t:'Christmas market'},{n:'Basel',d:'Day 7',t:'Disembark · Art Basel'}]},
+  douro:{title:'Douro — Porto to Salamanca',color:'#f59e0b',dur:'8 nights',
+    coords:[[-8.6291,41.1579],[-8.0183,41.1369],[-7.4600,41.1519],[-6.7703,41.3817],[-5.6635,41.0002]],
+    ports:[{n:'Porto',d:'Day 1',t:'Embark · Port wine'},{n:'Régua',d:'Day 3',t:'Wine region'},{n:'Pinhão',d:'Day 4',t:'Port wine heartland'},{n:"Barca d'Alva",d:'Day 5',t:'Portugal-Spain border'},{n:'Salamanca',d:'Day 8',t:'Disembark · UNESCO city'}]},
+  med:{title:'Mediterranean — Barcelona to Athens',color:'#60a5fa',dur:'7 nights',
+    coords:[[2.1734,41.3851],[5.3698,43.2965],[14.2681,40.8518],[25.4615,36.3932],[23.7275,37.9838]],
+    ports:[{n:'Barcelona',d:'Day 1',t:'Embark · Gaudí'},{n:'Marseille',d:'Day 2',t:'Calanques · Old Port'},{n:'Naples',d:'Day 4',t:'Pompeii'},{n:'Santorini',d:'Day 6',t:'Caldera · Oia'},{n:'Athens',d:'Day 7',t:'Disembark · Acropolis'}]},
+  caribbean:{title:'Caribbean — Miami Loop',color:'#4ade80',dur:'7 nights',
+    coords:[[-80.1918,25.7617],[-78.6997,26.5383],[-66.3283,18.4861],[-64.7452,17.7346],[-61.3897,15.2976]],
+    ports:[{n:'Miami',d:'Day 1',t:'Embark · South Beach'},{n:'Nassau',d:'Day 2',t:'Atlantis'},{n:'Puerto Rico',d:'Day 4',t:'Old San Juan'},{n:'St. Thomas',d:'Day 5',t:'Magens Bay'},{n:'Dominica',d:'Day 6',t:'Rainforest · Snorkeling'}]}
+};
+
+let routeMap, curRouteKey='danube', routeAnimRunning=false;
+
+const mapEl = document.getElementById('routeMap');
+if(mapEl) {
+  routeMap = new mapboxgl.Map({
+    container:'routeMap',
+    style:'mapbox://styles/mapbox/dark-v11',
+    center:[16.5,47.8], zoom:5.5,
+    projection:'mercator',
+    attributionControl:false
+  });
+  routeMap.addControl(new mapboxgl.NavigationControl({showCompass:false}),'bottom-right');
+
+  routeMap.on('load', () => {
+    routeMap.addSource('rl',{type:'geojson',data:{type:'Feature',geometry:{type:'LineString',coordinates:[]}}});
+    routeMap.addSource('rp',{type:'geojson',data:{type:'FeatureCollection',features:[]}});
+    routeMap.addLayer({id:'rl-glow',type:'line',source:'rl',paint:{'line-color':['get','c'],'line-width':10,'line-opacity':.1,'line-blur':6}});
+    routeMap.addLayer({id:'rl',type:'line',source:'rl',paint:{'line-color':['get','c'],'line-width':2.5,'line-opacity':.8,'line-dasharray':[2,2]}});
+    routeMap.addLayer({id:'rp',type:'circle',source:'rp',paint:{'circle-radius':7,'circle-color':['get','c'],'circle-stroke-width':2,'circle-stroke-color':'rgba(245,240,232,.7)'}});
+    routeMap.addLayer({id:'rp-lbl',type:'symbol',source:'rp',
+      layout:{'text-field':['get','n'],'text-font':['DIN Offc Pro Italic','Arial Unicode MS Regular'],'text-size':12,'text-offset':[0,-1.2],'text-anchor':'bottom'},
+      paint:{'text-color':'#f5f0e8','text-halo-color':'rgba(5,6,8,.85)','text-halo-width':2}});
+    routeMap.on('click','rp',e=>{
+      const p=e.features[0].properties;
+      new mapboxgl.Popup({offset:14})
+        .setLngLat(e.features[0].geometry.coordinates)
+        .setHTML(`<div style="font-size:.52rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:#c9a84c;margin-bottom:3px">${p.d}</div><div style="font-family:'Cormorant Garamond',serif;font-size:1rem;font-weight:400;margin-bottom:4px">${p.n}</div><div style="font-size:.7rem;color:rgba(245,240,232,.5);line-height:1.5">${p.t}</div>`)
+        .addTo(routeMap);
+    });
+    routeMap.on('mouseenter','rp',()=>routeMap.getCanvas().style.cursor='pointer');
+    routeMap.on('mouseleave','rp',()=>routeMap.getCanvas().style.cursor='');
+    updateRouteMap('danube');
+  });
+}
+
+function updateRouteMap(key) {
+  const r = ROUTE_DATA[key];
+  if(!routeMap || !routeMap.getSource('rl')) return;
+  routeMap.getSource('rl').setData({type:'Feature',properties:{c:r.color},geometry:{type:'LineString',coordinates:r.coords}});
+  routeMap.getSource('rp').setData({type:'FeatureCollection',features:r.coords.map((co,i)=>({
+    type:'Feature',properties:{n:r.ports[i].n,d:r.ports[i].d,t:r.ports[i].t,c:r.color},
+    geometry:{type:'Point',coordinates:co}
+  }))});
+  ['rl','rl-glow'].forEach(id=>{ if(routeMap.getLayer(id)) routeMap.setPaintProperty(id,'line-color',r.color); });
+  const bounds = r.coords.reduce((b,c)=>b.extend(c), new mapboxgl.LngLatBounds(r.coords[0],r.coords[0]));
+  routeMap.fitBounds(bounds,{padding:60,duration:1200,maxZoom:9});
+  // Update itinerary strip
+  const strip = document.getElementById('routeStrip');
+  if(strip) {
+    strip.innerHTML = r.ports.map((p,i) => `
+      <div onclick="routeMap.flyTo({center:[${r.coords[i]}],zoom:10,duration:800})"
+           style="min-width:130px;padding:12px 14px;border-right:1px solid rgba(245,240,232,.06);cursor:pointer;flex-shrink:0;transition:background .15s"
+           onmouseover="this.style.background='rgba(255,255,255,.03)'" onmouseout="this.style.background=''"
+      >
+        <div style="font-size:.52rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:${r.color};margin-bottom:3px">${p.d}</div>
+        <div style="font-size:.78rem;font-weight:500;color:#f5f0e8;margin-bottom:2px">${p.n}</div>
+        <div style="font-size:.62rem;font-weight:300;color:rgba(245,240,232,.4);line-height:1.45">${p.t}</div>
+      </div>`).join('');
+  }
+}
+
+function switchRoute(key, btn) {
+  curRouteKey = key;
+  document.querySelectorAll('.rpill').forEach(b => {
+    b.classList.remove('active');
+    b.style.borderColor=''; b.style.color=''; b.style.background='';
+  });
+  btn.classList.add('active');
+  updateRouteMap(key);
+}
+
+function animMap() {
+  if(routeAnimRunning || !routeMap) return;
+  const r = ROUTE_DATA[curRouteKey];
+  routeAnimRunning = true;
+  const btn = document.getElementById('routeAnimBtn');
+  if(btn) btn.textContent = '⏳ Animating...';
+  const el = document.createElement('div');
+  el.style.cssText = 'font-size:20px;line-height:1;filter:drop-shadow(0 0 8px rgba(201,168,76,.8))';
+  el.textContent = '🚢';
+  const sm = new mapboxgl.Marker({element:el,anchor:'center'}).setLngLat(r.coords[0]).addTo(routeMap);
+  const bounds = r.coords.reduce((b,c)=>b.extend(c), new mapboxgl.LngLatBounds(r.coords[0],r.coords[0]));
+  routeMap.fitBounds(bounds,{padding:80,duration:1200,maxZoom:8});
+  let i=0;
+  function next() {
+    if(i>=r.coords.length-1){sm.remove();routeAnimRunning=false;if(btn)btn.textContent='▶ Animate Route';return;}
+    i++;const from=r.coords[i-1],to=r.coords[i];let s=0;
+    const iv=setInterval(()=>{s++;const t=1-Math.pow(1-(s/80),3);
+      sm.setLngLat([from[0]+(to[0]-from[0])*t,from[1]+(to[1]-from[1])*t]);
+      if(s>=80){clearInterval(iv);
+        new mapboxgl.Popup({offset:18,closeButton:false})
+          .setLngLat(to)
+          .setHTML(`<div style="font-size:.52rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:#c9a84c;margin-bottom:3px">${r.ports[i].d}</div><div style="font-family:'Cormorant Garamond',serif;font-size:1rem">${r.ports[i].n}</div><div style="font-size:.7rem;color:rgba(245,240,232,.5)">${r.ports[i].t}</div>`)
+          .addTo(routeMap);
+        setTimeout(()=>{document.querySelectorAll('.mapboxgl-popup').forEach(p=>p.remove());next();},1800);
+      }
+    },25);
+  }
+  setTimeout(next,1400);
 }
 </script>
 </body>
