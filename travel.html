@@ -128,70 +128,127 @@ h2.stitle em{font-style:italic;color:var(--goldlt)}
 .cta-btns{display:flex;gap:16px;justify-content:center;flex-wrap:wrap}
 
 /* CHAT PANEL */
-#panel{position:fixed;right:0;top:0;bottom:0;width:400px;z-index:300;background:var(--black2);border-left:1px solid var(--border);display:flex;flex-direction:column;transform:translateX(100%);transition:transform .5s cubic-bezier(.16,1,.3,1);box-shadow:-28px 0 80px rgba(0,0,0,.6)}
-#panel.open{transform:translateX(0)}
-.ph{padding:24px 26px 16px;border-bottom:1px solid var(--border2);display:flex;align-items:flex-start;justify-content:space-between}
-.pht{font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-weight:400;margin-bottom:3px}
-.phs{font-size:.62rem;font-weight:300;letter-spacing:.18em;text-transform:uppercase;color:var(--gold)}
-#chatNav{min-height:20px;border-bottom:1px solid rgba(245,240,232,.06);padding-bottom:6px;margin-bottom:4px}
-.pclose{background:none;border:none;cursor:pointer;color:var(--muted);font-size:1.2rem;line-height:1;padding:4px;font-family:'Jost',sans-serif}
-.pclose:hover{color:var(--cream)}
-#pmsg{flex:1;overflow-y:auto;padding:18px;display:flex;flex-direction:column;gap:10px;scroll-behavior:smooth}
-#pmsg::-webkit-scrollbar{width:2px}
-#pmsg::-webkit-scrollbar-thumb{background:var(--border)}
-.msg{max-width:88%}
-.madv{align-self:flex-start;background:var(--black3);border:1px solid var(--border2);padding:11px 15px;font-size:.8rem;font-weight:300;line-height:1.65}
-.muser{align-self:flex-end;background:rgba(201,168,76,.1);border:1px solid var(--border);padding:11px 15px;font-size:.8rem;font-weight:300;line-height:1.65}
-.msndr{font-size:.55rem;font-weight:400;letter-spacing:.2em;text-transform:uppercase;margin-bottom:4px}
-.madv .msndr{color:var(--gold)}
-.muser .msndr{color:var(--muted);text-align:right}
-.msg a{color:var(--goldlt);text-decoration:underline}
-.co{display:flex;flex-wrap:wrap;gap:6px;padding:0 18px 10px}
-.co button{padding:7px 12px;border:1px solid rgba(201,168,76,.3);color:var(--gold);font-size:.72rem;font-weight:400;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;background:none;font-family:'Jost',sans-serif;transition:all .2s}
-.co button:hover{background:rgba(201,168,76,.1);border-color:var(--gold)}
-.cf{padding:0 18px 10px;display:flex;flex-direction:column;gap:7px}
-.cf input,.cf textarea{padding:9px 13px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);color:var(--cream);font-size:.8rem;font-family:'Jost',sans-serif;font-weight:300;outline:none;transition:border-color .2s}
-.cf input:focus,.cf textarea:focus{border-color:var(--gold)}
-.cf textarea{min-height:70px;resize:none}
-.cf button{padding:10px;background:var(--gold);color:#000;font-weight:600;border:none;cursor:pointer;font-family:'Jost',sans-serif;font-size:.82rem;letter-spacing:.1em;text-transform:uppercase}
-.cf button:hover{background:var(--goldlt)}
-.ct{display:flex;gap:7px;padding:0 18px 10px}
-.ct input{flex:1;padding:9px 13px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);color:var(--cream);font-size:.8rem;font-family:'Jost',sans-serif;outline:none;transition:border-color .2s}
-.ct input:focus{border-color:var(--gold)}
-.ct button{padding:9px 14px;background:var(--gold);color:#000;font-weight:600;border:none;cursor:pointer;font-family:'Jost',sans-serif;font-size:.76rem}
-.pinput{padding:12px 18px 18px;border-top:1px solid var(--border2);display:flex;gap:8px}
-#pinp{flex:1;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);padding:10px 14px;color:var(--cream);font-size:.8rem;font-family:'Jost',sans-serif;outline:none;transition:border-color .2s}
-#pinp:focus{border-color:var(--gold)}
-#pinp::placeholder{color:var(--muted);font-weight:300}
-#psend{width:40px;height:40px;background:var(--gold);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:background .2s}
-#psend:hover{background:var(--goldlt)}
-#psend svg{color:#000}
 
-/* FOOTER */
-footer{position:relative;z-index:2;background:var(--black2);border-top:1px solid var(--border);padding:48px 48px 32px}
-.fgrid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:40px;margin-bottom:44px}
-.fbname{font-family:'Cormorant Garamond',serif;font-size:1.25rem;font-weight:400;letter-spacing:.1em;margin-bottom:6px}
-.fbtag{font-size:.54rem;font-weight:400;letter-spacing:.25em;text-transform:uppercase;color:var(--gold);margin-bottom:16px}
-.fbody{font-size:.76rem;font-weight:300;color:var(--muted);line-height:1.8;max-width:270px}
-.fct{font-size:.56rem;font-weight:500;letter-spacing:.28em;text-transform:uppercase;color:var(--gold);margin-bottom:16px}
-.flinks{display:flex;flex-direction:column;gap:8px}
-.flinks a{font-size:.74rem;font-weight:300;color:var(--muted);transition:color .2s}
-.flinks a:hover{color:var(--cream)}
-.fbot{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;border-top:1px solid var(--border2);padding-top:22px}
-.flegal{font-size:.6rem;font-weight:300;color:var(--muted);line-height:1.7}
-@media(max-width:768px){.fgrid{grid-template-columns:1fr 1fr}footer{padding:40px 22px 28px}.container{padding:0 22px}.explorer{padding:70px 0}}
-@media(max-width:480px){.fgrid{grid-template-columns:1fr}}
-/* DEEP SPACE PANEL BACKGROUND */
-#panel{background:radial-gradient(ellipse 70% 60% at 25% 40%,rgba(201,168,76,.07),transparent 55%),radial-gradient(ellipse 50% 70% at 75% 60%,rgba(0,200,255,.05),transparent 55%),#06070a !important}
-#panelStars{position:absolute;inset:0;z-index:0;pointer-events:none}
-#panel .ph,#panel #pmsg,#panel #ctrl,#panel .pinput{position:relative;z-index:2}
-.mapboxgl-popup-content{background:rgba(10,12,15,.97)!important;border:1px solid var(--border)!important;border-radius:3px!important;padding:12px 16px!important;box-shadow:0 8px 32px rgba(0,0,0,.8)!important;color:var(--cream);font-family:'Jost',sans-serif;font-weight:300}
-.mapboxgl-popup-tip{border-top-color:rgba(10,12,15,.97)!important;border-bottom-color:rgba(10,12,15,.97)!important}
-.mapboxgl-popup-close-button{color:var(--muted)!important}
-.mapboxgl-ctrl-bottom-left,.mapboxgl-ctrl-bottom-right{opacity:.2}
+/* ── CHAT BUBBLE ─────────────────────────────────────────── */
+#chatBubble{position:fixed;bottom:24px;right:24px;z-index:500;width:60px;height:60px;border-radius:50%;background:linear-gradient(135deg,#c9a84c,#e8cc8a);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 24px rgba(201,168,76,.4),0 2px 8px rgba(0,0,0,.4);transition:transform .2s,box-shadow .2s;flex-shrink:0}
+#chatBubble:hover{transform:scale(1.08);box-shadow:0 6px 32px rgba(201,168,76,.5),0 2px 8px rgba(0,0,0,.4)}
+#chatBubble.pulse{animation:bubblePulse 2.5s infinite}
+@keyframes bubblePulse{0%,100%{box-shadow:0 4px 24px rgba(201,168,76,.4),0 0 0 0 rgba(201,168,76,.4)}60%{box-shadow:0 4px 24px rgba(201,168,76,.4),0 0 0 12px rgba(201,168,76,0)}}
+#chatNotif{position:absolute;top:2px;right:2px;width:16px;height:16px;border-radius:50%;background:#ef4444;border:2px solid #08090a;display:none;align-items:center;justify-content:center;font-size:9px;font-weight:700;color:#fff;font-family:'Jost',sans-serif}
+#chatNotif.show{display:flex}
+
+/* ── COMPARE BUTTON ──────────────────────────────────────── */
+#compareBtn{position:fixed;bottom:96px;right:24px;z-index:500;width:50px;height:50px;border-radius:50%;background:rgba(0,200,255,.12);border:1.5px solid rgba(0,200,255,.35);cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 20px rgba(0,200,255,.15);transition:all .2s;flex-shrink:0}
+#compareBtn:hover{background:rgba(0,200,255,.2);transform:scale(1.08)}
+#compareBtn .cbtooltip{position:absolute;right:62px;top:50%;transform:translateY(-50%);background:rgba(8,9,10,.95);border:1px solid rgba(0,200,255,.2);color:#00c8ff;font-size:.6rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;padding:5px 10px;white-space:nowrap;opacity:0;pointer-events:none;transition:opacity .2s;font-family:'Jost',sans-serif}
+#compareBtn:hover .cbtooltip{opacity:1}
+
+/* ── CHAT PANEL ──────────────────────────────────────────── */
+#panel{position:fixed;bottom:96px;right:24px;z-index:490;width:380px;height:540px;background:radial-gradient(ellipse 80% 60% at 20% 30%,rgba(201,168,76,.06),transparent 50%),radial-gradient(ellipse 60% 70% at 80% 70%,rgba(0,200,255,.04),transparent 55%),#0a0c10;border:1px solid rgba(201,168,76,.18);border-radius:16px;display:flex;flex-direction:column;overflow:hidden;box-shadow:0 24px 80px rgba(0,0,0,.7),0 0 0 1px rgba(255,255,255,.04);transform:scale(.9) translateY(20px);transform-origin:bottom right;opacity:0;pointer-events:none;transition:transform .3s cubic-bezier(.16,1,.3,1),opacity .3s}
+#panel.open{transform:scale(1) translateY(0);opacity:1;pointer-events:all}
+#panel.minimized{transform:scale(.9) translateY(20px);opacity:0;pointer-events:none}
+
+/* Panel header */
+.ph{padding:16px 18px 12px;border-bottom:1px solid rgba(245,240,232,.07);display:flex;align-items:center;justify-content:space-between;flex-shrink:0;background:rgba(0,0,0,.2)}
+.ph-left{display:flex;align-items:center;gap:10px}
+.ph-avatar{width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,#c9a84c,#e8cc8a);display:flex;align-items:center;justify-content:center;font-size:.9rem;flex-shrink:0}
+.ph-name{font-family:'Cormorant Garamond',serif;font-size:.95rem;font-weight:400;color:#f5f0e8;margin-bottom:1px}
+.ph-status{display:flex;align-items:center;gap:4px;font-size:.56rem;font-weight:400;letter-spacing:.1em;text-transform:uppercase;color:rgba(245,240,232,.4)}
+.ph-dot{width:5px;height:5px;border-radius:50%;background:#4ade80;animation:statusPulse 2s infinite}
+@keyframes statusPulse{0%,100%{opacity:1}50%{opacity:.4}}
+.ph-actions{display:flex;gap:4px}
+.ph-btn{background:none;border:none;cursor:pointer;color:rgba(245,240,232,.35);font-size:1rem;width:28px;height:28px;display:flex;align-items:center;justify-content:center;border-radius:6px;transition:all .2s;font-family:inherit}
+.ph-btn:hover{color:#f5f0e8;background:rgba(255,255,255,.06)}
+
+/* Nav bar */
+#chatNav{display:flex;gap:5px;padding:6px 14px;flex-wrap:wrap;flex-shrink:0;border-bottom:1px solid rgba(245,240,232,.04);min-height:0}
+
+/* Messages */
+#pmsg{flex:1;overflow-y:auto;padding:14px 14px 8px;display:flex;flex-direction:column;gap:9px;scroll-behavior:smooth}
+#pmsg::-webkit-scrollbar{width:3px}
+#pmsg::-webkit-scrollbar-thumb{background:rgba(201,168,76,.2);border-radius:2px}
+.msg{max-width:90%}
+.madv{align-self:flex-start}
+.muser{align-self:flex-end}
+.msndr{font-size:.52rem;font-weight:400;letter-spacing:.18em;text-transform:uppercase;margin-bottom:3px}
+.madv .msndr{color:rgba(201,168,76,.6)}
+.muser .msndr{color:rgba(245,240,232,.3);text-align:right}
+.mbubble{padding:10px 13px;font-size:.8rem;font-weight:300;line-height:1.65;border-radius:12px}
+.madv .mbubble{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.08);border-bottom-left-radius:3px;color:#f5f0e8}
+.muser .mbubble{background:rgba(201,168,76,.15);border:1px solid rgba(201,168,76,.25);border-bottom-right-radius:3px;color:#f5f0e8}
+.msg a{color:#e8cc8a;text-decoration:underline}
+
+/* Typing indicator */
+#typingDot{align-self:flex-start;padding:10px 14px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.08);border-radius:12px;border-bottom-left-radius:3px;display:none}
+#typingDot.show{display:flex;gap:4px;align-items:center}
+.td{width:5px;height:5px;border-radius:50%;background:rgba(245,240,232,.4)}
+.td:nth-child(1){animation:tdot .9s .0s infinite}
+.td:nth-child(2){animation:tdot .9s .2s infinite}
+.td:nth-child(3){animation:tdot .9s .4s infinite}
+@keyframes tdot{0%,60%,100%{transform:translateY(0)}30%{transform:translateY(-5px)}}
+
+/* Controls */
+#ctrl{padding:0 12px 8px;flex-shrink:0}
+.co{display:flex;flex-wrap:wrap;gap:5px;padding-top:6px}
+.co button{padding:6px 11px;border:1px solid rgba(201,168,76,.28);color:rgba(201,168,76,.85);font-size:.68rem;font-weight:400;letter-spacing:.08em;cursor:pointer;background:none;font-family:'Jost',sans-serif;transition:all .2s;border-radius:6px}
+.co button:hover{background:rgba(201,168,76,.1);border-color:var(--gold);color:var(--gold)}
+.cf{display:flex;flex-direction:column;gap:6px;padding-top:6px}
+.cf input,.cf textarea{padding:8px 11px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);color:#f5f0e8;font-size:.78rem;font-family:'Jost',sans-serif;font-weight:300;outline:none;transition:border-color .2s;border-radius:6px}
+.cf input:focus,.cf textarea:focus{border-color:var(--gold)}
+.cf textarea{min-height:60px;resize:none}
+.cf button{padding:9px;background:var(--gold);color:#000;font-weight:600;border:none;cursor:pointer;font-family:'Jost',sans-serif;font-size:.78rem;letter-spacing:.1em;text-transform:uppercase;border-radius:6px}
+.ct{display:flex;gap:6px;padding-top:6px}
+.ct input{flex:1;padding:8px 11px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);color:#f5f0e8;font-size:.78rem;font-family:'Jost',sans-serif;outline:none;border-radius:6px}
+.ct button{padding:8px 14px;background:var(--gold);color:#000;border:none;cursor:pointer;font-weight:700;font-family:'Jost',sans-serif;border-radius:6px}
+
+/* pinputRow */
+.pinput{display:flex;gap:8px;padding:8px 12px 10px;border-top:1px solid rgba(245,240,232,.06);flex-shrink:0;background:rgba(0,0,0,.15)}
+.pinput input{flex:1;padding:9px 13px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);color:#f5f0e8;font-size:.82rem;font-family:'Jost',sans-serif;outline:none;border-radius:8px;transition:border-color .2s}
+.pinput input:focus{border-color:rgba(201,168,76,.4)}
+.pinput button{width:36px;height:36px;border-radius:8px;background:var(--gold);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:background .2s}
+.pinput button:hover{background:var(--goldlt)}
+
+/* Trip selector modal */
+#tripSelector{position:fixed;inset:0;z-index:600;background:rgba(6,7,8,.95);display:none;flex-direction:column;overflow-y:auto}
+#tripSelector.open{display:flex}
+.ts-head{padding:20px 24px;border-bottom:1px solid rgba(201,168,76,.18);display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;background:rgba(6,7,8,.98);backdrop-filter:blur(12px);z-index:5;flex-shrink:0}
+.ts-title{font-family:'Cormorant Garamond',serif;font-size:1.2rem;font-weight:300;color:#f5f0e8}
+.ts-sub{font-size:.6rem;font-weight:400;letter-spacing:.16em;text-transform:uppercase;color:rgba(201,168,76,.7);margin-top:3px}
+.ts-close{background:none;border:1px solid rgba(245,240,232,.1);color:rgba(245,240,232,.5);padding:5px 12px;cursor:pointer;font-size:.62rem;font-weight:500;letter-spacing:.12em;text-transform:uppercase;font-family:'Jost',sans-serif;border-radius:3px}
+.ts-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px;padding:20px 24px}
+.ts-card{border:2px solid rgba(245,240,232,.08);border-radius:6px;overflow:hidden;cursor:pointer;transition:all .25s;position:relative;background:var(--black2)}
+.ts-card:hover{border-color:rgba(201,168,76,.35)}
+.ts-card.picked{border-color:var(--gold);background:rgba(201,168,76,.06)}
+.ts-card.picked::after{content:'✓';position:absolute;top:8px;right:8px;width:22px;height:22px;border-radius:50%;background:var(--gold);color:#000;font-size:.75rem;font-weight:700;display:flex;align-items:center;justify-content:center;z-index:2}
+.ts-card.disabled:not(.picked){opacity:.35;pointer-events:none}
+.ts-img{width:100%;height:120px;object-fit:cover}
+.ts-info{padding:11px 13px}
+.ts-name{font-size:.88rem;font-weight:500;color:#f5f0e8;margin-bottom:3px}
+.ts-type{font-size:.6rem;font-weight:400;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);margin-bottom:4px}
+.ts-price{font-size:.76rem;font-weight:300;color:rgba(245,240,232,.5)}
+.ts-footer{padding:14px 24px;border-top:1px solid rgba(245,240,232,.07);display:flex;align-items:center;justify-content:space-between;position:sticky;bottom:0;background:rgba(6,7,8,.98);backdrop-filter:blur(12px);flex-shrink:0}
+.ts-count{font-size:.72rem;font-weight:300;color:rgba(245,240,232,.5)}
+.ts-count strong{color:var(--gold)}
+.ts-compare-btn{padding:10px 24px;background:var(--gold);color:#000;border:none;cursor:pointer;font-size:.7rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;font-family:'Jost',sans-serif;border-radius:4px;transition:background .2s;opacity:.4;pointer-events:none}
+.ts-compare-btn.active{opacity:1;pointer-events:all}
+.ts-compare-btn.active:hover{background:var(--goldlt)}
+
+/* Deep Space panel bg stars */
+#panelStars{position:absolute;inset:0;z-index:0;pointer-events:none;border-radius:16px;overflow:hidden}
+.ph,.chatNav,#pmsg,#ctrl,.pinput{position:relative;z-index:2}
+
+/* Overlay display fix */
 #tripCompareOverlay.open{display:flex!important}
-.rpill.active{border-color:var(--gold)!important;color:var(--gold)!important;background:rgba(201,168,76,.06)!important}
-.rpill:hover{border-color:rgba(201,168,76,.4)!important;color:var(--cream)!important}
+#tripCompareOverlay{display:none}
+
+/* DEEP SPACE panel bg */
+#panel{background:radial-gradient(ellipse 70% 60% at 25% 40%,rgba(201,168,76,.07),transparent 55%),radial-gradient(ellipse 50% 70% at 75% 60%,rgba(0,200,255,.05),transparent 55%),#06070a}
+
+@media(max-width:480px){
+  #panel{width:calc(100vw - 16px);right:8px;bottom:88px;height:70vh}
+  #chatBubble{right:16px;bottom:16px}
+  #compareBtn{right:16px;bottom:88px}
+}
 </style>
 </head>
 <body>
@@ -559,21 +616,64 @@ footer{position:relative;z-index:2;background:var(--black2);border-top:1px solid
 </footer>
 
 <!-- ADVISOR PANEL -->
+<!-- CHAT BUBBLE -->
+<button id="chatBubble" onclick="togglePanel()" aria-label="Open travel advisor chat">
+  <span id="chatNotif">1</span>
+  <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+  </svg>
+</button>
+
+<!-- COMPARE BUTTON -->
+<button id="compareBtn" onclick="openTripSelector()" aria-label="Compare trips">
+  <span class="cbtooltip">Compare Trips</span>
+  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#00c8ff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+    <line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/>
+    <line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/>
+  </svg>
+</button>
+
+<!-- CHAT PANEL -->
 <div id="panel">
+  <canvas id="panelStars"></canvas>
   <div class="ph">
-    <div><div class="pht">Your Travel Advisor</div><div class="phs">✦ Cary Park Travel · Your Personal Advisor</div></div>
-    <button class="pclose" onclick="closePanel()">✕</button>
+    <div class="ph-left">
+      <div class="ph-avatar">✦</div>
+      <div>
+        <div class="ph-name">Ava · Travel Advisor</div>
+        <div class="ph-status"><span class="ph-dot"></span>Online · Replies in &lt;1 min</div>
+      </div>
+    </div>
+    <div class="ph-actions">
+      <button class="ph-btn" onclick="minimizePanel()" title="Minimize">−</button>
+      <button class="ph-btn" onclick="closePanel()" title="Close">✕</button>
+    </div>
   </div>
-  <div id="chatNav" style="display:flex;gap:6px;padding:6px 14px 0;flex-wrap:wrap">
-  </div>
-  <div id="chatNav" style="display:flex;gap:6px;padding:6px 14px 0;flex-wrap:wrap">
+  <div id="chatNav"></div>
+  <div id="typingDot"><div class="td"></div><div class="td"></div><div class="td"></div></div>
   <div id="pmsg"></div>
   <div id="ctrl"></div>
   <div class="pinput" id="pinputRow" style="display:none">
     <input id="pinp" type="text" placeholder="Tell us more…"/>
-    <button id="psend" onclick="sendFree()">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+    <button onclick="sendFree()">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
     </button>
+  </div>
+</div>
+
+<!-- TRIP SELECTOR MODAL -->
+<div id="tripSelector">
+  <div class="ts-head">
+    <div>
+      <div class="ts-title">Compare Trips</div>
+      <div class="ts-sub">Select up to 3 · then compare</div>
+    </div>
+    <button class="ts-close" onclick="closeTripSelector()">✕ Close</button>
+  </div>
+  <div class="ts-grid" id="tsGrid"></div>
+  <div class="ts-footer">
+    <div class="ts-count"><strong id="tsCount">0</strong> of 3 selected</div>
+    <button class="ts-compare-btn" id="tsCompareBtn" onclick="runTripComparison()">Compare Selected →</button>
   </div>
 </div>
 
@@ -602,478 +702,693 @@ document.querySelectorAll('.ftag').forEach(btn=>{
   });
 });
 
-// Advisory panel
-let panelOpen=false,convo={answers:{}};
-const pmsg=document.getElementById('pmsg'),ctrl=document.getElementById('ctrl');
+// ═══════════════════════════════════════════════════════════════
+// CHAT WIDGET — Cary Park Travel
+// ═══════════════════════════════════════════════════════════════
+const LS_KEY = 'cpt_chat';
+let panelOpen = false;
+let stack = [];
+let convo = {answers: {}};
 
-function openPanel(){
-  panelOpen=true;document.getElementById('panel').classList.add('open');
-  if(pmsg.children.length===0)setTimeout(startFlow,300);
-}
-function closePanel(){panelOpen=false;document.getElementById('panel').classList.remove('open')}
+const pmsg = () => document.getElementById('pmsg');
+const ctrl = () => document.getElementById('ctrl');
+const panel = () => document.getElementById('panel');
+const chatNav = () => document.getElementById('chatNav');
 
-function bot(m){
-  const w=document.createElement('div');w.className='msg madv';
-  const s=document.createElement('div');s.className='msndr';s.textContent='Ava · Cary Park Travel';
-  const b=document.createElement('div');b.innerHTML=m.replace(/\n/g,'<br/>');
-  w.appendChild(s);w.appendChild(b);pmsg.appendChild(w);pmsg.scrollTop=pmsg.scrollHeight;
-}
-function user(m){
-  const w=document.createElement('div');w.className='msg muser';
-  const s=document.createElement('div');s.className='msndr';s.textContent='You';
-  const b=document.createElement('div');b.textContent=m;
-  w.appendChild(s);w.appendChild(b);pmsg.appendChild(w);pmsg.scrollTop=pmsg.scrollHeight;
-}
-function clr(){ctrl.innerHTML='';document.getElementById('pinputRow').style.display='none'}
-function opts(os,fn){
-  clr();const w=document.createElement('div');w.className='co';
-  os.forEach(o=>{const b=document.createElement('button');b.textContent=o;b.onclick=()=>{user(o);clr();fn(o)};w.appendChild(b)});
-  ctrl.appendChild(w);
-}
-function typed(ph,fn){
-  clr();const w=document.createElement('div');w.className='ct';
-  w.innerHTML=`<input type="text" placeholder="${ph}"/><button>Send</button>`;
-  const i=w.querySelector('input'),b=w.querySelector('button');
-  const go=()=>{const v=i.value.trim();if(!v)return;user(v);clr();fn(v)};
-  b.onclick=go;i.addEventListener('keydown',e=>{if(e.key==='Enter')go()});
-  ctrl.appendChild(w);setTimeout(()=>i.focus(),100);
-}
-function cform(fn){
-  clr();const f=document.createElement('div');f.className='cf';
-  f.innerHTML=`<input type="text" placeholder="Your name" id="fn"><input type="email" placeholder="Email address" id="fe"><input type="tel" placeholder="Phone (optional)" id="fp"><textarea placeholder="Anything else we should know about your trip?" id="fnotes"></textarea><button>Send to Advisor</button>`;
-  f.querySelector('button').onclick=()=>{
-    const n=f.querySelector('#fn').value.trim(),em=f.querySelector('#fe').value.trim();
-    if(!n||!em)return;
-    user(`${n} · ${em}`);clr();
-    fn({name:n,email:em,phone:f.querySelector('#fp').value.trim(),notes:f.querySelector('#fnotes').value.trim()});
-  };
-  ctrl.appendChild(f);
-}
-function closeBtn(){
-  clr();const w=document.createElement('div');w.className='co';
-  const b=document.createElement('button');b.textContent='Close';b.onclick=closePanel;
-  w.appendChild(b);ctrl.appendChild(w);
+// ── PERSISTENCE ──────────────────────────────────────────────
+function saveState() {
+  try {
+    localStorage.setItem(LS_KEY, JSON.stringify({
+      open: panelOpen,
+      messages: [...pmsg().querySelectorAll('.msg')].map(m => ({
+        type: m.classList.contains('madv') ? 'bot' : 'user',
+        html: m.querySelector('.mbubble')?.innerHTML || ''
+      })),
+      answers: convo.answers
+    }));
+  } catch(e) {}
 }
 
-// ── PIVOT CONTROLS ────────────────────────────────────────────────────────────
-// Stack: tracks {fn, label} so Back can retrace steps
-let stack=[];
+function restoreState() {
+  try {
+    const s = JSON.parse(localStorage.getItem(LS_KEY) || 'null');
+    if (!s) { showNotif(); return; }
+    convo.answers = s.answers || {};
+    if (s.messages && s.messages.length) {
+      s.messages.forEach(m => m.type === 'bot' ? botRaw(m.html) : userRaw(m.html));
+    }
+    if (s.open) openPanel(true);
+  } catch(e) { showNotif(); }
+}
 
-function push(label,fn){ stack.push({label,label2:label,fn}); }
+function clearState() {
+  try { localStorage.removeItem(LS_KEY); } catch(e) {}
+}
 
-function renderNav(){
-  const nav=document.getElementById('chatNav');
-  if(!nav)return;
-  nav.innerHTML='';
-  if(stack.length>1){
-    const back=document.createElement('button');
-    back.textContent='← Back';
-    back.style.cssText='padding:4px 10px;background:none;border:1px solid rgba(245,240,232,.15);color:rgba(245,240,232,.45);font-size:.62rem;font-family:Jost,sans-serif;cursor:pointer;border-radius:2px';
-    back.onclick=()=>{
-      stack.pop(); // remove current
-      const prev=stack.pop(); // remove previous (will re-push when called)
-      pmsg.lastChild && pmsg.removeChild(pmsg.lastChild); // remove last bot message
+function showNotif() {
+  const n = document.getElementById('chatNotif');
+  if (n) n.classList.add('show');
+  const b = document.getElementById('chatBubble');
+  if (b) b.classList.add('pulse');
+}
+
+function hideNotif() {
+  const n = document.getElementById('chatNotif');
+  if (n) n.classList.remove('show');
+  const b = document.getElementById('chatBubble');
+  if (b) b.classList.remove('pulse');
+}
+
+// ── PANEL CONTROLS ────────────────────────────────────────────
+function togglePanel() {
+  panelOpen ? closePanel() : openPanel();
+}
+
+function openPanel(silent) {
+  panelOpen = true;
+  panel().classList.add('open');
+  panel().classList.remove('minimized');
+  hideNotif();
+  if (!silent && pmsg().children.length === 0) {
+    setTimeout(startFlow, 400);
+  }
+  saveState();
+}
+
+function closePanel() {
+  panelOpen = false;
+  panel().classList.remove('open');
+  saveState();
+}
+
+function minimizePanel() {
+  panelOpen = false;
+  panel().classList.remove('open');
+  panel().classList.add('minimized');
+  setTimeout(() => panel().classList.remove('minimized'), 300);
+  saveState();
+}
+
+// ── MESSAGE RENDERING ─────────────────────────────────────────
+function showTyping() {
+  const td = document.getElementById('typingDot');
+  if (td) td.classList.add('show');
+  const p = pmsg();
+  if (p) p.scrollTop = p.scrollHeight;
+}
+function hideTyping() {
+  const td = document.getElementById('typingDot');
+  if (td) td.classList.remove('show');
+}
+
+function botRaw(html) {
+  const w = document.createElement('div'); w.className = 'msg madv';
+  const s = document.createElement('div'); s.className = 'msndr'; s.textContent = 'Ava · Cary Park Travel';
+  const b = document.createElement('div'); b.className = 'mbubble'; b.innerHTML = html;
+  w.appendChild(s); w.appendChild(b);
+  const p = pmsg();
+  // Insert before typingDot if present
+  const td = document.getElementById('typingDot');
+  if (td && td.parentNode === p) p.insertBefore(w, td);
+  else p.appendChild(w);
+  p.scrollTop = p.scrollHeight;
+  return w;
+}
+
+function userRaw(text) {
+  const w = document.createElement('div'); w.className = 'msg muser';
+  const s = document.createElement('div'); s.className = 'msndr'; s.textContent = 'You';
+  const b = document.createElement('div'); b.className = 'mbubble'; b.textContent = text;
+  w.appendChild(s); w.appendChild(b);
+  const p = pmsg(); p.appendChild(w); p.scrollTop = p.scrollHeight;
+  return w;
+}
+
+function bot(m, delay) {
+  return new Promise(resolve => {
+    showTyping();
+    setTimeout(() => {
+      hideTyping();
+      botRaw(m.replace(/\n/g, '<br/>'));
+      saveState();
+      resolve();
+    }, delay || 600);
+  });
+}
+
+function user(m) {
+  userRaw(m);
+  saveState();
+}
+
+// ── CONTROLS ──────────────────────────────────────────────────
+function clr() {
+  const c = ctrl(); if (c) c.innerHTML = '';
+  const pr = document.getElementById('pinputRow');
+  if (pr) pr.style.display = 'none';
+}
+
+function renderNav() {
+  const nav = chatNav(); if (!nav) return;
+  nav.innerHTML = '';
+  if (stack.length > 1) {
+    const back = document.createElement('button');
+    back.textContent = '← Back';
+    back.style.cssText = 'padding:3px 9px;background:none;border:1px solid rgba(245,240,232,.12);color:rgba(245,240,232,.4);font-size:.58rem;font-family:Jost,sans-serif;cursor:pointer;border-radius:4px;margin:2px 0';
+    back.onclick = () => {
+      stack.pop();
+      const prev = stack.pop();
+      // Remove last bot message
+      const msgs = pmsg().querySelectorAll('.msg.madv');
+      if (msgs.length) msgs[msgs.length-1].remove();
       clr();
-      if(prev) prev.fn();
+      if (prev) prev.fn();
     };
     nav.appendChild(back);
   }
-  if(stack.length>0){
-    const restart=document.createElement('button');
-    restart.textContent='↩ Start over';
-    restart.style.cssText='padding:4px 10px;background:none;border:1px solid rgba(245,240,232,.1);color:rgba(245,240,232,.3);font-size:.62rem;font-family:Jost,sans-serif;cursor:pointer;border-radius:2px';
-    restart.onclick=()=>{ stack=[];convo={answers:{}};pmsg.innerHTML='';clr();startFlow(); };
+  if (stack.length > 0) {
+    const restart = document.createElement('button');
+    restart.textContent = '↩ Restart';
+    restart.style.cssText = 'padding:3px 9px;background:none;border:1px solid rgba(245,240,232,.08);color:rgba(245,240,232,.25);font-size:.58rem;font-family:Jost,sans-serif;cursor:pointer;border-radius:4px;margin:2px 0';
+    restart.onclick = () => {
+      stack = []; convo = {answers: {}}; pmsg().innerHTML = ''; clr();
+      clearState(); startFlow();
+    };
     nav.appendChild(restart);
   }
 }
 
-// ── CORE HELPERS ─────────────────────────────────────────────────────────────
-function clr(){
-  ctrl.innerHTML='';
-  document.getElementById('pinputRow').style.display='none';
-}
-
-function bot(m){
-  const w=document.createElement('div');w.className='msg madv';
-  const s=document.createElement('div');s.className='msndr';s.textContent='Ava · Cary Park Travel';
-  const b=document.createElement('div');b.innerHTML=m.replace(/\n/g,'<br/>');
-  w.appendChild(s);w.appendChild(b);pmsg.appendChild(w);pmsg.scrollTop=pmsg.scrollHeight;
-}
-function user(m){
-  const w=document.createElement('div');w.className='msg muser';
-  const s=document.createElement('div');s.className='msndr';s.textContent='You';
-  const b=document.createElement('div');b.textContent=m;
-  w.appendChild(s);w.appendChild(b);pmsg.appendChild(w);pmsg.scrollTop=pmsg.scrollHeight;
-}
-
-// opts: buttons + inline text field side by side
-function opts(os,fn,stepFn){
+// opts: buttons + text field always visible
+function opts(os, fn, stepLabel) {
   clr();
-  const w=document.createElement('div');w.className='co';
-  os.forEach(o=>{
-    const b=document.createElement('button');b.textContent=o;
-    b.onclick=()=>{ user(o);clr();if(stepFn)push(o,stepFn);renderNav();fn(o); };
+  const w = document.createElement('div'); w.className = 'co';
+  os.forEach(o => {
+    const b = document.createElement('button'); b.textContent = o;
+    b.onclick = () => {
+      user(o); clr();
+      if (stepLabel) stack.push({label: stepLabel, fn: () => opts(os, fn, stepLabel)});
+      renderNav(); fn(o);
+    };
     w.appendChild(b);
   });
-  ctrl.appendChild(w);
+  ctrl().appendChild(w);
   renderNav();
 }
 
-// optsOrType: preset buttons PLUS a live text field visible at the same time
-function optsOrType(os,placeholder,fn,stepFn){
+// optsOrType: buttons AND a text input visible simultaneously
+function optsOrType(os, placeholder, fn, stepLabel) {
   clr();
-  const w=document.createElement('div');w.className='co';
-  // Buttons
-  os.forEach(o=>{
-    const b=document.createElement('button');b.textContent=o;
-    b.onclick=()=>{ user(o);clr();if(stepFn)push(o,stepFn);renderNav();fn(o); };
+  const w = document.createElement('div'); w.className = 'co';
+  os.forEach(o => {
+    const b = document.createElement('button'); b.textContent = o;
+    b.onclick = () => {
+      user(o); clr();
+      if (stepLabel) stack.push({label: stepLabel, fn: () => optsOrType(os, placeholder, fn, stepLabel)});
+      renderNav(); fn(o);
+    };
     w.appendChild(b);
   });
-  // Text field always visible below buttons
-  const row=document.createElement('div');
-  row.style.cssText='display:flex;gap:6px;margin-top:6px;width:100%';
-  const inp=document.createElement('input');
-  inp.type='text';inp.placeholder=placeholder||'Or type your own…';
-  inp.style.cssText='flex:1;padding:8px 10px;background:rgba(255,255,255,.06);border:1px solid rgba(201,168,76,.25);color:#f5f0e8;font-size:.78rem;font-family:inherit;outline:none;border-radius:2px';
-  const sb=document.createElement('button');sb.textContent='→';
-  sb.style.cssText='padding:8px 12px;background:rgba(201,168,76,.15);border:1px solid rgba(201,168,76,.3);color:#c9a84c;font-size:.8rem;cursor:pointer;border-radius:2px;flex-shrink:0';
-  const go=()=>{ const v=inp.value.trim();if(!v)return;user(v);clr();if(stepFn)push(v,stepFn);renderNav();fn(v); };
-  sb.onclick=go;inp.addEventListener('keydown',e=>{if(e.key==='Enter')go()});
-  row.appendChild(inp);row.appendChild(sb);
-  w.appendChild(row);ctrl.appendChild(w);
-  renderNav();
-}
-
-function typed(ph,fn){
-  clr();const w=document.createElement('div');w.className='ct';
-  w.innerHTML=`<input type="text" placeholder="${ph}"/><button>Send</button>`;
-  const i=w.querySelector('input'),b=w.querySelector('button');
-  const go=()=>{const v=i.value.trim();if(!v)return;user(v);clr();fn(v)};
-  b.onclick=go;i.addEventListener('keydown',e=>{if(e.key==='Enter')go()});
-  ctrl.appendChild(w);setTimeout(()=>i.focus(),100);
-  renderNav();
-}
-
-function cform(fn){
-  clr();const f=document.createElement('div');f.className='cf';
-  f.innerHTML=`<input type="text" placeholder="Your name" id="fn2"><input type="email" placeholder="Email address" id="fe2"><input type="tel" placeholder="Phone (optional)" id="fp2"><textarea placeholder="Anything else we should know?" id="fnotes2"></textarea><button>Send to Advisor →</button>`;
-  f.querySelector('button').onclick=()=>{
-    const n=f.querySelector('#fn2').value.trim(),em=f.querySelector('#fe2').value.trim();
-    if(!n||!em){f.querySelector('#fn2').style.borderColor='#f87171';return;}
-    user(`${n} · ${em}`);clr();
-    fn({name:n,email:em,phone:f.querySelector('#fp2').value.trim(),notes:f.querySelector('#fnotes2').value.trim()});
+  // Text row always visible
+  const row = document.createElement('div');
+  row.style.cssText = 'display:flex;gap:5px;margin-top:6px;width:100%';
+  const inp = document.createElement('input'); inp.type = 'text';
+  inp.placeholder = placeholder || 'Or type your own…';
+  inp.style.cssText = 'flex:1;padding:7px 10px;background:rgba(255,255,255,.06);border:1px solid rgba(201,168,76,.22);color:#f5f0e8;font-size:.75rem;font-family:Jost,sans-serif;outline:none;border-radius:6px';
+  const sb = document.createElement('button'); sb.textContent = '→';
+  sb.style.cssText = 'padding:7px 11px;background:rgba(201,168,76,.15);border:1px solid rgba(201,168,76,.3);color:#c9a84c;font-size:.8rem;cursor:pointer;border-radius:6px;flex-shrink:0';
+  const go = () => {
+    const v = inp.value.trim(); if (!v) return;
+    user(v); clr();
+    if (stepLabel) stack.push({label: stepLabel, fn: () => optsOrType(os, placeholder, fn, stepLabel)});
+    renderNav(); fn(v);
   };
-  ctrl.appendChild(f);
+  sb.onclick = go; inp.addEventListener('keydown', e => { if (e.key === 'Enter') go(); });
+  row.appendChild(inp); row.appendChild(sb);
+  w.appendChild(row);
+  ctrl().appendChild(w);
+  renderNav();
 }
 
-// ── COMPARISON OVERLAY ────────────────────────────────────────────────────────
-function openCompare(){
-  document.getElementById('tripCompareOverlay').classList.add('open');
-  buildCompareChart();
+function typed(ph, fn) {
+  clr();
+  const w = document.createElement('div'); w.className = 'ct';
+  const inp = document.createElement('input'); inp.type = 'text'; inp.placeholder = ph;
+  const btn = document.createElement('button'); btn.textContent = '→';
+  const go = () => { const v = inp.value.trim(); if (!v) return; user(v); clr(); fn(v); };
+  btn.onclick = go; inp.addEventListener('keydown', e => { if (e.key === 'Enter') go(); });
+  w.appendChild(inp); w.appendChild(btn);
+  ctrl().appendChild(w);
+  setTimeout(() => inp.focus(), 100);
+  renderNav();
 }
-function closeCompare(){ document.getElementById('tripCompareOverlay').classList.remove('open'); }
 
-function buildCompareChart(){
-  const area=document.getElementById('bca');
-  if(!area||area.dataset.built)return;
-  area.dataset.built='1';
-  const colors=['#c9a84c','#e8cc8a','#00c8ff','#f59e0b','#60a5fa'];
-  const names=['Danube','Seine','Rhine','Douro','Med'];
-  const metrics=[
-    {l:'Overall',v:[88,84,91,86,82]},
-    {l:'Luxury',v:[95,82,88,94,78]},
-    {l:'Scenery',v:[92,86,97,93,88]},
-    {l:'Value',v:[78,84,86,72,90]},
-    {l:'Family',v:[72,74,88,65,84]},
+function cform(fn) {
+  clr();
+  const f = document.createElement('div'); f.className = 'cf';
+  f.innerHTML = `<input type="text" placeholder="Your name" id="fn2"><input type="email" placeholder="Email address" id="fe2"><input type="tel" placeholder="Phone (optional)" id="fp2"><textarea placeholder="Anything else we should know?" id="fnotes2"></textarea><button>Send to Advisor →</button>`;
+  f.querySelector('button').onclick = () => {
+    const n = f.querySelector('#fn2').value.trim(), em = f.querySelector('#fe2').value.trim();
+    if (!n || !em) { f.querySelector('#fn2').style.borderColor = '#f87171'; return; }
+    user(`${n} · ${em}`); clr();
+    fn({name: n, email: em, phone: f.querySelector('#fp2').value.trim(), notes: f.querySelector('#fnotes2').value.trim()});
+  };
+  ctrl().appendChild(f);
+}
+
+function closeBtn() {
+  clr();
+  const w = document.createElement('div'); w.className = 'co';
+  const b = document.createElement('button'); b.textContent = 'Close chat'; b.onclick = closePanel;
+  w.appendChild(b); ctrl().appendChild(w);
+}
+
+// ── TRIP SELECTOR ─────────────────────────────────────────────
+const TRIPS_DATA = [
+  {id:'caribbean',  name:'Caribbean',        type:'All-Inclusive',  price:'From ~$799 pp',  img:'https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=400&auto=format&fit=crop&q=70'},
+  {id:'danube',     name:'Danube Cruise',    type:'River Cruise',   price:'From ~$2,900 pp',img:'https://images.unsplash.com/photo-1516026672322-bc52d61a55d5?w=400&auto=format&fit=crop&q=70'},
+  {id:'med',        name:'Mediterranean',    type:'Ocean Cruise',   price:'From ~$1,299 pp',img:'https://images.unsplash.com/photo-1534430480872-3498386e7856?w=400&auto=format&fit=crop&q=70'},
+  {id:'japan',      name:'Japan Tour',       type:'Guided Tour',    price:'From ~$2,800 pp',img:'https://images.unsplash.com/photo-1480796927426-f609979314bd?w=400&auto=format&fit=crop&q=70'},
+  {id:'safari',     name:'African Safari',  type:'Safari',         price:'From ~$4,800 pp',img:'https://images.unsplash.com/photo-1516426122078-c23e76319801?w=400&auto=format&fit=crop&q=70'},
+  {id:'alaska',     name:'Alaska Cruise',   type:'Ocean Cruise',   price:'From ~$999 pp',  img:'https://images.unsplash.com/photo-1531223804574-3acb8c3952bc?w=400&auto=format&fit=crop&q=70'},
+  {id:'galapagos',  name:'Galápagos',        type:'Expedition',     price:'From ~$3,400 pp',img:'https://images.unsplash.com/photo-1596422846543-75c6fc197f07?w=400&auto=format&fit=crop&q=70'},
+  {id:'rhine',      name:'Rhine Cruise',    type:'River Cruise',   price:'From ~$2,600 pp',img:'https://images.unsplash.com/photo-1467269204594-9661b134dd2b?w=400&auto=format&fit=crop&q=70'},
+  {id:'mexico',     name:'Mexico Riviera',  type:'Resort',         price:'From ~$649 pp',  img:'https://images.unsplash.com/photo-1512813498716-3e640fed3f39?w=400&auto=format&fit=crop&q=70'},
+];
+
+let selectedTrips = [];
+
+function openTripSelector() {
+  selectedTrips = [];
+  const grid = document.getElementById('tsGrid');
+  grid.innerHTML = TRIPS_DATA.map(t => `
+    <div class="ts-card" id="tsc-${t.id}" onclick="toggleTripCard('${t.id}')">
+      <img class="ts-img" src="${t.img}" alt="${t.name}" loading="lazy"/>
+      <div class="ts-info">
+        <div class="ts-type">${t.type}</div>
+        <div class="ts-name">${t.name}</div>
+        <div class="ts-price">${t.price}</div>
+      </div>
+    </div>`).join('');
+  updateTsFooter();
+  document.getElementById('tripSelector').classList.add('open');
+}
+
+function closeTripSelector() {
+  document.getElementById('tripSelector').classList.remove('open');
+}
+
+function toggleTripCard(id) {
+  const card = document.getElementById('tsc-' + id);
+  const idx = selectedTrips.indexOf(id);
+  if (idx > -1) {
+    selectedTrips.splice(idx, 1);
+    card.classList.remove('picked');
+  } else {
+    if (selectedTrips.length >= 3) return;
+    selectedTrips.push(id);
+    card.classList.add('picked');
+  }
+  // Disable un-picked cards if 3 selected
+  document.querySelectorAll('.ts-card').forEach(c => {
+    const cid = c.id.replace('tsc-', '');
+    if (selectedTrips.length >= 3 && !selectedTrips.includes(cid)) c.classList.add('disabled');
+    else c.classList.remove('disabled');
+  });
+  updateTsFooter();
+}
+
+function updateTsFooter() {
+  document.getElementById('tsCount').textContent = selectedTrips.length;
+  const btn = document.getElementById('tsCompareBtn');
+  btn.classList.toggle('active', selectedTrips.length >= 2);
+}
+
+function runTripComparison() {
+  closeTripSelector();
+  openCompare();
+  // Highlight selected in the overlay
+  const names = selectedTrips.map(id => TRIPS_DATA.find(t => t.id === id)?.name || id);
+  convo.answers.tripCompare = `Compared: ${names.join(' vs ')}`;
+}
+
+// ── COMPARISON OVERLAY ────────────────────────────────────────
+function openCompare() {
+  const ov = document.getElementById('tripCompareOverlay');
+  if (ov) { ov.classList.add('open'); buildCompareChart(); }
+}
+function closeCompare() {
+  const ov = document.getElementById('tripCompareOverlay');
+  if (ov) ov.classList.remove('open');
+}
+function buildCompareChart() {
+  const area = document.getElementById('bca');
+  if (!area || area.dataset.built) return;
+  area.dataset.built = '1';
+  const colors = ['#c9a84c','#e8cc8a','#00c8ff','#f59e0b','#60a5fa'];
+  const names = ['Danube','Seine','Rhine','Douro','Med'];
+  const metrics = [
+    {l:'Overall', v:[88,84,91,86,82]},
+    {l:'Luxury',  v:[95,82,88,94,78]},
+    {l:'Scenery', v:[92,86,97,93,88]},
+    {l:'Value',   v:[78,84,86,72,90]},
+    {l:'Family',  v:[72,74,88,65,84]},
   ];
-  area.innerHTML=metrics.map(m=>`
+  area.innerHTML = metrics.map(m => `
     <div style="margin-bottom:14px">
       <div style="font-size:.56rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:rgba(245,240,232,.4);margin-bottom:7px">${m.l}</div>
       <div style="display:flex;gap:3px;align-items:flex-end;height:44px">
-        ${m.v.map((v,i)=>`
+        ${m.v.map((v, i) => `
           <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:2px">
             <div style="font-size:.56rem;font-weight:600;color:${colors[i]}">${v}</div>
             <div style="width:100%;background:rgba(255,255,255,.06);border-radius:2px 2px 0 0;overflow:hidden;flex:1;display:flex;align-items:flex-end">
-              <div class="bbar" style="width:100%;height:0%;background:${colors[i]};opacity:.85;border-radius:2px 2px 0 0;transition:height .9s cubic-bezier(.16,1,.3,1)" data-h="${v}%"></div>
+              <div class="bbar" data-h="${v}%" style="width:100%;height:0%;background:${colors[i]};opacity:.85;border-radius:2px 2px 0 0;transition:height .9s cubic-bezier(.16,1,.3,1)"></div>
             </div>
           </div>`).join('')}
       </div>
     </div>`).join('');
-  setTimeout(()=>area.querySelectorAll('.bbar').forEach(b=>b.style.height=b.dataset.h),100);
+  setTimeout(() => area.querySelectorAll('.bbar').forEach(b => b.style.height = b.dataset.h), 100);
 }
 
-// ── FLOW ─────────────────────────────────────────────────────────────────────
-function startFlow(){
-  stack=[];convo={answers:{}};
+// ── CHAT FLOW ─────────────────────────────────────────────────
+function startFlow() {
+  stack = []; convo = {answers: {}};
   renderNav();
-  bot("Hi — I'm Ava, your Cary Park Travel advisor. Let's find you the perfect trip.\n\nIs this travel for business or leisure?");
-  optsOrType(['Personal / Leisure','Corporate / Business Travel','Both — work and leisure'],'Or describe your trip…',purpose=>{
-    convo.answers.purpose=purpose;
-    /Corporate|Business/i.test(purpose)?corpBranch():leisureBranch();
-  },startFlow);
+  bot("Hi — I'm Ava, your Cary Park Travel advisor.\n\nIs this trip for business or leisure?").then(() => {
+    optsOrType(
+      ['Personal / Leisure', 'Corporate / Business', 'Both — mixing work and leisure'],
+      'Or describe your trip…',
+      purpose => { convo.answers.purpose = purpose; /Corporate|Business/i.test(purpose) ? corpBranch() : leisureBranch(); },
+      'Start'
+    );
+  });
 }
 
-function corpBranch(){
-  bot("What's the nature of the trip?");
-  optsOrType(['Client entertainment','Executive retreat','Team offsite','Conference or event','Incentive travel','Site visit / roadshow'],'Describe the trip…',corpType=>{
-    convo.answers.corpType=corpType;
-    bot("How many travelers?");
-    optsOrType(['1–2 executives','3–9 people','10–25 people','25+ people'],'Enter number…',pax=>{
-      convo.answers.pax=pax;
-      bot("Destination?");
-      optsOrType(['Domestic US','Caribbean / Latin America','Europe','Asia Pacific','Middle East / Africa','Flexible'],'Specific city or region…',dest=>{
-        convo.answers.dest=dest;
-        bot("Per-person budget?");
-        optsOrType(['Under $2,000','$2,000–$5,000','$5,000–$10,000','$10,000+','Needs approval'],'Budget range…',budget=>{
-          convo.answers.budget=budget;
-          askFlightPrefsCorpo();
+function corpBranch() {
+  bot("What is the nature of the trip?").then(() => {
+    optsOrType(['Client entertainment','Executive retreat','Team offsite','Conference or event','Incentive travel','Site visit / roadshow'],'Describe the trip…', corpType => {
+      convo.answers.corpType = corpType;
+      bot("How many travelers?").then(() => {
+        optsOrType(['1–2 executives','3–9 people','10–25 people','25+ people'],'Enter number…', pax => {
+          convo.answers.pax = pax;
+          bot("Destination preference?").then(() => {
+            optsOrType(['Domestic US','Caribbean / Latin America','Europe','Asia Pacific','Middle East / Africa','Flexible'],'Specific city or region…', dest => {
+              convo.answers.dest = dest;
+              bot("Per-person budget?").then(() => {
+                optsOrType(['Under $2,000','$2,000–$5,000','$5,000–$10,000','$10,000+','Needs approval'],'Budget range…', budget => {
+                  convo.answers.budget = budget; askFlightPrefsCorpo();
+                });
+              });
+            });
+          });
         });
       });
     });
   });
 }
 
-function askFlightPrefsCorpo(){
-  bot("Flight class preference for the group?");
-  optsOrType(['Business class required','Premium economy','Economy is fine','Private charter','Mixed — varies by traveler'],'Describe requirements…',fp=>{
-    convo.answers.flightClass=fp;
-    bot("Preferred airline or loyalty program?");
-    optsOrType(['No preference','American (AAdvantage)','Delta (SkyMiles)','United (MileagePlus)','International carrier','Star Alliance','Oneworld','SkyTeam'],'Enter airline…',airline=>{
-      convo.answers.airline=airline;
-      askCorpUpsells();
-    });
-  });
-}
-
-function askCorpUpsells(){
-  bot("Any upgrades needed for the group?");
-  optsOrType(['Business class flights','Private transfers','Executive lounge access','Group meeting space / AV','Event coordinator','Branded welcome packages','No special upgrades'],'Other requirement…',upsell=>{
-    convo.answers.corpUpsells=upsell;
-    bot("Any constraints I should note?");
-    opts(['Strict corporate travel policy','NDAs / confidentiality required','Expense reporting format needed','No special constraints'],reqs=>{
-      convo.answers.corpReqs=reqs;
-      bot("Last thing — anything else the advisor should know?");
-      typed('Special notes, VIP status, past trips…',notes=>{
-        convo.answers.extraNotes=notes;
-        bot("Last step — your contact info:");
-        cform(c=>{Object.assign(convo.answers,c);finish()});
+function askFlightPrefsCorpo() {
+  bot("Flight class for the group?").then(() => {
+    optsOrType(['Business class required','Premium economy','Economy is fine','Private charter','Mixed — varies'],'Describe requirements…', fp => {
+      convo.answers.flightClass = fp;
+      bot("Preferred airline or loyalty program?").then(() => {
+        optsOrType(['No preference','American (AAdvantage)','Delta (SkyMiles)','United (MileagePlus)','International carrier','Star Alliance','Oneworld','SkyTeam'],'Enter airline…', airline => {
+          convo.answers.airline = airline; askCorpUpsells();
+        });
       });
     });
   });
 }
 
-function leisureBranch(){
-  bot("What kind of trip are you dreaming of?");
-  optsOrType(['Ocean Cruise','River Cruise','All-Inclusive Resort','Guided Tour','Safari / Adventure','Luxury Escape','Honeymoon / Romance','Family Vacation','Not sure — surprise me'],'Describe your ideal trip…',type=>{
-    convo.answers.type=/not sure|surprise/i.test(type)?'Advisor curated':type;
-    askDestination();
-  });
-}
-
-function askDestination(){
-  bot("Where in the world are you thinking?");
-  optsOrType(['Caribbean','Europe','Mediterranean','Asia','Africa','Central / South America','Hawaii','Alaska / Canada','Anywhere — best value'],'Specific country, city, or region…',dest=>{
-    convo.answers.dest=dest;
-    bot("How many travelers?");
-    optsOrType(['Just me','2 adults','Couple + another couple','Family with young kids','Family with teens','Group of friends (4+)','Multi-generational group'],'Number of people…',pax=>{
-      convo.answers.pax=pax;
-      bot("Per-person budget?");
-      optsOrType(['Under $1,000','$1,000–$2,500','$2,500–$5,000','$5,000–$10,000','$10,000+','Flexible — show me options'],'Enter budget…',budget=>{
-        convo.answers.budget=budget;
-        askDuration();
+function askCorpUpsells() {
+  bot("Any upgrades or requirements?").then(() => {
+    optsOrType(['Business class flights','Private transfers','Executive lounge','Group meeting space / AV','Event coordinator','Branded welcome packages','No special upgrades'],'Other requirement…', upsell => {
+      convo.answers.corpUpsells = upsell;
+      bot("Anything else the advisor should know?").then(() => {
+        typed('Special notes, VIP status, past trips…', notes => {
+          convo.answers.extraNotes = notes;
+          bot("Last step — your contact info:").then(() => cform(c => { Object.assign(convo.answers, c); finish(); }));
+        });
       });
     });
   });
 }
 
-function askDuration(){
-  bot("How long are you looking to travel?");
-  optsOrType(['3–4 nights','5–7 nights','8–10 nights','11–14 nights','2+ weeks','Flexible'],'Enter number of nights…',dur=>{
-    convo.answers.duration=dur;
-    askVibe();
+function leisureBranch() {
+  bot("What kind of trip are you dreaming of?").then(() => {
+    optsOrType(['Ocean Cruise','River Cruise','All-Inclusive Resort','Guided Tour','Safari / Adventure','Luxury Escape','Honeymoon / Romance','Family Vacation','Not sure — surprise me'],'Describe your ideal trip…', type => {
+      convo.answers.type = /not sure|surprise/i.test(type) ? 'Advisor curated' : type;
+      askDestination();
+    });
   });
 }
 
-function askVibe(){
-  bot("What does your ideal experience look like?");
-  optsOrType(['Relaxed — beaches, pool, minimal planning','Active — excursions, hiking, exploring','Cultural — history, food, local immersion','Ultra-luxury — only the best','Adventure — off the beaten path','Balance of everything'],'Describe your vibe…',vibe=>{
-    convo.answers.vibe=vibe;
-    askFlightPrefs();
-  });
-}
-
-function askFlightPrefs(){
-  bot("What cabin class are you looking for?");
-  optsOrType(['Economy — best value','Premium economy','Business class','First class','No flights needed — already have them'],'Other preference…',fc=>{
-    convo.answers.flightClass=fc;
-    if(/no flights|already have/i.test(fc)){ askLuxuryUpsells(); return; }
-    bot("Preferred airline or loyalty program?");
-    optsOrType(['No preference','American Airlines (AAdvantage)','Delta (SkyMiles)','United (MileagePlus)','Southwest (Rapid Rewards)','International preferred','Star Alliance','Oneworld','SkyTeam'],'Enter airline or program…',airline=>{
-      convo.answers.airline=airline;
-      bot("Nonstop only, or are connections okay?");
-      opts(['Nonstop only','One connection is fine','Open to cheapest option'],stops=>{
-        convo.answers.stops=stops;
-        askLuxuryUpsells();
+function askDestination() {
+  bot("Where in the world?").then(() => {
+    optsOrType(['Caribbean','Europe','Mediterranean','Asia','Africa','Central / South America','Hawaii','Alaska / Canada','Anywhere — best value'],'Specific country, city, or region…', dest => {
+      convo.answers.dest = dest;
+      bot("How many travelers?").then(() => {
+        optsOrType(['Just me','2 adults','Couple + another couple','Family with young kids','Family with teens','Group of friends (4+)','Multi-generational'],'Number of people…', pax => {
+          convo.answers.pax = pax;
+          bot("Per-person budget?").then(() => {
+            optsOrType(['Under $1,000','$1,000–$2,500','$2,500–$5,000','$5,000–$10,000','$10,000+','Flexible — show me options'],'Enter budget…', budget => {
+              convo.answers.budget = budget; askDuration();
+            });
+          });
+        });
       });
     });
   });
 }
 
-function askLuxuryUpsells(){
-  bot("Any of these on your wish list?");
-  optsOrType(['Cabin / room upgrade','Private shore excursions','Spa & wellness package','Champagne / celebration setup','Private transfers throughout','Travel insurance','Early boarding / priority access','None of the above'],'Other wish list item…',upsell=>{
-    convo.answers.upsells=upsell;
-    if(!/None/i.test(upsell)) askMoreUpsells(); else askDates();
-  });
-}
-
-function askMoreUpsells(){
-  bot("Anything else?");
-  optsOrType(['Private chef / dining','Photography package','Helicopter or yacht excursion','VIP event access','Kids club / childcare onboard','Nothing else'],'Other…',extra=>{
-    convo.answers.extras=extra;
-    askDates();
-  });
-}
-
-function askDates(){
-  bot("When are you hoping to travel?");
-  optsOrType(['Within 30 days','1–3 months out','3–6 months out','6–12 months out','Next summer','Flexible / no rush'],'Specific month or date range…',timing=>{
-    convo.answers.timing=timing;
-    bot("Any special occasions?");
-    optsOrType(['Anniversary','Birthday milestone','Honeymoon','First time international','Repeat traveler — want something new','Surprise trip for someone','No special occasion'],'Tell me about it…',occasion=>{
-      convo.answers.occasion=occasion;
-      askComparison();
+function askDuration() {
+  bot("How long are you looking to travel?").then(() => {
+    optsOrType(['3–4 nights','5–7 nights','8–10 nights','11–14 nights','2+ weeks','Flexible'],'Enter number of nights…', dur => {
+      convo.answers.duration = dur; askVibe();
     });
   });
 }
 
-function askComparison(){
-  const t=convo.answers.type||'';
-  const compMap={
+function askVibe() {
+  bot("What does your ideal experience look like?").then(() => {
+    optsOrType(['Relaxed — beaches, pool, minimal planning','Active — excursions, hiking, exploring','Cultural — history, food, local immersion','Ultra-luxury — only the best','Adventure — off the beaten path','Balance of everything'],'Describe your vibe…', vibe => {
+      convo.answers.vibe = vibe; askFlightPrefs();
+    });
+  });
+}
+
+function askFlightPrefs() {
+  bot("What cabin class are you looking for?").then(() => {
+    optsOrType(['Economy — best value','Premium economy','Business class','First class','No flights needed — already have them'],'Other preference…', fc => {
+      convo.answers.flightClass = fc;
+      if (/no flights|already have/i.test(fc)) { askLuxuryUpsells(); return; }
+      bot("Preferred airline or program?").then(() => {
+        optsOrType(['No preference','American Airlines (AAdvantage)','Delta (SkyMiles)','United (MileagePlus)','Southwest (Rapid Rewards)','International preferred','Star Alliance','Oneworld','SkyTeam'],'Enter airline or program…', airline => {
+          convo.answers.airline = airline;
+          bot("Nonstop only, or connections okay?").then(() => {
+            opts(['Nonstop only','One connection is fine','Open to cheapest option'], stops => {
+              convo.answers.stops = stops; askLuxuryUpsells();
+            });
+          });
+        });
+      });
+    });
+  });
+}
+
+function askLuxuryUpsells() {
+  bot("Anything on your wish list?").then(() => {
+    optsOrType(['Cabin / room upgrade','Private shore excursions','Spa & wellness package','Champagne / celebration setup','Private transfers throughout','Travel insurance','Early boarding / priority access','None of the above'],'Other wish list item…', upsell => {
+      convo.answers.upsells = upsell;
+      if (!/None/i.test(upsell)) askMoreUpsells(); else askDates();
+    });
+  });
+}
+
+function askMoreUpsells() {
+  bot("Anything else?").then(() => {
+    optsOrType(['Private chef / dining','Photography package','Helicopter or yacht excursion','VIP event access','Kids club / childcare onboard','Nothing else'],'Other…', extra => {
+      convo.answers.extras = extra; askDates();
+    });
+  });
+}
+
+function askDates() {
+  bot("When are you hoping to travel?").then(() => {
+    optsOrType(['Within 30 days','1–3 months out','3–6 months out','6–12 months out','Next summer','Flexible / no rush'],'Specific month or date range…', timing => {
+      convo.answers.timing = timing;
+      bot("Any special occasions?").then(() => {
+        optsOrType(['Anniversary','Birthday milestone','Honeymoon','First time international','Repeat traveler — want something new','Surprise trip','No special occasion'],'Tell me about it…', occasion => {
+          convo.answers.occasion = occasion; askComparison();
+        });
+      });
+    });
+  });
+}
+
+function askComparison() {
+  const t = convo.answers.type || '';
+  const compMap = {
     'Ocean Cruise':'River Cruise','River Cruise':'Ocean Cruise',
     'All-Inclusive Resort':'Guided Tour','Guided Tour':'All-Inclusive Resort',
     'Safari / Adventure':'Luxury Escape','Luxury Escape':'Safari / Adventure',
     'Honeymoon / Romance':'Luxury Escape','Family Vacation':'All-Inclusive Resort',
   };
-  const alt=compMap[t];
-  if(alt&&!/Advisor curated/i.test(t)){
-    bot(`Want to see a quick comparison of ${t} vs ${alt} before we finalize?`);
-    opts([`Yes — compare them`,`No — I know what I want`],choice=>{
-      if(/yes/i.test(choice)) showComparison(t,alt,()=>preSubmit());
-      else preSubmit();
+  const alt = compMap[t];
+  if (alt && !/Advisor curated/i.test(t)) {
+    bot(`Want to see a quick comparison of ${t} vs ${alt} before we finalize?`).then(() => {
+      opts([`Yes — compare them`, `No — I know what I want`], choice => {
+        if (/yes/i.test(choice)) showInlineComparison(t, alt, () => preSubmit());
+        else preSubmit();
+      });
     });
   } else preSubmit();
 }
 
-function showComparison(tripA,tripB,fn){
-  const trips={
-    'Ocean Cruise':     {icon:'🚢',price:'$899–$2,500',dur:'5–10 nights',inc:'Entertainment, most meals, ports',best:'Value, variety, onboard life'},
-    'River Cruise':     {icon:'⚓',price:'$2,400–$4,500',dur:'5–8 nights',inc:'Shore excursions, all meals, wine',best:'Scenery, culture, intimacy'},
-    'All-Inclusive':    {icon:'🏖️',price:'$649–$2,500',dur:'4–7 nights',inc:'Meals, drinks, entertainment',best:'Families, couples, zero planning'},
-    'Guided Tour':      {icon:'🗺️',price:'$2,200–$5,000',dur:'7–14 nights',inc:'Hotels, guide, most meals',best:'Culture, history, first-timers'},
+function showInlineComparison(tripA, tripB, fn) {
+  const trips = {
+    'Ocean Cruise':      {icon:'🚢',price:'$899–$2,500',dur:'5–10 nights',inc:'Entertainment, meals, ports',best:'Value, variety, onboard life'},
+    'River Cruise':      {icon:'⚓',price:'$2,400–$4,500',dur:'5–8 nights',inc:'Shore excursions, all meals',best:'Scenery, culture, intimacy'},
+    'All-Inclusive Resort':{icon:'🏖️',price:'$649–$2,500',dur:'4–7 nights',inc:'Meals, drinks, entertainment',best:'Families, zero planning'},
+    'Guided Tour':       {icon:'🗺️',price:'$2,200–$5,000',dur:'7–14 nights',inc:'Hotels, guide, meals',best:'Culture, first-timers'},
     'Safari / Adventure':{icon:'🦁',price:'$3,500–$10,000',dur:'7–14 nights',inc:'Lodge, game drives, meals',best:'Wildlife, bucket list'},
-    'Luxury Escape':    {icon:'✨',price:'$3,000–$15,000',dur:'5–14 nights',inc:'Private transfers, butler, spa',best:'Honeymoon, milestone trip'},
-    'Honeymoon / Romance':{icon:'💍',price:'$2,500–$8,000',dur:'7–14 nights',inc:'Romance packages, upgrades',best:'Couples, privacy, memories'},
-    'Family Vacation':  {icon:'👨‍👩‍👧',price:'$800–$3,500',dur:'5–10 nights',inc:'Kids clubs, flexible dining',best:'Kids, multi-gen groups'},
+    'Luxury Escape':     {icon:'✨',price:'$3,000–$15,000',dur:'5–14 nights',inc:'Butler, spa, private transfers',best:'Milestone trips'},
+    'Honeymoon / Romance':{icon:'💍',price:'$2,500–$8,000',dur:'7–14 nights',inc:'Romance packages',best:'Couples, privacy'},
+    'Family Vacation':   {icon:'👨‍👩‍👧',price:'$800–$3,500',dur:'5–10 nights',inc:'Kids clubs, flexible dining',best:'Multi-gen groups'},
   };
-  const da=trips[tripA]||{icon:'✈️',price:'Custom',dur:'Flexible',inc:'TBD',best:'Advisor curated'};
-  const db=trips[tripB]||{icon:'🌍',price:'Custom',dur:'Flexible',inc:'TBD',best:'Advisor curated'};
-  bot(`Here is a quick breakdown:`);
-  const card=document.createElement('div');
-  card.style.cssText='display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:8px 0;font-size:.72rem';
-  card.innerHTML=`
-    <div style="background:rgba(201,168,76,.06);border:1px solid rgba(201,168,76,.2);padding:12px;border-radius:2px">
-      <div style="font-size:1.2rem;margin-bottom:4px">${da.icon}</div>
-      <div style="font-weight:600;color:#e8cc8a;margin-bottom:6px">${tripA}</div>
-      <div style="color:rgba(245,240,232,.5);margin-bottom:2px">From ${da.price} pp</div>
-      <div style="color:rgba(245,240,232,.5);margin-bottom:2px">${da.dur}</div>
-      <div style="color:rgba(245,240,232,.7);margin-top:6px;line-height:1.5">${da.inc}</div>
-      <div style="color:#c9a84c;margin-top:6px;font-size:.64rem">Best for: ${da.best}</div>
+  const da = trips[tripA] || {icon:'✈️',price:'Custom',dur:'Flexible',inc:'TBD',best:'Advisor curated'};
+  const db = trips[tripB] || {icon:'🌍',price:'Custom',dur:'Flexible',inc:'TBD',best:'Advisor curated'};
+  const card = document.createElement('div');
+  card.style.cssText = 'display:grid;grid-template-columns:1fr 1fr;gap:7px;margin:6px 0;font-size:.7rem';
+  card.innerHTML = `
+    <div style="background:rgba(201,168,76,.07);border:1px solid rgba(201,168,76,.2);padding:10px;border-radius:8px">
+      <div style="font-size:1.1rem;margin-bottom:3px">${da.icon}</div>
+      <div style="font-weight:600;color:#e8cc8a;margin-bottom:4px;font-size:.78rem">${tripA}</div>
+      <div style="color:rgba(245,240,232,.45);font-size:.68rem">From ${da.price} pp</div>
+      <div style="color:rgba(245,240,232,.45);font-size:.68rem">${da.dur}</div>
+      <div style="color:rgba(245,240,232,.65);margin-top:5px;line-height:1.5;font-size:.68rem">${da.inc}</div>
+      <div style="color:#c9a84c;margin-top:5px;font-size:.62rem">Best for: ${da.best}</div>
     </div>
-    <div style="background:rgba(0,200,255,.04);border:1px solid rgba(0,200,255,.15);padding:12px;border-radius:2px">
-      <div style="font-size:1.2rem;margin-bottom:4px">${db.icon}</div>
-      <div style="font-weight:600;color:#00c8ff;margin-bottom:6px">${tripB}</div>
-      <div style="color:rgba(245,240,232,.5);margin-bottom:2px">From ${db.price} pp</div>
-      <div style="color:rgba(245,240,232,.5);margin-bottom:2px">${db.dur}</div>
-      <div style="color:rgba(245,240,232,.7);margin-top:6px;line-height:1.5">${db.inc}</div>
-      <div style="color:#00c8ff;margin-top:6px;font-size:.64rem">Best for: ${db.best}</div>
+    <div style="background:rgba(0,200,255,.05);border:1px solid rgba(0,200,255,.15);padding:10px;border-radius:8px">
+      <div style="font-size:1.1rem;margin-bottom:3px">${db.icon}</div>
+      <div style="font-weight:600;color:#00c8ff;margin-bottom:4px;font-size:.78rem">${tripB}</div>
+      <div style="color:rgba(245,240,232,.45);font-size:.68rem">From ${db.price} pp</div>
+      <div style="color:rgba(245,240,232,.45);font-size:.68rem">${db.dur}</div>
+      <div style="color:rgba(245,240,232,.65);margin-top:5px;line-height:1.5;font-size:.68rem">${db.inc}</div>
+      <div style="color:#00c8ff;margin-top:5px;font-size:.62rem">Best for: ${db.best}</div>
     </div>`;
-  pmsg.appendChild(card);pmsg.scrollTop=pmsg.scrollHeight;
-  setTimeout(()=>{
-    bot("Which direction feels right?");
-    opts([tripA,tripB,'Either — advisor decides','Actually something different'],pick=>{
-      convo.answers.tripCompare=`Compared ${tripA} vs ${tripB} picked: ${pick}`;
-      if(pick==='Actually something different') leisureBranch();
-      else { if(pick!=='Either — advisor decides') convo.answers.type=pick; fn(); }
+  const p = pmsg(); p.appendChild(card); p.scrollTop = p.scrollHeight;
+  setTimeout(() => {
+    bot("Which feels right?").then(() => {
+      opts([tripA, tripB, 'Either — advisor decides', 'Something else'], pick => {
+        convo.answers.tripCompare = `${tripA} vs ${tripB} — picked: ${pick}`;
+        if (pick === 'Something else') leisureBranch();
+        else { if (pick !== 'Either — advisor decides') convo.answers.type = pick; fn(); }
+      });
     });
-  },400);
+  }, 300);
 }
 
-function preSubmit(){
-  const a=convo.answers;
-  bot(`Here is what I have:\n\n` +
-    `Trip: ${a.type||'Advisor curated'}\n` +
-    `Destination: ${a.dest||'—'}\n` +
-    `Travelers: ${a.pax||'—'}\n` +
-    `Budget: ${a.budget||'—'} pp\n` +
-    `Duration: ${a.duration||'—'}\n` +
-    `Flights: ${a.flightClass||'—'}${a.airline?' · '+a.airline:''}\n` +
-    `Timing: ${a.timing||'—'}\n\nDoes this look right?`);
-  opts(['Yes — send to advisor','Change something'],confirm=>{
-    if(/yes/i.test(confirm)){
-      bot("Last step — your contact info:");
-      cform(c=>{Object.assign(convo.answers,c);finish()});
-    } else {
-      bot("What would you like to update?");
-      opts(['Trip type','Destination','Budget','Travelers','Flights','Dates'],part=>{
-        const map={
-          'Trip type':leisureBranch,
-          'Destination':askDestination,
-          'Budget':()=>{bot("Updated budget?");optsOrType(['Under $1,000','$1,000–$2,500','$2,500–$5,000','$5,000+','Flexible'],'New budget…',b=>{convo.answers.budget=b;preSubmit()})},
-          'Travelers':()=>{bot("How many travelers?");optsOrType(['Just me','2 adults','Family with kids','Group of 4+'],'Number…',p=>{convo.answers.pax=p;preSubmit()})},
-          'Flights':askFlightPrefs,
-          'Dates':askDates
-        };
-        (map[part]||preSubmit)();
-      });
-    }
+function preSubmit() {
+  const a = convo.answers;
+  const lines = [
+    `Trip: ${a.type || 'Advisor curated'}`,
+    `Destination: ${a.dest || '—'}`,
+    `Travelers: ${a.pax || '—'}`,
+    `Budget: ${a.budget || '—'} pp`,
+    `Duration: ${a.duration || '—'}`,
+    `Flights: ${[a.flightClass, a.airline].filter(Boolean).join(' · ') || '—'}`,
+    `Timing: ${a.timing || '—'}`,
+  ].join('\n');
+  bot(`Here is what I have:\n\n${lines}\n\nLooks good?`).then(() => {
+    opts(['Yes — send to advisor', 'Change something'], confirm => {
+      if (/yes/i.test(confirm)) {
+        bot("Last step — your contact info:").then(() => cform(c => { Object.assign(convo.answers, c); finish(); }));
+      } else {
+        bot("What would you like to update?").then(() => {
+          opts(['Trip type','Destination','Budget','Travelers','Flights','Dates'], part => {
+            const map = {
+              'Trip type': leisureBranch,
+              'Destination': askDestination,
+              'Budget': () => bot("Updated budget?").then(() => optsOrType(['Under $1,000','$1,000–$2,500','$2,500–$5,000','$5,000+','Flexible'],'New budget…', b => { convo.answers.budget = b; preSubmit(); })),
+              'Travelers': () => bot("How many travelers?").then(() => optsOrType(['Just me','2 adults','Family with kids','Group of 4+'],'Number…', p => { convo.answers.pax = p; preSubmit(); })),
+              'Flights': askFlightPrefs,
+              'Dates': askDates,
+            };
+            (map[part] || preSubmit)();
+          });
+        });
+      }
+    });
   });
 }
 
-function finish(){
-  const a=convo.answers;
-  const isCorp=/Corporate|Business/i.test(a.purpose||'');
-  const tag=isCorp?'[Corporate Travel]':'[Leisure Travel]';
-  const subj=encodeURIComponent(`${tag} ${a.type||a.corpType||'Inquiry'} — ${a.dest||''} — ${a.name||'New lead'}`);
-  const body=isCorp
-    ?`CORPORATE TRAVEL INQUIRY\n\nName: ${a.name}\nEmail: ${a.email}\nPhone: ${a.phone||'—'}\n\nType: ${a.corpType}\nTravelers: ${a.pax}\nDestination: ${a.dest}\nBudget: ${a.budget} pp\nFlight class: ${a.flightClass||'—'}\nAirline: ${a.airline||'—'}\nUpgrades: ${a.corpUpsells||'—'}\nRequirements: ${a.corpReqs||'—'}\nNotes: ${a.extraNotes||''} ${a.notes||''}`
-    :`LEISURE TRAVEL INQUIRY\n\nName: ${a.name}\nEmail: ${a.email}\nPhone: ${a.phone||'—'}\n\nTrip: ${a.type}\nDestination: ${a.dest}\nTravelers: ${a.pax}\nBudget: ${a.budget} pp\nDuration: ${a.duration||'—'}\nVibe: ${a.vibe||'—'}\nFlights: ${a.flightClass||'—'} · ${a.airline||'—'} · ${a.stops||'—'}\nUpsells: ${a.upsells||'—'} ${a.extras||''}\nTiming: ${a.timing||'—'}\nOccasion: ${a.occasion||'—'}\nComparison: ${a.tripCompare||'—'}\nNotes: ${a.notes||'—'}`;
-  const fname=a.name?a.name.split(' ')[0]:'';
-  bot(`Thanks${fname?', '+fname:''}! Your inquiry is on its way.\n\nExpect a reply within 1 business day.`);
-  setTimeout(()=>window.location.href=`mailto:info@caryparksolutions.com?subject=${subj}&body=${encodeURIComponent(body+'\n\nSubmitted: '+new Date().toLocaleString())}`,900);
-  closeBtn();
+function finish() {
+  const a = convo.answers;
+  const isCorp = /Corporate|Business/i.test(a.purpose || '');
+  const tag = isCorp ? '[Corporate Travel]' : '[Leisure Travel]';
+  const subj = encodeURIComponent(`${tag} ${a.type || a.corpType || 'Inquiry'} — ${a.dest || ''} — ${a.name || 'New lead'}`);
+  const body = isCorp
+    ? `CORPORATE TRAVEL INQUIRY\n\nName: ${a.name}\nEmail: ${a.email}\nPhone: ${a.phone||'—'}\n\nType: ${a.corpType}\nTravelers: ${a.pax}\nDestination: ${a.dest}\nBudget: ${a.budget} pp\nFlight class: ${a.flightClass||'—'}\nAirline: ${a.airline||'—'}\nUpgrades: ${a.corpUpsells||'—'}\nNotes: ${a.extraNotes||''} ${a.notes||''}`
+    : `LEISURE TRAVEL INQUIRY\n\nName: ${a.name}\nEmail: ${a.email}\nPhone: ${a.phone||'—'}\n\nTrip: ${a.type}\nDestination: ${a.dest}\nTravelers: ${a.pax}\nBudget: ${a.budget} pp\nDuration: ${a.duration||'—'}\nVibe: ${a.vibe||'—'}\nFlights: ${a.flightClass||'—'} · ${a.airline||'—'} · ${a.stops||'—'}\nUpsells: ${a.upsells||'—'} ${a.extras||''}\nTiming: ${a.timing||'—'}\nOccasion: ${a.occasion||'—'}\nComparison: ${a.tripCompare||'—'}\nNotes: ${a.notes||'—'}`;
+  const fname = a.name ? a.name.split(' ')[0] : '';
+  bot(`Thanks${fname ? ', ' + fname : ''}! Your inquiry is on its way.\n\nExpect a reply within 1 business day.`).then(() => {
+    clearState(); closeBtn();
+  });
+  setTimeout(() => window.location.href = `mailto:info@caryparksolutions.com?subject=${subj}&body=${encodeURIComponent(body + '\n\nSubmitted: ' + new Date().toLocaleString())}`, 900);
 }
 
-function bookAdvisor(context){
-  convo.answers.context=context;
+function bookAdvisor(context) {
+  convo.answers.context = context;
   openPanel();
-  if(pmsg.children.length===0){
-    setTimeout(()=>{
-      bot(`I see you are interested in ${context}.\n\nIs this for personal travel or a corporate trip?`);
-      opts(['Personal / Leisure','Corporate / Business'],p=>{
-        convo.answers.purpose=p;
-        convo.answers.type=context;
-        /Corporate/i.test(p)?askFlightPrefsCorpo():askDestination();
+  if (pmsg().children.length === 0) {
+    setTimeout(() => {
+      bot(`I see you are interested in ${context}.\n\nIs this for personal travel or a corporate trip?`).then(() => {
+        opts(['Personal / Leisure', 'Corporate / Business'], p => {
+          convo.answers.purpose = p; convo.answers.type = context;
+          /Corporate/i.test(p) ? askFlightPrefsCorpo() : askDestination();
+        });
       });
-    },300);
+    }, 300);
   }
 }
 
-function sendFree(){
-  const v=document.getElementById('pinp').value.trim();
-  if(!v)return;document.getElementById('pinp').value='';
-  user(v);bot("Got it — noted for your advisor.");
+function sendFree() {
+  const v = document.getElementById('pinp').value.trim();
+  if (!v) return; document.getElementById('pinp').value = '';
+  user(v); bot("Got it — noted for your advisor.");
 }
+
+// ── PANEL STARS ───────────────────────────────────────────────
+function initPanelStars() {
+  const c = document.getElementById('panelStars');
+  if (!c) return;
+  const cx = c.getContext('2d');
+  function rsz() { c.width = panel().offsetWidth; c.height = panel().offsetHeight; }
+  rsz();
+  const pts = Array.from({length: 80}, () => ({
+    x: Math.random() * c.width, y: Math.random() * c.height,
+    r: Math.random() * .9 + .2, vx: (Math.random() - .5) * .04, vy: (Math.random() - .5) * .04,
+    a: Math.random() * .3 + .08
+  }));
+  function draw() {
+    cx.clearRect(0, 0, c.width, c.height);
+    pts.forEach(p => {
+      p.x += p.vx; p.y += p.vy;
+      if (p.x < 0) p.x = c.width; if (p.x > c.width) p.x = 0;
+      if (p.y < 0) p.y = c.height; if (p.y > c.height) p.y = 0;
+      cx.beginPath(); cx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+      cx.fillStyle = `rgba(255,255,255,${p.a})`; cx.fill();
+    });
+    requestAnimationFrame(draw);
+  }
+  draw();
+}
+
+// ── INIT ──────────────────────────────────────────────────────
+document.addEventListener('DOMContentLoaded', () => {
+  initPanelStars();
+  restoreState();
+});
 </script>
 <script>
 // ===================== PANEL STARS (Deep Space) =====================
