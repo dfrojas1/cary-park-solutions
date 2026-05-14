@@ -682,8 +682,8 @@ function showComparison(tripA,tripB,fn){
     'Honeymoon':       {icon:'💍',price:'$2,500–$8,000',dur:'7–14 nights',inc:'Romance packages, upgrades',best:'Couples, privacy, memories'},
     'Family Vacation': {icon:'👨‍👩‍👧',price:'$800–$3,500',dur:'5–10 nights',inc:'Kids clubs, flexible dining',best:'Kids, multi-gen groups'},
   };
-  const a=trips[tripA]||{icon:'✈️',price:'Custom',dur:'Flexible',inc:'TBD',best:'Advisor curated'};
-  const b=trips[tripB]||{icon:'🌍',price:'Custom',dur:'Flexible',inc:'TBD',best:'Advisor curated'};
+  const tripAData=trips[tripA]||{icon:'✈️',price:'Custom',dur:'Flexible',inc:'TBD',best:'Advisor curated'};
+  const tripBData=trips[tripB]||{icon:'🌍',price:'Custom',dur:'Flexible',inc:'TBD',best:'Advisor curated'};
 
   bot(`Here's a quick comparison of the two options you're weighing:`);
 
@@ -691,20 +691,20 @@ function showComparison(tripA,tripB,fn){
   card.style.cssText='display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:8px 0;font-size:.72rem';
   card.innerHTML=`
     <div style="background:rgba(201,168,76,.06);border:1px solid rgba(201,168,76,.2);padding:12px;border-radius:2px">
-      <div style="font-size:1.2rem;margin-bottom:4px">${a.icon}</div>
+      <div style="font-size:1.2rem;margin-bottom:4px">${tripAData.icon}</div>
       <div style="font-weight:600;color:#e8cc8a;margin-bottom:6px">${tripA}</div>
-      <div style="color:rgba(245,240,232,.5);margin-bottom:2px">From ${a.price} pp</div>
-      <div style="color:rgba(245,240,232,.5);margin-bottom:2px">${a.dur}</div>
-      <div style="color:rgba(245,240,232,.7);margin-top:6px;line-height:1.5">${a.inc}</div>
-      <div style="color:#c9a84c;margin-top:6px;font-size:.66rem">Best for: ${a.best}</div>
+      <div style="color:rgba(245,240,232,.5);margin-bottom:2px">From ${tripAData.price} pp</div>
+      <div style="color:rgba(245,240,232,.5);margin-bottom:2px">${tripAData.dur}</div>
+      <div style="color:rgba(245,240,232,.7);margin-top:6px;line-height:1.5">${tripAData.inc}</div>
+      <div style="color:#c9a84c;margin-top:6px;font-size:.66rem">Best for: ${tripAData.best}</div>
     </div>
     <div style="background:rgba(0,200,255,.04);border:1px solid rgba(0,200,255,.15);padding:12px;border-radius:2px">
-      <div style="font-size:1.2rem;margin-bottom:4px">${b.icon}</div>
+      <div style="font-size:1.2rem;margin-bottom:4px">${tripBData.icon}</div>
       <div style="font-weight:600;color:#00c8ff;margin-bottom:6px">${tripB}</div>
-      <div style="color:rgba(245,240,232,.5);margin-bottom:2px">From ${b.price} pp</div>
-      <div style="color:rgba(245,240,232,.5);margin-bottom:2px">${b.dur}</div>
-      <div style="color:rgba(245,240,232,.7);margin-top:6px;line-height:1.5">${b.inc}</div>
-      <div style="color:#00c8ff;margin-top:6px;font-size:.66rem">Best for: ${b.best}</div>
+      <div style="color:rgba(245,240,232,.5);margin-bottom:2px">From ${tripBData.price} pp</div>
+      <div style="color:rgba(245,240,232,.5);margin-bottom:2px">${tripBData.dur}</div>
+      <div style="color:rgba(245,240,232,.7);margin-top:6px;line-height:1.5">${tripBData.inc}</div>
+      <div style="color:#00c8ff;margin-top:6px;font-size:.66rem">Best for: ${tripBData.best}</div>
     </div>`;
   pmsg.appendChild(card);pmsg.scrollTop=pmsg.scrollHeight;
 
@@ -834,7 +834,7 @@ function askTripDepth(){
 
 function askFlightPrefs(){
   bot("Let's talk flights. What cabin class are you looking for?");
-  optsOrType(['Economy — best value','Premium economy','Business class','First class','No flights needed — I'm driving / already have flights'],'Other preference…',fc=>{
+  optsOrType(['Economy — best value','Premium economy','Business class','First class','No flights needed — already have flights'],'Other preference…',fc=>{
     convo.answers.flightClass=fc;
     if(/no flights|already have/i.test(fc)){
       askLuxuryUpsells();
