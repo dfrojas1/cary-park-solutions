@@ -1,0 +1,1168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cary Park Travel — Curated Journeys Worldwide</title>
+<meta name="description" content="Bespoke travel planning worldwide. Cruises, river journeys, all-inclusives, luxury villas, and adventures — real advisors, live pricing.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://api.mapbox.com/mapbox-gl-js/v3.3.0/mapbox-gl.css" rel="stylesheet">
+<script src="https://api.mapbox.com/mapbox-gl-js/v3.3.0/mapbox-gl.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@200;300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --black:#08090a;--black2:#0e1012;--black3:#141618;--bgc:#0b1220;
+  --gold:#c9a84c;--goldlt:#e8cc8a;--cream:#f5f0e8;--muted:rgba(245,240,232,.45);
+  --border:rgba(201,168,76,.18);--border2:rgba(245,240,232,.08);--r:12px;
+  --accent:#00c8ff;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Jost',sans-serif;font-weight:300;background:var(--black);color:var(--cream);overflow-x:hidden;-webkit-font-smoothing:antialiased;cursor:auto}
+a{color:inherit;text-decoration:none}
+canvas{position:fixed;inset:0;z-index:0;pointer-events:none}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:200;padding:22px 48px;display:flex;align-items:center;justify-content:space-between;transition:background .4s,padding .4s}
+nav.scrolled{background:rgba(8,9,10,.94);backdrop-filter:blur(20px);padding:15px 48px;border-bottom:1px solid var(--border)}
+.nw .nt{font-family:'Cormorant Garamond',serif;font-size:1.05rem;font-weight:400;letter-spacing:.18em;text-transform:uppercase}
+.nw .ns{font-size:.5rem;font-weight:400;letter-spacing:.3em;text-transform:uppercase;color:var(--gold);margin-top:1px}
+.nl{display:flex;align-items:center;gap:28px}
+.nl a{font-size:.68rem;font-weight:400;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);transition:color .25s}
+.nl a:hover{color:var(--cream)}
+.nadv{font-size:.64rem;font-weight:500;letter-spacing:.2em;text-transform:uppercase;color:var(--black);background:var(--gold);padding:9px 20px;border:none;cursor:pointer;font-family:'Jost',sans-serif;transition:background .25s}
+.nadv:hover{background:var(--goldlt)}
+@media(max-width:768px){nav{padding:16px 20px}.nl{display:none}}
+
+/* HERO */
+.hero{position:relative;height:100vh;min-height:680px;display:flex;align-items:flex-end;overflow:hidden}
+.hbg{position:absolute;inset:0;background:url('https://images.unsplash.com/photo-1523906834658-6e24ef2386f9?w=1800&auto=format&fit=crop&q=80') center/cover;filter:brightness(.5) saturate(1.1);transform:scale(1.04);transition:transform 8s ease-out}
+.hbg.loaded{transform:scale(1)}
+.hgrad{position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,rgba(8,9,10,.2) 0%,transparent 35%,transparent 50%,rgba(8,9,10,.9) 100%),linear-gradient(90deg,rgba(8,9,10,.45) 0%,transparent 65%)}
+.hc{position:relative;z-index:2;padding:0 48px 64px;max-width:820px}
+.eyebrow{display:flex;align-items:center;gap:14px;margin-bottom:22px}
+.eline{width:40px;height:1px;background:var(--gold)}
+.etext{font-size:.6rem;font-weight:400;letter-spacing:.3em;text-transform:uppercase;color:var(--gold)}
+h1.hero-title{font-family:'Cormorant Garamond',serif;font-size:clamp(3.6rem,8vw,6.5rem);font-weight:300;line-height:.95;letter-spacing:-.01em;margin-bottom:24px;opacity:0;transform:translateY(40px);animation:fadeUp .9s .3s cubic-bezier(.16,1,.3,1) forwards}
+h1.hero-title em{font-style:italic;color:var(--goldlt)}
+@keyframes fadeUp{to{opacity:1;transform:translateY(0)}}
+.hsub{font-size:.95rem;font-weight:300;color:var(--muted);max-width:460px;line-height:1.85;margin-bottom:36px;opacity:0;animation:fadeUp .9s .55s cubic-bezier(.16,1,.3,1) forwards}
+.hbtns{display:flex;align-items:center;gap:20px;flex-wrap:wrap;opacity:0;animation:fadeUp .9s .75s cubic-bezier(.16,1,.3,1) forwards}
+.bgold{font-size:.68rem;font-weight:500;letter-spacing:.2em;text-transform:uppercase;color:var(--black);background:var(--gold);padding:13px 30px;border:none;cursor:pointer;font-family:'Jost',sans-serif;transition:background .25s}
+.bgold:hover{background:var(--goldlt)}
+.bghost{font-size:.68rem;font-weight:500;letter-spacing:.2em;text-transform:uppercase;color:var(--cream);border:1px solid rgba(245,240,232,.3);padding:13px 30px;background:none;cursor:pointer;font-family:'Jost',sans-serif;transition:border-color .3s;display:inline-flex;align-items:center;gap:8px}
+.bghost:hover{border-color:var(--gold)}
+
+/* MARQUEE */
+.mwrap{border-top:1px solid var(--border);border-bottom:1px solid var(--border);overflow:hidden;padding:13px 0;background:var(--black2)}
+.min{display:flex;white-space:nowrap;animation:marquee 40s linear infinite}
+.mi{display:inline-flex;align-items:center;gap:8px;padding:0 44px;font-size:.6rem;font-weight:400;letter-spacing:.2em;text-transform:uppercase;color:var(--muted)}
+.mi strong{color:var(--gold);font-weight:500}
+.mdot{width:3px;height:3px;border-radius:50%;background:var(--gold);opacity:.5}
+@keyframes marquee{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+
+/* DESTINATION EXPLORER */
+.explorer{position:relative;z-index:2;padding:90px 0}
+.container{max-width:1200px;margin:0 auto;padding:0 48px}
+.slbl{font-size:.6rem;font-weight:400;letter-spacing:.3em;text-transform:uppercase;color:var(--gold);margin-bottom:20px;display:flex;align-items:center;gap:14px}
+.slbl::before{content:'';width:36px;height:1px;background:var(--gold)}
+h2.stitle{font-family:'Cormorant Garamond',serif;font-size:clamp(2rem,4vw,3.2rem);font-weight:300;line-height:1.1;letter-spacing:-.01em;margin-bottom:12px}
+h2.stitle em{font-style:italic;color:var(--goldlt)}
+.ssub{font-size:.88rem;font-weight:300;color:var(--muted);max-width:520px;line-height:1.9;margin-bottom:36px}
+
+/* TOGGLE FILTER BAR */
+.filter-bar{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:40px;padding-bottom:20px;border-bottom:1px solid var(--border2)}
+.ftag{padding:9px 18px;border:1px solid var(--border2);border-radius:0;font-size:.66rem;font-weight:400;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);cursor:pointer;background:none;font-family:'Jost',sans-serif;transition:all .2s;white-space:nowrap}
+.ftag:hover{border-color:rgba(201,168,76,.4);color:var(--cream)}
+.ftag.active{border-color:var(--gold);color:var(--gold);background:rgba(201,168,76,.06)}
+
+/* DESTINATION GRID */
+.dest-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.dcard{position:relative;overflow:hidden;cursor:pointer;border-radius:4px;background:var(--black2)}
+.dcard.hidden{display:none}
+.dcard-img{width:100%;aspect-ratio:3/4;object-fit:cover;filter:brightness(.65) saturate(1.1);transition:transform .6s cubic-bezier(.16,1,.3,1),filter .4s;display:block}
+.dcard:hover .dcard-img{transform:scale(1.06);filter:brightness(.5) saturate(1.3)}
+.dcard-ovl{position:absolute;inset:0;background:linear-gradient(180deg,transparent 35%,rgba(8,9,10,.88) 100%)}
+.dcard-info{position:absolute;bottom:0;left:0;right:0;padding:20px 18px}
+.dcard-region{font-size:.54rem;font-weight:400;letter-spacing:.24em;text-transform:uppercase;color:var(--gold);margin-bottom:4px}
+.dcard-name{font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-weight:400;margin-bottom:5px}
+.dcard-type{font-size:.58rem;font-weight:400;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:8px}
+.dcard-from{display:flex;align-items:center;gap:8px}
+.price-tag{font-size:.7rem;font-weight:500;color:var(--goldlt)}
+.dcard-btns{display:flex;gap:6px;margin-top:10px;opacity:0;transform:translateY(4px);transition:all .3s}
+.dcard:hover .dcard-btns{opacity:1;transform:translateY(0)}
+
+
+.dcard-btn-book{font-size:.58rem;font-weight:500;letter-spacing:.12em;text-transform:uppercase;padding:5px 11px;background:var(--gold);border:1px solid var(--gold);color:#000;cursor:pointer;font-family:'Jost',sans-serif;transition:background .2s}
+.dcard-btn-book:hover{background:var(--goldlt)}
+@media(max-width:1000px){.dest-grid{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:700px){.dest-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:480px){.dest-grid{grid-template-columns:1fr}}
+
+/* RIVER FEATURE */
+.rfeat{position:relative;height:75vh;overflow:hidden;display:flex;align-items:center}
+.rbg{position:absolute;inset:0;background:url('https://images.unsplash.com/photo-1467269204594-9661b134dd2b?w=1800&auto=format&fit=crop&q=80') center/cover;filter:brightness(.42) saturate(1.2)}
+.rovl{position:absolute;inset:0;background:linear-gradient(90deg,rgba(8,9,10,.8) 0%,rgba(8,9,10,.3) 60%,transparent 100%)}
+.rc{position:relative;z-index:2;padding:0 48px;max-width:580px}
+.rdet{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-bottom:32px}
+.rdi{border-top:1px solid var(--border);padding-top:12px}
+.rdl{font-size:.54rem;font-weight:400;letter-spacing:.24em;text-transform:uppercase;color:var(--gold);margin-bottom:4px}
+.rdv{font-size:.86rem;font-weight:300}
+@media(max-width:768px){.rfeat{height:auto;padding:80px 0}.rc{padding:0 22px}.rdet{grid-template-columns:1fr 1fr}}
+
+/* HOW IT WORKS */
+.how{background:var(--black3);border-top:1px solid var(--border2);border-bottom:1px solid var(--border2)}
+.how-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border2)}
+.how-item{background:var(--black3);padding:44px 32px;transition:background .3s}
+.how-item:hover{background:var(--black2)}
+.how-num{font-family:'Cormorant Garamond',serif;font-size:2.8rem;font-weight:300;color:var(--gold);line-height:1;margin-bottom:16px}
+.how-title{font-size:.72rem;font-weight:500;letter-spacing:.18em;text-transform:uppercase;margin-bottom:10px}
+.how-desc{font-size:.8rem;font-weight:300;color:var(--muted);line-height:1.8}
+@media(max-width:900px){.how-grid{grid-template-columns:repeat(2,1fr)}}
+
+/* CTA BAND */
+.cta-band{background:linear-gradient(135deg,rgba(201,168,76,.08),rgba(0,200,255,.04));border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:60px 48px;text-align:center}
+.cta-band h3{font-family:'Cormorant Garamond',serif;font-size:clamp(1.8rem,3.5vw,2.8rem);font-weight:300;margin-bottom:14px}
+.cta-band h3 em{font-style:italic;color:var(--goldlt)}
+.cta-band p{font-size:.88rem;font-weight:300;color:var(--muted);max-width:500px;margin:0 auto 32px;line-height:1.8}
+.cta-btns{display:flex;gap:16px;justify-content:center;flex-wrap:wrap}
+
+/* CHAT PANEL */
+#panel{position:fixed;right:0;top:0;bottom:0;width:400px;z-index:300;background:var(--black2);border-left:1px solid var(--border);display:flex;flex-direction:column;transform:translateX(100%);transition:transform .5s cubic-bezier(.16,1,.3,1);box-shadow:-28px 0 80px rgba(0,0,0,.6)}
+#panel.open{transform:translateX(0)}
+.ph{padding:24px 26px 16px;border-bottom:1px solid var(--border2);display:flex;align-items:flex-start;justify-content:space-between}
+.pht{font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-weight:400;margin-bottom:3px}
+.phs{font-size:.62rem;font-weight:300;letter-spacing:.18em;text-transform:uppercase;color:var(--gold)}
+.pclose{background:none;border:none;cursor:pointer;color:var(--muted);font-size:1.2rem;line-height:1;padding:4px;font-family:'Jost',sans-serif}
+.pclose:hover{color:var(--cream)}
+#pmsg{flex:1;overflow-y:auto;padding:18px;display:flex;flex-direction:column;gap:10px;scroll-behavior:smooth}
+#pmsg::-webkit-scrollbar{width:2px}
+#pmsg::-webkit-scrollbar-thumb{background:var(--border)}
+.msg{max-width:88%}
+.madv{align-self:flex-start;background:var(--black3);border:1px solid var(--border2);padding:11px 15px;font-size:.8rem;font-weight:300;line-height:1.65}
+.muser{align-self:flex-end;background:rgba(201,168,76,.1);border:1px solid var(--border);padding:11px 15px;font-size:.8rem;font-weight:300;line-height:1.65}
+.msndr{font-size:.55rem;font-weight:400;letter-spacing:.2em;text-transform:uppercase;margin-bottom:4px}
+.madv .msndr{color:var(--gold)}
+.muser .msndr{color:var(--muted);text-align:right}
+.msg a{color:var(--goldlt);text-decoration:underline}
+.co{display:flex;flex-wrap:wrap;gap:6px;padding:0 18px 10px}
+.co button{padding:7px 12px;border:1px solid rgba(201,168,76,.3);color:var(--gold);font-size:.72rem;font-weight:400;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;background:none;font-family:'Jost',sans-serif;transition:all .2s}
+.co button:hover{background:rgba(201,168,76,.1);border-color:var(--gold)}
+.cf{padding:0 18px 10px;display:flex;flex-direction:column;gap:7px}
+.cf input,.cf textarea{padding:9px 13px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);color:var(--cream);font-size:.8rem;font-family:'Jost',sans-serif;font-weight:300;outline:none;transition:border-color .2s}
+.cf input:focus,.cf textarea:focus{border-color:var(--gold)}
+.cf textarea{min-height:70px;resize:none}
+.cf button{padding:10px;background:var(--gold);color:#000;font-weight:600;border:none;cursor:pointer;font-family:'Jost',sans-serif;font-size:.82rem;letter-spacing:.1em;text-transform:uppercase}
+.cf button:hover{background:var(--goldlt)}
+.ct{display:flex;gap:7px;padding:0 18px 10px}
+.ct input{flex:1;padding:9px 13px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);color:var(--cream);font-size:.8rem;font-family:'Jost',sans-serif;outline:none;transition:border-color .2s}
+.ct input:focus{border-color:var(--gold)}
+.ct button{padding:9px 14px;background:var(--gold);color:#000;font-weight:600;border:none;cursor:pointer;font-family:'Jost',sans-serif;font-size:.76rem}
+.pinput{padding:12px 18px 18px;border-top:1px solid var(--border2);display:flex;gap:8px}
+#pinp{flex:1;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);padding:10px 14px;color:var(--cream);font-size:.8rem;font-family:'Jost',sans-serif;outline:none;transition:border-color .2s}
+#pinp:focus{border-color:var(--gold)}
+#pinp::placeholder{color:var(--muted);font-weight:300}
+#psend{width:40px;height:40px;background:var(--gold);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:background .2s}
+#psend:hover{background:var(--goldlt)}
+#psend svg{color:#000}
+
+/* FOOTER */
+footer{position:relative;z-index:2;background:var(--black2);border-top:1px solid var(--border);padding:48px 48px 32px}
+.fgrid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:40px;margin-bottom:44px}
+.fbname{font-family:'Cormorant Garamond',serif;font-size:1.25rem;font-weight:400;letter-spacing:.1em;margin-bottom:6px}
+.fbtag{font-size:.54rem;font-weight:400;letter-spacing:.25em;text-transform:uppercase;color:var(--gold);margin-bottom:16px}
+.fbody{font-size:.76rem;font-weight:300;color:var(--muted);line-height:1.8;max-width:270px}
+.fct{font-size:.56rem;font-weight:500;letter-spacing:.28em;text-transform:uppercase;color:var(--gold);margin-bottom:16px}
+.flinks{display:flex;flex-direction:column;gap:8px}
+.flinks a{font-size:.74rem;font-weight:300;color:var(--muted);transition:color .2s}
+.flinks a:hover{color:var(--cream)}
+.fbot{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;border-top:1px solid var(--border2);padding-top:22px}
+.flegal{font-size:.6rem;font-weight:300;color:var(--muted);line-height:1.7}
+@media(max-width:768px){.fgrid{grid-template-columns:1fr 1fr}footer{padding:40px 22px 28px}.container{padding:0 22px}.explorer{padding:70px 0}}
+@media(max-width:480px){.fgrid{grid-template-columns:1fr}}
+/* DEEP SPACE PANEL BACKGROUND */
+#panel{background:radial-gradient(ellipse 70% 60% at 25% 40%,rgba(201,168,76,.07),transparent 55%),radial-gradient(ellipse 50% 70% at 75% 60%,rgba(0,200,255,.05),transparent 55%),#06070a !important}
+#panelStars{position:absolute;inset:0;z-index:0;pointer-events:none}
+#panel .ph,#panel #pmsg,#panel #ctrl,#panel .pinput{position:relative;z-index:2}
+.mapboxgl-popup-content{background:rgba(10,12,15,.97)!important;border:1px solid var(--border)!important;border-radius:3px!important;padding:12px 16px!important;box-shadow:0 8px 32px rgba(0,0,0,.8)!important;color:var(--cream);font-family:'Jost',sans-serif;font-weight:300}
+.mapboxgl-popup-tip{border-top-color:rgba(10,12,15,.97)!important;border-bottom-color:rgba(10,12,15,.97)!important}
+.mapboxgl-popup-close-button{color:var(--muted)!important}
+.mapboxgl-ctrl-bottom-left,.mapboxgl-ctrl-bottom-right{opacity:.2}
+.rpill.active{border-color:var(--gold)!important;color:var(--gold)!important;background:rgba(201,168,76,.06)!important}
+.rpill:hover{border-color:rgba(201,168,76,.4)!important;color:var(--cream)!important}
+</style>
+</head>
+<body>
+<canvas id="c"></canvas>
+
+<nav id="nav">
+  <div class="nw">
+    <div class="nt">Cary Park Travel</div>
+    <div class="ns">Real Advisors · Live Pricing</div>
+  </div>
+  <div class="nl">
+    <a href="/">Home</a>
+    <a href="#explorer">Destinations</a>
+    <a href="#river">River Cruises</a>
+    <a href="#how">How It Works</a>
+    <a href="swim.html">Swim</a>
+    <button class="nadv" onclick="openPanel()">Speak With an Advisor</button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hbg" id="hbg"></div>
+  <div class="hgrad"></div>
+  <div class="hc">
+    <div class="eyebrow"><div class="eline"></div><div class="etext">Worldwide · Live Pricing · Expert Planning</div></div>
+    <h1 class="hero-title">The World<br/><em>Is Yours.</em></h1>
+    <p class="hsub">Cruises, river journeys, villa escapes, all-inclusives, and adventures — everywhere. Real advisors. Live prices. Booked right.</p>
+    <div class="hbtns">
+      <button class="bgold" onclick="openPanel()">Talk to an Advisor</button>
+      <a href="#explorer" class="bghost">Browse Destinations →</a>
+      <button class="bghost" onclick="openPanel()" style="border-color:rgba(0,200,255,.3);color:rgba(0,200,255,.7)">🔴 Talk to an Advisor</button>
+    </div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="mwrap">
+  <div class="min">
+    <span class="mi"><span class="mdot"></span><strong>Caribbean</strong>All-Inclusive from $799 pp</span>
+    <span class="mi"><span class="mdot"></span><strong>Mediterranean Cruise</strong>from $1,299 pp</span>
+    <span class="mi"><span class="mdot"></span><strong>Danube River Cruise</strong>from $2,900 pp</span>
+    <span class="mi"><span class="mdot"></span><strong>Mexico Riviera Maya</strong>from $649 pp</span>
+    <span class="mi"><span class="mdot"></span><strong>Alaska Cruise</strong>from $999 pp</span>
+    <span class="mi"><span class="mdot"></span><strong>Europe Tours</strong>from $2,200 pp</span>
+    <span class="mi"><span class="mdot"></span><strong>Hawaii</strong>from $1,100 pp</span>
+    <span class="mi"><span class="mdot"></span><strong>African Safari</strong>from $4,800 pp</span>
+    <span class="mi"><span class="mdot"></span><strong>Galapagos</strong>from $3,400 pp</span>
+    <span class="mi"><span class="mdot"></span><strong>Caribbean</strong>All-Inclusive from $799 pp</span>
+    <span class="mi"><span class="mdot"></span><strong>Mediterranean Cruise</strong>from $1,299 pp</span>
+    <span class="mi"><span class="mdot"></span><strong>Danube River Cruise</strong>from $2,900 pp</span>
+    <span class="mi"><span class="mdot"></span><strong>Mexico Riviera Maya</strong>from $649 pp</span>
+    <span class="mi"><span class="mdot"></span><strong>Alaska Cruise</strong>from $999 pp</span>
+    <span class="mi"><span class="mdot"></span><strong>Europe Tours</strong>from $2,200 pp</span>
+    <span class="mi"><span class="mdot"></span><strong>Hawaii</strong>from $1,100 pp</span>
+    <span class="mi"><span class="mdot"></span><strong>African Safari</strong>from $4,800 pp</span>
+    <span class="mi"><span class="mdot"></span><strong>Galapagos</strong>from $3,400 pp</span>
+  </div>
+</div>
+
+<!-- DESTINATION EXPLORER -->
+<section class="explorer" id="explorer">
+  <div class="container">
+    <div class="slbl">Destination Explorer</div>
+    <h2 class="stitle">Everywhere You've<br/><em>Ever Wanted to Go</em></h2>
+    <p class="ssub">Browse by travel style — then speak with an advisor to lock in current pricing and book.</p>
+
+    <div class="filter-bar" id="filterBar">
+      <button class="ftag active" data-filter="all">All</button>
+      <button class="ftag" data-filter="cruise">Ocean Cruises</button>
+      <button class="ftag" data-filter="river">River Cruises</button>
+      <button class="ftag" data-filter="resort">Resorts</button>
+      <button class="ftag" data-filter="allinclusive">All-Inclusive</button>
+      <button class="ftag" data-filter="luxury">Luxury</button>
+      <button class="ftag" data-filter="tour">Tours</button>
+      <button class="ftag" data-filter="adventure">Adventures</button>
+      <button class="ftag" data-filter="family">Family</button>
+    </div>
+
+    <div class="dest-grid" id="destGrid">
+      <!-- CARIBBEAN -->
+      <div class="dcard" data-cats="allinclusive resort family">
+        <img class="dcard-img" src="https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=500&auto=format&fit=crop&q=70" alt="Caribbean" loading="lazy"/>
+        <div class="dcard-ovl"></div>
+        <div class="dcard-info">
+          <div class="dcard-region">Americas</div>
+          <div class="dcard-name">Caribbean</div>
+          <div class="dcard-type">All-Inclusive · Beach Resort</div>
+          <div class="dcard-from"><span class="price-tag">From ~$799 pp</span></div>
+          <div class="dcard-btns">
+            <button class="dcard-btn-book" onclick="bookAdvisor('Caribbean all-inclusive resort')">Book w/ Advisor</button>
+          </div>
+        </div>
+      </div>
+      <!-- MEDITERRANEAN CRUISE -->
+      <div class="dcard" data-cats="cruise luxury">
+        <img class="dcard-img" src="https://images.unsplash.com/photo-1570077188670-e3a8d69ac5ff?w=500&auto=format&fit=crop&q=70" alt="Mediterranean" loading="lazy"/>
+        <div class="dcard-ovl"></div>
+        <div class="dcard-info">
+          <div class="dcard-region">Europe</div>
+          <div class="dcard-name">Mediterranean</div>
+          <div class="dcard-type">Ocean Cruise · Luxury</div>
+          <div class="dcard-from"><span class="price-tag">From ~$1,299 pp</span></div>
+          <div class="dcard-btns">
+            <button class="dcard-btn-book" onclick="bookAdvisor('Mediterranean cruise options')">Book w/ Advisor</button>
+          </div>
+        </div>
+      </div>
+      <!-- DANUBE RIVER CRUISE -->
+      <div class="dcard" data-cats="river luxury">
+        <img class="dcard-img" src="https://images.unsplash.com/photo-1467269204594-9661b134dd2b?w=500&auto=format&fit=crop&q=70" alt="Danube" loading="lazy"/>
+        <div class="dcard-ovl"></div>
+        <div class="dcard-info">
+          <div class="dcard-region">Europe</div>
+          <div class="dcard-name">Danube River</div>
+          <div class="dcard-type">River Cruise · Vienna to Budapest</div>
+          <div class="dcard-from"><span class="price-tag">From ~$2,900 pp</span></div>
+          <div class="dcard-btns">
+            <button class="dcard-btn-book" onclick="bookAdvisor('Danube river cruise pricing and availability')">Book w/ Advisor</button>
+          </div>
+        </div>
+      </div>
+      <!-- MEXICO -->
+      <div class="dcard" data-cats="allinclusive resort family">
+        <img class="dcard-img" src="https://images.unsplash.com/photo-1512813195386-6cf811ad3542?w=500&auto=format&fit=crop&q=70" alt="Mexico" loading="lazy"/>
+        <div class="dcard-ovl"></div>
+        <div class="dcard-info">
+          <div class="dcard-region">Americas</div>
+          <div class="dcard-name">Mexico</div>
+          <div class="dcard-type">All-Inclusive · Riviera Maya</div>
+          <div class="dcard-from"><span class="price-tag">From ~$649 pp</span></div>
+          <div class="dcard-btns">
+            <button class="dcard-btn-book" onclick="bookAdvisor('Mexico Riviera Maya all-inclusive deals')">Book w/ Advisor</button>
+          </div>
+        </div>
+      </div>
+      <!-- ALASKA -->
+      <div class="dcard" data-cats="cruise adventure">
+        <img class="dcard-img" src="https://images.unsplash.com/photo-1531168556467-80aace0d0144?w=500&auto=format&fit=crop&q=70" alt="Alaska" loading="lazy"/>
+        <div class="dcard-ovl"></div>
+        <div class="dcard-info">
+          <div class="dcard-region">North America</div>
+          <div class="dcard-name">Alaska</div>
+          <div class="dcard-type">Cruise · Expedition</div>
+          <div class="dcard-from"><span class="price-tag">From ~$999 pp</span></div>
+          <div class="dcard-btns">
+            <button class="dcard-btn-book" onclick="bookAdvisor('Alaska cruise options and pricing')">Book w/ Advisor</button>
+          </div>
+        </div>
+      </div>
+      <!-- SEINE RIVER CRUISE -->
+      <div class="dcard" data-cats="river luxury">
+        <img class="dcard-img" src="https://images.unsplash.com/photo-1502602898657-3e91760cbb34?w=500&auto=format&fit=crop&q=70" alt="Paris Seine" loading="lazy"/>
+        <div class="dcard-ovl"></div>
+        <div class="dcard-info">
+          <div class="dcard-region">France</div>
+          <div class="dcard-name">Seine River</div>
+          <div class="dcard-type">River Cruise · Paris to Normandy</div>
+          <div class="dcard-from"><span class="price-tag">From ~$2,400 pp</span></div>
+          <div class="dcard-btns">
+            <button class="dcard-btn-book" onclick="bookAdvisor('Seine river cruise Paris to Normandy')">Book w/ Advisor</button>
+          </div>
+        </div>
+      </div>
+      <!-- EUROPE TOURS -->
+      <div class="dcard" data-cats="tour luxury">
+        <img class="dcard-img" src="https://images.unsplash.com/photo-1516483638261-f4dbaf036963?w=500&auto=format&fit=crop&q=70" alt="Europe" loading="lazy"/>
+        <div class="dcard-ovl"></div>
+        <div class="dcard-info">
+          <div class="dcard-region">Europe</div>
+          <div class="dcard-name">Italy</div>
+          <div class="dcard-type">Guided Tour · Amalfi &amp; Rome</div>
+          <div class="dcard-from"><span class="price-tag">From ~$2,200 pp</span></div>
+          <div class="dcard-btns">
+            <button class="dcard-btn-book" onclick="bookAdvisor('Italy guided tour options')">Book w/ Advisor</button>
+          </div>
+        </div>
+      </div>
+      <!-- HAWAII -->
+      <div class="dcard" data-cats="resort family allinclusive">
+        <img class="dcard-img" src="https://images.unsplash.com/photo-1505852679233-d9fd70aff56d?w=500&auto=format&fit=crop&q=70" alt="Hawaii" loading="lazy"/>
+        <div class="dcard-ovl"></div>
+        <div class="dcard-info">
+          <div class="dcard-region">USA</div>
+          <div class="dcard-name">Hawaii</div>
+          <div class="dcard-type">Resort · Island Getaway</div>
+          <div class="dcard-from"><span class="price-tag">From ~$1,100 pp</span></div>
+          <div class="dcard-btns">
+            <button class="dcard-btn-book" onclick="bookAdvisor('Hawaii resort and island packages')">Book w/ Advisor</button>
+          </div>
+        </div>
+      </div>
+      <!-- AFRICA SAFARI -->
+      <div class="dcard" data-cats="adventure luxury tour">
+        <img class="dcard-img" src="https://images.unsplash.com/photo-1534470397273-69d3982baf91?w=500&auto=format&fit=crop&q=70" alt="Africa Safari" loading="lazy"/>
+        <div class="dcard-ovl"></div>
+        <div class="dcard-info">
+          <div class="dcard-region">Africa</div>
+          <div class="dcard-name">Safari</div>
+          <div class="dcard-type">Safari Tour · Kenya &amp; Tanzania</div>
+          <div class="dcard-from"><span class="price-tag">From ~$4,800 pp</span></div>
+          <div class="dcard-btns">
+            <button class="dcard-btn-book" onclick="bookAdvisor('African safari options and pricing')">Book w/ Advisor</button>
+          </div>
+        </div>
+      </div>
+      <!-- GALAPAGOS -->
+      <div class="dcard" data-cats="adventure cruise expedition">
+        <img class="dcard-img" src="https://images.unsplash.com/photo-1544551763-77ef2d0cfc6c?w=500&auto=format&fit=crop&q=70" alt="Galapagos" loading="lazy"/>
+        <div class="dcard-ovl"></div>
+        <div class="dcard-info">
+          <div class="dcard-region">Ecuador</div>
+          <div class="dcard-name">Galápagos</div>
+          <div class="dcard-type">Expedition Cruise</div>
+          <div class="dcard-from"><span class="price-tag">From ~$3,400 pp</span></div>
+          <div class="dcard-btns">
+            <button class="dcard-btn-book" onclick="bookAdvisor('Galapagos expedition cruise options')">Book w/ Advisor</button>
+          </div>
+        </div>
+      </div>
+      <!-- JAPAN -->
+      <div class="dcard" data-cats="tour luxury adventure">
+        <img class="dcard-img" src="https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?w=500&auto=format&fit=crop&q=70" alt="Japan" loading="lazy"/>
+        <div class="dcard-ovl"></div>
+        <div class="dcard-info">
+          <div class="dcard-region">Asia</div>
+          <div class="dcard-name">Japan</div>
+          <div class="dcard-type">Guided Tour · Tokyo &amp; Kyoto</div>
+          <div class="dcard-from"><span class="price-tag">From ~$2,800 pp</span></div>
+          <div class="dcard-btns">
+            <button class="dcard-btn-book" onclick="bookAdvisor('Japan tour package options and pricing')">Book w/ Advisor</button>
+          </div>
+        </div>
+      </div>
+      <!-- DOURO RIVER -->
+      <div class="dcard" data-cats="river luxury">
+        <img class="dcard-img" src="https://images.unsplash.com/photo-1555881400-74d7acaacd8b?w=500&auto=format&fit=crop&q=70" alt="Portugal Douro" loading="lazy"/>
+        <div class="dcard-ovl"></div>
+        <div class="dcard-info">
+          <div class="dcard-region">Portugal</div>
+          <div class="dcard-name">Douro Valley</div>
+          <div class="dcard-type">River Cruise · Wine Country</div>
+          <div class="dcard-from"><span class="price-tag">From ~$3,100 pp</span></div>
+          <div class="dcard-btns">
+            <button class="dcard-btn-book" onclick="bookAdvisor('Douro Valley river cruise in Portugal')">Book w/ Advisor</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div style="text-align:center;margin-top:32px">
+      <button class="bghost" onclick="openPanel()" style="display:inline-flex">Speak With an Advisor ↗</button>
+      <p style="font-size:.7rem;color:var(--muted);margin-top:12px;font-weight:300">Prices shown are estimates based on typical market rates. For current availability and exact pricing, speak with an advisor or browse live inventory above.</p>
+    </div>
+  </div>
+</section>
+
+<!-- RIVER CRUISE FEATURE -->
+<section class="rfeat" id="river">
+  <div class="rbg"></div>
+  <div class="rovl"></div>
+  <div class="rc">
+    <div class="eyebrow"><div class="eline"></div><div class="etext">Signature Collection</div></div>
+    <h2 class="stitle" style="color:var(--cream)">European<br/><em>River Cruises</em></h2>
+    <p style="font-size:.9rem;font-weight:300;color:var(--muted);max-width:420px;line-height:1.85;margin-bottom:28px">Wake up in Vienna, dine in Budapest, arrive in Amsterdam — all without unpacking twice. Rhine, Danube, Seine, Douro, and Rhône.</p>
+    <div class="rdet">
+      <div class="rdi"><div class="rdl">Duration</div><div class="rdv">7–14 nights</div></div>
+      <div class="rdi"><div class="rdl">Starting From</div><div class="rdv">~$2,400 pp</div></div>
+      <div class="rdi"><div class="rdl">Lines</div><div class="rdv">Viking · AmaWaterways · Scenic</div></div>
+    </div>
+    <div style="display:flex;gap:14px;flex-wrap:wrap">
+      <button class="bgold" onclick="openPanel()">Plan a River Cruise ↗</button>
+      <button class="bghost" onclick="bookAdvisor('European river cruise options — I want to compare routes and pricing')">Talk to an Advisor</button>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="how" id="how" style="padding:90px 0">
+  <div class="container">
+    <div class="slbl">The Process</div>
+    <h2 class="stitle">Browse, Plan,<br/><em>Book — Properly.</em></h2>
+    <p class="ssub" style="margin-bottom:44px">Live inventory to explore. A real advisor to finalize. That's the difference.</p>
+    <div class="how-grid">
+      <div class="how-item"><div class="how-num">01</div><div class="how-title">Browse Live Inventory</div><div class="how-desc">Browse curated options across hundreds of cruises, resorts, river journeys, and tours — with current market pricing.</div></div>
+      <div class="how-item"><div class="how-num">02</div><div class="how-title">Tell Us What You Love</div><div class="how-desc">Chat with our advisor, share your shortlist, and describe your ideal trip. We'll refine it to fit your budget and style.</div></div>
+      <div class="how-item"><div class="how-num">03</div><div class="how-title">We Handle the Details</div><div class="how-desc">Flights, transfers, shore excursions, travel insurance, and special requests — coordinated by your advisor.</div></div>
+      <div class="how-item"><div class="how-num">04</div><div class="how-title">Book with Confidence</div><div class="how-desc">All bookings handled by your licensed travel advisor. Full transaction support, no self-service guesswork.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ROUTE EXPLORER -->
+<section id="routes" style="padding:90px 0;background:var(--black2);border-top:1px solid var(--border2)">
+  <div style="max-width:1200px;margin:0 auto;padding:0 48px">
+    <div style="display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:32px;flex-wrap:wrap;gap:16px">
+      <div>
+        <div style="font-size:.6rem;font-weight:400;letter-spacing:.3em;text-transform:uppercase;color:var(--gold);display:flex;align-items:center;gap:12px;margin-bottom:14px"><span style="display:inline-block;width:32px;height:1px;background:var(--gold)"></span>Interactive Route Map</div>
+        <h2 style="font-family:'Cormorant Garamond',serif;font-size:clamp(1.8rem,3.5vw,3rem);font-weight:300;line-height:1.1;letter-spacing:-.01em">Explore the <em style="font-style:italic;color:var(--goldlt)">Journey</em></h2>
+        <p style="font-size:.88rem;font-weight:300;color:var(--muted);margin-top:10px;max-width:480px;line-height:1.8">Select any cruise route and watch the ship trace the path port by port. Click any stop for details.</p>
+      </div>
+      <div style="display:flex;gap:8px;flex-wrap:wrap">
+        <button class="rpill active" onclick="switchRoute('danube',this)" style="padding:7px 16px;border:1px solid var(--border);font-size:.62rem;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);cursor:pointer;background:rgba(201,168,76,.06);font-family:'Jost',sans-serif;transition:all .2s">Danube</button>
+        <button class="rpill" onclick="switchRoute('seine',this)" style="padding:7px 16px;border:1px solid var(--border2);font-size:.62rem;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);cursor:pointer;background:none;font-family:'Jost',sans-serif;transition:all .2s">Seine</button>
+        <button class="rpill" onclick="switchRoute('rhine',this)" style="padding:7px 16px;border:1px solid var(--border2);font-size:.62rem;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);cursor:pointer;background:none;font-family:'Jost',sans-serif;transition:all .2s">Rhine</button>
+        <button class="rpill" onclick="switchRoute('douro',this)" style="padding:7px 16px;border:1px solid var(--border2);font-size:.62rem;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);cursor:pointer;background:none;font-family:'Jost',sans-serif;transition:all .2s">Douro</button>
+        <button class="rpill" onclick="switchRoute('med',this)" style="padding:7px 16px;border:1px solid var(--border2);font-size:.62rem;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);cursor:pointer;background:none;font-family:'Jost',sans-serif;transition:all .2s">Mediterranean</button>
+        <button class="rpill" onclick="switchRoute('caribbean',this)" style="padding:7px 16px;border:1px solid var(--border2);font-size:.62rem;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);cursor:pointer;background:none;font-family:'Jost',sans-serif;transition:all .2s">Caribbean</button>
+      </div>
+    </div>
+    <!-- Map container -->
+    <div style="position:relative;border:1px solid var(--border);border-radius:4px;overflow:hidden">
+      <div id="routeMap" style="height:460px;width:100%"></div>
+      <!-- Itinerary strip -->
+      <div id="routeStrip" style="display:flex;gap:0;overflow-x:auto;border-top:1px solid var(--border);background:rgba(8,9,10,.9);backdrop-filter:blur(10px)">
+      </div>
+      <!-- Animate btn -->
+      <button onclick="animMap()" id="routeAnimBtn" style="position:absolute;bottom:70px;right:16px;background:var(--gold);border:none;color:#000;padding:8px 16px;font-size:.6rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;cursor:pointer;font-family:'Jost',sans-serif;z-index:5;border-radius:2px;box-shadow:0 4px 16px rgba(201,168,76,.3)">▶ Animate Route</button>
+    </div>
+  </div>
+</section>
+
+<!-- CTA BAND -->
+<div class="cta-band">
+  <h3>Ready to <em>Go Anywhere?</em></h3>
+  <p>Tell us where you want to go. Our advisors handle the rest — research, pricing, booking, and everything in between.</p>
+  <div class="cta-btns">
+    <button class="bgold" onclick="openPanel()">Talk to an Advisor ↗</button>
+    <button class="bghost" onclick="openPanel()">Speak With an Advisor</button>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="fgrid">
+    <div>
+      <div class="fbname">Cary Park Travel</div>
+      <div class="fbtag">Real Advisors · Live Pricing</div>
+      <p class="fbody">Curated travel planning worldwide. Cruises, river journeys, resorts, all-inclusives, and adventures — booked right.</p>
+    </div>
+    <div><div class="fct">Browse</div><div class="flinks">
+      <a href="#explorer">All Destinations</a>
+      <a href="#river">River Cruises</a>
+      <a href="#explorer">Resorts</a>
+      <a href="#explorer">Tours</a>
+      <a href="#explorer">Current Deals</a>
+    </div></div>
+    <div><div class="fct">Company</div><div class="flinks">
+      <a href="/">Cary Park Solutions</a>
+      <a href="web.html">Web Services</a>
+      <a href="support.html">Support</a>
+      <a href="swim.html">Swim Sessions</a>
+    </div></div>
+    <div><div class="fct">Contact</div><div class="flinks">
+      <a href="tel:+19842582028">(984) 258-2028</a>
+      <a href="mailto:info@caryparksolutions.com">info@caryparksolutions.com</a>
+      <a href="javascript:void(0)" onclick="openPanel()">Live Advisor Chat</a>
+    </div></div>
+  </div>
+  <div class="fbot">
+    <p class="flegal">© 2026 Cary Park Travel · Cary Park Solutions · Clayton, NC · (984) 258-2028<br/>Travel planning service. Prices shown are estimates based on typical market rates; confirm current pricing and availability with your advisor.</p>
+    <p class="flegal">Serving the Triangle · Worldwide</p>
+  </div>
+</footer>
+
+<!-- ADVISOR PANEL -->
+<div id="panel">
+  <div class="ph">
+    <div><div class="pht">Your Travel Advisor</div><div class="phs">✦ Cary Park Travel · Your Personal Advisor</div></div>
+    <button class="pclose" onclick="closePanel()">✕</button>
+  </div>
+  <div id="pmsg"></div>
+  <div id="ctrl"></div>
+  <div class="pinput" id="pinputRow" style="display:none">
+    <input id="pinp" type="text" placeholder="Tell us more…"/>
+    <button id="psend" onclick="sendFree()">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+    </button>
+  </div>
+</div>
+
+<script>
+// Canvas stars
+const cv=document.getElementById('c'),cx=cv.getContext('2d');let pts=[],mo={x:-999,y:-999};
+function rsz(){cv.width=innerWidth;cv.height=innerHeight}rsz();window.addEventListener('resize',rsz);
+window.addEventListener('mousemove',e=>{mo.x=e.clientX;mo.y=e.clientY});
+for(let i=0;i<160;i++)pts.push({x:Math.random()*innerWidth,y:Math.random()*innerHeight,r:Math.random()*1.3+.3,vx:(Math.random()-.5)*.18,vy:(Math.random()-.5)*.18,a:Math.random()*.6+.2});
+function draw(){cx.clearRect(0,0,cv.width,cv.height);pts.forEach(p=>{const dx=mo.x-p.x,dy=mo.y-p.y,d=Math.sqrt(dx*dx+dy*dy);if(d<120){p.x+=dx*.004;p.y+=dy*.004}p.x+=p.vx;p.y+=p.vy;if(p.x<0)p.x=cv.width;if(p.x>cv.width)p.x=0;if(p.y<0)p.y=cv.height;if(p.y>cv.height)p.y=0;cx.beginPath();cx.arc(p.x,p.y,p.r,0,Math.PI*2);cx.fillStyle=`rgba(255,255,255,${p.a})`;cx.fill()});requestAnimationFrame(draw)}draw();
+
+// Nav scroll + hero
+window.addEventListener('scroll',()=>document.getElementById('nav').classList.toggle('scrolled',scrollY>60));
+window.addEventListener('load',()=>document.getElementById('hbg').classList.add('loaded'));
+
+// Destination filter
+document.querySelectorAll('.ftag').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    document.querySelectorAll('.ftag').forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
+    const filter=btn.dataset.filter;
+    document.querySelectorAll('.dcard').forEach(card=>{
+      if(filter==='all'||card.dataset.cats.includes(filter)){card.classList.remove('hidden')}
+      else{card.classList.add('hidden')}
+    });
+  });
+});
+
+// Advisory panel
+let panelOpen=false,convo={answers:{}};
+const pmsg=document.getElementById('pmsg'),ctrl=document.getElementById('ctrl');
+
+function openPanel(){
+  panelOpen=true;document.getElementById('panel').classList.add('open');
+  if(pmsg.children.length===0)setTimeout(startFlow,300);
+}
+function closePanel(){panelOpen=false;document.getElementById('panel').classList.remove('open')}
+
+function bot(m){
+  const w=document.createElement('div');w.className='msg madv';
+  const s=document.createElement('div');s.className='msndr';s.textContent='Ava · Cary Park Travel';
+  const b=document.createElement('div');b.innerHTML=m.replace(/\n/g,'<br/>');
+  w.appendChild(s);w.appendChild(b);pmsg.appendChild(w);pmsg.scrollTop=pmsg.scrollHeight;
+}
+function user(m){
+  const w=document.createElement('div');w.className='msg muser';
+  const s=document.createElement('div');s.className='msndr';s.textContent='You';
+  const b=document.createElement('div');b.textContent=m;
+  w.appendChild(s);w.appendChild(b);pmsg.appendChild(w);pmsg.scrollTop=pmsg.scrollHeight;
+}
+function clr(){ctrl.innerHTML='';document.getElementById('pinputRow').style.display='none'}
+function opts(os,fn){
+  clr();const w=document.createElement('div');w.className='co';
+  os.forEach(o=>{const b=document.createElement('button');b.textContent=o;b.onclick=()=>{user(o);clr();fn(o)};w.appendChild(b)});
+  ctrl.appendChild(w);
+}
+function typed(ph,fn){
+  clr();const w=document.createElement('div');w.className='ct';
+  w.innerHTML=`<input type="text" placeholder="${ph}"/><button>Send</button>`;
+  const i=w.querySelector('input'),b=w.querySelector('button');
+  const go=()=>{const v=i.value.trim();if(!v)return;user(v);clr();fn(v)};
+  b.onclick=go;i.addEventListener('keydown',e=>{if(e.key==='Enter')go()});
+  ctrl.appendChild(w);setTimeout(()=>i.focus(),100);
+}
+function cform(fn){
+  clr();const f=document.createElement('div');f.className='cf';
+  f.innerHTML=`<input type="text" placeholder="Your name" id="fn"><input type="email" placeholder="Email address" id="fe"><input type="tel" placeholder="Phone (optional)" id="fp"><textarea placeholder="Anything else we should know about your trip?" id="fnotes"></textarea><button>Send to Advisor</button>`;
+  f.querySelector('button').onclick=()=>{
+    const n=f.querySelector('#fn').value.trim(),em=f.querySelector('#fe').value.trim();
+    if(!n||!em)return;
+    user(`${n} · ${em}`);clr();
+    fn({name:n,email:em,phone:f.querySelector('#fp').value.trim(),notes:f.querySelector('#fnotes').value.trim()});
+  };
+  ctrl.appendChild(f);
+}
+function closeBtn(){
+  clr();const w=document.createElement('div');w.className='co';
+  const b=document.createElement('button');b.textContent='Close';b.onclick=closePanel;
+  w.appendChild(b);ctrl.appendChild(w);
+}
+
+// opts with "Something else" free-text fallback
+function optsOrType(os,placeholder,fn){
+  clr();const w=document.createElement('div');w.className='co';
+  os.forEach(o=>{
+    const b=document.createElement('button');b.textContent=o;
+    b.onclick=()=>{user(o);clr();fn(o)};w.appendChild(b);
+  });
+  // Something else row
+  const row=document.createElement('div');row.style.cssText='display:flex;gap:6px;margin-top:4px;width:100%';
+  const inp=document.createElement('input');
+  inp.type='text';inp.placeholder=placeholder||'Something else…';
+  inp.style.cssText='flex:1;padding:8px 10px;background:rgba(255,255,255,.06);border:1px solid rgba(201,168,76,.25);color:#f5f0e8;font-size:.78rem;font-family:inherit;outline:none;border-radius:2px';
+  const sb=document.createElement('button');sb.textContent='→';
+  sb.style.cssText='padding:8px 12px;background:rgba(201,168,76,.15);border:1px solid rgba(201,168,76,.3);color:#c9a84c;font-size:.8rem;cursor:pointer;border-radius:2px';
+  const go=()=>{const v=inp.value.trim();if(!v)return;user(v);clr();fn(v)};
+  sb.onclick=go;inp.addEventListener('keydown',e=>{if(e.key==='Enter')go()});
+  row.appendChild(inp);row.appendChild(sb);
+  w.appendChild(row);ctrl.appendChild(w);
+}
+
+// Trip comparison card before form submit
+function showComparison(tripA,tripB,fn){
+  clr();
+  const trips={
+    'Ocean Cruise':    {icon:'🚢',price:'$899–$2,500',dur:'5–10 nights',inc:'Entertainment, most meals, ports',best:'Value, variety, onboard amenities'},
+    'River Cruise':    {icon:'⚓',price:'$2,400–$4,500',dur:'5–8 nights',inc:'Shore excursions, all meals, wine',best:'Scenery, culture, intimate experience'},
+    'All-Inclusive':   {icon:'🏖️',price:'$649–$2,500',dur:'4–7 nights',inc:'Meals, drinks, entertainment',best:'Families, couples, zero planning'},
+    'Guided Tour':     {icon:'🗺️',price:'$2,200–$5,000',dur:'7–14 nights',inc:'Hotels, guide, most meals',best:'Culture, history, first-timers'},
+    'Safari/Adventure':{icon:'🦁',price:'$3,500–$10,000',dur:'7–14 nights',inc:'Lodge, game drives, meals',best:'Wildlife, bucket list'},
+    'Luxury Escape':   {icon:'✨',price:'$3,000–$15,000',dur:'5–14 nights',inc:'Private transfers, butler, spa',best:'Honeymoon, milestone anniversary'},
+    'Honeymoon':       {icon:'💍',price:'$2,500–$8,000',dur:'7–14 nights',inc:'Romance packages, upgrades',best:'Couples, privacy, memories'},
+    'Family Vacation': {icon:'👨‍👩‍👧',price:'$800–$3,500',dur:'5–10 nights',inc:'Kids clubs, flexible dining',best:'Kids, multi-gen groups'},
+  };
+  const a=trips[tripA]||{icon:'✈️',price:'Custom',dur:'Flexible',inc:'TBD',best:'Advisor curated'};
+  const b=trips[tripB]||{icon:'🌍',price:'Custom',dur:'Flexible',inc:'TBD',best:'Advisor curated'};
+
+  bot(`Here's a quick comparison of the two options you're weighing:`);
+
+  const card=document.createElement('div');
+  card.style.cssText='display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:8px 0;font-size:.72rem';
+  card.innerHTML=`
+    <div style="background:rgba(201,168,76,.06);border:1px solid rgba(201,168,76,.2);padding:12px;border-radius:2px">
+      <div style="font-size:1.2rem;margin-bottom:4px">${a.icon}</div>
+      <div style="font-weight:600;color:#e8cc8a;margin-bottom:6px">${tripA}</div>
+      <div style="color:rgba(245,240,232,.5);margin-bottom:2px">From ${a.price} pp</div>
+      <div style="color:rgba(245,240,232,.5);margin-bottom:2px">${a.dur}</div>
+      <div style="color:rgba(245,240,232,.7);margin-top:6px;line-height:1.5">${a.inc}</div>
+      <div style="color:#c9a84c;margin-top:6px;font-size:.66rem">Best for: ${a.best}</div>
+    </div>
+    <div style="background:rgba(0,200,255,.04);border:1px solid rgba(0,200,255,.15);padding:12px;border-radius:2px">
+      <div style="font-size:1.2rem;margin-bottom:4px">${b.icon}</div>
+      <div style="font-weight:600;color:#00c8ff;margin-bottom:6px">${tripB}</div>
+      <div style="color:rgba(245,240,232,.5);margin-bottom:2px">From ${b.price} pp</div>
+      <div style="color:rgba(245,240,232,.5);margin-bottom:2px">${b.dur}</div>
+      <div style="color:rgba(245,240,232,.7);margin-top:6px;line-height:1.5">${b.inc}</div>
+      <div style="color:#00c8ff;margin-top:6px;font-size:.66rem">Best for: ${b.best}</div>
+    </div>`;
+  pmsg.appendChild(card);pmsg.scrollTop=pmsg.scrollHeight;
+
+  setTimeout(()=>{
+    bot("Which feels closer to what you're picturing?");
+    opts([tripA, tripB, 'Either — advisor decides', 'Actually something different'],pick=>{
+      convo.answers.tripCompare=`Compared ${tripA} vs ${tripB} → picked: ${pick}`;
+      if(pick==='Actually something different'){
+        leisureBranch();
+      } else {
+        if(pick!=='Either — advisor decides') convo.answers.type=pick;
+        fn();
+      }
+    });
+  },400);
+}
+
+function startFlow(){
+  bot("Hi — I'm Ava, your Cary Park Travel advisor. Let's find you the perfect trip.\n\nIs this travel for business or leisure?");
+  opts(['Personal / Leisure','Corporate / Business Travel','Both — mixing work and leisure'],purpose=>{
+    convo.answers.purpose=purpose;
+    const isCorp=/Corporate|Business/i.test(purpose);
+    if(isCorp) corpBranch();
+    else leisureBranch();
+  });
+}
+
+function corpBranch(){
+  bot("Let's get this dialed in. What's the nature of the trip?");
+  optsOrType(['Client entertainment','Executive retreat','Team offsite','Conference or event','Incentive travel','Site visit / roadshow'],'Describe your trip type…',corpType=>{
+    convo.answers.corpType=corpType;
+    bot("How many travelers?");
+    optsOrType(['1–2 executives','3–9 people','10–25 people','25+ people'],'Enter number…',pax=>{
+      convo.answers.pax=pax;
+      bot("Destination preference?");
+      optsOrType(['Domestic US','Caribbean / Latin America','Europe','Asia Pacific','Middle East / Africa','Flexible — best option'],'Specific city or country…',dest=>{
+        convo.answers.dest=dest;
+        bot("Approximate per-person budget?");
+        optsOrType(['Under $2,000','$2,000–$5,000','$5,000–$10,000','$10,000+','Needs internal approval'],'Enter budget range…',budget=>{
+          convo.answers.budget=budget;
+          askFlightPrefsCorpo();
+        });
+      });
+    });
+  });
+}
+
+function askFlightPrefsCorpo(){
+  bot("Any flight preferences for the group?");
+  optsOrType(['Business class required','Economy plus / premium economy','Economy is fine','Private charter needed','Mixed — varies by traveler'],'Describe requirements…',fp=>{
+    convo.answers.flightClass=fp;
+    bot("Preferred airlines or alliances?");
+    optsOrType(['No preference','American / AA','Delta','United','Delta or United only','Star Alliance','Oneworld','No domestic legs needed'],'Enter airline name or preference…',airline=>{
+      convo.answers.airline=airline;
+      askCorpUpsells();
+    });
+  });
+}
+
+function askCorpUpsells(){
+  bot("Any of these needed for the group?");
+  optsOrType(['Business class flights','Private transfers','Executive lounge access','Group meeting space / AV','Dedicated event coordinator','Branded welcome packages','Dietary accommodations','None — keep it standard'],'Other requirement…',upsell=>{
+    convo.answers.corpUpsells=upsell;
+    bot("Any confidentiality or policy constraints I should note?");
+    opts(['Strict corporate travel policy','NDAs / confidentiality required','Expense reporting format needed','No special constraints'],reqs=>{
+      convo.answers.corpReqs=reqs;
+      bot("Last thing — anything else about this trip the advisor should know?");
+      typed('Special notes, previous trips, VIP status…',notes=>{
+        convo.answers.extraNotes=notes;
+        bot("Got it. Last step — your contact info and I'll get a full proposal started:");
+        cform(c=>{Object.assign(convo.answers,c);finish()});
+      });
+    });
+  });
+}
+
+function leisureBranch(){
+  bot("What kind of trip are you dreaming of?");
+  optsOrType(['Ocean Cruise','River Cruise','All-Inclusive Resort','Guided Tour','Safari / Adventure','Luxury Escape','Honeymoon / Romance','Family Vacation','Not sure — surprise me'],'Describe your ideal trip…',type=>{
+    convo.answers.type=type;
+    if(/not sure|surprise/i.test(type)){
+      bot("No problem — I'll ask a few questions and our advisor will put together the perfect match.");
+      convo.answers.type='Advisor curated';
+    }
+    askDestination();
+  });
+}
+
+function askDestination(){
+  bot("Where in the world are you thinking?");
+  optsOrType(['Caribbean','Europe','Mediterranean','Asia','Africa / Safari','Central / South America','Hawaii','Alaska / Canada','Anywhere — best value for my budget'],'Specific country, city, or region…',dest=>{
+    convo.answers.dest=dest;
+    bot("How many travelers?");
+    optsOrType(['Just me','2 adults','Couple + another couple','Family with young kids','Family with teens','Group of friends (4+)','Multi-generational group'],'Number of people…',pax=>{
+      convo.answers.pax=pax;
+      bot("What's your per-person budget?");
+      optsOrType(['Under $1,000','$1,000–$2,500','$2,500–$5,000','$5,000–$10,000','$10,000+','Flexible — show me options'],'Enter your budget…',budget=>{
+        convo.answers.budget=budget;
+        askDuration();
+      });
+    });
+  });
+}
+
+function askDuration(){
+  bot("How long are you looking to travel?");
+  optsOrType(['3–4 nights (long weekend)','5–7 nights','8–10 nights','11–14 nights','2+ weeks','Flexible'],'Enter number of nights…',dur=>{
+    convo.answers.duration=dur;
+    askTripDepth();
+  });
+}
+
+function askTripDepth(){
+  bot("What does your ideal experience look like day-to-day?");
+  optsOrType([
+    'Relaxed — beaches, pool, minimal planning',
+    'Active — excursions, hiking, exploring each day',
+    'Cultural — history, food, local immersion',
+    'Ultra-luxury — only the best, no compromises',
+    'Adventure — off the beaten path',
+    'Balance of everything'
+  ],'Describe your vibe…',vibe=>{
+    convo.answers.vibe=vibe;
+    askFlightPrefs();
+  });
+}
+
+function askFlightPrefs(){
+  bot("Let's talk flights. What cabin class are you looking for?");
+  optsOrType(['Economy — best value','Premium economy','Business class','First class','No flights needed — I'm driving / already have flights'],'Other preference…',fc=>{
+    convo.answers.flightClass=fc;
+    if(/no flights|already have/i.test(fc)){
+      askLuxuryUpsells();
+      return;
+    }
+    bot("Any airline preferences or loyalty programs I should know about?");
+    optsOrType([
+      'No preference',
+      'American Airlines (AAdvantage)',
+      'Delta (SkyMiles)',
+      'United (MileagePlus)',
+      'Southwest (Rapid Rewards)',
+      'International preferred (Air France, Lufthansa, etc.)',
+      'Alliance: Star Alliance',
+      'Alliance: Oneworld',
+      'Alliance: SkyTeam'
+    ],'Enter airline or program…',airline=>{
+      convo.answers.airline=airline;
+      bot("Nonstop flights only, or are connections okay?");
+      opts(['Nonstop only','One connection is fine','Open to whatever is cheapest'],stops=>{
+        convo.answers.stops=stops;
+        askLuxuryUpsells();
+      });
+    });
+  });
+}
+
+function askLuxuryUpsells(){
+  bot("Any of these on your wish list?");
+  optsOrType([
+    'Cabin / room upgrade',
+    'Private shore excursions',
+    'Spa & wellness package',
+    'Champagne / celebration setup',
+    'Private transfers throughout',
+    'Travel insurance',
+    'Early boarding / priority access',
+    'None of the above'
+  ],'Other wish list item…',upsell=>{
+    convo.answers.upsells=upsell;
+    if(!/None/i.test(upsell)) askMoreUpsells();
+    else askDates();
+  });
+}
+
+function askMoreUpsells(){
+  bot("Anything else to add?");
+  optsOrType([
+    'Private chef / dining experience',
+    'Photography / videography package',
+    'Helicopter or yacht excursion',
+    'VIP event or show access',
+    'Kids club / childcare onboard',
+    'Nothing else'
+  ],'Other…',extra=>{
+    convo.answers.extras=extra;
+    askDates();
+  });
+}
+
+function askDates(){
+  bot("When are you hoping to travel?");
+  optsOrType(['Within 30 days','1–3 months out','3–6 months out','6–12 months out','Next summer (2027)','Flexible / no rush'],'Specific month or date range…',timing=>{
+    convo.answers.timing=timing;
+    bot("Any special occasions for this trip?");
+    optsOrType(['Anniversary','Birthday milestone','Honeymoon','First time traveling internationally','Repeat traveler — want something new','Surprise trip for someone','No special occasion'],'Tell me about it…',occasion=>{
+      convo.answers.occasion=occasion;
+      askComparison();
+    });
+  });
+}
+
+function askComparison(){
+  const t=convo.answers.type||'';
+  const compMap={
+    'Ocean Cruise':'River Cruise',
+    'River Cruise':'Ocean Cruise',
+    'All-Inclusive Resort':'Guided Tour',
+    'Guided Tour':'All-Inclusive Resort',
+    'Safari / Adventure':'Luxury Escape',
+    'Luxury Escape':'Safari / Adventure',
+    'Honeymoon / Romance':'Luxury Escape',
+    'Family Vacation':'All-Inclusive Resort',
+  };
+  const alt=compMap[t];
+  if(alt && !/Advisor curated|not sure/i.test(t)){
+    bot(`Before I pull your advisor in — would you like to see a quick comparison of ${t} vs ${alt}? Helps make sure we're pointed in the right direction.`);
+    opts([`Yes — compare ${t} vs ${alt}`,'No — I know what I want'],choice=>{
+      if(/yes/i.test(choice)){
+        showComparison(t,alt,()=>preSubmit());
+      } else {
+        preSubmit();
+      }
+    });
+  } else {
+    preSubmit();
+  }
+}
+
+function preSubmit(){
+  const a=convo.answers;
+  const summary=`Here's what I have for you:\n\n` +
+    `✦ Trip: ${a.type||'Advisor curated'}\n` +
+    `✦ Destination: ${a.dest||'—'}\n` +
+    `✦ Travelers: ${a.pax||'—'}\n` +
+    `✦ Budget: ${a.budget||'—'} pp\n` +
+    `✦ Duration: ${a.duration||'—'}\n` +
+    `✦ Flights: ${a.flightClass||'—'} · ${a.airline||'—'}\n` +
+    `✦ Timing: ${a.timing||'—'}\n\nDoes this look right?`;
+  bot(summary);
+  opts(['Yes — send to advisor','Let me change something'],confirm=>{
+    if(/yes/i.test(confirm)){
+      bot("Perfect. Last step — your contact info:");
+      cform(c=>{Object.assign(convo.answers,c);finish()});
+    } else {
+      bot("No problem — which part would you like to update?");
+      opts(['Trip type','Destination','Budget','Travelers','Flights / airline','Dates / timing'],part=>{
+        const reRoutes={
+          'Trip type':leisureBranch,
+          'Destination':askDestination,
+          'Budget':()=>{ bot("What's your updated budget?"); optsOrType(['Under $1,000','$1,000–$2,500','$2,500–$5,000','$5,000+','Flexible'],'New budget…',b=>{convo.answers.budget=b;preSubmit()})},
+          'Travelers':()=>{ bot("How many travelers?"); optsOrType(['Just me','2 adults','Family with kids','Group of 4+'],'Number…',p=>{convo.answers.pax=p;preSubmit()})},
+          'Flights / airline':askFlightPrefs,
+          'Dates / timing':askDates
+        };
+        (reRoutes[part]||preSubmit)();
+      });
+    }
+  });
+}
+
+function finish(){
+  const a=convo.answers;
+  const isCorp=/Corporate|Business/i.test(a.purpose||'');
+  const tag=isCorp?'[Corporate Travel]':'[Leisure Travel]';
+  const subj=encodeURIComponent(`${tag} ${a.type||a.corpType||'Inquiry'} — ${a.dest||''} — ${a.name||'New lead'}`);
+  const bodyText=isCorp
+    ?`CORPORATE TRAVEL INQUIRY\n\nName: ${a.name}\nEmail: ${a.email}\nPhone: ${a.phone||'—'}\n\nType: ${a.corpType}\nTravelers: ${a.pax}\nDestination: ${a.dest}\nBudget: ${a.budget} pp\nFlight class: ${a.flightClass||'—'}\nAirline pref: ${a.airline||'—'}\nUpgrades: ${a.corpUpsells||'—'}\nRequirements: ${a.corpReqs||'—'}\nExtra notes: ${a.extraNotes||'—'}\nNotes: ${a.notes||'—'}`
+    :`LEISURE TRAVEL INQUIRY\n\nName: ${a.name}\nEmail: ${a.email}\nPhone: ${a.phone||'—'}\n\nTrip type: ${a.type}\nDestination: ${a.dest}\nTravelers: ${a.pax}\nBudget: ${a.budget} pp\nDuration: ${a.duration||'—'}\nVibe: ${a.vibe||'—'}\nFlight class: ${a.flightClass||'—'}\nAirline pref: ${a.airline||'—'}\nStops: ${a.stops||'—'}\nUpsells: ${a.upsells||'—'}\nExtras: ${a.extras||'—'}\nTiming: ${a.timing||'—'}\nOccasion: ${a.occasion||'—'}\nComparison: ${a.tripCompare||'—'}\nNotes: ${a.notes||'—'}`;
+  const body=encodeURIComponent(bodyText+`\n\nSubmitted: ${new Date().toLocaleString()}`);
+  const fname=a.name?a.name.split(' ')[0]:'';
+  bot(`Thanks${fname?', '+fname:''}! Your inquiry is on its way to our advisor team.\n\nExpect a reply within 1 business day with curated options matched to your preferences.`);
+  setTimeout(()=>window.location.href=`mailto:info@caryparksolutions.com?subject=${subj}&body=${body}`,900);
+  closeBtn();
+}
+
+function bookAdvisor(context){
+  convo.answers.context=context;
+  openPanel();
+  if(pmsg.children.length===0){
+    setTimeout(()=>{
+      bot(`I see you're interested in ${context}.\n\nIs this for personal travel or a corporate / business trip?`);
+      opts(['Personal / Leisure','Corporate / Business'],p=>{
+        convo.answers.purpose=p;
+        convo.answers.type=context;
+        if(/Corporate/i.test(p)) askFlightPrefsCorpo();
+        else { askDestination(); }
+      });
+    },300);
+  }
+}
+
+function sendFree(){
+  const v=document.getElementById('pinp').value.trim();
+  if(!v)return;document.getElementById('pinp').value='';
+  user(v);bot("Got it — I've noted that for our advisor.");
+}
+</script>
+<script>
+// ===================== PANEL STARS (Deep Space) =====================
+function initPanelStars() {
+  const panel = document.getElementById('panel');
+  if(!panel) return;
+  const c = document.createElement('canvas');
+  c.id = 'panelStars'; c.style.cssText = 'position:absolute;inset:0;z-index:0;pointer-events:none';
+  panel.insertBefore(c, panel.firstChild);
+  const cx = c.getContext('2d');
+  function rsz() { c.width = panel.offsetWidth; c.height = panel.offsetHeight; }
+  rsz();
+  const pts = Array.from({length:100}, () => ({
+    x: Math.random()*c.width, y: Math.random()*c.height,
+    r: Math.random()*.9+.2, vx: (Math.random()-.5)*.05, vy: (Math.random()-.5)*.05,
+    a: Math.random()*.35+.1
+  }));
+  function draw() {
+    cx.clearRect(0,0,c.width,c.height);
+    pts.forEach(p => {
+      p.x+=p.vx; p.y+=p.vy;
+      if(p.x<0)p.x=c.width; if(p.x>c.width)p.x=0;
+      if(p.y<0)p.y=c.height; if(p.y>c.height)p.y=0;
+      cx.beginPath(); cx.arc(p.x,p.y,p.r,0,Math.PI*2);
+      cx.fillStyle=`rgba(255,255,255,${p.a})`; cx.fill();
+    });
+    requestAnimationFrame(draw);
+  }
+  draw();
+}
+// Init stars when panel first opens
+const _origOpen = window.openPanel;
+window.openPanel = function() {
+  if(_origOpen) _origOpen();
+  if(!document.getElementById('panelStars')) initPanelStars();
+};
+
+// ===================== MAPBOX ROUTE MAP =====================
+mapboxgl.accessToken = 'pk.eyJ1IjoiZGZyb2phczEiLCJhIjoiY21wNHNhYW5xMHZhbjJybzRsczdqZWk4OCJ9.b3fZVoDaLuU0K_j48lw5ZA';
+
+const ROUTE_DATA = {
+  danube:{title:'Danube — Vienna to Budapest',color:'#c9a84c',dur:'7 nights',
+    coords:[[16.3738,48.2082],[15.3317,48.2306],[17.1077,48.1486],[18.7406,47.7951],[19.0402,47.4979]],
+    ports:[{n:'Vienna',d:'Day 1',t:'Embark · Schönbrunn Palace'},{n:'Melk',d:'Day 2',t:'Melk Abbey · Wachau Valley'},{n:'Bratislava',d:'Day 3',t:'Old Town · Castle Hill'},{n:'Esztergom',d:'Day 5',t:"Hungary's oldest city"},{n:'Budapest',d:'Day 7',t:'Disembark · Buda Castle'}]},
+  seine:{title:'Seine — Paris to Normandy',color:'#e8cc8a',dur:'5 nights',
+    coords:[[2.3522,48.8566],[1.0993,49.4432],[1.4132,49.2404],[0.2318,49.4183],[-0.5506,49.3425]],
+    ports:[{n:'Paris',d:'Day 1',t:'Embark · Eiffel Tower'},{n:'Rouen',d:'Day 2',t:'Gothic cathedral'},{n:'Les Andelys',d:'Day 3',t:'Château Gaillard'},{n:'Honfleur',d:'Day 4',t:'Impressionist harbor'},{n:'Normandy',d:'Day 5',t:'D-Day beaches'}]},
+  rhine:{title:'Rhine — Amsterdam to Basel',color:'#00c8ff',dur:'7 nights',
+    coords:[[4.9041,52.3676],[6.9500,50.9333],[7.9167,49.9800],[7.7521,48.5734],[7.5886,47.5596]],
+    ports:[{n:'Amsterdam',d:'Day 1',t:'Embark · Canals'},{n:'Cologne',d:'Day 2',t:'Gothic cathedral'},{n:'Rüdesheim',d:'Day 3',t:'Rhine Gorge · Wine'},{n:'Strasbourg',d:'Day 5',t:'Christmas market'},{n:'Basel',d:'Day 7',t:'Disembark · Art Basel'}]},
+  douro:{title:'Douro — Porto to Salamanca',color:'#f59e0b',dur:'8 nights',
+    coords:[[-8.6291,41.1579],[-8.0183,41.1369],[-7.4600,41.1519],[-6.7703,41.3817],[-5.6635,41.0002]],
+    ports:[{n:'Porto',d:'Day 1',t:'Embark · Port wine'},{n:'Régua',d:'Day 3',t:'Wine region'},{n:'Pinhão',d:'Day 4',t:'Port wine heartland'},{n:"Barca d'Alva",d:'Day 5',t:'Portugal-Spain border'},{n:'Salamanca',d:'Day 8',t:'Disembark · UNESCO city'}]},
+  med:{title:'Mediterranean — Barcelona to Athens',color:'#60a5fa',dur:'7 nights',
+    coords:[[2.1734,41.3851],[5.3698,43.2965],[14.2681,40.8518],[25.4615,36.3932],[23.7275,37.9838]],
+    ports:[{n:'Barcelona',d:'Day 1',t:'Embark · Gaudí'},{n:'Marseille',d:'Day 2',t:'Calanques · Old Port'},{n:'Naples',d:'Day 4',t:'Pompeii'},{n:'Santorini',d:'Day 6',t:'Caldera · Oia'},{n:'Athens',d:'Day 7',t:'Disembark · Acropolis'}]},
+  caribbean:{title:'Caribbean — Miami Loop',color:'#4ade80',dur:'7 nights',
+    coords:[[-80.1918,25.7617],[-78.6997,26.5383],[-66.3283,18.4861],[-64.7452,17.7346],[-61.3897,15.2976]],
+    ports:[{n:'Miami',d:'Day 1',t:'Embark · South Beach'},{n:'Nassau',d:'Day 2',t:'Atlantis'},{n:'Puerto Rico',d:'Day 4',t:'Old San Juan'},{n:'St. Thomas',d:'Day 5',t:'Magens Bay'},{n:'Dominica',d:'Day 6',t:'Rainforest · Snorkeling'}]}
+};
+
+let routeMap, curRouteKey='danube', routeAnimRunning=false;
+
+const mapEl = document.getElementById('routeMap');
+if(mapEl) {
+  routeMap = new mapboxgl.Map({
+    container:'routeMap',
+    style:'mapbox://styles/mapbox/dark-v11',
+    center:[16.5,47.8], zoom:5.5,
+    projection:'mercator',
+    attributionControl:false
+  });
+  routeMap.addControl(new mapboxgl.NavigationControl({showCompass:false}),'bottom-right');
+
+  routeMap.on('load', () => {
+    routeMap.addSource('rl',{type:'geojson',data:{type:'Feature',geometry:{type:'LineString',coordinates:[]}}});
+    routeMap.addSource('rp',{type:'geojson',data:{type:'FeatureCollection',features:[]}});
+    routeMap.addLayer({id:'rl-glow',type:'line',source:'rl',paint:{'line-color':['get','c'],'line-width':10,'line-opacity':.1,'line-blur':6}});
+    routeMap.addLayer({id:'rl',type:'line',source:'rl',paint:{'line-color':['get','c'],'line-width':2.5,'line-opacity':.8,'line-dasharray':[2,2]}});
+    routeMap.addLayer({id:'rp',type:'circle',source:'rp',paint:{'circle-radius':7,'circle-color':['get','c'],'circle-stroke-width':2,'circle-stroke-color':'rgba(245,240,232,.7)'}});
+    routeMap.addLayer({id:'rp-lbl',type:'symbol',source:'rp',
+      layout:{'text-field':['get','n'],'text-font':['DIN Offc Pro Italic','Arial Unicode MS Regular'],'text-size':12,'text-offset':[0,-1.2],'text-anchor':'bottom'},
+      paint:{'text-color':'#f5f0e8','text-halo-color':'rgba(5,6,8,.85)','text-halo-width':2}});
+    routeMap.on('click','rp',e=>{
+      const p=e.features[0].properties;
+      new mapboxgl.Popup({offset:14})
+        .setLngLat(e.features[0].geometry.coordinates)
+        .setHTML(`<div style="font-size:.52rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:#c9a84c;margin-bottom:3px">${p.d}</div><div style="font-family:'Cormorant Garamond',serif;font-size:1rem;font-weight:400;margin-bottom:4px">${p.n}</div><div style="font-size:.7rem;color:rgba(245,240,232,.5);line-height:1.5">${p.t}</div>`)
+        .addTo(routeMap);
+    });
+    routeMap.on('mouseenter','rp',()=>routeMap.getCanvas().style.cursor='pointer');
+    routeMap.on('mouseleave','rp',()=>routeMap.getCanvas().style.cursor='');
+    updateRouteMap('danube');
+  });
+}
+
+function updateRouteMap(key) {
+  const r = ROUTE_DATA[key];
+  if(!routeMap || !routeMap.getSource('rl')) return;
+  routeMap.getSource('rl').setData({type:'Feature',properties:{c:r.color},geometry:{type:'LineString',coordinates:r.coords}});
+  routeMap.getSource('rp').setData({type:'FeatureCollection',features:r.coords.map((co,i)=>({
+    type:'Feature',properties:{n:r.ports[i].n,d:r.ports[i].d,t:r.ports[i].t,c:r.color},
+    geometry:{type:'Point',coordinates:co}
+  }))});
+  ['rl','rl-glow'].forEach(id=>{ if(routeMap.getLayer(id)) routeMap.setPaintProperty(id,'line-color',r.color); });
+  const bounds = r.coords.reduce((b,c)=>b.extend(c), new mapboxgl.LngLatBounds(r.coords[0],r.coords[0]));
+  routeMap.fitBounds(bounds,{padding:60,duration:1200,maxZoom:9});
+  // Update itinerary strip
+  const strip = document.getElementById('routeStrip');
+  if(strip) {
+    strip.innerHTML = r.ports.map((p,i) => `
+      <div onclick="routeMap.flyTo({center:[${r.coords[i]}],zoom:10,duration:800})"
+           style="min-width:130px;padding:12px 14px;border-right:1px solid rgba(245,240,232,.06);cursor:pointer;flex-shrink:0;transition:background .15s"
+           onmouseover="this.style.background='rgba(255,255,255,.03)'" onmouseout="this.style.background=''"
+      >
+        <div style="font-size:.52rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:${r.color};margin-bottom:3px">${p.d}</div>
+        <div style="font-size:.78rem;font-weight:500;color:#f5f0e8;margin-bottom:2px">${p.n}</div>
+        <div style="font-size:.62rem;font-weight:300;color:rgba(245,240,232,.4);line-height:1.45">${p.t}</div>
+      </div>`).join('');
+  }
+}
+
+function switchRoute(key, btn) {
+  curRouteKey = key;
+  document.querySelectorAll('.rpill').forEach(b => {
+    b.classList.remove('active');
+    b.style.borderColor=''; b.style.color=''; b.style.background='';
+  });
+  btn.classList.add('active');
+  updateRouteMap(key);
+}
+
+function animMap() {
+  if(routeAnimRunning || !routeMap) return;
+  const r = ROUTE_DATA[curRouteKey];
+  routeAnimRunning = true;
+  const btn = document.getElementById('routeAnimBtn');
+  if(btn) btn.textContent = '⏳ Animating...';
+  const el = document.createElement('div');
+  el.style.cssText = 'font-size:20px;line-height:1;filter:drop-shadow(0 0 8px rgba(201,168,76,.8))';
+  el.textContent = '🚢';
+  const sm = new mapboxgl.Marker({element:el,anchor:'center'}).setLngLat(r.coords[0]).addTo(routeMap);
+  const bounds = r.coords.reduce((b,c)=>b.extend(c), new mapboxgl.LngLatBounds(r.coords[0],r.coords[0]));
+  routeMap.fitBounds(bounds,{padding:80,duration:1200,maxZoom:8});
+  let i=0;
+  function next() {
+    if(i>=r.coords.length-1){sm.remove();routeAnimRunning=false;if(btn)btn.textContent='▶ Animate Route';return;}
+    i++;const from=r.coords[i-1],to=r.coords[i];let s=0;
+    const iv=setInterval(()=>{s++;const t=1-Math.pow(1-(s/80),3);
+      sm.setLngLat([from[0]+(to[0]-from[0])*t,from[1]+(to[1]-from[1])*t]);
+      if(s>=80){clearInterval(iv);
+        new mapboxgl.Popup({offset:18,closeButton:false})
+          .setLngLat(to)
+          .setHTML(`<div style="font-size:.52rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:#c9a84c;margin-bottom:3px">${r.ports[i].d}</div><div style="font-family:'Cormorant Garamond',serif;font-size:1rem">${r.ports[i].n}</div><div style="font-size:.7rem;color:rgba(245,240,232,.5)">${r.ports[i].t}</div>`)
+          .addTo(routeMap);
+        setTimeout(()=>{document.querySelectorAll('.mapboxgl-popup').forEach(p=>p.remove());next();},1800);
+      }
+    },25);
+  }
+  setTimeout(next,1400);
+}
+</script>
+</body>
+</html>
