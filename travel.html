@@ -16,7 +16,7 @@
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
-body{font-family:'Jost',sans-serif;font-weight:300;background:var(--black);color:var(--cream);overflow-x:hidden;-webkit-font-smoothing:antialiased}
+body{font-family:'Jost',sans-serif;font-weight:300;background:var(--black);color:var(--cream);overflow-x:hidden;-webkit-font-smoothing:antialiased;cursor:auto}
 a{color:inherit;text-decoration:none}
 canvas{position:fixed;inset:0;z-index:0;pointer-events:none}
 
@@ -89,8 +89,8 @@ h2.stitle em{font-style:italic;color:var(--goldlt)}
 .price-tag{font-size:.7rem;font-weight:500;color:var(--goldlt)}
 .dcard-btns{display:flex;gap:6px;margin-top:10px;opacity:0;transform:translateY(4px);transition:all .3s}
 .dcard:hover .dcard-btns{opacity:1;transform:translateY(0)}
-.dcard-btn-browse{font-size:.58rem;font-weight:500;letter-spacing:.12em;text-transform:uppercase;padding:5px 11px;background:rgba(201,168,76,.15);border:1px solid rgba(201,168,76,.3);color:var(--gold);cursor:pointer;font-family:'Jost',sans-serif;transition:background .2s}
-.dcard-btn-browse:hover{background:rgba(201,168,76,.25)}
+
+
 .dcard-btn-book{font-size:.58rem;font-weight:500;letter-spacing:.12em;text-transform:uppercase;padding:5px 11px;background:var(--gold);border:1px solid var(--gold);color:#000;cursor:pointer;font-family:'Jost',sans-serif;transition:background .2s}
 .dcard-btn-book:hover{background:var(--goldlt)}
 @media(max-width:1000px){.dest-grid{grid-template-columns:repeat(3,1fr)}}
@@ -269,7 +269,6 @@ footer{position:relative;z-index:2;background:var(--black2);border-top:1px solid
           <div class="dcard-type">All-Inclusive · Beach Resort</div>
           <div class="dcard-from"><span class="price-tag">From ~$799 pp</span></div>
           <div class="dcard-btns">
-            <a href="https://mkarabinos.dreamvacations.com/vacation/destinations/caribbean" target="_blank" class="dcard-btn-browse">Browse Deals ↗</a>
             <button class="dcard-btn-book" onclick="bookAdvisor('Caribbean all-inclusive resort')">Book w/ Advisor</button>
           </div>
         </div>
@@ -284,7 +283,6 @@ footer{position:relative;z-index:2;background:var(--black2);border-top:1px solid
           <div class="dcard-type">Ocean Cruise · Luxury</div>
           <div class="dcard-from"><span class="price-tag">From ~$1,299 pp</span></div>
           <div class="dcard-btns">
-            <a href="https://mkarabinos.dreamvacations.com/vacation/destinations/mediterranean" target="_blank" class="dcard-btn-browse">Browse Deals ↗</a>
             <button class="dcard-btn-book" onclick="bookAdvisor('Mediterranean cruise options')">Book w/ Advisor</button>
           </div>
         </div>
@@ -299,7 +297,6 @@ footer{position:relative;z-index:2;background:var(--black2);border-top:1px solid
           <div class="dcard-type">River Cruise · Vienna to Budapest</div>
           <div class="dcard-from"><span class="price-tag">From ~$2,900 pp</span></div>
           <div class="dcard-btns">
-            <a href="https://mkarabinos.dreamvacations.com/vacation/cruises/river-cruise-lines" target="_blank" class="dcard-btn-browse">Browse Deals ↗</a>
             <button class="dcard-btn-book" onclick="bookAdvisor('Danube river cruise pricing and availability')">Book w/ Advisor</button>
           </div>
         </div>
@@ -314,7 +311,6 @@ footer{position:relative;z-index:2;background:var(--black2);border-top:1px solid
           <div class="dcard-type">All-Inclusive · Riviera Maya</div>
           <div class="dcard-from"><span class="price-tag">From ~$649 pp</span></div>
           <div class="dcard-btns">
-            <a href="https://mkarabinos.dreamvacations.com/vacation/destinations/mexico" target="_blank" class="dcard-btn-browse">Browse Deals ↗</a>
             <button class="dcard-btn-book" onclick="bookAdvisor('Mexico Riviera Maya all-inclusive deals')">Book w/ Advisor</button>
           </div>
         </div>
@@ -329,7 +325,6 @@ footer{position:relative;z-index:2;background:var(--black2);border-top:1px solid
           <div class="dcard-type">Cruise · Expedition</div>
           <div class="dcard-from"><span class="price-tag">From ~$999 pp</span></div>
           <div class="dcard-btns">
-            <a href="https://mkarabinos.dreamvacations.com/vacation/destinations/alaska" target="_blank" class="dcard-btn-browse">Browse Deals ↗</a>
             <button class="dcard-btn-book" onclick="bookAdvisor('Alaska cruise options and pricing')">Book w/ Advisor</button>
           </div>
         </div>
@@ -344,7 +339,6 @@ footer{position:relative;z-index:2;background:var(--black2);border-top:1px solid
           <div class="dcard-type">River Cruise · Paris to Normandy</div>
           <div class="dcard-from"><span class="price-tag">From ~$2,400 pp</span></div>
           <div class="dcard-btns">
-            <a href="https://mkarabinos.dreamvacations.com/vacation/cruises/river-cruise-lines" target="_blank" class="dcard-btn-browse">Browse Deals ↗</a>
             <button class="dcard-btn-book" onclick="bookAdvisor('Seine river cruise Paris to Normandy')">Book w/ Advisor</button>
           </div>
         </div>
@@ -359,7 +353,6 @@ footer{position:relative;z-index:2;background:var(--black2);border-top:1px solid
           <div class="dcard-type">Guided Tour · Amalfi &amp; Rome</div>
           <div class="dcard-from"><span class="price-tag">From ~$2,200 pp</span></div>
           <div class="dcard-btns">
-            <a href="https://mkarabinos.dreamvacations.com/vacation/destinations/europe" target="_blank" class="dcard-btn-browse">Browse Deals ↗</a>
             <button class="dcard-btn-book" onclick="bookAdvisor('Italy guided tour options')">Book w/ Advisor</button>
           </div>
         </div>
@@ -374,7 +367,6 @@ footer{position:relative;z-index:2;background:var(--black2);border-top:1px solid
           <div class="dcard-type">Resort · Island Getaway</div>
           <div class="dcard-from"><span class="price-tag">From ~$1,100 pp</span></div>
           <div class="dcard-btns">
-            <a href="https://mkarabinos.dreamvacations.com/vacation/destinations/hawaii" target="_blank" class="dcard-btn-browse">Browse Deals ↗</a>
             <button class="dcard-btn-book" onclick="bookAdvisor('Hawaii resort and island packages')">Book w/ Advisor</button>
           </div>
         </div>
@@ -389,7 +381,6 @@ footer{position:relative;z-index:2;background:var(--black2);border-top:1px solid
           <div class="dcard-type">Safari Tour · Kenya &amp; Tanzania</div>
           <div class="dcard-from"><span class="price-tag">From ~$4,800 pp</span></div>
           <div class="dcard-btns">
-            <a href="https://mkarabinos.dreamvacations.com/vacation/destinations/africa" target="_blank" class="dcard-btn-browse">Browse Deals ↗</a>
             <button class="dcard-btn-book" onclick="bookAdvisor('African safari options and pricing')">Book w/ Advisor</button>
           </div>
         </div>
@@ -404,7 +395,6 @@ footer{position:relative;z-index:2;background:var(--black2);border-top:1px solid
           <div class="dcard-type">Expedition Cruise</div>
           <div class="dcard-from"><span class="price-tag">From ~$3,400 pp</span></div>
           <div class="dcard-btns">
-            <a href="https://mkarabinos.dreamvacations.com/vacation/destinations/galapagos" target="_blank" class="dcard-btn-browse">Browse Deals ↗</a>
             <button class="dcard-btn-book" onclick="bookAdvisor('Galapagos expedition cruise options')">Book w/ Advisor</button>
           </div>
         </div>
@@ -419,7 +409,6 @@ footer{position:relative;z-index:2;background:var(--black2);border-top:1px solid
           <div class="dcard-type">Guided Tour · Tokyo &amp; Kyoto</div>
           <div class="dcard-from"><span class="price-tag">From ~$2,800 pp</span></div>
           <div class="dcard-btns">
-            <a href="https://mkarabinos.dreamvacations.com/vacation/destinations/asia" target="_blank" class="dcard-btn-browse">Browse Deals ↗</a>
             <button class="dcard-btn-book" onclick="bookAdvisor('Japan tour package options and pricing')">Book w/ Advisor</button>
           </div>
         </div>
@@ -434,7 +423,6 @@ footer{position:relative;z-index:2;background:var(--black2);border-top:1px solid
           <div class="dcard-type">River Cruise · Wine Country</div>
           <div class="dcard-from"><span class="price-tag">From ~$3,100 pp</span></div>
           <div class="dcard-btns">
-            <a href="https://mkarabinos.dreamvacations.com/vacation/cruises/river-cruise-lines" target="_blank" class="dcard-btn-browse">Browse Deals ↗</a>
             <button class="dcard-btn-book" onclick="bookAdvisor('Douro Valley river cruise in Portugal')">Book w/ Advisor</button>
           </div>
         </div>
@@ -621,32 +609,119 @@ function closeBtn(){
 }
 
 function startFlow(){
-  bot("Hi! I'm Ava, your Cary Park Travel advisor. I work with Dream Vacations to find you the best trips at the best prices.\n\nWhat kind of trip are you thinking?");
-  opts(['Ocean Cruise','River Cruise','All-Inclusive Resort','Guided Tour','Safari or Adventure','Luxury Escape','Honeymoon','Family Vacation','Not sure — surprise me'],type=>{
-    convo.answers.type=type;
-    bot("Great choice. Where in the world do you want to go?");
-    opts(['Caribbean','Europe','Mediterranean','Asia','Africa','Central/South America','Hawaii','Alaska/Canada','Anywhere — best deals'],dest=>{
-      convo.answers.dest=dest;
-      bot("How many travelers?");
-      opts(['Just me','2 adults','Family (with kids)','Group (4+)'],pax=>{
-        convo.answers.pax=pax;
-        bot("Roughly what's your per-person budget?");
-        opts(['Under $1,000','$1,000–$2,500','$2,500–$5,000','$5,000+','Flexible'],budget=>{
+  bot("Hi — I'm Ava, your Cary Park Travel advisor. Let's build your perfect trip.\n\nIs this travel for business or leisure?");
+  opts(['Personal / Leisure','Corporate / Business Travel','Both — mixing work and leisure'],purpose=>{
+    convo.answers.purpose=purpose;
+    const isCorp=/Corporate|Business/i.test(purpose);
+    if(isCorp) corpBranch();
+    else leisureBranch();
+  });
+}
+
+function corpBranch(){
+  bot("Great — let's get you set up right. What's the nature of the trip?");
+  opts(['Client entertainment','Executive retreat','Team offsite','Conference or event','Incentive travel (reward trip)','Site visit or roadshow'],corpType=>{
+    convo.answers.corpType=corpType;
+    bot("How many travelers in your group?");
+    opts(['1–2 executives','3–9 people','10–25 people','25+ people'],pax=>{
+      convo.answers.pax=pax;
+      bot("What's your destination preference?");
+      opts(['Domestic US','Caribbean / Latin America','Europe','Asia Pacific','Flexible — advisor chooses'],dest=>{
+        convo.answers.dest=dest;
+        bot("What's the approximate per-person budget?");
+        opts(['Under $2,000','$2,000–$5,000','$5,000–$10,000','$10,000+','Needs approval — get quote first'],budget=>{
           convo.answers.budget=budget;
-          bot("Perfect. Last step — I'll pass your details to our advisor team who will search live inventory and contact you within 1 business day.");
-          cform(c=>{Object.assign(convo.answers,c);finish()});
+          askCorpUpsells();
         });
       });
     });
   });
 }
 
+function askCorpUpsells(){
+  bot("Would any of these corporate upgrades be relevant? (select all that apply)");
+  opts(['Business class flights','Private transfers','Executive lounge access','Group meeting space','Dedicated event coordinator','Branded welcome packages','None — keep it standard'],upsell=>{
+    convo.answers.corpUpsells=upsell;
+    bot("Last question — any specific requirements?");
+    opts(['Dietary restrictions for group','AV / presentation needs','Strict travel policy limits','Need NDAs / confidentiality','No special requirements'],reqs=>{
+      convo.answers.corpReqs=reqs;
+      bot("Perfect. Our corporate travel team will put together a full proposal. Last step — your contact info:");
+      cform(c=>{Object.assign(convo.answers,c);finish()});
+    });
+  });
+}
+
+function leisureBranch(){
+  bot("What kind of trip are you dreaming of?");
+  opts(['Ocean Cruise','River Cruise','All-Inclusive Resort','Guided Tour','Safari / Adventure','Luxury Escape','Honeymoon / Romance','Family Vacation','Not sure — surprise me'],type=>{
+    convo.answers.type=type;
+    bot("Where in the world do you want to go?");
+    opts(['Caribbean','Europe','Mediterranean','Asia','Africa','Central / South America','Hawaii','Alaska / Canada','Anywhere — best deals'],dest=>{
+      convo.answers.dest=dest;
+      bot("How many travelers?");
+      opts(['Just me','2 adults','Family with kids','Group of 4+'],pax=>{
+        convo.answers.pax=pax;
+        bot("What's your approximate per-person budget?");
+        opts(['Under $1,000','$1,000–$2,500','$2,500–$5,000','$5,000+','Flexible'],budget=>{
+          convo.answers.budget=budget;
+          askExperience();
+        });
+      });
+    });
+  });
+}
+
+function askExperience(){
+  bot("How would you describe your ideal travel experience?");
+  opts(['Relaxed — beaches, pool, minimal planning','Active — excursions, hiking, exploring','Cultural — history, food, local immersion','Ultra-luxury — only the best','Adventure — off the beaten path','Mix of everything'],vibe=>{
+    convo.answers.vibe=vibe;
+    askLuxuryUpsells();
+  });
+}
+
+function askLuxuryUpsells(){
+  bot("Are any of these on your wish list? I'll make sure our advisor factors them in:");
+  opts(['Cabin / room upgrade','Private shore excursions','Business or first class flights','Spa & wellness packages','Champagne / celebration setup','Travel insurance','Private transfers throughout','None of the above'],upsell=>{
+    convo.answers.upsells=upsell;
+    const wantsMore=/None/i.test(upsell)?false:true;
+    if(wantsMore) askMoreUpsells();
+    else askDates();
+  });
+}
+
+function askMoreUpsells(){
+  bot("Anything else you'd like included?");
+  opts(['Private chef / dining experience','Photography package','Helicopter or yacht excursion','VIP event access','Kids club / childcare onboard','Early boarding / priority disembark','Nothing else'],extra=>{
+    convo.answers.extras=extra;
+    askDates();
+  });
+}
+
+function askDates(){
+  bot("When are you hoping to travel?");
+  opts(['Within 30 days','1–3 months out','3–6 months out','6–12 months out','Flexible / no rush'],timing=>{
+    convo.answers.timing=timing;
+    bot("Almost done — any special occasions or things I should tell the advisor?");
+    opts(['Anniversary / birthday','Honeymoon','First time cruising','Repeat traveler — want something new','Surprise trip for someone','No special occasion'],occasion=>{
+      convo.answers.occasion=occasion;
+      bot("Perfect — you're all set. One last step, your contact info so our advisor can reach you:");
+      cform(c=>{Object.assign(convo.answers,c);finish()});
+    });
+  });
+}
+
 function finish(){
   const a=convo.answers;
-  const subj=encodeURIComponent(`[Travel] ${a.type||'Inquiry'} — ${a.dest||''} — ${a.name||'New lead'}`);
-  const body=encodeURIComponent(`Travel Advisor Inquiry\n\nName: ${a.name}\nEmail: ${a.email}\nPhone: ${a.phone||'—'}\n\nTrip Type: ${a.type}\nDestination: ${a.dest}\nTravelers: ${a.pax}\nBudget: ${a.budget} pp\n\nNotes: ${a.notes||'—'}\n\nSubmitted: ${new Date().toLocaleString()}`);
-  bot(`Thanks, ${a.name?a.name.split(' ')[0]:''}! Your details are on the way to our advisor team.\n\nThey'll search current Dream Vacations inventory and reach back with personalized options — usually within 1 business day.\n\nIn the meantime, you can <a href="https://mkarabinos.dreamvacations.com/home-page" target="_blank">browse live deals here ↗</a>`);
-  setTimeout(()=>window.location.href=`mailto:info@caryparksolutions.com?subject=${subj}&body=${body}`,800);
+  const isCorp=/Corporate|Business/i.test(a.purpose||'');
+  const tag=isCorp?'[Corporate Travel]':'[Leisure Travel]';
+  const subj=encodeURIComponent(`${tag} ${a.type||a.corpType||'Inquiry'} — ${a.dest||''} — ${a.name||'New lead'}`);
+  const bodyText=isCorp
+    ? `CORPORATE TRAVEL INQUIRY\n\nName: ${a.name}\nEmail: ${a.email}\nPhone: ${a.phone||'—'}\n\nType: ${a.corpType}\nTravelers: ${a.pax}\nDestination: ${a.dest}\nBudget: ${a.budget} pp\nUpgrades: ${a.corpUpsells||'—'}\nRequirements: ${a.corpReqs||'—'}\nNotes: ${a.notes||'—'}`
+    : `LEISURE TRAVEL INQUIRY\n\nName: ${a.name}\nEmail: ${a.email}\nPhone: ${a.phone||'—'}\n\nTrip: ${a.type}\nDestination: ${a.dest}\nTravelers: ${a.pax}\nBudget: ${a.budget} pp\nVibe: ${a.vibe||'—'}\nUpsells wanted: ${a.upsells||'—'}\nExtras: ${a.extras||'—'}\nTiming: ${a.timing||'—'}\nOccasion: ${a.occasion||'—'}\nNotes: ${a.notes||'—'}`;
+  const body=encodeURIComponent(bodyText+`\n\nSubmitted: ${new Date().toLocaleString()}`);
+  const fname=a.name?a.name.split(' ')[0]:'';
+  bot(`Thanks${fname?', '+fname:''}! Your inquiry is on its way to our advisor team.\n\nThey'll search current inventory${isCorp?' and prepare a corporate proposal':' and find your best options'} — expect a reply within 1 business day.\n\n<a href="https://mkarabinos.dreamvacations.com/home-page" target="_blank">Browse live deals while you wait ↗</a>`);
+  setTimeout(()=>window.location.href=`mailto:info@caryparksolutions.com?subject=${subj}&body=${body}`,900);
   closeBtn();
 }
 
@@ -654,13 +729,15 @@ function bookAdvisor(context){
   convo.answers.context=context;
   openPanel();
   if(pmsg.children.length===0){
-    setTimeout(()=>{bot(`I see you're interested in ${context}. Let me get a few details to find you the best current options.`);
-    setTimeout(()=>{opts(['Just me','2 adults','Family (with kids)','Group (4+)'],pax=>{convo.answers.pax=pax;
-      opts(['Under $1,000','$1,000–$2,500','$2,500–$5,000','$5,000+','Flexible'],budget=>{convo.answers.budget=budget;
-        bot("Last step — your contact info and I'll have our advisor reach out with live pricing:");
-        cform(c=>{Object.assign(convo.answers,c);finish()});
+    setTimeout(()=>{
+      bot(`I see you're interested in ${context}.\n\nIs this for personal travel or a corporate / business trip?`);
+      opts(['Personal / Leisure','Corporate / Business'],p=>{
+        convo.answers.purpose=p;
+        convo.answers.type=context;
+        if(/Corporate/i.test(p)) askCorpUpsells();
+        else askExperience();
       });
-    })},400);},300);
+    },300);
   }
 }
 

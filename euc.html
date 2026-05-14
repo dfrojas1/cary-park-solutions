@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EUC & VDI Consulting | Cary Park Solutions</title>
+<meta name="description" content="Enterprise End-User Computing and VDI consulting. IGEL OS, ControlUp, Citrix, VMware Horizon, AWS/Azure VDI. Reduce endpoint costs, simplify management, secure your workforce.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--a:#00c8ff;--bg:#070d1a;--bgc:#0d1525;--t:#e8e8e8;--m:#9ca3af;--nh:72px;--r:12px;--gold:#c9a84c}
+html{scroll-behavior:smooth;background:var(--bg)}
+body{font-family:'Inter',sans-serif;background:var(--bg);background-image:linear-gradient(rgba(255,255,255,.05)1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.05)1px,transparent 1px),linear-gradient(rgba(255,255,255,.02)1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.02)1px,transparent 1px);background-size:50px 50px,50px 50px,12px 12px,12px 12px;background-attachment:fixed;color:var(--t);line-height:1.6;overflow-x:hidden}
+canvas{position:fixed;inset:0;z-index:1;pointer-events:none}
+nav{position:fixed;top:0;left:0;right:0;height:var(--nh);background:rgba(7,13,26,.92);backdrop-filter:blur(16px);border-bottom:1px solid rgba(255,255,255,.06);z-index:1000;display:flex;align-items:center;justify-content:center}
+.ni{width:100%;max-width:1200px;padding:0 24px;display:flex;align-items:center;justify-content:space-between}
+.logo{font-size:1.15rem;font-weight:700;color:#fff;text-decoration:none;letter-spacing:-.02em}.logo span{color:var(--a)}
+.nl{display:flex;align-items:center;gap:4px;list-style:none}
+.nl a{color:var(--m);text-decoration:none;font-size:.875rem;font-weight:500;padding:7px 13px;border-radius:6px;transition:color .2s,background .2s;white-space:nowrap}
+.nl a:hover{color:#fff;background:rgba(255,255,255,.05)}
+.nl .cta{background:var(--a);color:#000!important;padding:9px 20px;border-radius:8px;font-weight:600;margin-left:8px}
+.nl .cta:hover{background:#22d4ff}
+.mb{display:none;background:none;border:none;cursor:pointer;padding:4px}
+.mb span{display:block;width:24px;height:2px;background:#fff;margin:5px 0}
+section{position:relative;z-index:2;padding:100px 24px}
+.container{max-width:1200px;margin:0 auto}
+.lbl{text-transform:uppercase;font-size:.72rem;font-weight:600;letter-spacing:.15em;color:var(--a);margin-bottom:10px}
+.ttl{font-size:clamp(1.8rem,3.5vw,2.8rem);font-weight:800;letter-spacing:-.03em;margin-bottom:14px;line-height:1.15}
+.sub{color:var(--m);font-size:1rem;max-width:640px;margin-bottom:40px;line-height:1.7}
+.hero{min-height:100vh;display:flex;align-items:center;padding-top:calc(var(--nh)+40px)}
+.badge{display:inline-flex;align-items:center;gap:8px;background:rgba(0,200,255,.08);border:1px solid rgba(0,200,255,.2);border-radius:100px;padding:5px 14px;font-size:.7rem;font-weight:600;color:var(--a);letter-spacing:.06em;text-transform:uppercase;margin-bottom:24px}
+.dot{width:5px;height:5px;border-radius:50%;background:var(--a);animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(1.5)}}
+.hero-grid{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center}
+.hero-title{font-size:clamp(2.4rem,5vw,3.8rem);font-weight:800;letter-spacing:-.04em;line-height:1.08;margin-bottom:20px}
+.hero-title .hl{color:var(--a)}
+.hero-title .hl2{color:var(--gold)}
+.hero-p{color:var(--m);font-size:1.05rem;max-width:520px;line-height:1.75;margin-bottom:32px}
+.btns{display:flex;gap:14px;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;justify-content:center;padding:12px 26px;border-radius:10px;font-size:.9rem;font-weight:600;text-decoration:none;transition:all .25s;cursor:pointer;border:none;font-family:inherit}
+.bp{background:var(--a);color:#000;box-shadow:0 0 24px rgba(0,200,255,.15)}.bp:hover{transform:translateY(-2px);box-shadow:0 0 36px rgba(0,200,255,.3);background:#22d4ff}
+.bo{background:transparent;color:#fff;border:1px solid rgba(255,255,255,.2)}.bo:hover{border-color:rgba(255,255,255,.5);background:rgba(255,255,255,.05)}
+
+/* HERO STATS CARD */
+.stats-card{background:var(--bgc);border:1px solid rgba(0,200,255,.15);border-radius:16px;padding:32px;box-shadow:0 0 60px rgba(0,200,255,.06)}
+.stats-card h3{font-size:.72rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--a);margin-bottom:20px}
+.stat-row{display:flex;align-items:center;justify-content:space-between;padding:12px 0;border-bottom:1px solid rgba(255,255,255,.05)}
+.stat-row:last-child{border-bottom:none}
+.stat-label{font-size:.82rem;color:var(--m);font-weight:400}
+.stat-val{font-size:.9rem;font-weight:700;color:var(--t)}
+.stat-val .up{color:#4ade80;font-size:.72rem;font-weight:600;margin-left:6px}
+.stat-val .down{color:var(--a);font-size:.72rem;font-weight:600;margin-left:6px}
+
+/* TECH STACK */
+.tech-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:16px}
+.tech-card{background:var(--bgc);border:1px solid rgba(255,255,255,.06);border-radius:var(--r);padding:24px 20px;transition:border-color .25s,transform .25s,box-shadow .25s;text-align:center}
+.tech-card:hover{border-color:rgba(0,200,255,.35);transform:translateY(-4px);box-shadow:0 8px 40px rgba(0,200,255,.08)}
+.tech-icon{font-size:2rem;margin-bottom:12px}
+.tech-name{font-size:.88rem;font-weight:700;margin-bottom:4px}
+.tech-role{font-size:.75rem;color:var(--m);line-height:1.5}
+.tech-badge{display:inline-block;margin-top:8px;font-size:.62rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:2px 8px;border-radius:100px}
+.tb-igel{background:rgba(0,200,255,.1);color:var(--a);border:1px solid rgba(0,200,255,.2)}
+.tb-partner{background:rgba(201,168,76,.1);color:var(--gold);border:1px solid rgba(201,168,76,.2)}
+.tb-cloud{background:rgba(168,85,247,.1);color:#a855f7;border:1px solid rgba(168,85,247,.2)}
+.tb-mgmt{background:rgba(74,222,128,.1);color:#4ade80;border:1px solid rgba(74,222,128,.2)}
+
+/* IGEL FEATURE */
+.igel-feature{background:linear-gradient(135deg,rgba(0,200,255,.06),rgba(0,200,255,.02));border:1px solid rgba(0,200,255,.15);border-radius:16px;padding:48px;display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:start}
+.igel-logo-area{display:flex;flex-direction:column;gap:20px}
+.igel-wordmark{font-size:2rem;font-weight:900;letter-spacing:.08em;color:var(--a)}
+.igel-tagline{font-size:.8rem;color:var(--m);line-height:1.7}
+.igel-stats{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.is{background:rgba(0,200,255,.06);border:1px solid rgba(0,200,255,.1);border-radius:8px;padding:14px}
+.is-num{font-size:1.4rem;font-weight:800;color:var(--a);margin-bottom:2px}
+.is-lbl{font-size:.68rem;color:var(--m);font-weight:500}
+.igel-right h3{font-size:1.1rem;font-weight:700;margin-bottom:16px}
+.igel-points{display:flex;flex-direction:column;gap:12px}
+.ip{display:flex;gap:12px;align-items:flex-start}
+.ip-icon{width:32px;height:32px;border-radius:8px;background:rgba(0,200,255,.1);flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:.9rem}
+.ip-title{font-size:.88rem;font-weight:700;margin-bottom:3px}
+.ip-desc{font-size:.8rem;color:var(--m);line-height:1.55}
+
+/* USE CASES */
+.uc-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px}
+.uc-card{background:var(--bgc);border:1px solid rgba(255,255,255,.06);border-radius:var(--r);padding:28px 24px;transition:border-color .25s,transform .25s}
+.uc-card:hover{border-color:rgba(0,200,255,.3);transform:translateY(-3px)}
+.uc-industry{font-size:.68rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--a);margin-bottom:8px}
+.uc-title{font-size:1rem;font-weight:700;margin-bottom:8px}
+.uc-desc{font-size:.84rem;color:var(--m);line-height:1.65;margin-bottom:14px}
+.uc-tags{display:flex;gap:6px;flex-wrap:wrap}
+.uc-tag{font-size:.62rem;font-weight:600;padding:3px 8px;border-radius:100px;background:rgba(0,200,255,.07);border:1px solid rgba(0,200,255,.15);color:var(--a)}
+
+/* APPROACH */
+.approach-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px}
+.ap{background:var(--bgc);border:1px solid rgba(255,255,255,.06);border-radius:var(--r);padding:28px 22px;position:relative;overflow:hidden;transition:border-color .25s,transform .25s}
+.ap:hover{border-color:rgba(0,200,255,.3);transform:translateY(-3px)}
+.ap-num{font-size:2.8rem;font-weight:900;color:rgba(0,200,255,.06);line-height:1;margin-bottom:12px;font-family:serif}
+.ap h3{font-size:.95rem;font-weight:700;margin-bottom:8px}
+.ap p{font-size:.82rem;color:var(--m);line-height:1.6}
+
+/* PRICING */
+.pc{background:var(--bgc);border:1px solid rgba(255,255,255,.06);border-radius:var(--r);padding:32px 26px;position:relative;transition:border-color .25s,transform .25s,box-shadow .25s}
+.pc:hover{border-color:rgba(0,200,255,.35);transform:translateY(-4px);box-shadow:0 8px 40px rgba(0,200,255,.08)}
+.pc.pop{border-color:var(--a);box-shadow:0 0 40px rgba(0,200,255,.1)}
+.pbadge{position:absolute;top:-12px;left:50%;transform:translateX(-50%);background:var(--a);color:#000;font-size:.66rem;font-weight:700;padding:4px 14px;border-radius:20px;text-transform:uppercase;letter-spacing:.08em;white-space:nowrap}
+.pp{font-size:1.6rem;font-weight:800;color:var(--a);margin-bottom:4px}
+.pn{font-size:.72rem;color:var(--m);margin-bottom:14px}
+.pf{list-style:none;margin-bottom:22px;display:flex;flex-direction:column;gap:6px}
+.pf li{font-size:.82rem;color:var(--m);display:flex;gap:7px;align-items:flex-start}
+.pf li::before{content:'✓';color:var(--a);font-weight:700;flex-shrink:0;margin-top:1px}
+
+/* CONTACT */
+.fg{margin-bottom:16px}
+.fg label{display:block;font-size:.76rem;font-weight:600;margin-bottom:5px;color:var(--m);text-transform:uppercase;letter-spacing:.06em}
+.fg input,.fg textarea,.fg select{width:100%;padding:11px 14px;background:var(--bgc);border:1px solid rgba(255,255,255,.1);border-radius:8px;color:#fff;font-size:.88rem;font-family:inherit;outline:none;transition:border-color .25s}
+.fg input:focus,.fg textarea:focus,.fg select:focus{border-color:var(--a)}
+.fg textarea{min-height:90px;resize:vertical}
+.fr{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+
+footer{position:relative;z-index:2;border-top:1px solid rgba(255,255,255,.06);padding:28px 24px}
+.fi{max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px}
+.fl a{font-size:.8rem;color:var(--m);text-decoration:none;margin-left:18px;transition:color .2s}
+.fl a:hover{color:var(--a)}
+
+@media(max-width:900px){
+  .hero-grid{grid-template-columns:1fr}
+  .igel-feature{grid-template-columns:1fr}
+}
+@media(max-width:768px){
+  .nl{position:fixed;top:var(--nh);right:0;width:260px;height:calc(100vh - var(--nh));background:rgba(7,13,26,.98);flex-direction:column;padding:28px 20px;gap:2px;transform:translateX(100%);transition:transform .3s;border-left:1px solid rgba(255,255,255,.06);overflow-y:auto}
+  .nl.open{transform:translateX(0)}
+  .mb{display:block}
+  .fr{grid-template-columns:1fr}
+  section{padding:80px 18px}
+}
+</style>
+</head>
+<body>
+<canvas id="c"></canvas>
+<nav>
+  <div class="ni">
+    <a href="/" class="logo">Cary Park <span>Solutions</span></a>
+    <ul class="nl" id="nl">
+      <li><a href="/">Home</a></li>
+      <li><a href="#igel">IGEL</a></li>
+      <li><a href="#usecases">Use Cases</a></li>
+      <li><a href="#pricing">Pricing</a></li>
+      <li><a href="web.html">Web</a></li>
+      <li><a href="travel.html">Travel</a></li>
+      <li><a href="#contact" class="cta">Get a Quote</a></li>
+    </ul>
+    <button class="mb" id="mb"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="container">
+    <div class="hero-grid">
+      <div>
+        <div class="badge"><span class="dot"></span>Enterprise EUC & VDI Consulting</div>
+        <h1 class="hero-title">
+          Smarter <span class="hl">Endpoints.</span><br/>
+          Leaner <span class="hl2">Infrastructure.</span>
+        </h1>
+        <p class="hero-p">End-User Computing and VDI strategy, deployment, and management from a team with hands-on enterprise experience across IGEL OS, ControlUp, Citrix, VMware Horizon, and cloud VDI platforms.</p>
+        <div class="btns">
+          <a href="#contact" class="btn bp">Get a Quote</a>
+          <a href="#igel" class="btn bo">IGEL Expertise →</a>
+        </div>
+      </div>
+      <div class="stats-card">
+        <h3>What We Deliver</h3>
+        <div class="stat-row"><span class="stat-label">Endpoint hardware costs</span><span class="stat-val">Reduced<span class="up">↓ 40–60%</span></span></div>
+        <div class="stat-row"><span class="stat-label">IT management overhead</span><span class="stat-val">Simplified<span class="up">↓ drastically</span></span></div>
+        <div class="stat-row"><span class="stat-label">Security attack surface</span><span class="stat-val">Minimized<span class="up">↓ read-only OS</span></span></div>
+        <div class="stat-row"><span class="stat-label">Remote worker experience</span><span class="stat-val">Elevated<span class="down">↑ measurably</span></span></div>
+        <div class="stat-row"><span class="stat-label">Time to provision endpoint</span><span class="stat-val">Minutes<span class="up">↓ from days</span></span></div>
+        <div class="stat-row"><span class="stat-label">Compliance posture</span><span class="stat-val">Strengthened<span class="down">↑ audit-ready</span></span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TECH STACK -->
+<section style="padding-top:0">
+  <div class="container">
+    <p class="lbl">Technology Stack</p>
+    <h2 class="ttl">Platforms We Know Cold</h2>
+    <p class="sub">Deep hands-on experience across the leading EUC and VDI platforms — not certifications, actual deployments.</p>
+    <div class="tech-grid">
+      <div class="tech-card">
+        <div class="tech-icon">🖥️</div>
+        <div class="tech-name">IGEL OS</div>
+        <div class="tech-role">Secure Linux-based endpoint OS. Convert any x86 device into a managed thin client. Zero-trust ready.</div>
+        <span class="tech-badge tb-igel">Core Focus</span>
+      </div>
+      <div class="tech-card">
+        <div class="tech-icon">📊</div>
+        <div class="tech-name">ControlUp</div>
+        <div class="tech-role">Real-time EUC monitoring and analytics. Session diagnostics, performance optimization, DEX scoring.</div>
+        <span class="tech-badge tb-partner">DEX Platform</span>
+      </div>
+      <div class="tech-card">
+        <div class="tech-icon">🌐</div>
+        <div class="tech-name">Citrix DaaS</div>
+        <div class="tech-role">Virtual app and desktop delivery. On-prem, hybrid, and full cloud deployments.</div>
+        <span class="tech-badge tb-partner">VDI</span>
+      </div>
+      <div class="tech-card">
+        <div class="tech-icon">⚡</div>
+        <div class="tech-name">VMware Horizon</div>
+        <div class="tech-role">Enterprise desktop virtualization. Horizon Cloud on Azure, on-prem, and Omnissa migrations.</div>
+        <span class="tech-badge tb-partner">VDI</span>
+      </div>
+      <div class="tech-card">
+        <div class="tech-icon">☁️</div>
+        <div class="tech-name">Azure Virtual Desktop</div>
+        <div class="tech-role">Microsoft's cloud VDI platform. Deployment, optimization, FSLogix, cost governance.</div>
+        <span class="tech-badge tb-cloud">Cloud VDI</span>
+      </div>
+      <div class="tech-card">
+        <div class="tech-icon">🔒</div>
+        <div class="tech-name">Amazon WorkSpaces</div>
+        <div class="tech-role">AWS managed desktop service. Architecture, security configuration, and cost optimization.</div>
+        <span class="tech-badge tb-cloud">Cloud VDI</span>
+      </div>
+      <div class="tech-card">
+        <div class="tech-icon">🛡️</div>
+        <div class="tech-name">Endpoint Security</div>
+        <div class="tech-role">Zero-trust endpoint policy, MDM/UEM integration, and compliance hardening across EUC environments.</div>
+        <span class="tech-badge tb-mgmt">Security</span>
+      </div>
+      <div class="tech-card">
+        <div class="tech-icon">📋</div>
+        <div class="tech-name">UEM & Management</div>
+        <div class="tech-role">Unified endpoint management strategy — policy design, IGEL UMS, Workspace ONE, Intune integration.</div>
+        <span class="tech-badge tb-mgmt">Management</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- IGEL FEATURE -->
+<section id="igel" style="padding-top:0">
+  <div class="container">
+    <div class="igel-feature">
+      <div class="igel-logo-area">
+        <div>
+          <div class="igel-wordmark">IGEL</div>
+          <p style="font-size:.56rem;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:var(--a);margin-top:4px">OS-Managed Endpoint Strategy</p>
+        </div>
+        <p class="igel-tagline">IGEL OS turns any x86 device into a secure, centrally managed endpoint in minutes. A read-only Linux OS that eliminates Windows licensing costs, reduces attack surface to near-zero, and provisions at scale via the IGEL Universal Management Suite.</p>
+        <p class="igel-tagline">We've deployed IGEL across enterprise environments — financial services, healthcare, logistics, and distributed workforces — and understand how to architect it for maximum ROI and minimum friction.</p>
+        <div class="igel-stats">
+          <div class="is"><div class="is-num">3 min</div><div class="is-lbl">Average device provisioning time</div></div>
+          <div class="is"><div class="is-num">~$0</div><div class="is-lbl">Windows licensing cost per endpoint</div></div>
+          <div class="is"><div class="is-num">10yr</div><div class="is-lbl">Hardware lifespan extension potential</div></div>
+          <div class="is"><div class="is-num">100%</div><div class="is-lbl">Read-only OS — no persistent malware</div></div>
+        </div>
+      </div>
+      <div class="igel-right">
+        <h3>What We Do With IGEL</h3>
+        <div class="igel-points">
+          <div class="ip">
+            <div class="ip-icon">🏗️</div>
+            <div><div class="ip-title">Architecture & Design</div><div class="ip-desc">Full IGEL deployment architecture — UMS server sizing, network topology, profile hierarchy, and security policy framework.</div></div>
+          </div>
+          <div class="ip">
+            <div class="ip-icon">🚀</div>
+            <div><div class="ip-title">Deployment & Migration</div><div class="ip-desc">Migrate from Windows fat clients, legacy thin clients, or mixed environments. Phased rollout planning and execution.</div></div>
+          </div>
+          <div class="ip">
+            <div class="ip-icon">🔧</div>
+            <div><div class="ip-title">UMS & Profile Management</div><div class="ip-desc">Universal Management Suite configuration — master profiles, device directories, update channels, and automation rules.</div></div>
+          </div>
+          <div class="ip">
+            <div class="ip-icon">🔗</div>
+            <div><div class="ip-title">Citrix / Horizon / AVD Integration</div><div class="ip-desc">IGEL as the front-end for your existing VDI infrastructure. Optimize the full delivery chain from endpoint to session.</div></div>
+          </div>
+          <div class="ip">
+            <div class="ip-icon">📈</div>
+            <div><div class="ip-title">ROI & TCO Analysis</div><div class="ip-desc">Build the business case for IGEL. We quantify hardware savings, licensing reduction, and IT labor cost avoidance.</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- USE CASES -->
+<section id="usecases" style="padding-top:0">
+  <div class="container">
+    <p class="lbl">Use Cases</p>
+    <h2 class="ttl">Where We've Done This</h2>
+    <p class="sub">EUC and VDI consulting isn't theoretical for us. Here are the environments we know best.</p>
+    <div class="uc-grid">
+      <div class="uc-card">
+        <div class="uc-industry">Healthcare</div>
+        <div class="uc-title">Clinical Workstation Modernization</div>
+        <div class="uc-desc">Replacing Windows fat clients at nursing stations and clinical desktops with IGEL endpoints. HIPAA-compliant profiles, EHR integration, zero persistent local data.</div>
+        <div class="uc-tags"><span class="uc-tag">IGEL OS</span><span class="uc-tag">Citrix</span><span class="uc-tag">HIPAA</span></div>
+      </div>
+      <div class="uc-card">
+        <div class="uc-industry">Financial Services</div>
+        <div class="uc-title">Secure Trading & Compliance Desktops</div>
+        <div class="uc-desc">High-performance VDI for trading floors and compliance teams. Low-latency session delivery, DLP policy enforcement, and audit trail via ControlUp.</div>
+        <div class="uc-tags"><span class="uc-tag">VMware Horizon</span><span class="uc-tag">ControlUp</span><span class="uc-tag">Zero Trust</span></div>
+      </div>
+      <div class="uc-card">
+        <div class="uc-industry">Logistics & Distribution</div>
+        <div class="uc-title">Warehouse & Distribution Center Endpoints</div>
+        <div class="uc-desc">Ruggedized endpoint strategy for high-turnover warehouse environments. IGEL on shared devices, kiosk mode profiles, and centralized management across distributed sites.</div>
+        <div class="uc-tags"><span class="uc-tag">IGEL OS</span><span class="uc-tag">Kiosk Mode</span><span class="uc-tag">Multi-site</span></div>
+      </div>
+      <div class="uc-card">
+        <div class="uc-industry">Remote & Hybrid Workforce</div>
+        <div class="uc-title">Work-From-Anywhere Enablement</div>
+        <div class="uc-desc">IGEL-based home office endpoints with centralized policy control. Employees get secure, managed devices — IT gets full visibility regardless of location.</div>
+        <div class="uc-tags"><span class="uc-tag">IGEL OS</span><span class="uc-tag">AVD</span><span class="uc-tag">Zero Trust</span></div>
+      </div>
+      <div class="uc-card">
+        <div class="uc-industry">SMB & Mid-Market</div>
+        <div class="uc-title">Right-Sized VDI Without Enterprise Overhead</div>
+        <div class="uc-desc">Cloud-first VDI for growing companies. Azure Virtual Desktop or Amazon WorkSpaces — scoped right, priced right, managed without a dedicated IT team.</div>
+        <div class="uc-tags"><span class="uc-tag">AVD</span><span class="uc-tag">WorkSpaces</span><span class="uc-tag">Cost Optimization</span></div>
+      </div>
+      <div class="uc-card">
+        <div class="uc-industry">Digital Employee Experience</div>
+        <div class="uc-title">EUC Performance & DEX Monitoring</div>
+        <div class="uc-desc">ControlUp deployment for real-time session monitoring, logon duration analysis, and proactive remediation scripts. Turn reactive help desk into preventive IT.</div>
+        <div class="uc-tags"><span class="uc-tag">ControlUp</span><span class="uc-tag">DEX</span><span class="uc-tag">Automation</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- APPROACH -->
+<section style="padding-top:0">
+  <div class="container">
+    <p class="lbl">How We Work</p>
+    <h2 class="ttl">Our EUC Approach</h2>
+    <p class="sub" style="margin-bottom:36px">We don't sell licenses. We solve problems. Here's how we engage.</p>
+    <div class="approach-grid">
+      <div class="ap"><div class="ap-num">01</div><h3>Discovery</h3><p>Audit your current endpoint estate — hardware inventory, OS versions, VDI platform, licensing spend, and pain points. No assumptions.</p></div>
+      <div class="ap"><div class="ap-num">02</div><h3>Architecture</h3><p>Design the right solution for your environment — IGEL, VDI platform selection, cloud vs on-prem, and integration with your identity and security stack.</p></div>
+      <div class="ap"><div class="ap-num">03</div><h3>Proof of Concept</h3><p>Pilot deployment with real users before full rollout. Validate performance, user experience, and IT management workflows before committing.</p></div>
+      <div class="ap"><div class="ap-num">04</div><h3>Deployment</h3><p>Phased rollout with change management support. We stay hands-on through go-live, not just the design phase.</p></div>
+      <div class="ap"><div class="ap-num">05</div><h3>Optimization</h3><p>Post-deployment tuning — ControlUp analytics, profile optimization, cost governance, and ongoing support options.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section id="pricing" style="padding-top:0">
+  <div class="container">
+    <div style="text-align:center;margin-bottom:44px">
+      <p class="lbl">EUC Consulting Pricing</p>
+      <h2 class="ttl">Straightforward Engagements</h2>
+      <p class="sub" style="margin:0 auto">Project-based with clear scope. No retainer required to get started.</p>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px">
+      <div class="pc">
+        <h3 style="font-size:1rem;font-weight:700;margin-bottom:6px">EUC Assessment</h3>
+        <div class="pp">$2,500</div>
+        <div class="pn">One-time · Delivered in 1 week</div>
+        <p style="color:var(--m);font-size:.86rem;line-height:1.65;margin-bottom:16px">Comprehensive audit of your current endpoint environment with a prioritized recommendation report.</p>
+        <ul class="pf">
+          <li>Hardware & OS inventory analysis</li>
+          <li>VDI platform evaluation</li>
+          <li>Licensing cost audit</li>
+          <li>IGEL fit assessment</li>
+          <li>Executive summary + roadmap</li>
+        </ul>
+        <a href="#contact" class="btn bo" style="width:100%;text-align:center">Get Started</a>
+      </div>
+      <div class="pc pop">
+        <div class="pbadge">Most Requested</div>
+        <h3 style="font-size:1rem;font-weight:700;margin-bottom:6px">IGEL Deployment</h3>
+        <div class="pp">From $8,000</div>
+        <div class="pn">Scoped per environment size</div>
+        <p style="color:var(--m);font-size:.86rem;line-height:1.65;margin-bottom:16px">End-to-end IGEL OS deployment — from architecture through go-live. Includes UMS setup, profiles, and training.</p>
+        <ul class="pf">
+          <li>UMS server architecture & setup</li>
+          <li>Master profile design</li>
+          <li>Pilot deployment (up to 25 devices)</li>
+          <li>VDI broker integration</li>
+          <li>IT admin training</li>
+          <li>30-day post-launch support</li>
+        </ul>
+        <a href="#contact" class="btn bp" style="width:100%;text-align:center">Request a Scope</a>
+      </div>
+      <div class="pc">
+        <h3 style="font-size:1rem;font-weight:700;margin-bottom:6px">VDI Strategy & Migration</h3>
+        <div class="pp">Custom Quote</div>
+        <div class="pn">Discovery call required</div>
+        <p style="color:var(--m);font-size:.86rem;line-height:1.65;margin-bottom:16px">Full VDI platform evaluation, migration planning, and deployment. Citrix, Horizon, AVD, or WorkSpaces.</p>
+        <ul class="pf">
+          <li>Platform selection & TCO analysis</li>
+          <li>Migration architecture</li>
+          <li>Phased rollout plan</li>
+          <li>ControlUp monitoring setup</li>
+          <li>Hyperscaler cost optimization</li>
+        </ul>
+        <a href="#contact" class="btn bo" style="width:100%;text-align:center">Schedule a Call</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" style="padding-top:0">
+  <div class="container">
+    <div style="text-align:center;margin-bottom:36px">
+      <p class="lbl">Contact</p>
+      <h2 class="ttl">Start the Conversation</h2>
+      <p class="sub" style="margin:0 auto">Tell us about your environment and we'll respond within one business day.</p>
+    </div>
+    <div style="max-width:580px;margin:0 auto">
+      <div class="fr">
+        <div class="fg"><label>Name</label><input id="cn" type="text" placeholder="Your name"/></div>
+        <div class="fg"><label>Email</label><input id="ce" type="email" placeholder="you@company.com"/></div>
+      </div>
+      <div class="fg"><label>Company</label><input id="cc" type="text" placeholder="Your organization"/></div>
+      <div class="fg"><label>Environment</label>
+        <select id="cs">
+          <option value="">What describes your situation…</option>
+          <option>We use IGEL and need help optimizing</option>
+          <option>We want to evaluate IGEL OS</option>
+          <option>We need a VDI platform assessment</option>
+          <option>We're migrating from Citrix / Horizon</option>
+          <option>We need ControlUp deployed</option>
+          <option>We want cloud VDI (AVD or WorkSpaces)</option>
+          <option>General EUC consulting</option>
+        </select>
+      </div>
+      <div class="fg"><label>Approximate endpoint count</label>
+        <select id="cep">
+          <option value="">Select range…</option>
+          <option>Under 50</option>
+          <option>50–250</option>
+          <option>250–1,000</option>
+          <option>1,000–5,000</option>
+          <option>5,000+</option>
+        </select>
+      </div>
+      <div class="fg"><label>Tell us about your environment</label><textarea id="cm" placeholder="Current platforms, pain points, timeline, and any specific goals…"></textarea></div>
+      <button class="btn bp" style="width:100%" onclick="submitEUC()">Send Message →</button>
+      <p style="font-size:.73rem;color:var(--m);text-align:center;margin-top:10px">Or email <a href="mailto:info@caryparksolutions.com" style="color:var(--a)">info@caryparksolutions.com</a></p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="fi">
+    <span style="font-size:.8rem;color:var(--m)">© 2026 <strong style="color:#fff">Cary Park Solutions</strong> · EUC & VDI Consulting</span>
+    <div class="fl"><a href="/">Home</a><a href="web.html">Web</a><a href="support.html">Support</a><a href="travel.html">Travel</a><a href="mailto:info@caryparksolutions.com">Contact</a></div>
+  </div>
+</footer>
+
+<script>
+const cv=document.getElementById('c'),cx=cv.getContext('2d');let pts=[],mo={x:-999,y:-999};
+function rsz(){cv.width=innerWidth;cv.height=innerHeight}rsz();window.addEventListener('resize',rsz);
+window.addEventListener('mousemove',e=>{mo.x=e.clientX;mo.y=e.clientY});
+for(let i=0;i<150;i++)pts.push({x:Math.random()*innerWidth,y:Math.random()*innerHeight,r:Math.random()*1.4+.3,vx:(Math.random()-.5)*.2,vy:(Math.random()-.5)*.2,a:Math.random()*.6+.2});
+function draw(){cx.clearRect(0,0,cv.width,cv.height);pts.forEach(p=>{const dx=mo.x-p.x,dy=mo.y-p.y,d=Math.sqrt(dx*dx+dy*dy);if(d<120){p.x+=dx*.005;p.y+=dy*.005}p.x+=p.vx;p.y+=p.vy;if(p.x<0)p.x=cv.width;if(p.x>cv.width)p.x=0;if(p.y<0)p.y=cv.height;if(p.y>cv.height)p.y=0;cx.beginPath();cx.arc(p.x,p.y,p.r,0,Math.PI*2);cx.fillStyle=`rgba(255,255,255,${p.a})`;cx.fill()});requestAnimationFrame(draw)}draw();
+document.getElementById('mb').addEventListener('click',()=>document.getElementById('nl').classList.toggle('open'));
+
+function submitEUC(){
+  const n=document.getElementById('cn').value.trim(),e=document.getElementById('ce').value.trim();
+  if(!n||!e){alert('Name and email required.');return}
+  const c=document.getElementById('cc').value.trim(),s=document.getElementById('cs').value,ep=document.getElementById('cep').value,m=document.getElementById('cm').value.trim();
+  const body=`EUC / VDI Inquiry\n\nName: ${n}\nEmail: ${e}\nCompany: ${c||'—'}\nEnvironment: ${s||'—'}\nEndpoint Count: ${ep||'—'}\n\nDetails:\n${m||'—'}`;
+  window.location.href=`mailto:info@caryparksolutions.com?subject=[EUC] ${c||n} — ${s||'General Inquiry'}&body=${encodeURIComponent(body)}`;
+}
+</script>
+</body>
+</html>
