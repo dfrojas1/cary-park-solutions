@@ -209,17 +209,15 @@
       position: relative;
       min-height: 100vh; min-height: 100svh;
       display: flex; align-items: center; overflow: hidden;
-      background: linear-gradient(155deg,#0a1933 0%,#1a5fa8 55%,#0d9488 100%);
-    }
-    /* Subtle dot-grid texture on hero */
-    #hero::before {
-      content: ''; position: absolute; inset: 0; pointer-events: none;
-      background-image: radial-gradient(circle,rgba(255,255,255,.07) 1px,transparent 1px);
-      background-size: 28px 28px;
+      background:
+        radial-gradient(ellipse 75% 75% at 85% 15%, rgba(26,95,168,.42) 0%, transparent 65%),
+        radial-gradient(ellipse 55% 55% at 10% 90%, rgba(13,148,136,.22) 0%, transparent 58%),
+        radial-gradient(ellipse 40% 60% at 50% 50%, rgba(255,255,255,.02) 0%, transparent 100%),
+        linear-gradient(168deg, #060e1c 0%, #0b1a30 45%, #08141f 100%);
     }
     .hero-overlay {
       position: absolute; inset: 0;
-      background: linear-gradient(180deg,rgba(10,25,55,.3) 0%,transparent 60%,rgba(10,25,55,.25) 100%);
+      background: linear-gradient(to right, rgba(6,14,28,.65) 0%, rgba(6,14,28,.25) 55%, transparent 100%);
     }
     .hero-body {
       position: relative; z-index: 2; width: 100%; max-width: 740px; margin: 0 auto;
@@ -257,47 +255,23 @@
       flex-shrink: 0; font-size: .62rem; font-weight: 800; color: #fff;
     }
 
-    /* ── Image boxes — CSS gradient art, zero external deps ── */
+    /* ── Illustration panels — self-contained SVG art ── */
     .img-box { position: relative; overflow: hidden; width: 100%; }
     .img-box::before { content: ''; display: block; }
     .img-box.r16-10::before { padding-top: 62.5%; }
     .img-box.r4-3::before   { padding-top: 75%; }
-    .img-inner {
-      position: absolute; inset: 0;
-      display: flex; flex-direction: column;
-      align-items: center; justify-content: center;
-      gap: 14px; padding: 20px;
-    }
-    .img-inner svg { flex-shrink: 0; }
-    /* Specialty card gradients */
-    .g-hand     { background: linear-gradient(145deg,#1a5fa8 0%,#0d9488 100%); }
-    .g-wrist    { background: linear-gradient(145deg,#134a84 0%,#1565c0 100%); }
-    .g-shoulder { background: linear-gradient(145deg,#0e3d6e 0%,#0d9488 100%); }
-    /* Doctor card gradients */
-    .g-doc1 { background: linear-gradient(145deg,#162844 0%,#1a5fa8 100%); }
-    .g-doc2 { background: linear-gradient(145deg,#0d3352 0%,#1a7091 100%); }
-    .g-doc3 { background: linear-gradient(145deg,#1a2e50 0%,#0d9488 100%); }
-    /* Therapy gradient */
-    .g-therapy { background: linear-gradient(145deg,#0e4166 0%,#0a7060 100%); }
-    /* Decorative dot grid overlay */
-    .img-inner::before {
-      content: ''; position: absolute; inset: 0; pointer-events: none;
-      background-image: radial-gradient(circle,rgba(255,255,255,.12) 1px,transparent 1px);
-      background-size: 20px 20px;
-    }
-    /* Doctor avatar circle */
-    .doc-avatar {
-      width: 72px; height: 72px; border-radius: 50%;
-      background: rgba(255,255,255,.18); border: 2px solid rgba(255,255,255,.35);
-      display: flex; align-items: center; justify-content: center;
-      font-family: var(--serif); font-size: 1.5rem; font-weight: 700; color: #fff;
-      position: relative; z-index: 1;
-    }
-    .doc-role {
-      font-size: .72rem; font-weight: 700; letter-spacing: .1em;
-      text-transform: uppercase; color: rgba(255,255,255,.8);
-      position: relative; z-index: 1;
-    }
+    .img-inner { position: absolute; inset: 0; }
+    .img-inner svg { width: 100%; height: 100%; display: block; }
+    /* Specialty backgrounds */
+    .g-hand     { background: linear-gradient(140deg,#0c1e38 0%,#0f2d52 55%,#0a2540 100%); }
+    .g-wrist    { background: linear-gradient(140deg,#0a1a30 0%,#112843 55%,#091e38 100%); }
+    .g-shoulder { background: linear-gradient(140deg,#091d35 0%,#0e2a45 55%,#072030 100%); }
+    /* Doctor card backgrounds */
+    .g-doc1 { background: linear-gradient(160deg,#0c1e38 0%,#1a5fa8 100%); }
+    .g-doc2 { background: linear-gradient(160deg,#091e35 0%,#1a5fa8 100%); }
+    .g-doc3 { background: linear-gradient(160deg,#091a30 0%,#0a7060 100%); }
+    /* Therapy */
+    .g-therapy { background: linear-gradient(140deg,#071e2f 0%,#0d3352 55%,#053028 100%); }
 
     /* ── Trust Bar ── */
     #trust-bar {
@@ -346,7 +320,7 @@
       transition: box-shadow var(--ease), transform var(--ease);
     }
     @media (hover:hover) { .why-card:hover { box-shadow: var(--sh-md); transform: translateY(-3px); } }
-    .why-icon { font-size: 1.9rem; margin-bottom: 12px; line-height: 1; }
+    .why-icon { margin-bottom: 14px; color: var(--blue); }
     .why-title { font-family: var(--serif); font-size: 1.05rem; font-weight: 700; color: var(--text); margin-bottom: 8px; }
     .why-desc { font-size: .86rem; color: var(--g600); line-height: 1.65; }
 
@@ -599,8 +573,43 @@
       <article class="spec-card anim">
         <div class="img-box r16-10">
           <div class="img-inner g-hand">
-            <svg width="68" height="68" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.85)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="position:relative;z-index:1"><path d="M18 11V6a2 2 0 0 0-2-2v0a2 2 0 0 0-2 2v0"/><path d="M14 10V4a2 2 0 0 0-2-2v0a2 2 0 0 0-2 2v2"/><path d="M10 10.5V6a2 2 0 0 0-2-2v0a2 2 0 0 0-2 2v8"/><path d="M18 8a2 2 0 1 1 4 0v6a8 8 0 0 1-8 8h-2c-2.8 0-4.5-.86-5.99-2.34l-3.6-3.6a2 2 0 0 1 2.83-2.82L7 15"/></svg>
-            <span style="font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.7);position:relative;z-index:1">Hand Surgery &amp; Care</span>
+            <!-- Hand anatomy illustration — dorsal view -->
+            <svg viewBox="0 0 300 188" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid meet">
+              <defs>
+                <radialGradient id="hglow" cx="50%" cy="50%" r="50%">
+                  <stop offset="0%" stop-color="#1a5fa8" stop-opacity=".35"/>
+                  <stop offset="100%" stop-color="transparent"/>
+                </radialGradient>
+              </defs>
+              <ellipse cx="150" cy="94" rx="90" ry="76" fill="url(#hglow)"/>
+              <!-- Wrist/carpal base -->
+              <path d="M 108,172 Q 96,162 98,148 L 100,128 L 192,128 L 194,148 Q 196,162 184,172 Z" fill="rgba(255,255,255,.06)" stroke="rgba(255,255,255,.28)" stroke-width="1.1"/>
+              <!-- Thumb -->
+              <path d="M 107,148 Q 88,138 82,122 Q 76,106 82,94 Q 90,84 100,88 Q 108,93 110,108 L 112,128" fill="rgba(255,255,255,.06)" stroke="rgba(255,255,255,.32)" stroke-width="1.1" stroke-linejoin="round"/>
+              <!-- thumb joint line -->
+              <line x1="84" y1="110" x2="110" y2="113" stroke="rgba(255,255,255,.18)" stroke-width=".9"/>
+              <!-- Index finger -->
+              <path d="M 118,128 L 115,68 Q 115,57 122,57 Q 130,57 130,68 L 126,128 Z" fill="rgba(255,255,255,.06)" stroke="rgba(255,255,255,.32)" stroke-width="1.1"/>
+              <!-- Middle finger (longest) -->
+              <path d="M 133,128 L 131,52 Q 131,41 139,41 Q 147,41 147,52 L 143,128 Z" fill="rgba(255,255,255,.07)" stroke="rgba(255,255,255,.36)" stroke-width="1.1"/>
+              <!-- Ring finger -->
+              <path d="M 149,128 L 148,60 Q 148,49 156,49 Q 164,49 164,60 L 161,128 Z" fill="rgba(255,255,255,.06)" stroke="rgba(255,255,255,.30)" stroke-width="1.1"/>
+              <!-- Pinky -->
+              <path d="M 165,128 L 165,78 Q 165,68 172,68 Q 179,68 179,78 L 178,128 Z" fill="rgba(255,255,255,.05)" stroke="rgba(255,255,255,.24)" stroke-width="1.1"/>
+              <!-- PIP joint lines -->
+              <line x1="115" y1="90" x2="130" y2="90" stroke="rgba(255,255,255,.2)" stroke-width=".9"/>
+              <line x1="131" y1="82" x2="147" y2="82" stroke="rgba(255,255,255,.22)" stroke-width=".9"/>
+              <line x1="148" y1="86" x2="164" y2="86" stroke="rgba(255,255,255,.2)" stroke-width=".9"/>
+              <line x1="165" y1="98" x2="179" y2="98" stroke="rgba(255,255,255,.18)" stroke-width=".9"/>
+              <!-- MCP joint line -->
+              <line x1="115" y1="110" x2="179" y2="110" stroke="rgba(255,255,255,.15)" stroke-width=".9" stroke-dasharray="3 2"/>
+              <!-- Carpal canal callout -->
+              <circle cx="146" cy="150" r="14" fill="none" stroke="rgba(13,148,136,.65)" stroke-width="1" stroke-dasharray="3 2"/>
+              <line x1="160" y1="142" x2="210" y2="124" stroke="rgba(13,148,136,.5)" stroke-width=".8"/>
+              <text x="213" y="122" font-family="ui-sans-serif,system-ui,sans-serif" font-size="7.5" fill="rgba(255,255,255,.52)" font-weight="700" letter-spacing=".07em">CARPAL CANAL</text>
+              <!-- Label -->
+              <text x="150" y="184" text-anchor="middle" font-family="ui-sans-serif,system-ui,sans-serif" font-size="8.5" fill="rgba(255,255,255,.38)" font-weight="700" letter-spacing=".18em">HAND · DORSAL VIEW</text>
+            </svg>
           </div>
         </div>
         <div class="spec-body">
@@ -612,8 +621,42 @@
       <article class="spec-card anim anim-d1">
         <div class="img-box r16-10">
           <div class="img-inner g-wrist">
-            <svg width="68" height="68" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.85)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="position:relative;z-index:1"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/><path d="M12 2a10 10 0 0 1 0 20"/></svg>
-            <span style="font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.7);position:relative;z-index:1">Wrist &amp; Elbow</span>
+            <!-- Elbow/forearm anatomy — lateral view -->
+            <svg viewBox="0 0 300 188" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid meet">
+              <defs>
+                <radialGradient id="eglow" cx="50%" cy="48%" r="45%">
+                  <stop offset="0%" stop-color="#1565c0" stop-opacity=".3"/>
+                  <stop offset="100%" stop-color="transparent"/>
+                </radialGradient>
+              </defs>
+              <ellipse cx="150" cy="90" rx="80" ry="70" fill="url(#eglow)"/>
+              <!-- Humerus (upper arm bone, entering from top) -->
+              <path d="M 130,12 Q 126,20 128,38 L 124,66 Q 122,78 128,88 Q 138,102 148,104 Q 156,106 164,100 Q 174,90 172,78 L 166,66 L 164,42 Q 166,22 162,12 Z" fill="rgba(255,255,255,.07)" stroke="rgba(255,255,255,.30)" stroke-width="1.1" stroke-linejoin="round"/>
+              <!-- Olecranon (elbow bony point) -->
+              <path d="M 128,88 Q 120,96 122,108 Q 124,116 132,118 L 144,116" fill="rgba(255,255,255,.07)" stroke="rgba(255,255,255,.28)" stroke-width="1.1" stroke-linejoin="round"/>
+              <!-- Radius (forearm, lateral) -->
+              <path d="M 164,100 Q 170,108 172,120 L 176,158 Q 178,168 170,172 L 160,174 Q 150,175 148,166 L 148,154 L 148,122 Q 148,110 152,104 Z" fill="rgba(255,255,255,.07)" stroke="rgba(255,255,255,.30)" stroke-width="1.1" stroke-linejoin="round"/>
+              <!-- Ulna (forearm, medial) -->
+              <path d="M 144,116 Q 136,120 132,132 L 128,158 Q 126,168 134,172 L 144,174 Q 148,175 148,166 L 148,122" fill="rgba(255,255,255,.06)" stroke="rgba(255,255,255,.24)" stroke-width="1" stroke-linejoin="round"/>
+              <!-- Joint space line -->
+              <path d="M 124,80 Q 148,96 172,80" fill="none" stroke="rgba(255,255,255,.16)" stroke-width=".9" stroke-dasharray="3 2"/>
+              <!-- Range-of-motion arc -->
+              <path d="M 200,58 Q 218,92 200,126" fill="none" stroke="rgba(13,148,136,.55)" stroke-width="1.2" stroke-dasharray="5 3"/>
+              <line x1="200" y1="58" x2="210" y2="50" stroke="rgba(13,148,136,.4)" stroke-width=".9"/>
+              <line x1="200" y1="126" x2="210" y2="134" stroke="rgba(13,148,136,.4)" stroke-width=".9"/>
+              <!-- Callout labels -->
+              <text x="226" y="54" font-family="ui-sans-serif,system-ui,sans-serif" font-size="7" fill="rgba(255,255,255,.45)" font-weight="700" letter-spacing=".05em">FLEXION</text>
+              <text x="220" y="140" font-family="ui-sans-serif,system-ui,sans-serif" font-size="7" fill="rgba(255,255,255,.45)" font-weight="700" letter-spacing=".05em">EXTENSION</text>
+              <!-- Bone labels -->
+              <line x1="146" y1="30" x2="100" y2="30" stroke="rgba(255,255,255,.18)" stroke-width=".7"/>
+              <text x="96" y="30" text-anchor="end" font-family="ui-sans-serif,system-ui,sans-serif" font-size="7" fill="rgba(255,255,255,.4)" font-weight="600" letter-spacing=".06em">HUMERUS</text>
+              <line x1="174" y1="140" x2="232" y2="140" stroke="rgba(255,255,255,.15)" stroke-width=".7"/>
+              <text x="235" y="143" font-family="ui-sans-serif,system-ui,sans-serif" font-size="7" fill="rgba(255,255,255,.4)" font-weight="600" letter-spacing=".06em">RADIUS</text>
+              <line x1="130" y1="148" x2="76" y2="148" stroke="rgba(255,255,255,.13)" stroke-width=".7"/>
+              <text x="72" y="151" text-anchor="end" font-family="ui-sans-serif,system-ui,sans-serif" font-size="7" fill="rgba(255,255,255,.38)" font-weight="600" letter-spacing=".06em">ULNA</text>
+              <!-- Label -->
+              <text x="150" y="184" text-anchor="middle" font-family="ui-sans-serif,system-ui,sans-serif" font-size="8.5" fill="rgba(255,255,255,.38)" font-weight="700" letter-spacing=".18em">ELBOW · LATERAL VIEW</text>
+            </svg>
           </div>
         </div>
         <div class="spec-body">
@@ -624,9 +667,43 @@
       </article>
       <article class="spec-card anim anim-d2">
         <div class="img-box r16-10">
+        <div class="img-box r16-10">
           <div class="img-inner g-shoulder">
-            <svg width="68" height="68" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.85)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="position:relative;z-index:1"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
-            <span style="font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.7);position:relative;z-index:1">Shoulder Specialists</span>
+            <!-- Shoulder joint anatomy — anterior view -->
+            <svg viewBox="0 0 300 188" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid meet">
+              <defs>
+                <radialGradient id="sglow" cx="48%" cy="45%" r="48%">
+                  <stop offset="0%" stop-color="#0d9488" stop-opacity=".28"/>
+                  <stop offset="100%" stop-color="transparent"/>
+                </radialGradient>
+              </defs>
+              <ellipse cx="148" cy="90" rx="82" ry="72" fill="url(#sglow)"/>
+              <!-- Clavicle (collarbone) — horizontal strut top-left to joint -->
+              <path d="M 56,60 Q 80,52 108,58 Q 122,62 130,72" fill="none" stroke="rgba(255,255,255,.35)" stroke-width="10" stroke-linecap="round"/>
+              <path d="M 56,60 Q 80,52 108,58 Q 122,62 130,72" fill="none" stroke="rgba(255,255,255,.22)" stroke-width="1" stroke-linecap="round"/>
+              <!-- Acromion arch over joint -->
+              <path d="M 130,72 Q 148,62 166,68 L 168,80 Q 154,74 140,80" fill="rgba(255,255,255,.08)" stroke="rgba(255,255,255,.3)" stroke-width="1.1"/>
+              <!-- Glenoid (socket) -->
+              <ellipse cx="138" cy="100" rx="14" ry="22" fill="rgba(255,255,255,.07)" stroke="rgba(255,255,255,.28)" stroke-width="1.1"/>
+              <!-- Humeral head (ball) -->
+              <circle cx="166" cy="96" r="28" fill="rgba(255,255,255,.07)" stroke="rgba(255,255,255,.32)" stroke-width="1.1"/>
+              <!-- Glenohumeral joint space -->
+              <path d="M 152,76 Q 154,96 152,116" fill="none" stroke="rgba(255,255,255,.14)" stroke-width=".8" stroke-dasharray="3 2"/>
+              <!-- Humeral shaft going down -->
+              <path d="M 178,116 Q 184,130 182,160 L 174,162 Q 170,132 164,120 Z" fill="rgba(255,255,255,.07)" stroke="rgba(255,255,255,.24)" stroke-width="1"/>
+              <!-- Rotator cuff suggestion — arc of dashes around humeral head -->
+              <path d="M 148,72 Q 192,68 196,96 Q 196,126 172,138" fill="none" stroke="rgba(13,148,136,.6)" stroke-width="1.5" stroke-dasharray="4 3" stroke-linecap="round"/>
+              <!-- Rotator cuff callout -->
+              <line x1="194" y1="82" x2="238" y2="62" stroke="rgba(13,148,136,.45)" stroke-width=".8"/>
+              <text x="241" y="60" font-family="ui-sans-serif,system-ui,sans-serif" font-size="7.5" fill="rgba(255,255,255,.5)" font-weight="700" letter-spacing=".06em">ROTATOR CUFF</text>
+              <!-- Bone labels -->
+              <line x1="80" y1="52" x2="80" y2="38" stroke="rgba(255,255,255,.16)" stroke-width=".7"/>
+              <text x="80" y="34" text-anchor="middle" font-family="ui-sans-serif,system-ui,sans-serif" font-size="7" fill="rgba(255,255,255,.4)" font-weight="600" letter-spacing=".06em">CLAVICLE</text>
+              <line x1="166" y1="68" x2="166" y2="38" stroke="rgba(255,255,255,.14)" stroke-width=".7"/>
+              <text x="166" y="34" text-anchor="middle" font-family="ui-sans-serif,system-ui,sans-serif" font-size="7" fill="rgba(255,255,255,.38)" font-weight="600" letter-spacing=".06em">HUMERUS</text>
+              <!-- Label -->
+              <text x="150" y="184" text-anchor="middle" font-family="ui-sans-serif,system-ui,sans-serif" font-size="8.5" fill="rgba(255,255,255,.38)" font-weight="700" letter-spacing=".18em">SHOULDER · ANTERIOR VIEW</text>
+            </svg>
           </div>
         </div>
         <div class="spec-body">
@@ -650,22 +727,22 @@
     </div>
     <div class="why-grid">
       <div class="why-card anim">
-        <div class="why-icon" aria-hidden="true">🏥</div>
+        <div class="why-icon" aria-hidden="true"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div>
         <h3 class="why-title">Physician-Owned Practice</h3>
         <p class="why-desc">We answer to our patients — not a hospital system. Independent, focused, and community-rooted since 1991.</p>
       </div>
       <div class="why-card anim anim-d1">
-        <div class="why-icon" aria-hidden="true">🎓</div>
+        <div class="why-icon" aria-hidden="true"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg></div>
         <h3 class="why-title">Fellowship-Trained Surgeons</h3>
         <p class="why-desc">Every doctor holds dual board certification in orthopedic surgery AND hand surgery — the highest level available.</p>
       </div>
       <div class="why-card anim anim-d2">
-        <div class="why-icon" aria-hidden="true">📅</div>
+        <div class="why-icon" aria-hidden="true"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/><line x1="8" y1="14" x2="8.01" y2="14"/><line x1="12" y1="14" x2="12.01" y2="14"/><line x1="16" y1="14" x2="16.01" y2="14"/></svg></div>
         <h3 class="why-title">Same-Week Appointments</h3>
         <p class="why-desc">Pain doesn't wait. Same-day and next-day appointments frequently available. On-call 24/7 for urgent needs.</p>
       </div>
       <div class="why-card anim anim-d3">
-        <div class="why-icon" aria-hidden="true">💊</div>
+        <div class="why-icon" aria-hidden="true"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
         <h3 class="why-title">Conservative First Approach</h3>
         <p class="why-desc">Surgery when necessary — never when it isn't. Every non-surgical option explored first. You decide together.</p>
       </div>
@@ -686,8 +763,29 @@
       <article class="doc-card anim">
         <div class="img-box r4-3">
           <div class="img-inner g-doc1">
-            <div class="doc-avatar">JP</div>
-            <span class="doc-role">Orthopedic Surgeon</span>
+            <!-- Physician silhouette — white coat, stethoscope -->
+            <svg viewBox="0 0 200 150" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid meet">
+              <defs><radialGradient id="dg1" cx="50%" cy="40%" r="55%"><stop offset="0%" stop-color="#1a5fa8" stop-opacity=".4"/><stop offset="100%" stop-color="transparent"/></radialGradient></defs>
+              <rect width="200" height="150" fill="url(#dg1)"/>
+              <!-- Head -->
+              <ellipse cx="100" cy="38" rx="20" ry="23" fill="rgba(255,255,255,.1)" stroke="rgba(255,255,255,.35)" stroke-width="1.2"/>
+              <!-- Neck -->
+              <rect x="93" y="59" width="14" height="11" fill="rgba(255,255,255,.08)" stroke="rgba(255,255,255,.25)" stroke-width="1"/>
+              <!-- Lab coat body -->
+              <path d="M 52,148 L 52,92 Q 56,76 72,74 L 90,72 L 100,74 L 110,72 L 128,74 Q 144,76 148,92 L 148,148" fill="rgba(255,255,255,.08)" stroke="rgba(255,255,255,.3)" stroke-width="1.2" stroke-linejoin="round"/>
+              <!-- Coat lapels -->
+              <path d="M 90,72 L 95,90 L 100,108" stroke="rgba(255,255,255,.22)" stroke-width="1" fill="none"/>
+              <path d="M 110,72 L 105,90 L 100,108" stroke="rgba(255,255,255,.22)" stroke-width="1" fill="none"/>
+              <!-- Collar / shirt -->
+              <path d="M 93,70 L 96,82 L 100,88 L 104,82 L 107,70" fill="rgba(255,255,255,.05)" stroke="rgba(255,255,255,.18)" stroke-width=".8"/>
+              <!-- Stethoscope -->
+              <path d="M 86,88 Q 80,98 80,112 Q 80,122 88,124 Q 96,126 98,118" fill="none" stroke="rgba(13,148,136,.75)" stroke-width="2" stroke-linecap="round"/>
+              <circle cx="98" cy="118" r="5" fill="none" stroke="rgba(13,148,136,.75)" stroke-width="1.5"/>
+              <!-- Pocket on coat -->
+              <rect x="112" y="100" width="22" height="14" rx="2" fill="rgba(255,255,255,.05)" stroke="rgba(255,255,255,.18)" stroke-width=".8"/>
+              <!-- Pen in pocket -->
+              <line x1="118" y1="100" x2="118" y2="112" stroke="rgba(13,148,136,.5)" stroke-width="1.5" stroke-linecap="round"/>
+            </svg>
           </div>
         </div>
         <div class="doc-body">
@@ -699,8 +797,21 @@
       <article class="doc-card anim anim-d1">
         <div class="img-box r4-3">
           <div class="img-inner g-doc2">
-            <div class="doc-avatar">CM</div>
-            <span class="doc-role">Orthopedic Surgeon</span>
+            <svg viewBox="0 0 200 150" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid meet">
+              <defs><radialGradient id="dg2" cx="50%" cy="40%" r="55%"><stop offset="0%" stop-color="#1a5fa8" stop-opacity=".35"/><stop offset="100%" stop-color="transparent"/></radialGradient></defs>
+              <rect width="200" height="150" fill="url(#dg2)"/>
+              <ellipse cx="100" cy="38" rx="20" ry="23" fill="rgba(255,255,255,.1)" stroke="rgba(255,255,255,.35)" stroke-width="1.2"/>
+              <rect x="93" y="59" width="14" height="11" fill="rgba(255,255,255,.08)" stroke="rgba(255,255,255,.25)" stroke-width="1"/>
+              <path d="M 52,148 L 52,92 Q 56,76 72,74 L 90,72 L 100,74 L 110,72 L 128,74 Q 144,76 148,92 L 148,148" fill="rgba(255,255,255,.08)" stroke="rgba(255,255,255,.3)" stroke-width="1.2" stroke-linejoin="round"/>
+              <path d="M 90,72 L 95,90 L 100,108" stroke="rgba(255,255,255,.22)" stroke-width="1" fill="none"/>
+              <path d="M 110,72 L 105,90 L 100,108" stroke="rgba(255,255,255,.22)" stroke-width="1" fill="none"/>
+              <path d="M 93,70 L 96,82 L 100,88 L 104,82 L 107,70" fill="rgba(255,255,255,.05)" stroke="rgba(255,255,255,.18)" stroke-width=".8"/>
+              <!-- Stethoscope — different drape angle for variety -->
+              <path d="M 114,88 Q 122,98 120,112 Q 118,122 110,124 Q 102,126 100,118" fill="none" stroke="rgba(13,148,136,.75)" stroke-width="2" stroke-linecap="round"/>
+              <circle cx="100" cy="118" r="5" fill="none" stroke="rgba(13,148,136,.75)" stroke-width="1.5"/>
+              <rect x="66" y="100" width="22" height="14" rx="2" fill="rgba(255,255,255,.05)" stroke="rgba(255,255,255,.18)" stroke-width=".8"/>
+              <line x1="72" y1="100" x2="72" y2="112" stroke="rgba(13,148,136,.5)" stroke-width="1.5" stroke-linecap="round"/>
+            </svg>
           </div>
         </div>
         <div class="doc-body">
@@ -712,8 +823,21 @@
       <article class="doc-card anim anim-d2">
         <div class="img-box r4-3">
           <div class="img-inner g-doc3">
-            <div class="doc-avatar">RE</div>
-            <span class="doc-role">Orthopedic Surgeon</span>
+            <svg viewBox="0 0 200 150" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid meet">
+              <defs><radialGradient id="dg3" cx="50%" cy="40%" r="55%"><stop offset="0%" stop-color="#0a7060" stop-opacity=".4"/><stop offset="100%" stop-color="transparent"/></radialGradient></defs>
+              <rect width="200" height="150" fill="url(#dg3)"/>
+              <ellipse cx="100" cy="38" rx="20" ry="23" fill="rgba(255,255,255,.1)" stroke="rgba(255,255,255,.35)" stroke-width="1.2"/>
+              <rect x="93" y="59" width="14" height="11" fill="rgba(255,255,255,.08)" stroke="rgba(255,255,255,.25)" stroke-width="1"/>
+              <path d="M 52,148 L 52,92 Q 56,76 72,74 L 90,72 L 100,74 L 110,72 L 128,74 Q 144,76 148,92 L 148,148" fill="rgba(255,255,255,.08)" stroke="rgba(255,255,255,.3)" stroke-width="1.2" stroke-linejoin="round"/>
+              <path d="M 90,72 L 95,90 L 100,108" stroke="rgba(255,255,255,.22)" stroke-width="1" fill="none"/>
+              <path d="M 110,72 L 105,90 L 100,108" stroke="rgba(255,255,255,.22)" stroke-width="1" fill="none"/>
+              <path d="M 93,70 L 96,82 L 100,88 L 104,82 L 107,70" fill="rgba(255,255,255,.05)" stroke="rgba(255,255,255,.18)" stroke-width=".8"/>
+              <path d="M 86,88 Q 80,98 80,112 Q 80,122 88,124 Q 96,126 98,118" fill="none" stroke="rgba(13,148,136,.75)" stroke-width="2" stroke-linecap="round"/>
+              <circle cx="98" cy="118" r="5" fill="none" stroke="rgba(13,148,136,.75)" stroke-width="1.5"/>
+              <rect x="112" y="100" width="22" height="14" rx="2" fill="rgba(255,255,255,.05)" stroke="rgba(255,255,255,.18)" stroke-width=".8"/>
+              <line x1="120" y1="100" x2="120" y2="112" stroke="rgba(13,148,136,.5)" stroke-width="1.5" stroke-linecap="round"/>
+              <line x1="126" y1="100" x2="126" y2="112" stroke="rgba(255,255,255,.3)" stroke-width="1" stroke-linecap="round"/>
+            </svg>
           </div>
         </div>
         <div class="doc-body">
@@ -732,8 +856,42 @@
   <div class="therapy-wrap">
     <div class="img-box r4-3 therapy-img-box anim">
       <div class="img-inner g-therapy">
-        <svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.85)" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="position:relative;z-index:1"><path d="M18 11V6a2 2 0 0 0-2-2v0a2 2 0 0 0-2 2v0"/><path d="M14 10V4a2 2 0 0 0-2-2v0a2 2 0 0 0-2 2v2"/><path d="M10 10.5V6a2 2 0 0 0-2-2v0a2 2 0 0 0-2 2v8"/><path d="M18 8a2 2 0 1 1 4 0v6a8 8 0 0 1-8 8h-2c-2.8 0-4.5-.86-5.99-2.34l-3.6-3.6a2 2 0 0 1 2.83-2.82L7 15"/></svg>
-        <span style="font-size:.75rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.75);position:relative;z-index:1;text-align:center">Integrated Hand Therapy</span>
+        <!-- Therapist's hands supporting patient's hand — rehabilitation scene -->
+        <svg viewBox="0 0 300 225" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid meet">
+          <defs>
+            <radialGradient id="tglow" cx="50%" cy="55%" r="50%">
+              <stop offset="0%" stop-color="#0d9488" stop-opacity=".3"/>
+              <stop offset="100%" stop-color="transparent"/>
+            </radialGradient>
+          </defs>
+          <rect width="300" height="225" fill="url(#tglow)"/>
+          <!-- Therapist hands (from sides, supporting) -->
+          <!-- Left supporting hand — palm up -->
+          <path d="M 30,145 Q 24,135 28,120 L 34,90 Q 36,82 43,82 Q 50,82 51,90 L 52,80 Q 54,72 61,72 Q 68,72 69,80 L 70,76 Q 72,68 79,68 Q 86,68 87,76 L 88,80 Q 90,72 97,72 Q 104,72 104,80 L 104,110 Q 120,118 124,130 L 122,148 Q 100,158 70,158 Z" fill="rgba(255,255,255,.08)" stroke="rgba(255,255,255,.28)" stroke-width="1.1" stroke-linejoin="round"/>
+          <!-- Left hand knuckle lines -->
+          <line x1="34" y1="102" x2="51" y2="102" stroke="rgba(255,255,255,.16)" stroke-width=".8"/>
+          <line x1="52" y1="94" x2="69" y2="94" stroke="rgba(255,255,255,.16)" stroke-width=".8"/>
+          <line x1="70" y1="90" x2="87" y2="90" stroke="rgba(255,255,255,.16)" stroke-width=".8"/>
+          <line x1="88" y1="93" x2="104" y2="93" stroke="rgba(255,255,255,.16)" stroke-width=".8"/>
+          <!-- Patient's hand — center, being held/supported -->
+          <path d="M 110,165 Q 100,152 104,138 L 108,108 Q 110,100 117,100 Q 124,100 125,108 L 126,98 Q 128,90 135,90 Q 142,90 143,98 L 144,94 Q 146,86 153,86 Q 160,86 161,94 L 162,98 Q 164,90 171,90 Q 178,90 178,98 L 178,128 Q 192,136 192,150 L 188,165 Q 168,178 145,178 Z" fill="rgba(255,255,255,.1)" stroke="rgba(255,255,255,.38)" stroke-width="1.2" stroke-linejoin="round"/>
+          <!-- Patient knuckle lines -->
+          <line x1="108" y1="120" x2="125" y2="120" stroke="rgba(255,255,255,.2)" stroke-width=".9"/>
+          <line x1="126" y1="112" x2="143" y2="112" stroke="rgba(255,255,255,.22)" stroke-width=".9"/>
+          <line x1="144" y1="108" x2="161" y2="108" stroke="rgba(255,255,255,.2)" stroke-width=".9"/>
+          <line x1="162" y1="112" x2="178" y2="112" stroke="rgba(255,255,255,.18)" stroke-width=".9"/>
+          <!-- Therapist right hand guiding from right -->
+          <path d="M 272,138 Q 278,126 274,112 L 266,84 Q 264,76 257,76 Q 250,76 249,84 L 248,74 Q 246,66 239,66 Q 232,66 231,74 L 230,70 Q 228,62 221,62 Q 214,62 213,70 L 212,74 Q 210,66 203,66 Q 196,66 196,74 L 196,106 Q 180,114 178,128 L 180,145 Q 202,155 230,155 Z" fill="rgba(255,255,255,.08)" stroke="rgba(255,255,255,.28)" stroke-width="1.1" stroke-linejoin="round"/>
+          <!-- Right hand knuckles -->
+          <line x1="250" y1="96" x2="266" y2="96" stroke="rgba(255,255,255,.16)" stroke-width=".8"/>
+          <line x1="231" y1="88" x2="248" y2="88" stroke="rgba(255,255,255,.16)" stroke-width=".8"/>
+          <line x1="213" y1="88" x2="230" y2="88" stroke="rgba(255,255,255,.16)" stroke-width=".8"/>
+          <line x1="196" y1="88" x2="212" y2="88" stroke="rgba(255,255,255,.14)" stroke-width=".8"/>
+          <!-- ROM arc indicator on patient's wrist -->
+          <path d="M 134,178 Q 154,190 174,178" fill="none" stroke="rgba(13,148,136,.6)" stroke-width="1.2" stroke-dasharray="4 2"/>
+          <!-- Label -->
+          <text x="150" y="215" text-anchor="middle" font-family="ui-sans-serif,system-ui,sans-serif" font-size="9" fill="rgba(255,255,255,.4)" font-weight="700" letter-spacing=".16em">HAND THERAPY · REHABILITATION</text>
+        </svg>
       </div>
     </div>
     <div class="anim anim-d1">
