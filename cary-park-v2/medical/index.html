@@ -1,0 +1,1707 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Triangle Hand & Shoulder Center | Orthopedic Specialists — Raleigh, NC</title>
+  <meta name="description" content="5 fellowship-trained, board-certified orthopedic surgeons specializing in hand, wrist, elbow, and shoulder care. Serving the Triangle for over 30 years." />
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ─── Reset & Base ─── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --blue:       #1a5fa8;
+      --blue-dark:  #134a84;
+      --blue-light: #e8f0fb;
+      --teal:       #0d9488;
+      --teal-light: #e0f2f1;
+      --white:      #ffffff;
+      --off-white:  #f8f9fa;
+      --gray-100:   #f1f3f5;
+      --gray-200:   #e9ecef;
+      --gray-400:   #adb5bd;
+      --gray-600:   #6c757d;
+      --gray-800:   #343a40;
+      --text:       #1a1a2e;
+      --serif:      'Source Serif 4', Georgia, serif;
+      --sans:       'DM Sans', system-ui, sans-serif;
+      --shadow-sm:  0 1px 4px rgba(0,0,0,.08);
+      --shadow-md:  0 4px 16px rgba(0,0,0,.10);
+      --shadow-lg:  0 8px 32px rgba(0,0,0,.13);
+      --radius:     12px;
+      --transition: .25s ease;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--sans);
+      color: var(--text);
+      background: var(--white);
+      line-height: 1.6;
+      font-size: 16px;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    img { display: block; max-width: 100%; }
+    a   { color: inherit; text-decoration: none; }
+
+    .container {
+      max-width: 1160px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* ─── Utilities ─── */
+    .section-label {
+      display: inline-block;
+      font-family: var(--sans);
+      font-size: .75rem;
+      font-weight: 600;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--teal);
+      margin-bottom: 12px;
+    }
+
+    .section-title {
+      font-family: var(--serif);
+      font-size: clamp(1.75rem, 3.5vw, 2.5rem);
+      font-weight: 600;
+      line-height: 1.2;
+      color: var(--text);
+    }
+
+    .section-sub {
+      font-size: 1.05rem;
+      color: var(--gray-600);
+      margin-top: 10px;
+      max-width: 640px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 14px 28px;
+      border-radius: 8px;
+      font-family: var(--sans);
+      font-size: .95rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all var(--transition);
+      border: 2px solid transparent;
+      white-space: nowrap;
+      text-decoration: none;
+    }
+
+    .btn-primary {
+      background: var(--blue);
+      color: var(--white);
+      border-color: var(--blue);
+    }
+    .btn-primary:hover {
+      background: var(--blue-dark);
+      border-color: var(--blue-dark);
+      transform: translateY(-1px);
+      box-shadow: 0 6px 20px rgba(26,95,168,.35);
+    }
+
+    .btn-outline-white {
+      background: transparent;
+      color: var(--white);
+      border-color: rgba(255,255,255,.75);
+    }
+    .btn-outline-white:hover {
+      background: rgba(255,255,255,.15);
+      border-color: var(--white);
+    }
+
+    .btn-outline-blue {
+      background: transparent;
+      color: var(--blue);
+      border-color: var(--blue);
+    }
+    .btn-outline-blue:hover {
+      background: var(--blue-light);
+    }
+
+    .btn-white {
+      background: var(--white);
+      color: var(--blue);
+      border-color: var(--white);
+    }
+    .btn-white:hover {
+      background: var(--off-white);
+      transform: translateY(-1px);
+    }
+
+    /* ─── Navigation ─── */
+    #navbar {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 1000;
+      background: var(--white);
+      padding: 0 24px;
+      transition: box-shadow var(--transition);
+    }
+
+    #navbar.scrolled {
+      box-shadow: 0 2px 16px rgba(0,0,0,.10);
+    }
+
+    .nav-inner {
+      max-width: 1160px;
+      margin: 0 auto;
+      height: 72px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .nav-logo {
+      display: flex;
+      flex-direction: column;
+      line-height: 1.15;
+      flex-shrink: 0;
+    }
+
+    .nav-logo-name {
+      font-family: var(--serif);
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--blue);
+    }
+
+    .nav-logo-sub {
+      font-size: .68rem;
+      font-weight: 500;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      color: var(--teal);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-size: .875rem;
+      font-weight: 500;
+      color: var(--gray-800);
+      padding: 8px 12px;
+      border-radius: 6px;
+      transition: color var(--transition), background var(--transition);
+    }
+    .nav-links a:hover {
+      color: var(--blue);
+      background: var(--blue-light);
+    }
+
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      flex-shrink: 0;
+    }
+
+    .nav-phone {
+      font-size: .875rem;
+      font-weight: 600;
+      color: var(--gray-800);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .nav-phone svg { color: var(--teal); flex-shrink: 0; }
+
+    .nav-book {
+      padding: 10px 20px;
+      font-size: .875rem;
+    }
+
+    /* Mobile hamburger */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      padding: 4px;
+      background: none;
+      border: none;
+    }
+    .hamburger span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: var(--gray-800);
+      border-radius: 2px;
+      transition: all var(--transition);
+    }
+
+    .mobile-menu {
+      display: none;
+      position: absolute;
+      top: 72px; left: 0; right: 0;
+      background: var(--white);
+      padding: 16px 24px 24px;
+      box-shadow: var(--shadow-md);
+      flex-direction: column;
+      gap: 4px;
+    }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a {
+      font-size: .95rem;
+      font-weight: 500;
+      color: var(--gray-800);
+      padding: 10px 12px;
+      border-radius: 6px;
+    }
+    .mobile-menu a:hover { background: var(--blue-light); color: var(--blue); }
+    .mobile-menu-divider {
+      height: 1px;
+      background: var(--gray-200);
+      margin: 8px 0;
+    }
+
+    /* ─── Hero ─── */
+    #hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background-image: url('https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=1920&q=80');
+      background-size: cover;
+      background-position: center 20%;
+      transform: scale(1.04);
+      transition: transform 6s ease;
+    }
+
+    #hero.loaded .hero-bg { transform: scale(1); }
+
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        135deg,
+        rgba(10,25,55,.65) 0%,
+        rgba(15,40,80,.50) 60%,
+        rgba(10,25,55,.40) 100%
+      );
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 760px;
+      padding: 140px 24px 80px;
+      margin: 0 auto;
+      width: 100%;
+    }
+
+    .hero-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(255,255,255,.15);
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(255,255,255,.25);
+      border-radius: 100px;
+      padding: 6px 16px;
+      font-size: .8rem;
+      font-weight: 600;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,.9);
+      margin-bottom: 24px;
+    }
+
+    .hero-eyebrow::before {
+      content: '';
+      display: block;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--teal);
+    }
+
+    .hero-title {
+      font-family: var(--serif);
+      font-size: clamp(2rem, 5.5vw, 3.75rem);
+      font-weight: 700;
+      color: var(--white);
+      line-height: 1.1;
+      margin-bottom: 20px;
+    }
+
+    .hero-sub {
+      font-size: clamp(1rem, 2.2vw, 1.2rem);
+      color: rgba(255,255,255,.88);
+      line-height: 1.6;
+      margin-bottom: 36px;
+      max-width: 560px;
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+      margin-bottom: 36px;
+    }
+
+    .trust-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px 20px;
+    }
+
+    .trust-badge {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: .83rem;
+      font-weight: 500;
+      color: rgba(255,255,255,.9);
+    }
+
+    .trust-badge-check {
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: var(--teal);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      font-size: .65rem;
+      color: white;
+      font-weight: 700;
+    }
+
+    /* ─── Trust Bar ─── */
+    #trust-bar {
+      background: var(--gray-100);
+      border-top: 1px solid var(--gray-200);
+      border-bottom: 1px solid var(--gray-200);
+      padding: 40px 24px;
+    }
+
+    .trust-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+      max-width: 1160px;
+      margin: 0 auto;
+    }
+
+    .trust-item {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 12px 0;
+    }
+
+    .trust-icon {
+      width: 52px;
+      height: 52px;
+      border-radius: 12px;
+      background: var(--blue);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      color: white;
+    }
+
+    .trust-number {
+      font-family: var(--serif);
+      font-size: 1.75rem;
+      font-weight: 700;
+      color: var(--blue);
+      line-height: 1;
+    }
+
+    .trust-label {
+      font-size: .8rem;
+      font-weight: 600;
+      letter-spacing: .04em;
+      text-transform: uppercase;
+      color: var(--gray-600);
+      margin-top: 2px;
+    }
+
+    /* ─── Specialties ─── */
+    #specialties {
+      background: var(--white);
+      padding: 88px 24px;
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 52px;
+    }
+
+    .section-header .section-sub {
+      margin: 10px auto 0;
+    }
+
+    .specialties-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 28px;
+    }
+
+    .specialty-card {
+      border-radius: var(--radius);
+      overflow: hidden;
+      border: 1px solid var(--gray-200);
+      transition: transform var(--transition), box-shadow var(--transition);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .specialty-card:hover {
+      transform: translateY(-6px);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .specialty-img-wrap {
+      aspect-ratio: 16/10;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .specialty-img-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform .4s ease;
+    }
+
+    .specialty-card:hover .specialty-img-wrap img {
+      transform: scale(1.06);
+    }
+
+    .specialty-body {
+      padding: 24px 28px 28px;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+    }
+
+    .specialty-title {
+      font-family: var(--serif);
+      font-size: 1.3rem;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 10px;
+    }
+
+    .specialty-desc {
+      font-size: .92rem;
+      color: var(--gray-600);
+      line-height: 1.65;
+      flex: 1;
+      margin-bottom: 20px;
+    }
+
+    .link-arrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: .875rem;
+      font-weight: 600;
+      color: var(--blue);
+      transition: gap var(--transition);
+    }
+    .link-arrow:hover { gap: 10px; }
+
+    /* ─── Why Choose Us ─── */
+    #why-us {
+      background: var(--off-white);
+      padding: 88px 24px;
+    }
+
+    .why-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+      margin-top: 52px;
+    }
+
+    .why-card {
+      background: var(--white);
+      border-radius: var(--radius);
+      padding: 32px 28px;
+      border: 1px solid var(--gray-200);
+      transition: transform var(--transition), box-shadow var(--transition);
+    }
+
+    .why-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-md);
+    }
+
+    .why-icon {
+      font-size: 2rem;
+      margin-bottom: 16px;
+    }
+
+    .why-title {
+      font-family: var(--serif);
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 10px;
+    }
+
+    .why-desc {
+      font-size: .88rem;
+      color: var(--gray-600);
+      line-height: 1.65;
+    }
+
+    /* ─── Team ─── */
+    #team {
+      background: var(--white);
+      padding: 88px 24px;
+    }
+
+    .team-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 28px;
+      margin-top: 52px;
+    }
+
+    .doctor-card {
+      border-radius: var(--radius);
+      overflow: hidden;
+      border: 1px solid var(--gray-200);
+      transition: transform var(--transition), box-shadow var(--transition);
+    }
+
+    .doctor-card:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .doctor-photo {
+      aspect-ratio: 4/3;
+      overflow: hidden;
+      background: var(--gray-100);
+    }
+
+    .doctor-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center top;
+      transition: transform .4s ease;
+    }
+
+    .doctor-card:hover .doctor-photo img {
+      transform: scale(1.05);
+    }
+
+    .doctor-body {
+      padding: 24px;
+    }
+
+    .doctor-name {
+      font-family: var(--serif);
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 4px;
+    }
+
+    .doctor-cred {
+      font-size: .8rem;
+      font-weight: 600;
+      color: var(--blue);
+      letter-spacing: .03em;
+      margin-bottom: 8px;
+    }
+
+    .doctor-fellowship {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: .82rem;
+      color: var(--gray-600);
+    }
+
+    .fellowship-label {
+      font-weight: 600;
+      color: var(--gray-800);
+    }
+
+    /* ─── Therapy ─── */
+    #therapy {
+      background: #e8f4f8;
+      padding: 88px 24px;
+    }
+
+    .therapy-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+      max-width: 1160px;
+      margin: 0 auto;
+    }
+
+    .therapy-img {
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: var(--shadow-lg);
+      aspect-ratio: 4/3;
+    }
+
+    .therapy-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .therapy-text .section-title {
+      margin-bottom: 20px;
+    }
+
+    .therapy-body {
+      font-size: 1rem;
+      color: var(--gray-600);
+      line-height: 1.75;
+      margin-bottom: 28px;
+    }
+
+    .therapy-points {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-bottom: 32px;
+    }
+
+    .therapy-points li {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: .92rem;
+      color: var(--gray-800);
+    }
+
+    .therapy-points li::before {
+      content: '';
+      display: block;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--teal);
+      flex-shrink: 0;
+      margin-top: 6px;
+    }
+
+    /* ─── Testimonials ─── */
+    #testimonials {
+      background: var(--white);
+      padding: 88px 24px;
+    }
+
+    .testimonial-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      margin-top: 52px;
+    }
+
+    .testimonial-card {
+      background: var(--off-white);
+      border-radius: var(--radius);
+      padding: 32px;
+      border: 1px solid var(--gray-200);
+      transition: transform var(--transition), box-shadow var(--transition);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .testimonial-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-md);
+    }
+
+    .stars {
+      color: #f59e0b;
+      font-size: 1rem;
+      letter-spacing: 2px;
+      margin-bottom: 16px;
+    }
+
+    .testimonial-quote {
+      font-family: var(--serif);
+      font-size: 1.05rem;
+      color: var(--text);
+      line-height: 1.6;
+      flex: 1;
+      margin-bottom: 20px;
+    }
+
+    .testimonial-quote::before {
+      content: '\201C';
+      font-size: 3rem;
+      line-height: .5;
+      vertical-align: -.4em;
+      color: var(--blue);
+      opacity: .25;
+      margin-right: 4px;
+    }
+
+    .testimonial-source {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      border-top: 1px solid var(--gray-200);
+      padding-top: 16px;
+    }
+
+    .google-icon {
+      width: 22px;
+      height: 22px;
+      flex-shrink: 0;
+    }
+
+    .testimonial-attr {
+      font-size: .8rem;
+      font-weight: 600;
+      color: var(--gray-600);
+    }
+
+    /* ─── CTA / Contact ─── */
+    #contact {
+      background: var(--blue);
+      padding: 88px 24px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    #contact::before {
+      content: '';
+      position: absolute;
+      top: -80px; right: -80px;
+      width: 360px; height: 360px;
+      border-radius: 50%;
+      background: rgba(255,255,255,.05);
+      pointer-events: none;
+    }
+
+    #contact::after {
+      content: '';
+      position: absolute;
+      bottom: -120px; left: -60px;
+      width: 480px; height: 480px;
+      border-radius: 50%;
+      background: rgba(255,255,255,.04);
+      pointer-events: none;
+    }
+
+    .contact-inner {
+      position: relative;
+      z-index: 1;
+      max-width: 1160px;
+      margin: 0 auto;
+    }
+
+    .contact-top {
+      text-align: center;
+      margin-bottom: 56px;
+    }
+
+    .contact-top .section-label {
+      color: rgba(255,255,255,.7);
+    }
+
+    .contact-top .section-title {
+      color: var(--white);
+    }
+
+    .contact-top .section-sub {
+      color: rgba(255,255,255,.8);
+      margin: 12px auto 32px;
+    }
+
+    .contact-buttons {
+      display: flex;
+      gap: 14px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-bottom: 52px;
+    }
+
+    .contact-details {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: rgba(255,255,255,.15);
+      border-radius: var(--radius);
+      overflow: hidden;
+    }
+
+    .contact-detail {
+      background: rgba(255,255,255,.08);
+      padding: 28px 32px;
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+    }
+
+    .contact-detail-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 10px;
+      background: rgba(255,255,255,.15);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      color: white;
+    }
+
+    .contact-detail-label {
+      font-size: .75rem;
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,.65);
+      margin-bottom: 4px;
+    }
+
+    .contact-detail-value {
+      font-size: .95rem;
+      font-weight: 500;
+      color: var(--white);
+      line-height: 1.5;
+    }
+
+    /* ─── Footer ─── */
+    footer {
+      background: var(--white);
+      border-top: 1px solid var(--gray-200);
+      padding: 48px 24px 28px;
+    }
+
+    .footer-inner {
+      max-width: 1160px;
+      margin: 0 auto;
+    }
+
+    .footer-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 40px;
+      margin-bottom: 36px;
+    }
+
+    .footer-brand .nav-logo-name {
+      font-size: 1.15rem;
+    }
+
+    .footer-brand p {
+      font-size: .82rem;
+      color: var(--gray-600);
+      margin-top: 8px;
+      max-width: 260px;
+      line-height: 1.5;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 40px;
+    }
+
+    .footer-col h4 {
+      font-size: .78rem;
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: var(--gray-600);
+      margin-bottom: 14px;
+    }
+
+    .footer-col ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .footer-col ul li a {
+      font-size: .875rem;
+      color: var(--blue);
+      transition: color var(--transition);
+    }
+    .footer-col ul li a:hover { color: var(--blue-dark); text-decoration: underline; }
+
+    .footer-bottom {
+      border-top: 1px solid var(--gray-200);
+      padding-top: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .footer-copy {
+      font-size: .8rem;
+      color: var(--gray-600);
+    }
+
+    .footer-demo {
+      font-size: .78rem;
+      color: var(--gray-400);
+      font-style: italic;
+    }
+
+    .footer-demo a {
+      color: var(--teal);
+      font-weight: 600;
+    }
+    .footer-demo a:hover { text-decoration: underline; }
+
+    /* ─── Responsive ─── */
+    @media (max-width: 1024px) {
+      .trust-grid  { grid-template-columns: repeat(2, 1fr); }
+      .why-grid    { grid-template-columns: repeat(2, 1fr); }
+      .footer-top  { flex-direction: column; }
+      .footer-links { flex-wrap: wrap; gap: 24px; }
+    }
+
+    @media (max-width: 768px) {
+      .nav-links, .nav-right { display: none; }
+      .hamburger { display: flex; }
+
+      .hero-content { padding-top: 100px; }
+
+      .specialties-grid  { grid-template-columns: 1fr; }
+      .team-grid         { grid-template-columns: 1fr; }
+      .testimonial-grid  { grid-template-columns: 1fr; }
+      .contact-details   { grid-template-columns: 1fr; }
+      .therapy-inner     { grid-template-columns: 1fr; }
+
+      .trust-grid { grid-template-columns: repeat(2, 1fr); }
+      .why-grid   { grid-template-columns: 1fr 1fr; }
+
+      .footer-bottom {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .trust-grid { grid-template-columns: 1fr 1fr; }
+      .why-grid   { grid-template-columns: 1fr; }
+      .hero-buttons { flex-direction: column; }
+    }
+
+    /* ─── Scroll animations ─── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity .6s ease, transform .6s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Staggered children */
+    .stagger > * { transition-delay: calc(var(--i, 0) * 80ms); }
+
+  </style>
+</head>
+<body>
+
+  <!-- ═══════════════════════════════════════════
+       NAVIGATION
+  ═══════════════════════════════════════════ -->
+  <nav id="navbar" role="banner">
+    <div class="nav-inner">
+
+      <a href="#" class="nav-logo" aria-label="Triangle Hand & Shoulder Center home">
+        <span class="nav-logo-name">Triangle Hand &amp; Shoulder Center</span>
+        <span class="nav-logo-sub">Orthopedic Specialists · Raleigh, NC</span>
+      </a>
+
+      <ul class="nav-links" role="list">
+        <li><a href="#team">Our Doctors</a></li>
+        <li><a href="#specialties">Specialties</a></li>
+        <li><a href="#therapy">Therapy</a></li>
+        <li><a href="#contact">Patient Resources</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+
+      <div class="nav-right">
+        <a href="tel:9190000000" class="nav-phone">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1.27h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.92a16 16 0 0 0 6 6l.92-.92a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21.73 16.92z"/>
+          </svg>
+          (919) 000-0000
+        </a>
+        <a href="#contact" class="btn btn-primary nav-book">Book Appointment</a>
+      </div>
+
+      <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+
+    <div class="mobile-menu" id="mobile-menu" role="navigation" aria-label="Mobile navigation">
+      <a href="#team">Our Doctors</a>
+      <a href="#specialties">Specialties</a>
+      <a href="#therapy">Therapy</a>
+      <a href="#contact">Patient Resources</a>
+      <a href="#contact">Contact</a>
+      <div class="mobile-menu-divider"></div>
+      <a href="tel:9190000000" style="color: var(--teal); font-weight: 600;">(919) 000-0000</a>
+      <a href="#contact" class="btn btn-primary" style="justify-content: center; margin-top: 4px;">Book Appointment</a>
+    </div>
+  </nav>
+
+
+  <!-- ═══════════════════════════════════════════
+       HERO
+  ═══════════════════════════════════════════ -->
+  <section id="hero" aria-label="Hero">
+    <div class="hero-bg" role="img" aria-label="Doctor examining a patient's hand in a clinical setting"></div>
+    <div class="hero-overlay" aria-hidden="true"></div>
+
+    <div class="hero-content">
+      <div class="hero-eyebrow">Raleigh · Durham · Chapel Hill</div>
+
+      <h1 class="hero-title">
+        Expert Care for Your Hands,<br>Wrists, Elbows &amp; Shoulders
+      </h1>
+
+      <p class="hero-sub">
+        5 fellowship-trained, board-certified orthopedic surgeons.<br>
+        Serving the Triangle for over 30 years.
+      </p>
+
+      <div class="hero-buttons">
+        <a href="#contact" class="btn btn-primary" style="font-size: 1rem; padding: 16px 32px;">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/>
+          </svg>
+          Book an Appointment
+        </a>
+        <a href="tel:9190000000" class="btn btn-outline-white" style="font-size: 1rem; padding: 16px 32px;">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1.27h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.92a16 16 0 0 0 6 6l.92-.92a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21.73 16.92z"/>
+          </svg>
+          Call (919) 000-0000
+        </a>
+      </div>
+
+      <div class="trust-badges" role="list">
+        <div class="trust-badge" role="listitem">
+          <div class="trust-badge-check" aria-hidden="true">✓</div>
+          <span>Board Certified</span>
+        </div>
+        <div class="trust-badge" role="listitem">
+          <div class="trust-badge-check" aria-hidden="true">✓</div>
+          <span>Physician Owned</span>
+        </div>
+        <div class="trust-badge" role="listitem">
+          <div class="trust-badge-check" aria-hidden="true">✓</div>
+          <span>Same-Week Appointments</span>
+        </div>
+        <div class="trust-badge" role="listitem">
+          <div class="trust-badge-check" aria-hidden="true">✓</div>
+          <span>On-Call 24/7</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════
+       TRUST BAR
+  ═══════════════════════════════════════════ -->
+  <section id="trust-bar" aria-label="Practice highlights">
+    <div class="trust-grid stagger">
+
+      <div class="trust-item reveal" style="--i:0">
+        <div class="trust-icon" aria-hidden="true">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+          </svg>
+        </div>
+        <div>
+          <div class="trust-number">30+</div>
+          <div class="trust-label">Years Serving the Triangle</div>
+        </div>
+      </div>
+
+      <div class="trust-item reveal" style="--i:1">
+        <div class="trust-icon" aria-hidden="true">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+          </svg>
+        </div>
+        <div>
+          <div class="trust-number">5</div>
+          <div class="trust-label">Fellowship-Trained Surgeons</div>
+        </div>
+      </div>
+
+      <div class="trust-item reveal" style="--i:2">
+        <div class="trust-icon" aria-hidden="true">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
+          </svg>
+        </div>
+        <div>
+          <div class="trust-number">24/7</div>
+          <div class="trust-label">On-Call · Nights &amp; Weekends</div>
+        </div>
+      </div>
+
+      <div class="trust-item reveal" style="--i:3">
+        <div class="trust-icon" aria-hidden="true">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M22 12h-4l-3 9L9 3l-3 9H2"/>
+          </svg>
+        </div>
+        <div>
+          <div class="trust-number">In-House</div>
+          <div class="trust-label">Therapy · Coordinated Care</div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════
+       SPECIALTIES
+  ═══════════════════════════════════════════ -->
+  <section id="specialties">
+    <div class="container">
+
+      <div class="section-header reveal">
+        <span class="section-label">What We Treat</span>
+        <h2 class="section-title">Our Hand to Shoulder Specialties</h2>
+        <p class="section-sub">
+          All our doctors are board-certified in both orthopedic surgery and hand surgery — the highest level of specialized training available.
+        </p>
+      </div>
+
+      <div class="specialties-grid stagger">
+
+        <article class="specialty-card reveal" style="--i:0">
+          <div class="specialty-img-wrap">
+            <img
+              src="https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=600&q=80"
+              alt="Close-up of a person's hand, representing hand pain treatment"
+              loading="lazy"
+              width="600" height="375"
+            />
+          </div>
+          <div class="specialty-body">
+            <h3 class="specialty-title">Hand Pain</h3>
+            <p class="specialty-desc">From carpal tunnel syndrome and arthritis to fractures and tendon injuries — we treat the full range of hand conditions with precision and care.</p>
+            <a href="#contact" class="link-arrow">
+              Hand Pain Help
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </a>
+          </div>
+        </article>
+
+        <article class="specialty-card reveal" style="--i:1">
+          <div class="specialty-img-wrap">
+            <img
+              src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=600&q=80"
+              alt="Person holding their wrist, representing wrist and elbow care"
+              loading="lazy"
+              width="600" height="375"
+            />
+          </div>
+          <div class="specialty-body">
+            <h3 class="specialty-title">Wrist &amp; Elbow</h3>
+            <p class="specialty-desc">Wrist tendonitis, sports injuries, motor vehicle injuries, and complex wrist fractures treated with precision and evidence-based methods.</p>
+            <a href="#contact" class="link-arrow">
+              Wrist &amp; Elbow Help
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </a>
+          </div>
+        </article>
+
+        <article class="specialty-card reveal" style="--i:2">
+          <div class="specialty-img-wrap">
+            <img
+              src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=600&q=80"
+              alt="Active person using their shoulder, representing shoulder treatment"
+              loading="lazy"
+              width="600" height="375"
+            />
+          </div>
+          <div class="specialty-body">
+            <h3 class="specialty-title">Shoulder</h3>
+            <p class="specialty-desc">Rotator cuff tears, shoulder instability, arthritis, and sports injuries — conservative and surgical options tailored to your goals.</p>
+            <a href="#contact" class="link-arrow">
+              Shoulder Help
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </a>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════
+       WHY CHOOSE US
+  ═══════════════════════════════════════════ -->
+  <section id="why-us" aria-labelledby="why-us-title">
+    <div class="container">
+
+      <div class="section-header reveal">
+        <span class="section-label">The Difference</span>
+        <h2 class="section-title" id="why-us-title">Why Patients Trust Us</h2>
+        <p class="section-sub">An independent, physician-owned practice built around one purpose: getting you back to what you love.</p>
+      </div>
+
+      <div class="why-grid stagger">
+
+        <div class="why-card reveal" style="--i:0">
+          <div class="why-icon" aria-hidden="true">🏥</div>
+          <h3 class="why-title">Physician-Owned Practice</h3>
+          <p class="why-desc">We answer to our patients — not a hospital system. Independent, focused, and community-rooted since 1991. Every decision we make is guided by what's best for you.</p>
+        </div>
+
+        <div class="why-card reveal" style="--i:1">
+          <div class="why-icon" aria-hidden="true">🎓</div>
+          <h3 class="why-title">Fellowship-Trained Surgeons</h3>
+          <p class="why-desc">Every doctor holds dual board certification in orthopedic surgery AND hand surgery. The highest level of specialized training available in upper extremity care.</p>
+        </div>
+
+        <div class="why-card reveal" style="--i:2">
+          <div class="why-icon" aria-hidden="true">📅</div>
+          <h3 class="why-title">Same-Week Appointments</h3>
+          <p class="why-desc">We know pain doesn't wait. Same-day and next-day appointments are frequently available. On-call 24/7 for urgent needs — because injuries don't keep business hours.</p>
+        </div>
+
+        <div class="why-card reveal" style="--i:3">
+          <div class="why-icon" aria-hidden="true">💊</div>
+          <h3 class="why-title">Conservative First Approach</h3>
+          <p class="why-desc">Surgery when necessary — never when it isn't. We explore every non-surgical option first and involve you in every decision. Your goals drive the treatment plan.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════
+       MEET THE TEAM
+  ═══════════════════════════════════════════ -->
+  <section id="team">
+    <div class="container">
+
+      <div class="section-header reveal">
+        <span class="section-label">Our Surgeons</span>
+        <h2 class="section-title">Meet Our Surgeons</h2>
+        <p class="section-sub">Your doctor performs your surgery from start to finish — and guides your recovery every step of the way. You'll always know who's in your corner.</p>
+      </div>
+
+      <div class="team-grid stagger">
+
+        <article class="doctor-card reveal" style="--i:0">
+          <div class="doctor-photo">
+            <img
+              src="https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?w=400&q=80"
+              alt="Dr. Post, MD — orthopedic surgeon"
+              loading="lazy"
+              width="400" height="300"
+            />
+          </div>
+          <div class="doctor-body">
+            <p class="doctor-cred">Board Certified · Orthopedic Surgery &amp; Hand Surgery</p>
+            <h3 class="doctor-name">Dr. Post, MD</h3>
+            <p class="doctor-fellowship">
+              <span class="fellowship-label">Fellowship:</span>
+              Upper Extremity Surgery
+            </p>
+          </div>
+        </article>
+
+        <article class="doctor-card reveal" style="--i:1">
+          <div class="doctor-photo">
+            <img
+              src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=400&q=80"
+              alt="Dr. Messer, MD — orthopedic surgeon"
+              loading="lazy"
+              width="400" height="300"
+            />
+          </div>
+          <div class="doctor-body">
+            <p class="doctor-cred">Board Certified · Orthopedic Surgery &amp; Hand Surgery</p>
+            <h3 class="doctor-name">Dr. Messer, MD</h3>
+            <p class="doctor-fellowship">
+              <span class="fellowship-label">Fellowship:</span>
+              Hand &amp; Upper Extremity
+            </p>
+          </div>
+        </article>
+
+        <article class="doctor-card reveal" style="--i:2">
+          <div class="doctor-photo">
+            <img
+              src="https://images.unsplash.com/photo-1651008376811-b90baee60c1f?w=400&q=80"
+              alt="Dr. Erickson, MD — orthopedic surgeon"
+              loading="lazy"
+              width="400" height="300"
+            />
+          </div>
+          <div class="doctor-body">
+            <p class="doctor-cred">Board Certified · Orthopedic Surgery &amp; Hand Surgery</p>
+            <h3 class="doctor-name">Dr. Erickson, MD</h3>
+            <p class="doctor-fellowship">
+              <span class="fellowship-label">Fellowship:</span>
+              Hand Surgery
+            </p>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════
+       THERAPY SECTION
+  ═══════════════════════════════════════════ -->
+  <section id="therapy" aria-labelledby="therapy-title">
+    <div class="therapy-inner">
+
+      <div class="therapy-img reveal" style="--i:0">
+        <img
+          src="https://images.unsplash.com/photo-1520206183501-b80df61043c2?w=800&q=80"
+          alt="Hand therapist working with a patient on wrist rehabilitation"
+          loading="lazy"
+          width="800" height="600"
+        />
+      </div>
+
+      <div class="therapy-text reveal" style="--i:1">
+        <span class="section-label">Integrated Therapy</span>
+        <h2 class="section-title" id="therapy-title">Integrated Hand-to-Shoulder Therapy</h2>
+        <p class="therapy-body">
+          Our therapy department works directly alongside our surgeons — sharing the same space, the same records, and the same commitment to your recovery. From post-operative rehab to non-surgical treatment, our therapists are hand and upper extremity specialists.
+        </p>
+        <ul class="therapy-points">
+          <li>Certified hand therapists on staff</li>
+          <li>Seamless communication between surgery and therapy teams</li>
+          <li>Custom splinting and orthotic fabrication</li>
+          <li>Post-operative and non-surgical rehabilitation programs</li>
+          <li>Conveniently co-located with our surgical team</li>
+        </ul>
+        <a href="#contact" class="btn btn-outline-blue">
+          Meet Our Therapists
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════
+       TESTIMONIALS
+  ═══════════════════════════════════════════ -->
+  <section id="testimonials">
+    <div class="container">
+
+      <div class="section-header reveal">
+        <span class="section-label">Patient Reviews</span>
+        <h2 class="section-title">What Our Patients Are Saying</h2>
+        <p class="section-sub">Hundreds of five-star reviews from patients across Raleigh, Durham, and the Triangle.</p>
+      </div>
+
+      <div class="testimonial-grid stagger">
+
+        <div class="testimonial-card reveal" style="--i:0">
+          <div class="stars" aria-label="5 out of 5 stars">★★★★★</div>
+          <p class="testimonial-quote">
+            If ever you need surgery or advice, this is one of the best medical offices in Raleigh. The doctors, nurses, and desk staff are exceptional.
+          </p>
+          <div class="testimonial-source">
+            <svg class="google-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
+              <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
+              <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/>
+              <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/>
+            </svg>
+            <span class="testimonial-attr">Google Review</span>
+          </div>
+        </div>
+
+        <div class="testimonial-card reveal" style="--i:1">
+          <div class="stars" aria-label="5 out of 5 stars">★★★★★</div>
+          <p class="testimonial-quote">
+            The therapy team is incredible. I am so thankful for the care and treatment I received. They genuinely care about your outcome.
+          </p>
+          <div class="testimonial-source">
+            <svg class="google-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
+              <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
+              <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/>
+              <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/>
+            </svg>
+            <span class="testimonial-attr">Google Review</span>
+          </div>
+        </div>
+
+        <div class="testimonial-card reveal" style="--i:2">
+          <div class="stars" aria-label="5 out of 5 stars">★★★★★</div>
+          <p class="testimonial-quote">
+            Same-week appointment, friendly staff, and my doctor explained everything clearly before we made any decisions. Outstanding practice.
+          </p>
+          <div class="testimonial-source">
+            <svg class="google-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
+              <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
+              <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/>
+              <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/>
+            </svg>
+            <span class="testimonial-attr">Google Review</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════
+       CONTACT / BOOK
+  ═══════════════════════════════════════════ -->
+  <section id="contact" aria-labelledby="contact-title">
+    <div class="contact-inner">
+
+      <div class="contact-top reveal">
+        <span class="section-label">Get Started Today</span>
+        <h2 class="section-title" id="contact-title">Ready to Feel Better?</h2>
+        <p class="section-sub">
+          Book an appointment online or call us directly. Same-week appointments often available — we'll get you seen quickly.
+        </p>
+        <div class="contact-buttons">
+          <a href="#" class="btn btn-white" style="font-size: 1rem; padding: 16px 36px;">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/>
+            </svg>
+            Book Online
+          </a>
+          <a href="tel:9190000000" class="btn btn-outline-white" style="font-size: 1rem; padding: 16px 36px;">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1.27h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.92a16 16 0 0 0 6 6l.92-.92a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21.73 16.92z"/>
+            </svg>
+            Call (919) 000-0000
+          </a>
+        </div>
+      </div>
+
+      <div class="contact-details reveal">
+
+        <div class="contact-detail">
+          <div class="contact-detail-icon" aria-hidden="true">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/>
+            </svg>
+          </div>
+          <div>
+            <div class="contact-detail-label">Location</div>
+            <div class="contact-detail-value">
+              3701 Wake Forest Rd, Suite 100<br>
+              Raleigh, NC 27609
+            </div>
+          </div>
+        </div>
+
+        <div class="contact-detail">
+          <div class="contact-detail-icon" aria-hidden="true">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
+            </svg>
+          </div>
+          <div>
+            <div class="contact-detail-label">Office Hours</div>
+            <div class="contact-detail-value">
+              Mon–Fri: 8:00am – 4:30pm<br>
+              On-Call 24/7 for Urgent Needs
+            </div>
+          </div>
+        </div>
+
+        <div class="contact-detail">
+          <div class="contact-detail-icon" aria-hidden="true">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1.27h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.92a16 16 0 0 0 6 6l.92-.92a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21.73 16.92z"/>
+            </svg>
+          </div>
+          <div>
+            <div class="contact-detail-label">Phone</div>
+            <div class="contact-detail-value">
+              <a href="tel:9190000000" style="color: white;">(919) 000-0000</a><br>
+              Fax: (919) 000-0001
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════
+       FOOTER
+  ═══════════════════════════════════════════ -->
+  <footer>
+    <div class="footer-inner">
+
+      <div class="footer-top">
+        <div class="footer-brand">
+          <a href="#" class="nav-logo" aria-label="Triangle Hand & Shoulder Center home">
+            <span class="nav-logo-name">Triangle Hand &amp; Shoulder Center</span>
+            <span class="nav-logo-sub">Orthopedic Specialists · Est. 1991</span>
+          </a>
+          <p>Fellowship-trained orthopedic surgeons specializing in hand, wrist, elbow, and shoulder care. Serving Raleigh and the Triangle since 1991.</p>
+        </div>
+
+        <div class="footer-links">
+          <div class="footer-col">
+            <h4>Practice</h4>
+            <ul>
+              <li><a href="#team">Our Doctors</a></li>
+              <li><a href="#specialties">Specialties</a></li>
+              <li><a href="#therapy">Therapy</a></li>
+              <li><a href="#why-us">About Us</a></li>
+            </ul>
+          </div>
+          <div class="footer-col">
+            <h4>Patients</h4>
+            <ul>
+              <li><a href="#contact">Book Appointment</a></li>
+              <li><a href="#contact">Patient Resources</a></li>
+              <li><a href="#contact">Insurance</a></li>
+              <li><a href="#contact">Privacy Policy</a></li>
+            </ul>
+          </div>
+          <div class="footer-col">
+            <h4>Contact</h4>
+            <ul>
+              <li><a href="tel:9190000000">(919) 000-0000</a></li>
+              <li><a href="#contact">3701 Wake Forest Rd</a></li>
+              <li><a href="#contact">Suite 100, Raleigh, NC</a></li>
+              <li><a href="#contact">Get Directions</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p class="footer-copy">
+          © 2025 Triangle Hand &amp; Shoulder Center &nbsp;·&nbsp; 3701 Wake Forest Rd, Raleigh, NC &nbsp;·&nbsp; (919) 000-0000
+        </p>
+        <p class="footer-demo">
+          Demo site — built by <a href="https://caryparksolutions.com" target="_blank" rel="noopener">Cary Park Solutions</a>
+        </p>
+      </div>
+
+    </div>
+  </footer>
+
+
+  <!-- ═══════════════════════════════════════════
+       JAVASCRIPT
+  ═══════════════════════════════════════════ -->
+  <script>
+    // Sticky nav shadow on scroll
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+      navbar.classList.toggle('scrolled', window.scrollY > 12);
+    }, { passive: true });
+
+    // Hero parallax / loaded class
+    const hero = document.getElementById('hero');
+    window.addEventListener('load', () => hero.classList.add('loaded'));
+
+    // Mobile menu toggle
+    const hamburger = document.getElementById('hamburger');
+    const mobileMenu = document.getElementById('mobile-menu');
+
+    hamburger.addEventListener('click', () => {
+      const open = mobileMenu.classList.toggle('open');
+      hamburger.setAttribute('aria-expanded', open);
+    });
+
+    // Close mobile menu on link click
+    mobileMenu.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        mobileMenu.classList.remove('open');
+        hamburger.setAttribute('aria-expanded', false);
+      });
+    });
+
+    // Scroll reveal using IntersectionObserver
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.12, rootMargin: '0px 0px -40px 0px' }
+    );
+    reveals.forEach(el => observer.observe(el));
+
+    // Smooth scroll for anchor links (polyfill for older browsers)
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          e.preventDefault();
+          const navH = navbar.offsetHeight;
+          const top  = target.getBoundingClientRect().top + window.scrollY - navH - 16;
+          window.scrollTo({ top, behavior: 'smooth' });
+        }
+      });
+    });
+  </script>
+
+</body>
+</html>
