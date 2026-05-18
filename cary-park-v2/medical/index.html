@@ -1,0 +1,1083 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#1a5fa8" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <title>Triangle Hand &amp; Shoulder Center | Orthopedic Specialists — Raleigh, NC</title>
+  <meta name="description" content="5 fellowship-trained, board-certified orthopedic surgeons specializing in hand, wrist, elbow, and shoulder care. Serving the Triangle for over 30 years." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:wght@600;700&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ── Reset ── */
+    *, *::before, *::after {
+      box-sizing: border-box; margin: 0; padding: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    :root {
+      --blue:     #1a5fa8;
+      --blue-dk:  #134a84;
+      --blue-lt:  #e8f0fb;
+      --teal:     #0d9488;
+      --white:    #ffffff;
+      --off:      #f8f9fa;
+      --g100:     #f1f3f5;
+      --g200:     #e9ecef;
+      --g400:     #adb5bd;
+      --g600:     #6c757d;
+      --g800:     #343a40;
+      --text:     #1a1a2e;
+      --serif:    'Source Serif 4', Georgia, serif;
+      --sans:     'DM Sans', system-ui, -apple-system, sans-serif;
+      --sh-md:    0 4px 20px rgba(0,0,0,.09);
+      --sh-lg:    0 8px 36px rgba(0,0,0,.13);
+      --r:        12px;
+      --ease:     .22s ease;
+      --nav-h:    60px;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      overflow-x: hidden;
+      -webkit-text-size-adjust: 100%;
+      text-size-adjust: 100%;
+    }
+
+    body {
+      font-family: var(--sans);
+      color: var(--text);
+      background: var(--white);
+      line-height: 1.65;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    img { display: block; max-width: 100%; height: auto; }
+    a   { color: inherit; text-decoration: none; }
+    a, button { touch-action: manipulation; }
+
+    .container { max-width: 1160px; margin: 0 auto; padding: 0 20px; }
+
+    /* ── Section animations — CSS-only, no JS required ──
+       Elements animate in when they enter the viewport using
+       animation-timeline where supported, with a plain visible
+       fallback so content is NEVER hidden if animation fails.    */
+    .anim {
+      animation: slideUp .55s ease both;
+    }
+    @keyframes slideUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Stagger delays */
+    .anim-d1 { animation-delay: .07s; }
+    .anim-d2 { animation-delay: .14s; }
+    .anim-d3 { animation-delay: .21s; }
+    .anim-d4 { animation-delay: .28s; }
+
+    /* If animation is disabled (reduced motion) — just show immediately */
+    @media (prefers-reduced-motion: reduce) {
+      .anim { animation: none !important; }
+    }
+
+    /* ── Typography helpers ── */
+    .eyebrow {
+      display: inline-block;
+      font-size: .72rem; font-weight: 700;
+      letter-spacing: .12em; text-transform: uppercase;
+      color: var(--teal); margin-bottom: 10px;
+    }
+    .h2 {
+      font-family: var(--serif);
+      font-size: clamp(1.55rem, 3.8vw, 2.4rem);
+      font-weight: 700; line-height: 1.2; color: var(--text);
+    }
+    .lead {
+      font-size: 1rem; color: var(--g600);
+      margin-top: 8px; max-width: 620px; line-height: 1.7;
+    }
+    .section-head { text-align: center; margin-bottom: 48px; }
+    .section-head .lead { margin: 8px auto 0; }
+
+    /* ── Buttons ── */
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+      padding: 14px 24px; border-radius: 8px;
+      font-family: var(--sans); font-size: .95rem; font-weight: 600;
+      cursor: pointer; border: 2px solid transparent;
+      text-decoration: none; white-space: nowrap; min-height: 48px;
+      transition: background var(--ease), border-color var(--ease), box-shadow var(--ease);
+      touch-action: manipulation; -webkit-user-select: none; user-select: none;
+    }
+    .btn-primary { background: var(--blue); color: #fff; border-color: var(--blue); }
+    .btn-primary:active { background: var(--blue-dk); }
+    @media (hover:hover) { .btn-primary:hover { background: var(--blue-dk); box-shadow: 0 6px 20px rgba(26,95,168,.3); } }
+
+    .btn-wh-out { background: transparent; color: #fff; border-color: rgba(255,255,255,.75); }
+    .btn-wh-out:active { background: rgba(255,255,255,.15); }
+    @media (hover:hover) { .btn-wh-out:hover { background: rgba(255,255,255,.12); border-color: #fff; } }
+
+    .btn-bl-out { background: transparent; color: var(--blue); border-color: var(--blue); }
+    .btn-bl-out:active { background: var(--blue-lt); }
+    @media (hover:hover) { .btn-bl-out:hover { background: var(--blue-lt); } }
+
+    .btn-solid-wh { background: #fff; color: var(--blue); border-color: #fff; }
+    .btn-solid-wh:active { background: var(--off); }
+    @media (hover:hover) { .btn-solid-wh:hover { background: var(--off); } }
+
+    /* ── Sticky nav ── */
+    #nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+      background: #fff;
+      -webkit-transform: translateZ(0); transform: translateZ(0);
+      transition: box-shadow var(--ease);
+      padding: 0 max(20px, env(safe-area-inset-right)) 0 max(20px, env(safe-area-inset-left));
+    }
+    #nav.shad { box-shadow: 0 2px 16px rgba(0,0,0,.10); }
+    .nav-wrap {
+      max-width: 1160px; margin: 0 auto;
+      height: var(--nav-h); display: flex; align-items: center;
+      justify-content: space-between; gap: 16px;
+    }
+    .nav-logo { display: flex; flex-direction: column; line-height: 1.2; flex-shrink: 0; min-width: 0; }
+    .logo-name {
+      font-family: var(--serif); font-weight: 700; color: var(--blue);
+      font-size: clamp(.85rem, 2vw, 1.06rem);
+      white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+    }
+    .logo-sub { font-size: .61rem; font-weight: 600; letter-spacing: .07em; text-transform: uppercase; color: var(--teal); }
+
+    .nav-links { display: flex; align-items: center; gap: 2px; list-style: none; }
+    .nav-links a {
+      font-size: .875rem; font-weight: 500; color: var(--g800);
+      padding: 8px 11px; border-radius: 6px;
+    }
+    @media (hover:hover) { .nav-links a:hover { color: var(--blue); background: var(--blue-lt); } }
+
+    .nav-right { display: flex; align-items: center; gap: 12px; flex-shrink: 0; }
+    .nav-tel {
+      font-size: .875rem; font-weight: 600; color: var(--g800);
+      display: flex; align-items: center; gap: 5px;
+    }
+    .nav-tel svg { color: var(--teal); flex-shrink: 0; }
+
+    /* Hamburger — 44×44 iOS tap target */
+    .ham {
+      display: none; flex-direction: column; align-items: center;
+      justify-content: center; gap: 5px;
+      width: 44px; height: 44px; background: none; border: none;
+      border-radius: 8px; cursor: pointer; flex-shrink: 0;
+    }
+    .ham span {
+      display: block; width: 22px; height: 2px;
+      background: var(--g800); border-radius: 2px;
+      transition: transform var(--ease), opacity var(--ease);
+      pointer-events: none;
+    }
+    .ham[aria-expanded="true"] span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .ham[aria-expanded="true"] span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+    .ham[aria-expanded="true"] span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    /* Mobile slide-down menu */
+    .mob {
+      display: flex; flex-direction: column; gap: 2px;
+      position: absolute; top: var(--nav-h); left: 0; right: 0;
+      background: #fff; padding: 0 20px;
+      box-shadow: var(--sh-md);
+      max-height: 0; overflow: hidden; visibility: hidden;
+      transition: max-height .3s cubic-bezier(.4,0,.2,1),
+                  padding   .3s cubic-bezier(.4,0,.2,1),
+                  visibility .3s;
+    }
+    .mob.open { max-height: 560px; padding: 10px 20px 20px; visibility: visible; }
+    .mob a {
+      font-size: 1rem; font-weight: 500; color: var(--g800);
+      padding: 12px 14px; border-radius: 8px;
+      display: flex; align-items: center; min-height: 48px;
+    }
+    .mob a:active { background: var(--blue-lt); color: var(--blue); }
+    .mob-div { height: 1px; background: var(--g200); margin: 6px 0; }
+
+    /* ── Hero ── */
+    #hero {
+      position: relative;
+      min-height: 100vh; min-height: 100svh;
+      display: flex; align-items: center; overflow: hidden;
+      background:
+        radial-gradient(ellipse 75% 75% at 85% 15%, rgba(26,95,168,.42) 0%, transparent 65%),
+        radial-gradient(ellipse 55% 55% at 10% 90%, rgba(13,148,136,.22) 0%, transparent 58%),
+        radial-gradient(ellipse 40% 60% at 50% 50%, rgba(255,255,255,.02) 0%, transparent 100%),
+        linear-gradient(168deg, #060e1c 0%, #0b1a30 45%, #08141f 100%);
+    }
+    .hero-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to right, rgba(6,14,28,.65) 0%, rgba(6,14,28,.25) 55%, transparent 100%);
+    }
+    .hero-body {
+      position: relative; z-index: 2; width: 100%; max-width: 740px; margin: 0 auto;
+      padding: calc(var(--nav-h) + 56px) 20px 72px;
+      padding-top: max(calc(var(--nav-h) + 56px), calc(var(--nav-h) + 56px + env(safe-area-inset-top)));
+    }
+    .hero-pill {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(255,255,255,.16);
+      -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px);
+      border: 1px solid rgba(255,255,255,.28); border-radius: 100px;
+      padding: 6px 16px; font-size: .78rem; font-weight: 700;
+      letter-spacing: .09em; text-transform: uppercase;
+      color: rgba(255,255,255,.92); margin-bottom: 20px;
+    }
+    .hero-pill::before {
+      content: ''; width: 6px; height: 6px; border-radius: 50%;
+      background: var(--teal); flex-shrink: 0;
+    }
+    .hero-h1 {
+      font-family: var(--serif);
+      font-size: clamp(1.85rem, 6vw, 3.6rem);
+      font-weight: 700; color: #fff; line-height: 1.1; margin-bottom: 18px;
+    }
+    .hero-sub {
+      font-size: clamp(.95rem, 2.5vw, 1.18rem);
+      color: rgba(255,255,255,.87); line-height: 1.65; margin-bottom: 30px;
+    }
+    .hero-btns { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 28px; }
+    .trust-row { display: flex; flex-wrap: wrap; gap: 10px 20px; }
+    .trust-chip { display: flex; align-items: center; gap: 7px; font-size: .82rem; font-weight: 500; color: rgba(255,255,255,.9); }
+    .trust-check {
+      width: 20px; height: 20px; border-radius: 50%; background: var(--teal);
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0; font-size: .62rem; font-weight: 800; color: #fff;
+    }
+
+    /* ── Illustration panels — self-contained SVG art ── */
+    .img-box { position: relative; overflow: hidden; width: 100%; }
+    .img-box::before { content: ''; display: block; }
+    .img-box.r16-10::before { padding-top: 62.5%; }
+    .img-box.r4-3::before   { padding-top: 75%; }
+    .img-inner { position: absolute; inset: 0; }
+    .img-inner svg { width: 100%; height: 100%; display: block; }
+    /* Specialty backgrounds */
+    .g-hand     { background: linear-gradient(140deg,#0c1e38 0%,#0f2d52 55%,#0a2540 100%); }
+    .g-wrist    { background: linear-gradient(140deg,#0a1a30 0%,#112843 55%,#091e38 100%); }
+    .g-shoulder { background: linear-gradient(140deg,#091d35 0%,#0e2a45 55%,#072030 100%); }
+    /* Doctor card backgrounds */
+    .g-doc1 { background: linear-gradient(160deg,#0c1e38 0%,#1a5fa8 100%); }
+    .g-doc2 { background: linear-gradient(160deg,#091e35 0%,#1a5fa8 100%); }
+    .g-doc3 { background: linear-gradient(160deg,#091a30 0%,#0a7060 100%); }
+    /* Therapy */
+    .g-therapy { background: linear-gradient(140deg,#071e2f 0%,#0d3352 55%,#053028 100%); }
+
+    /* ── Trust Bar ── */
+    #trust-bar {
+      background: var(--g100);
+      border-top: 1px solid var(--g200); border-bottom: 1px solid var(--g200);
+      padding: 32px 20px;
+    }
+    .trust-grid {
+      display: grid; grid-template-columns: repeat(4,1fr);
+      gap: 20px; max-width: 1160px; margin: 0 auto;
+    }
+    .trust-item { display: flex; align-items: center; gap: 14px; }
+    .trust-icon {
+      width: 46px; height: 46px; border-radius: 11px;
+      background: var(--blue); display: flex; align-items: center;
+      justify-content: center; flex-shrink: 0; color: #fff;
+    }
+    .trust-num { font-family: var(--serif); font-size: 1.55rem; font-weight: 700; color: var(--blue); line-height: 1; }
+    .trust-lbl { font-size: .73rem; font-weight: 600; letter-spacing: .04em; text-transform: uppercase; color: var(--g600); margin-top: 2px; line-height: 1.3; }
+
+    /* ── Specialties ── */
+    #specialties { background: var(--white); padding: 80px 20px; }
+    .spec-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 22px; }
+    .spec-card {
+      border-radius: var(--r); overflow: hidden;
+      border: 1px solid var(--g200);
+      display: flex; flex-direction: column; background: var(--white);
+      transition: box-shadow var(--ease), transform var(--ease);
+    }
+    @media (hover:hover) { .spec-card:hover { box-shadow: var(--sh-lg); transform: translateY(-4px); } }
+    .spec-body { padding: 22px 22px 24px; display: flex; flex-direction: column; flex: 1; }
+    .spec-title { font-family: var(--serif); font-size: 1.18rem; font-weight: 700; color: var(--text); margin-bottom: 8px; }
+    .spec-desc { font-size: .88rem; color: var(--g600); line-height: 1.65; flex: 1; margin-bottom: 16px; }
+    .link-arr {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-size: .87rem; font-weight: 600; color: var(--blue); min-height: 44px;
+    }
+    @media (hover:hover) { .link-arr:hover { gap: 10px; } }
+
+    /* ── Why Us ── */
+    #why-us { background: var(--off); padding: 80px 20px; }
+    .why-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 18px; margin-top: 48px; }
+    .why-card {
+      background: var(--white); border-radius: var(--r);
+      padding: 26px 22px; border: 1px solid var(--g200);
+      transition: box-shadow var(--ease), transform var(--ease);
+    }
+    @media (hover:hover) { .why-card:hover { box-shadow: var(--sh-md); transform: translateY(-3px); } }
+    .why-icon { margin-bottom: 14px; color: var(--blue); }
+    .why-title { font-family: var(--serif); font-size: 1.05rem; font-weight: 700; color: var(--text); margin-bottom: 8px; }
+    .why-desc { font-size: .86rem; color: var(--g600); line-height: 1.65; }
+
+    /* ── Team ── */
+    #team { background: var(--white); padding: 80px 20px; }
+    .team-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 22px; margin-top: 48px; }
+    .doc-card {
+      border-radius: var(--r); overflow: hidden;
+      border: 1px solid var(--g200); background: var(--white);
+      transition: box-shadow var(--ease), transform var(--ease);
+    }
+    @media (hover:hover) { .doc-card:hover { box-shadow: var(--sh-lg); transform: translateY(-4px); } }
+    .doc-body { padding: 18px 20px 20px; }
+    .doc-cred { font-size: .75rem; font-weight: 700; color: var(--blue); letter-spacing: .03em; margin-bottom: 4px; }
+    .doc-name { font-family: var(--serif); font-size: 1.12rem; font-weight: 700; color: var(--text); margin-bottom: 6px; }
+    .doc-fellow { font-size: .8rem; color: var(--g600); display: flex; align-items: flex-start; gap: 5px; flex-wrap: wrap; }
+    .fellow-lbl { font-weight: 700; color: var(--g800); }
+
+    /* ── Therapy ── */
+    #therapy { background: #e8f4f8; padding: 80px 20px; }
+    .therapy-wrap {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 52px; align-items: center;
+      max-width: 1160px; margin: 0 auto;
+    }
+    .therapy-img-box { border-radius: var(--r); overflow: hidden; box-shadow: var(--sh-lg); }
+    .therapy-p { font-size: .96rem; color: var(--g600); line-height: 1.75; margin-bottom: 20px; margin-top: 14px; }
+    .therapy-list { list-style: none; display: flex; flex-direction: column; gap: 9px; margin-bottom: 26px; }
+    .therapy-list li { display: flex; align-items: flex-start; gap: 10px; font-size: .9rem; color: var(--g800); }
+    .therapy-list li::before {
+      content: ''; display: block; width: 6px; height: 6px;
+      border-radius: 50%; background: var(--teal); flex-shrink: 0; margin-top: 7px;
+    }
+
+    /* ── Testimonials ── */
+    #testimonials { background: var(--white); padding: 80px 20px; }
+    .testi-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 18px; margin-top: 48px; }
+    .testi-card {
+      background: var(--off); border-radius: var(--r);
+      padding: 26px; border: 1px solid var(--g200);
+      display: flex; flex-direction: column;
+    }
+    .stars { color: #f59e0b; font-size: 1rem; letter-spacing: 2px; margin-bottom: 12px; }
+    .testi-q {
+      font-family: var(--serif); font-size: .98rem;
+      color: var(--text); line-height: 1.65; flex: 1; margin-bottom: 16px;
+    }
+    .testi-q::before {
+      content: '\201C'; font-size: 2.6rem; line-height: .5;
+      vertical-align: -.38em; color: var(--blue); opacity: .2; margin-right: 2px;
+    }
+    .testi-src { display: flex; align-items: center; gap: 9px; border-top: 1px solid var(--g200); padding-top: 12px; }
+    .g-icon { width: 20px; height: 20px; flex-shrink: 0; }
+    .testi-by { font-size: .78rem; font-weight: 600; color: var(--g600); }
+
+    /* ── Contact / CTA ── */
+    #contact { background: var(--blue); padding: 80px 20px; position: relative; overflow: hidden; }
+    #contact::before {
+      content: ''; position: absolute; top: -80px; right: -80px;
+      width: 300px; height: 300px; border-radius: 50%;
+      background: rgba(255,255,255,.05); pointer-events: none;
+    }
+    #contact::after {
+      content: ''; position: absolute; bottom: -100px; left: -60px;
+      width: 380px; height: 380px; border-radius: 50%;
+      background: rgba(255,255,255,.04); pointer-events: none;
+    }
+    .contact-wrap { position: relative; z-index: 1; max-width: 1160px; margin: 0 auto; }
+    .contact-top { text-align: center; margin-bottom: 44px; }
+    .contact-top .eyebrow { color: rgba(255,255,255,.7); }
+    .contact-top .h2 { color: #fff; }
+    .contact-top .lead { color: rgba(255,255,255,.82); margin: 10px auto 26px; }
+    .contact-btns { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-bottom: 44px; }
+    .contact-grid {
+      display: grid; grid-template-columns: repeat(3,1fr);
+      gap: 1px; background: rgba(255,255,255,.15);
+      border-radius: var(--r); overflow: hidden;
+    }
+    .c-item { background: rgba(255,255,255,.08); padding: 22px 26px; display: flex; align-items: flex-start; gap: 13px; }
+    .c-icon {
+      width: 40px; height: 40px; border-radius: 9px;
+      background: rgba(255,255,255,.16);
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0; color: #fff;
+    }
+    .c-lbl { font-size: .7rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: rgba(255,255,255,.65); margin-bottom: 3px; }
+    .c-val { font-size: .9rem; font-weight: 500; color: #fff; line-height: 1.55; }
+
+    /* ── Footer ── */
+    footer {
+      background: var(--white); border-top: 1px solid var(--g200);
+      padding: 40px 20px max(20px, env(safe-area-inset-bottom));
+    }
+    .footer-inner { max-width: 1160px; margin: 0 auto; }
+    .footer-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 32px; margin-bottom: 28px; }
+    .footer-brand p { font-size: .8rem; color: var(--g600); margin-top: 7px; max-width: 240px; line-height: 1.5; }
+    .footer-cols { display: flex; gap: 32px; }
+    .f-col h4 { font-size: .7rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--g600); margin-bottom: 11px; }
+    .f-col ul { list-style: none; display: flex; flex-direction: column; gap: 6px; }
+    .f-col ul li a { font-size: .86rem; color: var(--blue); display: block; padding: 2px 0; min-height: 32px; display: flex; align-items: center; }
+    .f-col ul li a:hover { text-decoration: underline; }
+    .footer-bot { border-top: 1px solid var(--g200); padding-top: 16px; display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; }
+    .f-copy { font-size: .77rem; color: var(--g600); }
+    .f-demo { font-size: .73rem; color: var(--g400); font-style: italic; }
+    .f-demo a { color: var(--teal); font-weight: 600; }
+
+    /* ── Responsive ── */
+    @media (max-width: 1024px) {
+      .trust-grid { grid-template-columns: repeat(2,1fr); }
+      .why-grid   { grid-template-columns: repeat(2,1fr); }
+      .footer-top { flex-direction: column; }
+      .footer-cols { flex-wrap: wrap; gap: 22px; }
+    }
+    @media (max-width: 768px) {
+      .nav-links, .nav-right { display: none; }
+      .ham { display: flex; }
+      .spec-grid    { grid-template-columns: 1fr; }
+      .team-grid    { grid-template-columns: 1fr; }
+      .testi-grid   { grid-template-columns: 1fr; }
+      .contact-grid { grid-template-columns: 1fr; }
+      .therapy-wrap { grid-template-columns: 1fr; gap: 28px; }
+      .trust-grid { grid-template-columns: repeat(2,1fr); }
+      .why-grid   { grid-template-columns: 1fr 1fr; }
+      .footer-bot { flex-direction: column; align-items: flex-start; }
+    }
+    @media (max-width: 480px) {
+      .why-grid     { grid-template-columns: 1fr; }
+      .hero-btns    { flex-direction: column; align-items: stretch; }
+      .hero-btns .btn { width: 100%; }
+      .contact-btns { flex-direction: column; align-items: stretch; }
+      .contact-btns .btn { width: 100%; }
+      .footer-cols  { flex-direction: column; gap: 18px; }
+      #specialties, #why-us, #team, #therapy, #testimonials, #contact { padding: 60px 20px; }
+    }
+    @media (max-width: 360px) {
+      .trust-grid { grid-template-columns: 1fr; }
+      .logo-sub   { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ══ NAV ══ -->
+<nav id="nav" role="banner">
+  <div class="nav-wrap">
+    <a href="#" class="nav-logo" aria-label="Triangle Hand & Shoulder Center home">
+      <span class="logo-name">Triangle Hand &amp; Shoulder Center</span>
+      <span class="logo-sub">Orthopedic Specialists · Raleigh, NC</span>
+    </a>
+
+    <ul class="nav-links" role="list">
+      <li><a href="#team">Our Doctors</a></li>
+      <li><a href="#specialties">Specialties</a></li>
+      <li><a href="#therapy">Therapy</a></li>
+      <li><a href="#contact">Patient Resources</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+
+    <div class="nav-right">
+      <a href="tel:9190000000" class="nav-tel">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1.27h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.92a16 16 0 0 0 6 6l.92-.92a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21.73 16.92z"/></svg>
+        (919) 000-0000
+      </a>
+      <a href="#contact" class="btn btn-primary" style="padding:10px 18px;font-size:.875rem;min-height:40px">Book Appointment</a>
+    </div>
+
+    <button class="ham" id="ham" aria-label="Open menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+
+  <div class="mob" id="mob" role="navigation" aria-label="Mobile navigation">
+    <a href="#team">Our Doctors</a>
+    <a href="#specialties">Specialties</a>
+    <a href="#therapy">Therapy</a>
+    <a href="#contact">Patient Resources</a>
+    <a href="#contact">Contact</a>
+    <div class="mob-div"></div>
+    <a href="tel:9190000000" style="color:var(--teal);font-weight:600">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="margin-right:7px;flex-shrink:0"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1.27h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.92a16 16 0 0 0 6 6l.92-.92a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21.73 16.92z"/></svg>
+      (919) 000-0000
+    </a>
+    <a href="#contact" class="btn btn-primary" style="margin-top:6px">Book Appointment</a>
+  </div>
+</nav>
+
+
+<!-- ══ HERO ══ -->
+<section id="hero" aria-label="Hero">
+  <div class="hero-overlay" aria-hidden="true"></div>
+
+  <div class="hero-body">
+    <div class="hero-pill">Raleigh · Durham · Chapel Hill</div>
+    <h1 class="hero-h1">Expert Care for Your Hands,&nbsp;Wrists, Elbows &amp; Shoulders</h1>
+    <p class="hero-sub">5 fellowship-trained, board-certified orthopedic surgeons. Serving the Triangle for over 30 years.</p>
+
+    <div class="hero-btns">
+      <a href="#contact" class="btn btn-primary" style="font-size:1rem;padding:15px 28px">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+        Book an Appointment
+      </a>
+      <a href="tel:9190000000" class="btn btn-wh-out" style="font-size:1rem;padding:15px 28px">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1.27h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.92a16 16 0 0 0 6 6l.92-.92a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21.73 16.92z"/></svg>
+        Call (919) 000-0000
+      </a>
+    </div>
+
+    <div class="trust-row" role="list">
+      <div class="trust-chip" role="listitem"><div class="trust-check" aria-hidden="true">✓</div><span>Board Certified</span></div>
+      <div class="trust-chip" role="listitem"><div class="trust-check" aria-hidden="true">✓</div><span>Physician Owned</span></div>
+      <div class="trust-chip" role="listitem"><div class="trust-check" aria-hidden="true">✓</div><span>Same-Week Appointments</span></div>
+      <div class="trust-chip" role="listitem"><div class="trust-check" aria-hidden="true">✓</div><span>On-Call 24/7</span></div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══ TRUST BAR ══ -->
+<section id="trust-bar" aria-label="Practice stats">
+  <div class="trust-grid">
+    <div class="trust-item anim">
+      <div class="trust-icon" aria-hidden="true"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+      <div><div class="trust-num">30+</div><div class="trust-lbl">Years Serving the Triangle</div></div>
+    </div>
+    <div class="trust-item anim anim-d1">
+      <div class="trust-icon" aria-hidden="true"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+      <div><div class="trust-num">5</div><div class="trust-lbl">Fellowship-Trained Surgeons</div></div>
+    </div>
+    <div class="trust-item anim anim-d2">
+      <div class="trust-icon" aria-hidden="true"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+      <div><div class="trust-num">24/7</div><div class="trust-lbl">On-Call · Nights &amp; Weekends</div></div>
+    </div>
+    <div class="trust-item anim anim-d3">
+      <div class="trust-icon" aria-hidden="true"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div>
+      <div><div class="trust-num">In-House</div><div class="trust-lbl">Therapy · Coordinated Care</div></div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══ SPECIALTIES ══ -->
+<section id="specialties">
+  <div class="container">
+    <div class="section-head anim">
+      <span class="eyebrow">What We Treat</span>
+      <h2 class="h2">Our Hand to Shoulder Specialties</h2>
+      <p class="lead">All our doctors are board-certified in both orthopedic surgery and hand surgery — the highest level of specialized training available.</p>
+    </div>
+    <div class="spec-grid">
+      <article class="spec-card anim">
+        <div class="img-box r16-10">
+          <div class="img-inner g-hand">
+            <!-- Hand anatomy illustration — dorsal view -->
+            <svg viewBox="0 0 300 188" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid meet">
+              <defs>
+                <radialGradient id="hglow" cx="50%" cy="50%" r="50%">
+                  <stop offset="0%" stop-color="#1a5fa8" stop-opacity=".35"/>
+                  <stop offset="100%" stop-color="transparent"/>
+                </radialGradient>
+              </defs>
+              <ellipse cx="150" cy="94" rx="90" ry="76" fill="url(#hglow)"/>
+              <!-- Wrist/carpal base -->
+              <path d="M 108,172 Q 96,162 98,148 L 100,128 L 192,128 L 194,148 Q 196,162 184,172 Z" fill="rgba(255,255,255,.06)" stroke="rgba(255,255,255,.28)" stroke-width="1.1"/>
+              <!-- Thumb -->
+              <path d="M 107,148 Q 88,138 82,122 Q 76,106 82,94 Q 90,84 100,88 Q 108,93 110,108 L 112,128" fill="rgba(255,255,255,.06)" stroke="rgba(255,255,255,.32)" stroke-width="1.1" stroke-linejoin="round"/>
+              <!-- thumb joint line -->
+              <line x1="84" y1="110" x2="110" y2="113" stroke="rgba(255,255,255,.18)" stroke-width=".9"/>
+              <!-- Index finger -->
+              <path d="M 118,128 L 115,68 Q 115,57 122,57 Q 130,57 130,68 L 126,128 Z" fill="rgba(255,255,255,.06)" stroke="rgba(255,255,255,.32)" stroke-width="1.1"/>
+              <!-- Middle finger (longest) -->
+              <path d="M 133,128 L 131,52 Q 131,41 139,41 Q 147,41 147,52 L 143,128 Z" fill="rgba(255,255,255,.07)" stroke="rgba(255,255,255,.36)" stroke-width="1.1"/>
+              <!-- Ring finger -->
+              <path d="M 149,128 L 148,60 Q 148,49 156,49 Q 164,49 164,60 L 161,128 Z" fill="rgba(255,255,255,.06)" stroke="rgba(255,255,255,.30)" stroke-width="1.1"/>
+              <!-- Pinky -->
+              <path d="M 165,128 L 165,78 Q 165,68 172,68 Q 179,68 179,78 L 178,128 Z" fill="rgba(255,255,255,.05)" stroke="rgba(255,255,255,.24)" stroke-width="1.1"/>
+              <!-- PIP joint lines -->
+              <line x1="115" y1="90" x2="130" y2="90" stroke="rgba(255,255,255,.2)" stroke-width=".9"/>
+              <line x1="131" y1="82" x2="147" y2="82" stroke="rgba(255,255,255,.22)" stroke-width=".9"/>
+              <line x1="148" y1="86" x2="164" y2="86" stroke="rgba(255,255,255,.2)" stroke-width=".9"/>
+              <line x1="165" y1="98" x2="179" y2="98" stroke="rgba(255,255,255,.18)" stroke-width=".9"/>
+              <!-- MCP joint line -->
+              <line x1="115" y1="110" x2="179" y2="110" stroke="rgba(255,255,255,.15)" stroke-width=".9" stroke-dasharray="3 2"/>
+              <!-- Carpal canal callout -->
+              <circle cx="146" cy="150" r="14" fill="none" stroke="rgba(13,148,136,.65)" stroke-width="1" stroke-dasharray="3 2"/>
+              <line x1="160" y1="142" x2="210" y2="124" stroke="rgba(13,148,136,.5)" stroke-width=".8"/>
+              <text x="213" y="122" font-family="ui-sans-serif,system-ui,sans-serif" font-size="7.5" fill="rgba(255,255,255,.52)" font-weight="700" letter-spacing=".07em">CARPAL CANAL</text>
+              <!-- Label -->
+              <text x="150" y="184" text-anchor="middle" font-family="ui-sans-serif,system-ui,sans-serif" font-size="8.5" fill="rgba(255,255,255,.38)" font-weight="700" letter-spacing=".18em">HAND · DORSAL VIEW</text>
+            </svg>
+          </div>
+        </div>
+        <div class="spec-body">
+          <h3 class="spec-title">Hand Pain</h3>
+          <p class="spec-desc">From carpal tunnel syndrome and arthritis to fractures and tendon injuries — we treat the full range of hand conditions with precision and care.</p>
+          <a href="#contact" class="link-arr">Hand Pain Help <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+        </div>
+      </article>
+      <article class="spec-card anim anim-d1">
+        <div class="img-box r16-10">
+          <div class="img-inner g-wrist">
+            <!-- Elbow/forearm anatomy — lateral view -->
+            <svg viewBox="0 0 300 188" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid meet">
+              <defs>
+                <radialGradient id="eglow" cx="50%" cy="48%" r="45%">
+                  <stop offset="0%" stop-color="#1565c0" stop-opacity=".3"/>
+                  <stop offset="100%" stop-color="transparent"/>
+                </radialGradient>
+              </defs>
+              <ellipse cx="150" cy="90" rx="80" ry="70" fill="url(#eglow)"/>
+              <!-- Humerus (upper arm bone, entering from top) -->
+              <path d="M 130,12 Q 126,20 128,38 L 124,66 Q 122,78 128,88 Q 138,102 148,104 Q 156,106 164,100 Q 174,90 172,78 L 166,66 L 164,42 Q 166,22 162,12 Z" fill="rgba(255,255,255,.07)" stroke="rgba(255,255,255,.30)" stroke-width="1.1" stroke-linejoin="round"/>
+              <!-- Olecranon (elbow bony point) -->
+              <path d="M 128,88 Q 120,96 122,108 Q 124,116 132,118 L 144,116" fill="rgba(255,255,255,.07)" stroke="rgba(255,255,255,.28)" stroke-width="1.1" stroke-linejoin="round"/>
+              <!-- Radius (forearm, lateral) -->
+              <path d="M 164,100 Q 170,108 172,120 L 176,158 Q 178,168 170,172 L 160,174 Q 150,175 148,166 L 148,154 L 148,122 Q 148,110 152,104 Z" fill="rgba(255,255,255,.07)" stroke="rgba(255,255,255,.30)" stroke-width="1.1" stroke-linejoin="round"/>
+              <!-- Ulna (forearm, medial) -->
+              <path d="M 144,116 Q 136,120 132,132 L 128,158 Q 126,168 134,172 L 144,174 Q 148,175 148,166 L 148,122" fill="rgba(255,255,255,.06)" stroke="rgba(255,255,255,.24)" stroke-width="1" stroke-linejoin="round"/>
+              <!-- Joint space line -->
+              <path d="M 124,80 Q 148,96 172,80" fill="none" stroke="rgba(255,255,255,.16)" stroke-width=".9" stroke-dasharray="3 2"/>
+              <!-- Range-of-motion arc -->
+              <path d="M 200,58 Q 218,92 200,126" fill="none" stroke="rgba(13,148,136,.55)" stroke-width="1.2" stroke-dasharray="5 3"/>
+              <line x1="200" y1="58" x2="210" y2="50" stroke="rgba(13,148,136,.4)" stroke-width=".9"/>
+              <line x1="200" y1="126" x2="210" y2="134" stroke="rgba(13,148,136,.4)" stroke-width=".9"/>
+              <!-- Callout labels -->
+              <text x="226" y="54" font-family="ui-sans-serif,system-ui,sans-serif" font-size="7" fill="rgba(255,255,255,.45)" font-weight="700" letter-spacing=".05em">FLEXION</text>
+              <text x="220" y="140" font-family="ui-sans-serif,system-ui,sans-serif" font-size="7" fill="rgba(255,255,255,.45)" font-weight="700" letter-spacing=".05em">EXTENSION</text>
+              <!-- Bone labels -->
+              <line x1="146" y1="30" x2="100" y2="30" stroke="rgba(255,255,255,.18)" stroke-width=".7"/>
+              <text x="96" y="30" text-anchor="end" font-family="ui-sans-serif,system-ui,sans-serif" font-size="7" fill="rgba(255,255,255,.4)" font-weight="600" letter-spacing=".06em">HUMERUS</text>
+              <line x1="174" y1="140" x2="232" y2="140" stroke="rgba(255,255,255,.15)" stroke-width=".7"/>
+              <text x="235" y="143" font-family="ui-sans-serif,system-ui,sans-serif" font-size="7" fill="rgba(255,255,255,.4)" font-weight="600" letter-spacing=".06em">RADIUS</text>
+              <line x1="130" y1="148" x2="76" y2="148" stroke="rgba(255,255,255,.13)" stroke-width=".7"/>
+              <text x="72" y="151" text-anchor="end" font-family="ui-sans-serif,system-ui,sans-serif" font-size="7" fill="rgba(255,255,255,.38)" font-weight="600" letter-spacing=".06em">ULNA</text>
+              <!-- Label -->
+              <text x="150" y="184" text-anchor="middle" font-family="ui-sans-serif,system-ui,sans-serif" font-size="8.5" fill="rgba(255,255,255,.38)" font-weight="700" letter-spacing=".18em">ELBOW · LATERAL VIEW</text>
+            </svg>
+          </div>
+        </div>
+        <div class="spec-body">
+          <h3 class="spec-title">Wrist &amp; Elbow</h3>
+          <p class="spec-desc">Wrist tendonitis, sports injuries, motor vehicle injuries, and complex wrist fractures treated with precision and evidence-based methods.</p>
+          <a href="#contact" class="link-arr">Wrist &amp; Elbow Help <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+        </div>
+      </article>
+      <article class="spec-card anim anim-d2">
+        <div class="img-box r16-10">
+        <div class="img-box r16-10">
+          <div class="img-inner g-shoulder">
+            <!-- Shoulder joint anatomy — anterior view -->
+            <svg viewBox="0 0 300 188" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid meet">
+              <defs>
+                <radialGradient id="sglow" cx="48%" cy="45%" r="48%">
+                  <stop offset="0%" stop-color="#0d9488" stop-opacity=".28"/>
+                  <stop offset="100%" stop-color="transparent"/>
+                </radialGradient>
+              </defs>
+              <ellipse cx="148" cy="90" rx="82" ry="72" fill="url(#sglow)"/>
+              <!-- Clavicle (collarbone) — horizontal strut top-left to joint -->
+              <path d="M 56,60 Q 80,52 108,58 Q 122,62 130,72" fill="none" stroke="rgba(255,255,255,.35)" stroke-width="10" stroke-linecap="round"/>
+              <path d="M 56,60 Q 80,52 108,58 Q 122,62 130,72" fill="none" stroke="rgba(255,255,255,.22)" stroke-width="1" stroke-linecap="round"/>
+              <!-- Acromion arch over joint -->
+              <path d="M 130,72 Q 148,62 166,68 L 168,80 Q 154,74 140,80" fill="rgba(255,255,255,.08)" stroke="rgba(255,255,255,.3)" stroke-width="1.1"/>
+              <!-- Glenoid (socket) -->
+              <ellipse cx="138" cy="100" rx="14" ry="22" fill="rgba(255,255,255,.07)" stroke="rgba(255,255,255,.28)" stroke-width="1.1"/>
+              <!-- Humeral head (ball) -->
+              <circle cx="166" cy="96" r="28" fill="rgba(255,255,255,.07)" stroke="rgba(255,255,255,.32)" stroke-width="1.1"/>
+              <!-- Glenohumeral joint space -->
+              <path d="M 152,76 Q 154,96 152,116" fill="none" stroke="rgba(255,255,255,.14)" stroke-width=".8" stroke-dasharray="3 2"/>
+              <!-- Humeral shaft going down -->
+              <path d="M 178,116 Q 184,130 182,160 L 174,162 Q 170,132 164,120 Z" fill="rgba(255,255,255,.07)" stroke="rgba(255,255,255,.24)" stroke-width="1"/>
+              <!-- Rotator cuff suggestion — arc of dashes around humeral head -->
+              <path d="M 148,72 Q 192,68 196,96 Q 196,126 172,138" fill="none" stroke="rgba(13,148,136,.6)" stroke-width="1.5" stroke-dasharray="4 3" stroke-linecap="round"/>
+              <!-- Rotator cuff callout -->
+              <line x1="194" y1="82" x2="238" y2="62" stroke="rgba(13,148,136,.45)" stroke-width=".8"/>
+              <text x="241" y="60" font-family="ui-sans-serif,system-ui,sans-serif" font-size="7.5" fill="rgba(255,255,255,.5)" font-weight="700" letter-spacing=".06em">ROTATOR CUFF</text>
+              <!-- Bone labels -->
+              <line x1="80" y1="52" x2="80" y2="38" stroke="rgba(255,255,255,.16)" stroke-width=".7"/>
+              <text x="80" y="34" text-anchor="middle" font-family="ui-sans-serif,system-ui,sans-serif" font-size="7" fill="rgba(255,255,255,.4)" font-weight="600" letter-spacing=".06em">CLAVICLE</text>
+              <line x1="166" y1="68" x2="166" y2="38" stroke="rgba(255,255,255,.14)" stroke-width=".7"/>
+              <text x="166" y="34" text-anchor="middle" font-family="ui-sans-serif,system-ui,sans-serif" font-size="7" fill="rgba(255,255,255,.38)" font-weight="600" letter-spacing=".06em">HUMERUS</text>
+              <!-- Label -->
+              <text x="150" y="184" text-anchor="middle" font-family="ui-sans-serif,system-ui,sans-serif" font-size="8.5" fill="rgba(255,255,255,.38)" font-weight="700" letter-spacing=".18em">SHOULDER · ANTERIOR VIEW</text>
+            </svg>
+          </div>
+        </div>
+        <div class="spec-body">
+          <h3 class="spec-title">Shoulder</h3>
+          <p class="spec-desc">Rotator cuff tears, shoulder instability, arthritis, and sports injuries — conservative and surgical options tailored to your goals.</p>
+          <a href="#contact" class="link-arr">Shoulder Help <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══ WHY US ══ -->
+<section id="why-us" aria-labelledby="why-title">
+  <div class="container">
+    <div class="section-head anim">
+      <span class="eyebrow">The Difference</span>
+      <h2 class="h2" id="why-title">Why Patients Trust Us</h2>
+      <p class="lead">An independent, physician-owned practice built around one purpose: getting you back to what you love.</p>
+    </div>
+    <div class="why-grid">
+      <div class="why-card anim">
+        <div class="why-icon" aria-hidden="true"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div>
+        <h3 class="why-title">Physician-Owned Practice</h3>
+        <p class="why-desc">We answer to our patients — not a hospital system. Independent, focused, and community-rooted since 1991.</p>
+      </div>
+      <div class="why-card anim anim-d1">
+        <div class="why-icon" aria-hidden="true"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg></div>
+        <h3 class="why-title">Fellowship-Trained Surgeons</h3>
+        <p class="why-desc">Every doctor holds dual board certification in orthopedic surgery AND hand surgery — the highest level available.</p>
+      </div>
+      <div class="why-card anim anim-d2">
+        <div class="why-icon" aria-hidden="true"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/><line x1="8" y1="14" x2="8.01" y2="14"/><line x1="12" y1="14" x2="12.01" y2="14"/><line x1="16" y1="14" x2="16.01" y2="14"/></svg></div>
+        <h3 class="why-title">Same-Week Appointments</h3>
+        <p class="why-desc">Pain doesn't wait. Same-day and next-day appointments frequently available. On-call 24/7 for urgent needs.</p>
+      </div>
+      <div class="why-card anim anim-d3">
+        <div class="why-icon" aria-hidden="true"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+        <h3 class="why-title">Conservative First Approach</h3>
+        <p class="why-desc">Surgery when necessary — never when it isn't. Every non-surgical option explored first. You decide together.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══ TEAM ══ -->
+<section id="team">
+  <div class="container">
+    <div class="section-head anim">
+      <span class="eyebrow">Our Surgeons</span>
+      <h2 class="h2">Meet Our Surgeons</h2>
+      <p class="lead">Your doctor performs your surgery from start to finish — and guides your recovery every step of the way.</p>
+    </div>
+    <div class="team-grid">
+      <article class="doc-card anim">
+        <div class="img-box r4-3">
+          <div class="img-inner g-doc1">
+            <!-- Physician silhouette — white coat, stethoscope -->
+            <svg viewBox="0 0 200 150" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid meet">
+              <defs><radialGradient id="dg1" cx="50%" cy="40%" r="55%"><stop offset="0%" stop-color="#1a5fa8" stop-opacity=".4"/><stop offset="100%" stop-color="transparent"/></radialGradient></defs>
+              <rect width="200" height="150" fill="url(#dg1)"/>
+              <!-- Head -->
+              <ellipse cx="100" cy="38" rx="20" ry="23" fill="rgba(255,255,255,.1)" stroke="rgba(255,255,255,.35)" stroke-width="1.2"/>
+              <!-- Neck -->
+              <rect x="93" y="59" width="14" height="11" fill="rgba(255,255,255,.08)" stroke="rgba(255,255,255,.25)" stroke-width="1"/>
+              <!-- Lab coat body -->
+              <path d="M 52,148 L 52,92 Q 56,76 72,74 L 90,72 L 100,74 L 110,72 L 128,74 Q 144,76 148,92 L 148,148" fill="rgba(255,255,255,.08)" stroke="rgba(255,255,255,.3)" stroke-width="1.2" stroke-linejoin="round"/>
+              <!-- Coat lapels -->
+              <path d="M 90,72 L 95,90 L 100,108" stroke="rgba(255,255,255,.22)" stroke-width="1" fill="none"/>
+              <path d="M 110,72 L 105,90 L 100,108" stroke="rgba(255,255,255,.22)" stroke-width="1" fill="none"/>
+              <!-- Collar / shirt -->
+              <path d="M 93,70 L 96,82 L 100,88 L 104,82 L 107,70" fill="rgba(255,255,255,.05)" stroke="rgba(255,255,255,.18)" stroke-width=".8"/>
+              <!-- Stethoscope -->
+              <path d="M 86,88 Q 80,98 80,112 Q 80,122 88,124 Q 96,126 98,118" fill="none" stroke="rgba(13,148,136,.75)" stroke-width="2" stroke-linecap="round"/>
+              <circle cx="98" cy="118" r="5" fill="none" stroke="rgba(13,148,136,.75)" stroke-width="1.5"/>
+              <!-- Pocket on coat -->
+              <rect x="112" y="100" width="22" height="14" rx="2" fill="rgba(255,255,255,.05)" stroke="rgba(255,255,255,.18)" stroke-width=".8"/>
+              <!-- Pen in pocket -->
+              <line x1="118" y1="100" x2="118" y2="112" stroke="rgba(13,148,136,.5)" stroke-width="1.5" stroke-linecap="round"/>
+            </svg>
+          </div>
+        </div>
+        <div class="doc-body">
+          <p class="doc-cred">Board Certified · Orthopedic Surgery &amp; Hand Surgery</p>
+          <h3 class="doc-name">Dr. Post, MD</h3>
+          <p class="doc-fellow"><span class="fellow-lbl">Fellowship:</span>&nbsp;Upper Extremity Surgery</p>
+        </div>
+      </article>
+      <article class="doc-card anim anim-d1">
+        <div class="img-box r4-3">
+          <div class="img-inner g-doc2">
+            <svg viewBox="0 0 200 150" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid meet">
+              <defs><radialGradient id="dg2" cx="50%" cy="40%" r="55%"><stop offset="0%" stop-color="#1a5fa8" stop-opacity=".35"/><stop offset="100%" stop-color="transparent"/></radialGradient></defs>
+              <rect width="200" height="150" fill="url(#dg2)"/>
+              <ellipse cx="100" cy="38" rx="20" ry="23" fill="rgba(255,255,255,.1)" stroke="rgba(255,255,255,.35)" stroke-width="1.2"/>
+              <rect x="93" y="59" width="14" height="11" fill="rgba(255,255,255,.08)" stroke="rgba(255,255,255,.25)" stroke-width="1"/>
+              <path d="M 52,148 L 52,92 Q 56,76 72,74 L 90,72 L 100,74 L 110,72 L 128,74 Q 144,76 148,92 L 148,148" fill="rgba(255,255,255,.08)" stroke="rgba(255,255,255,.3)" stroke-width="1.2" stroke-linejoin="round"/>
+              <path d="M 90,72 L 95,90 L 100,108" stroke="rgba(255,255,255,.22)" stroke-width="1" fill="none"/>
+              <path d="M 110,72 L 105,90 L 100,108" stroke="rgba(255,255,255,.22)" stroke-width="1" fill="none"/>
+              <path d="M 93,70 L 96,82 L 100,88 L 104,82 L 107,70" fill="rgba(255,255,255,.05)" stroke="rgba(255,255,255,.18)" stroke-width=".8"/>
+              <!-- Stethoscope — different drape angle for variety -->
+              <path d="M 114,88 Q 122,98 120,112 Q 118,122 110,124 Q 102,126 100,118" fill="none" stroke="rgba(13,148,136,.75)" stroke-width="2" stroke-linecap="round"/>
+              <circle cx="100" cy="118" r="5" fill="none" stroke="rgba(13,148,136,.75)" stroke-width="1.5"/>
+              <rect x="66" y="100" width="22" height="14" rx="2" fill="rgba(255,255,255,.05)" stroke="rgba(255,255,255,.18)" stroke-width=".8"/>
+              <line x1="72" y1="100" x2="72" y2="112" stroke="rgba(13,148,136,.5)" stroke-width="1.5" stroke-linecap="round"/>
+            </svg>
+          </div>
+        </div>
+        <div class="doc-body">
+          <p class="doc-cred">Board Certified · Orthopedic Surgery &amp; Hand Surgery</p>
+          <h3 class="doc-name">Dr. Messer, MD</h3>
+          <p class="doc-fellow"><span class="fellow-lbl">Fellowship:</span>&nbsp;Hand &amp; Upper Extremity</p>
+        </div>
+      </article>
+      <article class="doc-card anim anim-d2">
+        <div class="img-box r4-3">
+          <div class="img-inner g-doc3">
+            <svg viewBox="0 0 200 150" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid meet">
+              <defs><radialGradient id="dg3" cx="50%" cy="40%" r="55%"><stop offset="0%" stop-color="#0a7060" stop-opacity=".4"/><stop offset="100%" stop-color="transparent"/></radialGradient></defs>
+              <rect width="200" height="150" fill="url(#dg3)"/>
+              <ellipse cx="100" cy="38" rx="20" ry="23" fill="rgba(255,255,255,.1)" stroke="rgba(255,255,255,.35)" stroke-width="1.2"/>
+              <rect x="93" y="59" width="14" height="11" fill="rgba(255,255,255,.08)" stroke="rgba(255,255,255,.25)" stroke-width="1"/>
+              <path d="M 52,148 L 52,92 Q 56,76 72,74 L 90,72 L 100,74 L 110,72 L 128,74 Q 144,76 148,92 L 148,148" fill="rgba(255,255,255,.08)" stroke="rgba(255,255,255,.3)" stroke-width="1.2" stroke-linejoin="round"/>
+              <path d="M 90,72 L 95,90 L 100,108" stroke="rgba(255,255,255,.22)" stroke-width="1" fill="none"/>
+              <path d="M 110,72 L 105,90 L 100,108" stroke="rgba(255,255,255,.22)" stroke-width="1" fill="none"/>
+              <path d="M 93,70 L 96,82 L 100,88 L 104,82 L 107,70" fill="rgba(255,255,255,.05)" stroke="rgba(255,255,255,.18)" stroke-width=".8"/>
+              <path d="M 86,88 Q 80,98 80,112 Q 80,122 88,124 Q 96,126 98,118" fill="none" stroke="rgba(13,148,136,.75)" stroke-width="2" stroke-linecap="round"/>
+              <circle cx="98" cy="118" r="5" fill="none" stroke="rgba(13,148,136,.75)" stroke-width="1.5"/>
+              <rect x="112" y="100" width="22" height="14" rx="2" fill="rgba(255,255,255,.05)" stroke="rgba(255,255,255,.18)" stroke-width=".8"/>
+              <line x1="120" y1="100" x2="120" y2="112" stroke="rgba(13,148,136,.5)" stroke-width="1.5" stroke-linecap="round"/>
+              <line x1="126" y1="100" x2="126" y2="112" stroke="rgba(255,255,255,.3)" stroke-width="1" stroke-linecap="round"/>
+            </svg>
+          </div>
+        </div>
+        <div class="doc-body">
+          <p class="doc-cred">Board Certified · Orthopedic Surgery &amp; Hand Surgery</p>
+          <h3 class="doc-name">Dr. Erickson, MD</h3>
+          <p class="doc-fellow"><span class="fellow-lbl">Fellowship:</span>&nbsp;Hand Surgery</p>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══ THERAPY ══ -->
+<section id="therapy" aria-labelledby="therapy-h">
+  <div class="therapy-wrap">
+    <div class="img-box r4-3 therapy-img-box anim">
+      <div class="img-inner g-therapy">
+        <!-- Therapist's hands supporting patient's hand — rehabilitation scene -->
+        <svg viewBox="0 0 300 225" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid meet">
+          <defs>
+            <radialGradient id="tglow" cx="50%" cy="55%" r="50%">
+              <stop offset="0%" stop-color="#0d9488" stop-opacity=".3"/>
+              <stop offset="100%" stop-color="transparent"/>
+            </radialGradient>
+          </defs>
+          <rect width="300" height="225" fill="url(#tglow)"/>
+          <!-- Therapist hands (from sides, supporting) -->
+          <!-- Left supporting hand — palm up -->
+          <path d="M 30,145 Q 24,135 28,120 L 34,90 Q 36,82 43,82 Q 50,82 51,90 L 52,80 Q 54,72 61,72 Q 68,72 69,80 L 70,76 Q 72,68 79,68 Q 86,68 87,76 L 88,80 Q 90,72 97,72 Q 104,72 104,80 L 104,110 Q 120,118 124,130 L 122,148 Q 100,158 70,158 Z" fill="rgba(255,255,255,.08)" stroke="rgba(255,255,255,.28)" stroke-width="1.1" stroke-linejoin="round"/>
+          <!-- Left hand knuckle lines -->
+          <line x1="34" y1="102" x2="51" y2="102" stroke="rgba(255,255,255,.16)" stroke-width=".8"/>
+          <line x1="52" y1="94" x2="69" y2="94" stroke="rgba(255,255,255,.16)" stroke-width=".8"/>
+          <line x1="70" y1="90" x2="87" y2="90" stroke="rgba(255,255,255,.16)" stroke-width=".8"/>
+          <line x1="88" y1="93" x2="104" y2="93" stroke="rgba(255,255,255,.16)" stroke-width=".8"/>
+          <!-- Patient's hand — center, being held/supported -->
+          <path d="M 110,165 Q 100,152 104,138 L 108,108 Q 110,100 117,100 Q 124,100 125,108 L 126,98 Q 128,90 135,90 Q 142,90 143,98 L 144,94 Q 146,86 153,86 Q 160,86 161,94 L 162,98 Q 164,90 171,90 Q 178,90 178,98 L 178,128 Q 192,136 192,150 L 188,165 Q 168,178 145,178 Z" fill="rgba(255,255,255,.1)" stroke="rgba(255,255,255,.38)" stroke-width="1.2" stroke-linejoin="round"/>
+          <!-- Patient knuckle lines -->
+          <line x1="108" y1="120" x2="125" y2="120" stroke="rgba(255,255,255,.2)" stroke-width=".9"/>
+          <line x1="126" y1="112" x2="143" y2="112" stroke="rgba(255,255,255,.22)" stroke-width=".9"/>
+          <line x1="144" y1="108" x2="161" y2="108" stroke="rgba(255,255,255,.2)" stroke-width=".9"/>
+          <line x1="162" y1="112" x2="178" y2="112" stroke="rgba(255,255,255,.18)" stroke-width=".9"/>
+          <!-- Therapist right hand guiding from right -->
+          <path d="M 272,138 Q 278,126 274,112 L 266,84 Q 264,76 257,76 Q 250,76 249,84 L 248,74 Q 246,66 239,66 Q 232,66 231,74 L 230,70 Q 228,62 221,62 Q 214,62 213,70 L 212,74 Q 210,66 203,66 Q 196,66 196,74 L 196,106 Q 180,114 178,128 L 180,145 Q 202,155 230,155 Z" fill="rgba(255,255,255,.08)" stroke="rgba(255,255,255,.28)" stroke-width="1.1" stroke-linejoin="round"/>
+          <!-- Right hand knuckles -->
+          <line x1="250" y1="96" x2="266" y2="96" stroke="rgba(255,255,255,.16)" stroke-width=".8"/>
+          <line x1="231" y1="88" x2="248" y2="88" stroke="rgba(255,255,255,.16)" stroke-width=".8"/>
+          <line x1="213" y1="88" x2="230" y2="88" stroke="rgba(255,255,255,.16)" stroke-width=".8"/>
+          <line x1="196" y1="88" x2="212" y2="88" stroke="rgba(255,255,255,.14)" stroke-width=".8"/>
+          <!-- ROM arc indicator on patient's wrist -->
+          <path d="M 134,178 Q 154,190 174,178" fill="none" stroke="rgba(13,148,136,.6)" stroke-width="1.2" stroke-dasharray="4 2"/>
+          <!-- Label -->
+          <text x="150" y="215" text-anchor="middle" font-family="ui-sans-serif,system-ui,sans-serif" font-size="9" fill="rgba(255,255,255,.4)" font-weight="700" letter-spacing=".16em">HAND THERAPY · REHABILITATION</text>
+        </svg>
+      </div>
+    </div>
+    <div class="anim anim-d1">
+      <span class="eyebrow">Integrated Therapy</span>
+      <h2 class="h2" id="therapy-h">Integrated Hand-to-Shoulder Therapy</h2>
+      <p class="therapy-p">Our therapy department works directly alongside our surgeons — sharing the same space, the same records, and the same commitment to your recovery. From post-operative rehab to non-surgical treatment, our therapists are hand and upper extremity specialists.</p>
+      <ul class="therapy-list">
+        <li>Certified hand therapists on staff</li>
+        <li>Seamless communication between surgery and therapy teams</li>
+        <li>Custom splinting and orthotic fabrication</li>
+        <li>Post-operative and non-surgical rehabilitation programs</li>
+        <li>Conveniently co-located with our surgical team</li>
+      </ul>
+      <a href="#contact" class="btn btn-bl-out">Meet Our Therapists <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══ TESTIMONIALS ══ -->
+<section id="testimonials">
+  <div class="container">
+    <div class="section-head anim">
+      <span class="eyebrow">Patient Reviews</span>
+      <h2 class="h2">What Our Patients Are Saying</h2>
+      <p class="lead">Hundreds of five-star reviews from patients across Raleigh, Durham, and the Triangle.</p>
+    </div>
+    <div class="testi-grid">
+      <div class="testi-card anim">
+        <div class="stars" aria-label="5 out of 5 stars">★★★★★</div>
+        <p class="testi-q">If ever you need surgery or advice, this is one of the best medical offices in Raleigh. The doctors, nurses, and desk staff are exceptional.</p>
+        <div class="testi-src">
+          <svg class="g-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
+          <span class="testi-by">Google Review</span>
+        </div>
+      </div>
+      <div class="testi-card anim anim-d1">
+        <div class="stars" aria-label="5 out of 5 stars">★★★★★</div>
+        <p class="testi-q">The therapy team is incredible. I am so thankful for the care and treatment I received. They genuinely care about your outcome.</p>
+        <div class="testi-src">
+          <svg class="g-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
+          <span class="testi-by">Google Review</span>
+        </div>
+      </div>
+      <div class="testi-card anim anim-d2">
+        <div class="stars" aria-label="5 out of 5 stars">★★★★★</div>
+        <p class="testi-q">Same-week appointment, friendly staff, and my doctor explained everything clearly before we made any decisions. Outstanding practice.</p>
+        <div class="testi-src">
+          <svg class="g-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
+          <span class="testi-by">Google Review</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══ CONTACT ══ -->
+<section id="contact" aria-labelledby="contact-h">
+  <div class="contact-wrap">
+    <div class="contact-top anim">
+      <span class="eyebrow">Get Started Today</span>
+      <h2 class="h2" id="contact-h">Ready to Feel Better?</h2>
+      <p class="lead">Book an appointment online or call us directly. Same-week appointments often available.</p>
+      <div class="contact-btns">
+        <a href="#contact" class="btn btn-solid-wh" style="font-size:1rem;padding:15px 32px">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          Book Online
+        </a>
+        <a href="tel:9190000000" class="btn btn-wh-out" style="font-size:1rem;padding:15px 32px">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1.27h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.92a16 16 0 0 0 6 6l.92-.92a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21.73 16.92z"/></svg>
+          Call (919) 000-0000
+        </a>
+      </div>
+    </div>
+    <div class="contact-grid anim">
+      <div class="c-item">
+        <div class="c-icon" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
+        <div><div class="c-lbl">Location</div><div class="c-val">3701 Wake Forest Rd, Suite 100<br>Raleigh, NC 27609</div></div>
+      </div>
+      <div class="c-item">
+        <div class="c-icon" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+        <div><div class="c-lbl">Office Hours</div><div class="c-val">Mon–Fri: 8:00am – 4:30pm<br>On-Call 24/7 for Urgent Needs</div></div>
+      </div>
+      <div class="c-item">
+        <div class="c-icon" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1.27h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.92a16 16 0 0 0 6 6l.92-.92a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21.73 16.92z"/></svg></div>
+        <div><div class="c-lbl">Phone</div><div class="c-val"><a href="tel:9190000000" style="color:#fff">(919) 000-0000</a><br>Fax: (919) 000-0001</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══ FOOTER ══ -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <a href="#" class="nav-logo" aria-label="Home">
+          <span class="logo-name">Triangle Hand &amp; Shoulder Center</span>
+          <span class="logo-sub">Orthopedic Specialists · Est. 1991</span>
+        </a>
+        <p>Fellowship-trained surgeons specializing in hand, wrist, elbow, and shoulder care. Serving Raleigh and the Triangle since 1991.</p>
+      </div>
+      <div class="footer-cols">
+        <div class="f-col">
+          <h4>Practice</h4>
+          <ul>
+            <li><a href="#team">Our Doctors</a></li>
+            <li><a href="#specialties">Specialties</a></li>
+            <li><a href="#therapy">Therapy</a></li>
+            <li><a href="#why-us">About Us</a></li>
+          </ul>
+        </div>
+        <div class="f-col">
+          <h4>Patients</h4>
+          <ul>
+            <li><a href="#contact">Book Appointment</a></li>
+            <li><a href="#contact">Patient Resources</a></li>
+            <li><a href="#contact">Insurance</a></li>
+            <li><a href="#contact">Privacy Policy</a></li>
+          </ul>
+        </div>
+        <div class="f-col">
+          <h4>Contact</h4>
+          <ul>
+            <li><a href="tel:9190000000">(919) 000-0000</a></li>
+            <li><a href="#contact">3701 Wake Forest Rd</a></li>
+            <li><a href="#contact">Suite 100, Raleigh, NC</a></li>
+            <li><a href="#contact">Get Directions</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bot">
+      <p class="f-copy">© 2025 Triangle Hand &amp; Shoulder Center &nbsp;·&nbsp; 3701 Wake Forest Rd, Raleigh, NC &nbsp;·&nbsp; (919) 000-0000</p>
+      <p class="f-demo">Demo site — built by <a href="https://caryparksolutions.com" target="_blank" rel="noopener">Cary Park Solutions</a></p>
+    </div>
+  </div>
+</footer>
+
+
+<script>
+(function(){
+  'use strict';
+
+  // Nav shadow
+  var nav = document.getElementById('nav');
+  window.addEventListener('scroll', function(){
+    nav.classList.toggle('shad', window.pageYOffset > 8);
+  }, {passive:true});
+
+  // Hamburger
+  var ham = document.getElementById('ham');
+  var mob = document.getElementById('mob');
+  ham.addEventListener('click', function(){
+    var open = mob.classList.toggle('open');
+    ham.setAttribute('aria-expanded', String(open));
+  });
+  mob.querySelectorAll('a').forEach(function(a){
+    a.addEventListener('click', function(){
+      mob.classList.remove('open');
+      ham.setAttribute('aria-expanded','false');
+    });
+  });
+  document.addEventListener('click', function(e){
+    if(mob.classList.contains('open') && !nav.contains(e.target)){
+      mob.classList.remove('open');
+      ham.setAttribute('aria-expanded','false');
+    }
+  }, {passive:true});
+
+  // Smooth anchor scroll
+  document.querySelectorAll('a[href^="#"]').forEach(function(a){
+    a.addEventListener('click', function(e){
+      var href = this.getAttribute('href');
+      var target = href === '#' ? document.body : document.querySelector(href);
+      if(!target) return;
+      e.preventDefault();
+      var top = href === '#' ? 0 : target.getBoundingClientRect().top + window.pageYOffset - nav.offsetHeight - 10;
+      try { window.scrollTo({top: Math.max(0,top), behavior:'smooth'}); }
+      catch(_){ window.scrollTo(0, Math.max(0,top)); }
+    });
+  });
+
+}());
+</script>
+</body>
+</html>
