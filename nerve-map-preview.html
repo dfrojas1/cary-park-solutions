@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Nerve Distribution — Triangle Hand & Shoulder Center</title>
+<style>
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:#02080f;display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:100vh;font-family:ui-sans-serif,system-ui,sans-serif;padding:20px}
+  .wrap{width:100%;max-width:720px}
+  h1{text-align:center;font-size:.72rem;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:rgba(0,212,255,.38);margin-bottom:14px}
+
+  /* ── Base nerve styles ── */
+  .nerve{fill:none;stroke-linecap:round;stroke-linejoin:round}
+
+  /* Draw-on animation */
+  @keyframes drawNerve{
+    from{stroke-dashoffset:1000;opacity:0}
+    to{stroke-dashoffset:0;opacity:1}
+  }
+  @keyframes fadeIn{from{opacity:0}to{opacity:1}}
+  @keyframes fadeUp{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:translateY(0)}}
+  @keyframes glowPulse{0%,100%{opacity:.55}50%{opacity:.95}}
+
+  /* Skeleton */
+  .skel{animation:fadeIn .9s ease .2s both}
+
+  /* Nerve trunks */
+  .med-trunk {stroke-dasharray:1000;stroke-dashoffset:1000;animation:drawNerve 1.5s ease 2s both}
+  .uln-trunk {stroke-dasharray:1000;stroke-dashoffset:1000;animation:drawNerve 1.4s ease 2.5s both}
+  .rad-sens  {stroke-dasharray:1000;stroke-dashoffset:1000;animation:drawNerve 1.5s ease 3s both}
+
+  /* Common digital nerves */
+  .cdn-thm{stroke-dasharray:1000;stroke-dashoffset:1000;animation:drawNerve 1.3s ease 3.6s both}
+  .cdn-1  {stroke-dasharray:1000;stroke-dashoffset:1000;animation:drawNerve 1.3s ease 3.7s both}
+  .cdn-2  {stroke-dasharray:1000;stroke-dashoffset:1000;animation:drawNerve 1.2s ease 3.9s both}
+  .cdn-3  {stroke-dasharray:1000;stroke-dashoffset:1000;animation:drawNerve 1.2s ease 4s both}
+
+  /* Thumb PDNs */
+  .pdn-thm-r{stroke-dasharray:1000;stroke-dashoffset:1000;animation:drawNerve 1.8s ease 4.9s both}
+  .pdn-thm-u{stroke-dasharray:1000;stroke-dashoffset:1000;animation:drawNerve 1.8s ease 5.1s both}
+
+  /* Index PDNs */
+  .pdn-idx-r{stroke-dasharray:1000;stroke-dashoffset:1000;animation:drawNerve 1.9s ease 5.1s both}
+  .pdn-idx-u{stroke-dasharray:1000;stroke-dashoffset:1000;animation:drawNerve 1.9s ease 5.2s both}
+
+  /* Middle PDNs */
+  .pdn-mid-r{stroke-dasharray:1000;stroke-dashoffset:1000;animation:drawNerve 1.9s ease 5.3s both}
+  .pdn-mid-u{stroke-dasharray:1000;stroke-dashoffset:1000;animation:drawNerve 1.9s ease 5.5s both}
+
+  /* Ring PDNs */
+  .pdn-rng-r{stroke-dasharray:1000;stroke-dashoffset:1000;animation:drawNerve 1.9s ease 5.6s both}
+  .pdn-rng-u{stroke-dasharray:1000;stroke-dashoffset:1000;animation:drawNerve 1.9s ease 5.7s both}
+
+  /* Pinky PDNs */
+  .pdn-pky-r{stroke-dasharray:1000;stroke-dashoffset:1000;animation:drawNerve 1.8s ease 5.9s both}
+  .pdn-pky-u{stroke-dasharray:1000;stroke-dashoffset:1000;animation:drawNerve 1.8s ease 6s both}
+
+  /* Radial dorsal branches */
+  .rad-idx  {stroke-dasharray:1000;stroke-dashoffset:1000;animation:drawNerve 1.5s ease 4.3s both}
+  .rad-mid  {stroke-dasharray:1000;stroke-dashoffset:1000;animation:drawNerve 1.4s ease 4.5s both}
+
+  /* Tip arcs */
+  .tip-arc{animation:fadeIn .8s ease 7.4s both;opacity:0}
+
+  /* Territories */
+  .terr-med{animation:fadeIn 1.3s ease 7.6s both}
+  .terr-uln{animation:fadeIn 1.3s ease 7.9s both}
+  .terr-rad{animation:fadeIn 1.3s ease 8.3s both}
+
+  /* Nodes */
+  .node{animation:fadeIn .6s ease 5.2s both}
+
+  /* Labels + inset */
+  .labels{animation:fadeIn 1s ease 9.1s both}
+  .inset {animation:fadeIn 1.2s ease 8.5s both}
+
+  /* Pulses appear late */
+  .pulse{animation:fadeIn .5s ease 10.2s both}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>Triangle Hand &amp; Shoulder Center — Nerve Distribution</h1>
+  <svg viewBox="0 0 960 1080" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;display:block;border-radius:12px;box-shadow:0 0 80px rgba(0,200,240,.1),0 0 160px rgba(0,0,0,.6)">
+    <defs>
+      <!-- Glow filters -->
+      <filter id="gL" x="-60%" y="-60%" width="220%" height="220%">
+        <feGaussianBlur in="SourceGraphic" stdDeviation="9" result="b"/>
+        <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+      </filter>
+      <filter id="gM" x="-35%" y="-35%" width="170%" height="170%">
+        <feGaussianBlur in="SourceGraphic" stdDeviation="5" result="b"/>
+        <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+      </filter>
+      <filter id="gS" x="-25%" y="-25%" width="150%" height="150%">
+        <feGaussianBlur in="SourceGraphic" stdDeviation="3" result="b"/>
+        <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+      </filter>
+      <radialGradient id="bgH" cx="50%" cy="44%" r="52%">
+        <stop offset="0%" stop-color="rgba(0,100,200,.09)"/>
+        <stop offset="100%" stop-color="transparent"/>
+      </radialGradient>
+
+      <!-- Signal pulse paths -->
+      <path id="pp1" d="M 464,924 L 464,750 L 437,726 L 437,170"/>
+      <path id="pp2" d="M 464,924 Q 450,742 399,730 L 358,726 L 340,222"/>
+      <path id="pp3" d="M 464,924 L 464,750 L 453,726 L 454,170"/>
+      <path id="pp4" d="M 464,924 Q 420,744 370,737 Q 330,732 296,726 Q 280,680 240,536"/>
+      <path id="pp5" d="M 524,924 L 524,750 L 566,726 L 607,374"/>
+      <path id="pp6" d="M 524,924 L 524,750 L 537,726 L 538,214"/>
+      <path id="pp7" d="M 524,924 L 524,750 L 592,726 L 592,374"/>
+      <path id="pp8" d="M 358,880 Q 320,852 288,812 Q 258,766 244,722 Q 232,682 230,642"/>
+      <path id="pp9" d="M 308,778 L 308,726 L 340,222"/>
+    </defs>
+
+    <!-- Background -->
+    <rect width="960" height="1080" fill="#02080f"/>
+    <ellipse cx="480" cy="520" rx="400" ry="490" fill="url(#bgH)"/>
+
+    <!-- Grid -->
+    <g opacity="0.025" stroke="rgba(0,180,255,1)" stroke-width="0.5">
+      <line x1="0" y1="135" x2="960" y2="135"/><line x1="0" y1="270" x2="960" y2="270"/>
+      <line x1="0" y1="405" x2="960" y2="405"/><line x1="0" y1="540" x2="960" y2="540"/>
+      <line x1="0" y1="675" x2="960" y2="675"/><line x1="0" y1="810" x2="960" y2="810"/>
+      <line x1="0" y1="945" x2="960" y2="945"/>
+      <line x1="160" y1="0" x2="160" y2="1080"/><line x1="320" y1="0" x2="320" y2="1080"/>
+      <line x1="480" y1="0" x2="480" y2="1080"/><line x1="640" y1="0" x2="640" y2="1080"/>
+      <line x1="800" y1="0" x2="800" y2="1080"/>
+    </g>
+
+    <!-- Title -->
+    <text x="480" y="50" text-anchor="middle" fill="rgba(0,212,255,.30)"
+          font-family="ui-sans-serif,system-ui,sans-serif" font-size="12" font-weight="700" letter-spacing="0.26em">
+      NERVE DISTRIBUTION · DORSAL HAND · TRIANGLE HAND &amp; SHOULDER
+    </text>
+
+    <!-- ══ HAND SKELETON ══ -->
+    <g class="skel">
+      <!-- Wrist block -->
+      <path d="M 295,975 Q 278,952 280,926 L 284,902 L 680,902 L 684,926 Q 686,952 669,975 Z"
+            fill="rgba(0,70,180,.05)" stroke="rgba(0,140,255,.26)" stroke-width="1.4"/>
+      <!-- Carpal tunnel oval -->
+      <ellipse cx="464" cy="902" rx="90" ry="20" fill="none"
+               stroke="rgba(0,212,255,.50)" stroke-width="1" stroke-dasharray="5 3"/>
+      <!-- Guyon's canal -->
+      <ellipse cx="528" cy="902" rx="32" ry="12" fill="none"
+               stroke="rgba(0,255,200,.40)" stroke-width="0.8" stroke-dasharray="3 3"/>
+      <!-- Palm -->
+      <path d="M 295,902 L 295,738 Q 295,726 308,726 L 660,726 Q 672,726 672,738 L 672,902 Z"
+            fill="rgba(0,70,180,.04)" stroke="rgba(0,140,255,.20)" stroke-width="1.2"/>
+      <!-- MCP line -->
+      <line x1="295" y1="726" x2="672" y2="726" stroke="rgba(0,140,255,.10)" stroke-width="0.8" stroke-dasharray="5 4"/>
+
+      <!-- THUMB -->
+      <path d="M 302,862 Q 276,840 246,800 Q 216,754 214,718 Q 212,684 232,670 Q 254,656 272,676 Q 288,698 290,730 L 298,822"
+            fill="rgba(0,70,180,.04)" stroke="rgba(0,140,255,.24)" stroke-width="1.2" stroke-linejoin="round"/>
+      <line x1="232" y1="692" x2="280" y2="696" stroke="rgba(0,140,255,.17)" stroke-width="0.9"/>
+      <path d="M 236,670 Q 225,642 222,614 Q 220,594 226,578 Q 232,562 242,558 Q 253,554 260,566 Q 266,582 262,604 L 258,628"
+            fill="rgba(0,70,180,.05)" stroke="rgba(0,140,255,.22)" stroke-width="1.1"/>
+
+      <!-- INDEX -->
+      <path d="M 340,726 L 337,222 Q 337,210 358,210 Q 377,210 377,222 L 374,726 Z"
+            fill="rgba(0,70,180,.04)" stroke="rgba(0,140,255,.22)" stroke-width="1.1"/>
+      <line x1="337" y1="418" x2="377" y2="418" stroke="rgba(0,140,255,.16)" stroke-width="0.9"/>
+      <line x1="337" y1="308" x2="377" y2="308" stroke="rgba(0,140,255,.13)" stroke-width="0.8"/>
+
+      <!-- MIDDLE -->
+      <path d="M 418,726 L 416,170 Q 416,158 438,158 Q 460,158 460,170 L 458,726 Z"
+            fill="rgba(0,70,180,.04)" stroke="rgba(0,140,255,.24)" stroke-width="1.2"/>
+      <line x1="416" y1="390" x2="460" y2="390" stroke="rgba(0,140,255,.18)" stroke-width="0.9"/>
+      <line x1="416" y1="275" x2="460" y2="275" stroke="rgba(0,140,255,.14)" stroke-width="0.8"/>
+
+      <!-- RING -->
+      <path d="M 506,726 L 504,214 Q 504,202 524,202 Q 544,202 544,214 L 542,726 Z"
+            fill="rgba(0,70,180,.04)" stroke="rgba(0,140,255,.22)" stroke-width="1.1"/>
+      <line x1="504" y1="404" x2="544" y2="404" stroke="rgba(0,140,255,.16)" stroke-width="0.9"/>
+      <line x1="504" y1="298" x2="544" y2="298" stroke="rgba(0,140,255,.13)" stroke-width="0.8"/>
+
+      <!-- PINKY -->
+      <path d="M 593,726 L 591,374 Q 591,362 608,362 Q 626,362 626,374 L 624,726 Z"
+            fill="rgba(0,70,180,.03)" stroke="rgba(0,140,255,.18)" stroke-width="1"/>
+      <line x1="591" y1="508" x2="625" y2="508" stroke="rgba(0,140,255,.14)" stroke-width="0.8"/>
+      <line x1="591" y1="428" x2="625" y2="428" stroke="rgba(0,140,255,.11)" stroke-width="0.7"/>
+
+      <!-- Web space curves -->
+      <path d="M 376,726 Q 388,712 400,726" fill="none" stroke="rgba(0,140,255,.12)" stroke-width="0.8"/>
+      <path d="M 458,726 Q 470,712 482,726" fill="none" stroke="rgba(0,140,255,.12)" stroke-width="0.8"/>
+      <path d="M 542,726 Q 554,712 566,726" fill="none" stroke="rgba(0,140,255,.12)" stroke-width="0.8"/>
+
+      <!-- Extensor tendon guides -->
+      <line x1="358" y1="726" x2="358" y2="222" stroke="rgba(0,180,255,.04)" stroke-width="0.5" stroke-dasharray="6 5"/>
+      <line x1="438" y1="726" x2="438" y2="170" stroke="rgba(0,180,255,.04)" stroke-width="0.5" stroke-dasharray="6 5"/>
+      <line x1="524" y1="726" x2="524" y2="214" stroke="rgba(0,180,255,.04)" stroke-width="0.5" stroke-dasharray="6 5"/>
+      <line x1="608" y1="726" x2="608" y2="374" stroke="rgba(0,180,255,.03)" stroke-width="0.5" stroke-dasharray="6 5"/>
+    </g>
+
+    <!-- ══ TERRITORIES ══ -->
+    <g class="terr-med">
+      <path d="M 232,670 Q 254,656 298,726 L 302,860 Q 276,840 246,800 Q 212,754 212,718 Q 210,684 230,670 Z" fill="rgba(0,212,255,.065)"/>
+      <path d="M 335,210 L 379,210 L 377,726 L 337,726 Z" fill="rgba(0,212,255,.065)"/>
+      <path d="M 414,158 L 462,158 L 460,726 L 416,726 Z" fill="rgba(0,212,255,.07)"/>
+      <path d="M 502,202 L 524,202 L 524,726 L 504,726 Z" fill="rgba(0,212,255,.045)"/>
+    </g>
+    <g class="terr-uln">
+      <path d="M 524,202 L 546,202 L 544,726 L 524,726 Z" fill="rgba(0,255,200,.055)"/>
+      <path d="M 589,362 L 627,362 L 625,726 L 591,726 Z" fill="rgba(0,255,200,.07)"/>
+    </g>
+    <g class="terr-rad">
+      <path d="M 337,308 L 379,308 L 378,726 L 338,726 Z" fill="rgba(255,220,0,.04)"/>
+      <path d="M 416,390 L 460,390 L 459,726 L 417,726 Z" fill="rgba(255,220,0,.035)"/>
+    </g>
+
+    <!-- ══ NERVE TRUNKS ══ -->
+    <!-- MEDIAN trunk — glow + core -->
+    <path class="nerve med-trunk" d="M 464,924 L 464,750" pathLength="1000"
+          stroke="#00d4ff" stroke-width="20" opacity="0.14" filter="url(#gL)"/>
+    <path class="nerve med-trunk" d="M 464,924 L 464,750" pathLength="1000"
+          stroke="#00d4ff" stroke-width="3.5"/>
+
+    <!-- ULNAR trunk -->
+    <path class="nerve uln-trunk" d="M 524,924 L 524,750" pathLength="1000"
+          stroke="#00ffcc" stroke-width="20" opacity="0.13" filter="url(#gL)"/>
+    <path class="nerve uln-trunk" d="M 524,924 L 524,750" pathLength="1000"
+          stroke="#00ffcc" stroke-width="3.5"/>
+
+    <!-- RADIAL SENSORY trunk -->
+    <path class="nerve rad-sens" d="M 358,880 Q 320,852 288,812 Q 258,766 244,722 Q 232,682 230,642" pathLength="1000"
+          stroke="#ffdd00" stroke-width="18" opacity="0.12" filter="url(#gL)"/>
+    <path class="nerve rad-sens" d="M 358,880 Q 320,852 288,812 Q 258,766 244,722 Q 232,682 230,642" pathLength="1000"
+          stroke="#ffdd00" stroke-width="3"/>
+
+    <!-- Junction nodes -->
+    <g class="node">
+      <circle cx="464" cy="748" r="8" fill="#00d4ff" opacity="0.25" filter="url(#gS)"/>
+      <circle cx="464" cy="748" r="3.5" fill="#00d4ff"/>
+      <circle cx="524" cy="748" r="7" fill="#00ffcc" opacity="0.22" filter="url(#gS)"/>
+      <circle cx="524" cy="748" r="3.2" fill="#00ffcc"/>
+    </g>
+
+    <!-- ══ COMMON DIGITAL NERVES ══ -->
+    <!-- Median → thumb -->
+    <path class="nerve cdn-thm" d="M 464,750 Q 420,744 370,737 Q 330,732 300,726" pathLength="1000"
+          stroke="#00d4ff" stroke-width="11" opacity="0.10" filter="url(#gM)"/>
+    <path class="nerve cdn-thm" d="M 464,750 Q 420,744 370,737 Q 330,732 300,726" pathLength="1000"
+          stroke="#00d4ff" stroke-width="2.2"/>
+
+    <!-- Median → 1st common (idx-mid) -->
+    <path class="nerve cdn-1" d="M 464,750 Q 450,742 399,730 L 358,726" pathLength="1000"
+          stroke="#00d4ff" stroke-width="11" opacity="0.10" filter="url(#gM)"/>
+    <path class="nerve cdn-1" d="M 464,750 Q 450,742 399,730 L 358,726" pathLength="1000"
+          stroke="#00d4ff" stroke-width="2.2"/>
+
+    <!-- Median → 2nd common (mid-rng) -->
+    <path class="nerve cdn-2" d="M 464,750 L 482,726" pathLength="1000"
+          stroke="#00d4ff" stroke-width="11" opacity="0.10" filter="url(#gM)"/>
+    <path class="nerve cdn-2" d="M 464,750 L 482,726" pathLength="1000"
+          stroke="#00d4ff" stroke-width="2.2"/>
+
+    <!-- Ulnar → 3rd common (rng-pky) -->
+    <path class="nerve cdn-3" d="M 524,750 L 566,726" pathLength="1000"
+          stroke="#00ffcc" stroke-width="11" opacity="0.10" filter="url(#gM)"/>
+    <path class="nerve cdn-3" d="M 524,750 L 566,726" pathLength="1000"
+          stroke="#00ffcc" stroke-width="2.2"/>
+
+    <!-- Web-space nodes -->
+    <g class="node" style="animation-delay:5.3s">
+      <circle cx="300" cy="724" r="5" fill="#00d4ff" opacity="0.28" filter="url(#gS)"/>
+      <circle cx="300" cy="724" r="2.5" fill="#00d4ff"/>
+      <circle cx="358" cy="724" r="5" fill="#00d4ff" opacity="0.28" filter="url(#gS)"/>
+      <circle cx="358" cy="724" r="2.5" fill="#00d4ff"/>
+      <circle cx="482" cy="724" r="5" fill="#00d4ff" opacity="0.28" filter="url(#gS)"/>
+      <circle cx="482" cy="724" r="2.5" fill="#00d4ff"/>
+      <circle cx="566" cy="724" r="5" fill="#00ffcc" opacity="0.28" filter="url(#gS)"/>
+      <circle cx="566" cy="724" r="2.5" fill="#00ffcc"/>
+    </g>
+
+    <!-- ══ PROPER DIGITAL NERVES ══ -->
+    <!-- THUMB radial (gold — radial sensory) -->
+    <path class="nerve pdn-thm-r" d="M 230,644 Q 222,618 219,590 Q 217,570 223,554 Q 229,540 240,536" pathLength="1000"
+          stroke="#ffdd00" stroke-width="9" opacity="0.12" filter="url(#gM)"/>
+    <path class="nerve pdn-thm-r" d="M 230,644 Q 222,618 219,590 Q 217,570 223,554 Q 229,540 240,536" pathLength="1000"
+          stroke="#ffdd00" stroke-width="1.8"/>
+
+    <!-- THUMB ulnar (blue — median) -->
+    <path class="nerve pdn-thm-u" d="M 272,678 Q 263,655 260,628 Q 257,606 263,588 Q 269,572 280,562 Q 287,554 296,552" pathLength="1000"
+          stroke="#00d4ff" stroke-width="9" opacity="0.10" filter="url(#gM)"/>
+    <path class="nerve pdn-thm-u" d="M 272,678 Q 263,655 260,628 Q 257,606 263,588 Q 269,572 280,562 Q 287,554 296,552" pathLength="1000"
+          stroke="#00d4ff" stroke-width="1.8"/>
+
+    <!-- INDEX radial -->
+    <path class="nerve pdn-idx-r" d="M 340,726 L 338,222" pathLength="1000"
+          stroke="#00d4ff" stroke-width="9" opacity="0.12" filter="url(#gM)"/>
+    <path class="nerve pdn-idx-r" d="M 340,726 L 338,222" pathLength="1000"
+          stroke="#00d4ff" stroke-width="1.8"/>
+    <!-- INDEX ulnar -->
+    <path class="nerve pdn-idx-u" d="M 376,726 L 374,222" pathLength="1000"
+          stroke="#00d4ff" stroke-width="9" opacity="0.12" filter="url(#gM)"/>
+    <path class="nerve pdn-idx-u" d="M 376,726 L 374,222" pathLength="1000"
+          stroke="#00d4ff" stroke-width="1.8"/>
+
+    <!-- MIDDLE radial -->
+    <path class="nerve pdn-mid-r" d="M 420,726 L 418,170" pathLength="1000"
+          stroke="#00d4ff" stroke-width="9" opacity="0.12" filter="url(#gM)"/>
+    <path class="nerve pdn-mid-r" d="M 420,726 L 418,170" pathLength="1000"
+          stroke="#00d4ff" stroke-width="1.8"/>
+    <!-- MIDDLE ulnar -->
+    <path class="nerve pdn-mid-u" d="M 456,726 L 454,170" pathLength="1000"
+          stroke="#00d4ff" stroke-width="9" opacity="0.12" filter="url(#gM)"/>
+    <path class="nerve pdn-mid-u" d="M 456,726 L 454,170" pathLength="1000"
+          stroke="#00d4ff" stroke-width="1.8"/>
+
+    <!-- RING radial (median blue) -->
+    <path class="nerve pdn-rng-r" d="M 508,726 L 506,214" pathLength="1000"
+          stroke="#00d4ff" stroke-width="9" opacity="0.10" filter="url(#gM)"/>
+    <path class="nerve pdn-rng-r" d="M 508,726 L 506,214" pathLength="1000"
+          stroke="#00d4ff" stroke-width="1.8"/>
+    <!-- RING ulnar (ulnar teal) — color split -->
+    <path class="nerve pdn-rng-u" d="M 540,726 L 538,214" pathLength="1000"
+          stroke="#00ffcc" stroke-width="9" opacity="0.10" filter="url(#gM)"/>
+    <path class="nerve pdn-rng-u" d="M 540,726 L 538,214" pathLength="1000"
+          stroke="#00ffcc" stroke-width="1.8"/>
+
+    <!-- PINKY radial -->
+    <path class="nerve pdn-pky-r" d="M 593,726 L 591,374" pathLength="1000"
+          stroke="#00ffcc" stroke-width="8" opacity="0.10" filter="url(#gM)"/>
+    <path class="nerve pdn-pky-r" d="M 593,726 L 591,374" pathLength="1000"
+          stroke="#00ffcc" stroke-width="1.8"/>
+    <!-- PINKY ulnar -->
+    <path class="nerve pdn-pky-u" d="M 623,726 L 621,374" pathLength="1000"
+          stroke="#00ffcc" stroke-width="8" opacity="0.10" filter="url(#gM)"/>
+    <path class="nerve pdn-pky-u" d="M 623,726 L 621,374" pathLength="1000"
+          stroke="#00ffcc" stroke-width="1.8"/>
+
+    <!-- RADIAL dorsal branches -->
+    <path class="nerve rad-idx" d="M 308,778 L 308,726 L 340,222" pathLength="1000"
+          stroke="#ffdd00" stroke-width="7" opacity="0.09" filter="url(#gS)"/>
+    <path class="nerve rad-idx" d="M 308,778 L 308,726 L 340,222" pathLength="1000"
+          stroke="#ffdd00" stroke-width="1.5"/>
+    <path class="nerve rad-mid" d="M 295,762 Q 340,740 418,390" pathLength="1000"
+          stroke="#ffdd00" stroke-width="6" opacity="0.08" filter="url(#gS)"/>
+    <path class="nerve rad-mid" d="M 295,762 Q 340,740 418,390" pathLength="1000"
+          stroke="#ffdd00" stroke-width="1.3"/>
+
+    <!-- Fingertip anastomotic arcs -->
+    <g class="tip-arc">
+      <path d="M 338,222 Q 356,208 374,222" fill="none" stroke="#00d4ff" stroke-width="1.2" stroke-linecap="round" filter="url(#gS)" opacity="0.6"/>
+      <path d="M 418,170 Q 436,156 454,170" fill="none" stroke="#00d4ff" stroke-width="1.2" stroke-linecap="round" filter="url(#gS)" opacity="0.6"/>
+      <path d="M 506,214 Q 524,200 538,214" fill="none" stroke="#ffdd00" stroke-width="1.2" stroke-linecap="round" filter="url(#gS)" opacity="0.6"/>
+      <path d="M 591,374 Q 608,360 621,374" fill="none" stroke="#00ffcc" stroke-width="1.2" stroke-linecap="round" filter="url(#gS)" opacity="0.6"/>
+    </g>
+
+    <!-- Ring finger median/ulnar boundary line -->
+    <line x1="524" y1="460" x2="524" y2="726" stroke="rgba(180,210,255,.14)" stroke-width="0.6"
+          stroke-dasharray="3 2" style="animation:fadeIn .6s ease 7.8s both;opacity:0"/>
+
+    <!-- ══ SIGNAL PULSES ══ -->
+    <g class="pulse">
+      <!-- Median → middle (two pulses) -->
+      <circle r="6" fill="#00d4ff" filter="url(#gL)" opacity="0.92">
+        <animateMotion dur="2.8s" begin="10.2s" repeatCount="indefinite"><mpath href="#pp1"/></animateMotion>
+      </circle>
+      <circle r="2.8" fill="#fff" opacity="0.72">
+        <animateMotion dur="2.8s" begin="10.2s" repeatCount="indefinite"><mpath href="#pp1"/></animateMotion>
+      </circle>
+      <circle r="5" fill="#00d4ff" filter="url(#gM)" opacity="0.85">
+        <animateMotion dur="2.8s" begin="11.6s" repeatCount="indefinite"><mpath href="#pp1"/></animateMotion>
+      </circle>
+
+      <!-- Median → index -->
+      <circle r="5" fill="#00d4ff" filter="url(#gM)" opacity="0.88">
+        <animateMotion dur="3.2s" begin="10.9s" repeatCount="indefinite"><mpath href="#pp2"/></animateMotion>
+      </circle>
+      <circle r="2.2" fill="#fff" opacity="0.65">
+        <animateMotion dur="3.2s" begin="10.9s" repeatCount="indefinite"><mpath href="#pp2"/></animateMotion>
+      </circle>
+
+      <!-- Median → middle ulnar -->
+      <circle r="4.5" fill="#00d4ff" filter="url(#gM)" opacity="0.80">
+        <animateMotion dur="2.6s" begin="11.3s" repeatCount="indefinite"><mpath href="#pp3"/></animateMotion>
+      </circle>
+
+      <!-- Median → thumb -->
+      <circle r="4" fill="#00d4ff" filter="url(#gM)" opacity="0.75">
+        <animateMotion dur="3.4s" begin="10.6s" repeatCount="indefinite"><mpath href="#pp4"/></animateMotion>
+      </circle>
+
+      <!-- Ulnar → pinky (two pulses) -->
+      <circle r="6" fill="#00ffcc" filter="url(#gL)" opacity="0.92">
+        <animateMotion dur="2.5s" begin="10.4s" repeatCount="indefinite"><mpath href="#pp5"/></animateMotion>
+      </circle>
+      <circle r="2.8" fill="#fff" opacity="0.70">
+        <animateMotion dur="2.5s" begin="10.4s" repeatCount="indefinite"><mpath href="#pp5"/></animateMotion>
+      </circle>
+      <circle r="4.5" fill="#00ffcc" filter="url(#gM)" opacity="0.80">
+        <animateMotion dur="2.5s" begin="11.8s" repeatCount="indefinite"><mpath href="#pp5"/></animateMotion>
+      </circle>
+
+      <!-- Ulnar → ring -->
+      <circle r="4.5" fill="#00ffcc" filter="url(#gM)" opacity="0.82">
+        <animateMotion dur="3.0s" begin="11.0s" repeatCount="indefinite"><mpath href="#pp6"/></animateMotion>
+      </circle>
+
+      <!-- Ulnar → pinky radial side -->
+      <circle r="3.8" fill="#00ffcc" filter="url(#gM)" opacity="0.72">
+        <animateMotion dur="2.6s" begin="12.1s" repeatCount="indefinite"><mpath href="#pp7"/></animateMotion>
+      </circle>
+
+      <!-- Radial sensory main -->
+      <circle r="5.5" fill="#ffdd00" filter="url(#gL)" opacity="0.88">
+        <animateMotion dur="3.0s" begin="10.7s" repeatCount="indefinite"><mpath href="#pp8"/></animateMotion>
+      </circle>
+      <circle r="2.5" fill="#fff" opacity="0.65">
+        <animateMotion dur="3.0s" begin="10.7s" repeatCount="indefinite"><mpath href="#pp8"/></animateMotion>
+      </circle>
+
+      <!-- Radial → index dorsal -->
+      <circle r="4" fill="#ffdd00" filter="url(#gM)" opacity="0.78">
+        <animateMotion dur="2.8s" begin="11.5s" repeatCount="indefinite"><mpath href="#pp9"/></animateMotion>
+      </circle>
+    </g>
+
+    <!-- ══ LABELS ══ -->
+    <g class="labels">
+      <!-- Carpal tunnel -->
+      <line x1="464" y1="900" x2="620" y2="862" stroke="rgba(0,212,255,.44)" stroke-width="0.8"/>
+      <rect x="622" y="846" width="120" height="36" rx="5"
+            fill="rgba(0,6,18,.88)" stroke="rgba(0,212,255,.38)" stroke-width="0.8"/>
+      <text x="632" y="860" fill="#00d4ff" font-family="ui-sans-serif,system-ui,sans-serif"
+            font-size="9" font-weight="700" letter-spacing="0.08em">CARPAL TUNNEL</text>
+      <text x="632" y="874" fill="rgba(0,212,255,.78)" font-family="ui-sans-serif,system-ui,sans-serif"
+            font-size="7.5">Median N. · CTS site</text>
+
+      <!-- Guyon's canal -->
+      <line x1="528" y1="900" x2="644" y2="930" stroke="rgba(0,255,200,.44)" stroke-width="0.8"/>
+      <text x="648" y="935" fill="#00ffcc" font-family="ui-sans-serif,system-ui,sans-serif"
+            font-size="8.5" font-weight="700" letter-spacing="0.07em">GUYON'S CANAL</text>
+
+      <!-- Radial sensory -->
+      <line x1="335" y1="872" x2="240" y2="900" stroke="rgba(255,221,0,.44)" stroke-width="0.8"/>
+      <text x="236" y="905" text-anchor="end" fill="#ffdd00"
+            font-family="ui-sans-serif,system-ui,sans-serif" font-size="8.5" font-weight="700" letter-spacing="0.07em">RADIAL SENSORY N.</text>
+
+      <!-- Proper digital nerve label -->
+      <line x1="340" y1="362" x2="268" y2="342" stroke="rgba(180,210,255,.20)" stroke-width="0.7"/>
+      <text x="264" y="340" text-anchor="end" fill="rgba(180,210,255,.52)"
+            font-family="ui-sans-serif,system-ui,sans-serif" font-size="8" font-weight="600">Proper Digital N.</text>
+
+      <!-- Median/Ulnar split on ring -->
+      <line x1="524" y1="462" x2="582" y2="442" stroke="rgba(180,210,255,.20)" stroke-width="0.7"/>
+      <text x="586" y="440" fill="rgba(180,210,255,.45)"
+            font-family="ui-sans-serif,system-ui,sans-serif" font-size="7.5">Median | Ulnar</text>
+
+      <!-- PIP / DIP -->
+      <text x="268" y="420" fill="rgba(180,210,255,.36)"
+            font-family="ui-sans-serif,system-ui,sans-serif" font-size="8" font-weight="600" letter-spacing="0.06em">PIP</text>
+      <text x="268" y="310" fill="rgba(180,210,255,.30)"
+            font-family="ui-sans-serif,system-ui,sans-serif" font-size="8" font-weight="600" letter-spacing="0.06em">DIP</text>
+
+      <!-- Legend -->
+      <rect x="28" y="1026" width="385" height="44" rx="7"
+            fill="rgba(0,6,18,.78)" stroke="rgba(100,150,255,.10)" stroke-width="0.8"/>
+      <line x1="44"  y1="1044" x2="70"  y2="1044" stroke="#00d4ff" stroke-width="2.5" stroke-linecap="round" filter="url(#gS)"/>
+      <line x1="44"  y1="1044" x2="70"  y2="1044" stroke="#00d4ff" stroke-width="1.5" stroke-linecap="round"/>
+      <text x="76" y="1048" fill="rgba(0,212,255,.85)" font-family="ui-sans-serif,system-ui,sans-serif" font-size="9.5" font-weight="600">Median N.</text>
+      <line x1="170" y1="1044" x2="196" y2="1044" stroke="#00ffcc" stroke-width="2.5" stroke-linecap="round" filter="url(#gS)"/>
+      <line x1="170" y1="1044" x2="196" y2="1044" stroke="#00ffcc" stroke-width="1.5" stroke-linecap="round"/>
+      <text x="202" y="1048" fill="rgba(0,255,200,.85)" font-family="ui-sans-serif,system-ui,sans-serif" font-size="9.5" font-weight="600">Ulnar N.</text>
+      <line x1="288" y1="1044" x2="314" y2="1044" stroke="#ffdd00" stroke-width="2.5" stroke-linecap="round" filter="url(#gS)"/>
+      <line x1="288" y1="1044" x2="314" y2="1044" stroke="#ffdd00" stroke-width="1.5" stroke-linecap="round"/>
+      <text x="320" y="1048" fill="rgba(255,221,0,.85)" font-family="ui-sans-serif,system-ui,sans-serif" font-size="9.5" font-weight="600">Radial Sensory</text>
+      <text x="44" y="1062" fill="rgba(180,210,255,.28)"
+            font-family="ui-sans-serif,system-ui,sans-serif" font-size="7.5" letter-spacing="0.08em">
+        PROPER DIGITAL NERVES · COMMON DIGITAL NERVES · DORSAL BRANCHES
+      </text>
+    </g>
+
+    <!-- ══ CARPAL TUNNEL CROSS-SECTION INSET ══ -->
+    <g class="inset" transform="translate(720,672)">
+      <rect width="220" height="182" rx="9"
+            fill="rgba(1,5,18,.93)" stroke="rgba(100,150,255,.17)" stroke-width="0.8"/>
+      <text x="110" y="19" text-anchor="middle" fill="rgba(180,210,255,.44)"
+            font-family="ui-sans-serif,system-ui,sans-serif" font-size="8" font-weight="700" letter-spacing="0.16em">CARPAL TUNNEL</text>
+      <text x="110" y="31" text-anchor="middle" fill="rgba(180,210,255,.28)"
+            font-family="ui-sans-serif,system-ui,sans-serif" font-size="6.5" letter-spacing="0.10em">Axial Cross-Section</text>
+
+      <!-- Carpal bones arch -->
+      <path d="M 28,115 Q 40,58 110,50 Q 180,58 192,115 Z"
+            fill="rgba(26,95,168,.10)" stroke="rgba(100,150,255,.28)" stroke-width="1.2"/>
+      <!-- Flexor retinaculum -->
+      <path d="M 24,120 Q 110,102 196,120"
+            fill="none" stroke="rgba(220,235,255,.44)" stroke-width="2.2" stroke-linecap="round"/>
+      <text x="110" y="100" text-anchor="middle" fill="rgba(200,220,255,.34)"
+            font-family="ui-sans-serif,system-ui,sans-serif" font-size="6.5">Flex. Retinaculum</text>
+
+      <!-- Median nerve -->
+      <circle cx="85" cy="128" r="10" fill="rgba(0,212,255,.28)" stroke="#00d4ff" stroke-width="1.5" filter="url(#gS)"/>
+      <circle cx="85" cy="128" r="16" fill="none" stroke="#00d4ff" stroke-width="0.6" opacity="0.25"/>
+      <text x="85" y="132" text-anchor="middle" fill="#00d4ff"
+            font-family="ui-sans-serif,system-ui,sans-serif" font-size="7" font-weight="700">MN</text>
+
+      <!-- FDS tendons -->
+      <circle cx="107" cy="122" r="6" fill="rgba(200,220,255,.07)" stroke="rgba(200,220,255,.27)" stroke-width="0.8"/>
+      <text x="107" y="125" text-anchor="middle" fill="rgba(200,220,255,.38)" font-family="ui-sans-serif,system-ui,sans-serif" font-size="4.5" font-weight="600">FDS</text>
+      <circle cx="126" cy="122" r="6" fill="rgba(200,220,255,.07)" stroke="rgba(200,220,255,.27)" stroke-width="0.8"/>
+      <text x="126" y="125" text-anchor="middle" fill="rgba(200,220,255,.38)" font-family="ui-sans-serif,system-ui,sans-serif" font-size="4.5" font-weight="600">FDS</text>
+      <circle cx="145" cy="122" r="6" fill="rgba(200,220,255,.07)" stroke="rgba(200,220,255,.27)" stroke-width="0.8"/>
+      <text x="145" y="125" text-anchor="middle" fill="rgba(200,220,255,.38)" font-family="ui-sans-serif,system-ui,sans-serif" font-size="4.5" font-weight="600">FDS</text>
+      <circle cx="164" cy="122" r="6" fill="rgba(200,220,255,.07)" stroke="rgba(200,220,255,.27)" stroke-width="0.8"/>
+      <text x="164" y="125" text-anchor="middle" fill="rgba(200,220,255,.38)" font-family="ui-sans-serif,system-ui,sans-serif" font-size="4.5" font-weight="600">FDS</text>
+
+      <!-- FDP tendons -->
+      <circle cx="107" cy="140" r="6" fill="rgba(200,220,255,.06)" stroke="rgba(200,220,255,.22)" stroke-width="0.8"/>
+      <text x="107" y="143" text-anchor="middle" fill="rgba(200,220,255,.33)" font-family="ui-sans-serif,system-ui,sans-serif" font-size="4.5" font-weight="600">FDP</text>
+      <circle cx="126" cy="140" r="6" fill="rgba(200,220,255,.06)" stroke="rgba(200,220,255,.22)" stroke-width="0.8"/>
+      <text x="126" y="143" text-anchor="middle" fill="rgba(200,220,255,.33)" font-family="ui-sans-serif,system-ui,sans-serif" font-size="4.5" font-weight="600">FDP</text>
+      <circle cx="145" cy="140" r="6" fill="rgba(200,220,255,.06)" stroke="rgba(200,220,255,.22)" stroke-width="0.8"/>
+      <text x="145" y="143" text-anchor="middle" fill="rgba(200,220,255,.33)" font-family="ui-sans-serif,system-ui,sans-serif" font-size="4.5" font-weight="600">FDP</text>
+      <circle cx="164" cy="140" r="6" fill="rgba(200,220,255,.06)" stroke="rgba(200,220,255,.22)" stroke-width="0.8"/>
+      <text x="164" y="143" text-anchor="middle" fill="rgba(200,220,255,.33)" font-family="ui-sans-serif,system-ui,sans-serif" font-size="4.5" font-weight="600">FDP</text>
+      <!-- FPL -->
+      <circle cx="68" cy="140" r="5.5" fill="rgba(200,220,255,.06)" stroke="rgba(200,220,255,.22)" stroke-width="0.8"/>
+      <text x="68" y="143" text-anchor="middle" fill="rgba(200,220,255,.33)" font-family="ui-sans-serif,system-ui,sans-serif" font-size="4">FPL</text>
+
+      <!-- Guyon's canal / ulnar -->
+      <ellipse cx="30" cy="128" rx="16" ry="12" fill="rgba(0,10,24,.70)" stroke="rgba(0,255,200,.44)" stroke-width="0.9"/>
+      <text x="30" y="126" text-anchor="middle" fill="rgba(0,255,200,.90)"
+            font-family="ui-sans-serif,system-ui,sans-serif" font-size="6" font-weight="700">UN</text>
+      <text x="30" y="136" text-anchor="middle" fill="rgba(0,255,200,.38)"
+            font-family="ui-sans-serif,system-ui,sans-serif" font-size="5">Guyon</text>
+
+      <!-- Legend row -->
+      <circle cx="30"  cy="164" r="4.5" fill="rgba(0,212,255,.28)" stroke="#00d4ff" stroke-width="0.8"/>
+      <text x="38"  y="168" fill="rgba(0,212,255,.55)" font-family="ui-sans-serif,system-ui,sans-serif" font-size="6.5">Median N.</text>
+      <circle cx="100" cy="164" r="4.5" fill="rgba(200,220,255,.10)" stroke="rgba(200,220,255,.28)" stroke-width="0.8"/>
+      <text x="108" y="168" fill="rgba(180,210,255,.45)" font-family="ui-sans-serif,system-ui,sans-serif" font-size="6.5">9 Tendons</text>
+      <circle cx="168" cy="164" r="4.5" fill="rgba(0,10,24,.70)" stroke="rgba(0,255,200,.44)" stroke-width="0.8"/>
+      <text x="176" y="168" fill="rgba(0,255,200,.45)" font-family="ui-sans-serif,system-ui,sans-serif" font-size="6.5">Ulnar N.</text>
+    </g>
+
+  </svg>
+</div>
+</body>
+</html>
