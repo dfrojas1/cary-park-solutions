@@ -536,7 +536,7 @@
       line-height: 1.45;
     }
     .nm-canvas { position: relative; }
-    .nm-canvas svg {
+    .nm-canvas video, .nm-canvas svg {
       width: 100%;
       height: auto;
       max-width: 460px;
@@ -964,7 +964,13 @@
 
     <!-- Animation column -->
     <div class="nm-canvas anim anim-d1">
-      <svg viewBox="0 0 480 640" xmlns="http://www.w3.org/2000/svg"
+      <video autoplay loop muted playsinline
+             aria-label="Animated nerve anatomy diagram showing median, ulnar, and radial sensory nerve distribution in the dorsal hand"
+             style="width:100%;max-width:460px;display:block;margin:0 auto;border-radius:14px;box-shadow:0 0 80px rgba(0,200,240,.1),0 0 140px rgba(0,0,0,.5)">
+        <source src="nerve-animation.mp4" type="video/mp4">
+      </video>
+      <!-- Fallback SVG if video doesn't load -->
+      <svg viewBox="0 0 480 640" xmlns="http://www.w3.org/2000/svg" style="display:none"
            role="img" aria-label="Animated nerve anatomy diagram showing median, ulnar, and radial sensory nerve distribution in the dorsal hand">
         <defs>
           <filter id="glow-b" x="-30%" y="-30%" width="160%" height="160%">
@@ -1244,6 +1250,7 @@
 
       </svg>
     </div><!-- .nm-canvas -->
+
 
   </div><!-- .nm-inner -->
 </section>
