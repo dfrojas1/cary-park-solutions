@@ -1,319 +1,321 @@
-import { AbsoluteFill, useCurrentFrame, useVideoConfig, interpolate, spring } from 'remotion';
-import React from 'react';
+import { useCurrentFrame, interpolate } from 'remotion';
 
-const FPS = 30;
+const MEDIAN = '#00d4ff';
+const ULNAR  = '#00ffcc';
+const RADIAL = '#ffdd00';
 
-// Median nerve path (thumb, index, middle, half of ring)
-const MEDIAN_PATH = "M 480,560 Q 480,520 475,500 Q 468,470 460,452 L 455,420 L 368,420 L 360,390 L 352,340 Q 350,322 360,318 Q 370,314 374,330 L 378,380 L 382,338 Q 384,320 394,318 Q 404,316 406,332 L 408,372 L 412,334 Q 414,316 424,316 Q 434,316 434,334 L 432,420 L 480,420";
-const ULNAR_PATH  = "M 480,560 Q 480,520 475,500 Q 468,470 460,452 L 455,420 L 368,420 L 362,398 L 340,340 Q 338,322 326,320 Q 314,318 314,336 L 316,420";
-const RADIAL_PATH = "M 480,510 Q 470,480 462,460 L 450,420 L 380,420 L 370,395 L 350,320 L 360,300 Q 374,285 386,300 L 396,380";
+const fade = (frame, start, end) =>
+  interpolate(frame, [start, end], [0, 1], { extrapolateLeft: 'clamp', extrapolateRight: 'clamp' });
 
-// Cross-section nerve circles (wrist level)
-const NERVES_XS = [
-  { id: 'median', cx: 240, cy: 440, r: 18, color: '#00c8f0', label: 'Median N.' },
-  { id: 'ulnar',  cx: 180, cy: 446, r: 12, color: '#06d6a0', label: 'Ulnar N.'  },
-  { id: 'radial', cx: 298, cy: 436, r: 10, color: '#ffd700', label: 'Radial N.' },
-];
+const prog = (frame, start, end) =>
+  interpolate(frame, [start, end], [0, 1], { extrapolateLeft: 'clamp', extrapolateRight: 'clamp' });
 
-// Innervation territories on the hand
-const TERRITORIES = [
-  // Median — thumb, index, middle, lateral half ring
-  { id: 'median', color: '#00c8f0', d: 'M 360,380 L 354,320 Q 354,304 364,300 Q 374,296 378,310 L 382,356 L 386,310 Q 388,294 398,292 Q 408,290 410,306 L 412,356 L 416,328 Q 418,312 428,310 Q 438,308 440,322 L 438,380 L 430,400 Q 410,412 390,410 Z' },
-  // Ulnar — ring and pinky
-  { id: 'ulnar',  color: '#06d6a0', d: 'M 320,368 L 318,322 Q 318,306 328,304 Q 338,302 340,316 L 342,370 L 348,340 Q 350,324 360,322 Q 370,320 370,334 L 366,380 L 356,400 Q 336,412 320,404 Z' },
-];
-
-function useNervePulse(delay = 0) {
-  const frame = useCurrentFrame();
-  const total = 90;
-  const adjusted = ((frame + delay) % total) / total;
-  return adjusted;
-}
-
-function AnimatedPath({ d, color, progress, width = 3, glow = true }) {
-  // Estimate path length for dasharray animation
-  const len = 800;
-  const dashOffset = len - progress * len;
+// Nerve path: wide glow layer + sharp core
+const Nerve = ({ d, p, stroke, sw = 2, glowSw = 14, glowOp = 0.12, blur = 7 }) => {
+  const PL = 1000;
+  const off = interpolate(p, [0, 1], [PL, 0], { extrapolateLeft: 'clamp', extrapolateRight: 'clamp' });
+  const shared = { fill: 'none', strokeLinecap: 'round', strokeLinejoin: 'round', pathLength: PL, strokeDasharray: PL, strokeDashoffset: off };
   return (
     <g>
-      {glow && (
-        <path
-          d={d}
-          fill="none"
-          stroke={color}
-          strokeWidth={width + 10}
-          strokeDasharray={len}
-          strokeDashoffset={dashOffset}
-          strokeLinecap="round"
-          opacity={0.12}
-          filter="url(#blur6)"
-        />
-      )}
-      <path
-        d={d}
-        fill="none"
-        stroke={color}
-        strokeWidth={width}
-        strokeDasharray={len}
-        strokeDashoffset={dashOffset}
-        strokeLinecap="round"
-        opacity={0.85}
-      />
+      <path d={d} stroke={stroke} strokeWidth={glowSw} opacity={glowOp} style={{ filter: `blur(${blur}px)` }} {...shared}/>
+      <path d={d} stroke={stroke} strokeWidth={sw} {...shared}/>
     </g>
   );
-}
+};
 
-function PulseCircle({ path, progress, color }) {
-  // Animate a glowing circle along a rough linear interpolation
-  const t = progress;
-  const x = interpolate(t, [0, 1], [480, 340]);
-  const y = interpolate(t, [0, 1], [540, 280]);
-  return (
-    <circle cx={x} cy={y} r={8} fill={color} opacity={0.9} filter="url(#blur4)">
-      <animate attributeName="r" values="6;12;6" dur="0.6s" repeatCount="indefinite" />
-    </circle>
-  );
-}
-
-function Label({ x, y, text, color, frame, delay }) {
-  const opacity = interpolate(frame, [delay, delay + 18], [0, 1], { extrapolateRight: 'clamp', extrapolateLeft: 'clamp' });
-  return (
-    <g opacity={opacity}>
-      <rect x={x} y={y - 14} width={text.length * 7.4 + 16} height={20} rx={4}
-        fill="rgba(6,13,26,.75)" stroke={color} strokeWidth={0.8} strokeOpacity={0.5} />
-      <text x={x + 8} y={y} fontFamily="ui-sans-serif,system-ui,sans-serif" fontSize={11}
-        fill={color} fontWeight="700" letterSpacing="0.06em" opacity={0.95}>
-        {text}
-      </text>
-    </g>
-  );
-}
+const Node = ({ cx, cy, c, op }) => (
+  <g opacity={op}>
+    <circle cx={cx} cy={cy} r={7} fill={c} opacity={0.25} style={{ filter: 'blur(4px)' }}/>
+    <circle cx={cx} cy={cy} r={3.5} fill={c}/>
+  </g>
+);
 
 export const NerveMap = () => {
   const frame = useCurrentFrame();
-  const { fps } = useVideoConfig();
+  const f = (s, e) => fade(frame, s, e);
+  const p = (s, e) => prog(frame, s, e);
 
-  // Phase 0-60: skeleton draws in
-  // Phase 60-120: nerve paths draw
-  // Phase 120-180: territories illuminate
-  // Phase 180+: pulses loop
+  const skelOp   = f(5, 60);
+  const medTrunk = p(60, 105);
+  const ulnTrunk = p(75, 118);
+  const radSens  = p(90, 135);
+  const cdnThumb = p(108, 148);
+  const cdn1     = p(112, 152);
+  const cdn2     = p(116, 156);
+  const cdn3     = p(120, 160);
+  const pdnIdxR  = p(152, 208);
+  const pdnIdxU  = p(156, 212);
+  const pdnMidR  = p(160, 216);
+  const pdnMidU  = p(164, 220);
+  const pdnRngR  = p(168, 224);
+  const pdnRngU  = p(172, 228);
+  const pdnPkyR  = p(176, 230);
+  const pdnPkyU  = p(180, 234);
+  const pdnThmR  = p(148, 204);
+  const pdnThmU  = p(152, 208);
+  const radIdx   = p(130, 174);
+  const radMid   = p(136, 178);
+  const medTerrOp = f(228, 268);
+  const ulnTerrOp = f(238, 278);
+  const radTerrOp = f(248, 288);
+  const labelOp   = f(272, 305);
+  const insetOp   = f(255, 292);
+  const nodeOp    = f(145, 168);
+  const pulseOp   = f(310, 338);
 
-  const skelOpacity = interpolate(frame, [0, 30], [0, 1], { extrapolateRight: 'clamp' });
-  const medianProgress = interpolate(frame, [40, 100], [0, 1], { extrapolateLeft: 'clamp', extrapolateRight: 'clamp' });
-  const ulnarProgress  = interpolate(frame, [55, 110], [0, 1], { extrapolateLeft: 'clamp', extrapolateRight: 'clamp' });
-  const radialProgress = interpolate(frame, [65, 120], [0, 1], { extrapolateLeft: 'clamp', extrapolateRight: 'clamp' });
-  const territoryOpacity = interpolate(frame, [110, 150], [0, 0.18], { extrapolateLeft: 'clamp', extrapolateRight: 'clamp' });
-
-  const pulse1 = useNervePulse(0);
-  const pulse2 = useNervePulse(30);
-  const pulse3 = useNervePulse(60);
-
-  const pulseOpacity = interpolate(frame, [120, 150], [0, 1], { extrapolateLeft: 'clamp', extrapolateRight: 'clamp' });
+  // Signal pulses loop from frame 310
+  const pf = Math.max(0, frame - 310);
+  const mk = (offset, period) => (pf + offset) % period / period;
+  const lp = (t, x1, y1, x2, y2) => ({ x: x1 + t * (x2 - x1), y: y1 + t * (y2 - y1) });
+  const pulses = [
+    { t: mk(0,  90), x1: 464, y1: 924, x2: 437, y2: 170, c: MEDIAN, r: 5.5 },
+    { t: mk(22, 90), x1: 464, y1: 924, x2: 340, y2: 222, c: MEDIAN, r: 4.5 },
+    { t: mk(45, 90), x1: 464, y1: 924, x2: 453, y2: 170, c: MEDIAN, r: 3.5 },
+    { t: mk(62, 90), x1: 464, y1: 924, x2: 285, y2: 554, c: MEDIAN, r: 3.5 },
+    { t: mk(0,  80), x1: 524, y1: 924, x2: 607, y2: 374, c: ULNAR,  r: 5.5 },
+    { t: mk(40, 80), x1: 524, y1: 924, x2: 537, y2: 214, c: ULNAR,  r: 4   },
+    { t: mk(20, 80), x1: 524, y1: 924, x2: 592, y2: 374, c: ULNAR,  r: 3.5 },
+    { t: mk(0,  70), x1: 358, y1: 880, x2: 230, y2: 642, c: RADIAL, r: 5   },
+    { t: mk(35, 70), x1: 308, y1: 778, x2: 340, y2: 222, c: RADIAL, r: 3.5 },
+  ];
 
   return (
-    <AbsoluteFill style={{ background: 'linear-gradient(160deg,#060d1a 0%,#091525 60%,#061420 100%)' }}>
-      <svg viewBox="0 0 960 1080" xmlns="http://www.w3.org/2000/svg"
-        style={{ position: 'absolute', inset: 0, width: '100%', height: '100%' }}>
-        <defs>
-          <filter id="blur4"><feGaussianBlur stdDeviation="4" /></filter>
-          <filter id="blur6"><feGaussianBlur stdDeviation="6" /></filter>
-          <filter id="blur2"><feGaussianBlur stdDeviation="2" /></filter>
-          {/* Subtle coordinate grid */}
-          <pattern id="cgrid" width="40" height="40" patternUnits="userSpaceOnUse">
-            <path d="M 40 0 L 0 0 0 40" fill="none" stroke="rgba(0,200,240,.05)" strokeWidth=".5"/>
-          </pattern>
-          {/* Radial glow behind hand */}
-          <radialGradient id="handglow" cx="50%" cy="50%" r="50%">
-            <stop offset="0%" stopColor="rgba(0,200,240,.06)"/>
-            <stop offset="100%" stopColor="transparent"/>
-          </radialGradient>
-        </defs>
+    <svg width={960} height={1080} viewBox="0 0 960 1080" style={{ background: '#02080f' }}>
+      <defs>
+        <filter id="gB" x="-60%" y="-60%" width="220%" height="220%">
+          <feGaussianBlur in="SourceGraphic" stdDeviation="9" result="b"/>
+          <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+        </filter>
+        <filter id="gS" x="-25%" y="-25%" width="150%" height="150%">
+          <feGaussianBlur in="SourceGraphic" stdDeviation="3" result="b"/>
+          <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+        </filter>
+        <radialGradient id="bgH" cx="50%" cy="44%" r="52%">
+          <stop offset="0%" stopColor="rgba(0,100,200,.09)"/>
+          <stop offset="100%" stopColor="transparent"/>
+        </radialGradient>
+      </defs>
 
-        {/* Grid background */}
-        <rect width="960" height="1080" fill="url(#cgrid)"/>
-        {/* Glow behind anatomy */}
-        <ellipse cx="480" cy="500" rx="260" ry="340" fill="url(#handglow)"/>
+      <ellipse cx={480} cy={520} rx={400} ry={490} fill="url(#bgH)"/>
+      <g opacity={0.025} stroke="rgba(0,180,255,1)" strokeWidth={0.5}>
+        {[1,2,3,4,5,6,7].map(i => <line key={`h${i}`} x1={0} y1={i*135} x2={960} y2={i*135}/>)}
+        {[1,2,3,4,5].map(i => <line key={`v${i}`} x1={i*160} y1={0} x2={i*160} y2={1080}/>)}
+      </g>
 
-        {/* ═══ HAND SKELETON — dorsal view ═══ */}
-        <g opacity={skelOpacity}>
-          {/* Wrist / carpal block */}
-          <path d="M 340,630 Q 310,610 314,588 L 318,550 L 642,550 L 646,588 Q 650,610 620,630 Z"
-            fill="rgba(26,95,168,.07)" stroke="rgba(180,210,255,.35)" strokeWidth="1.8"/>
-          {/* Thumb */}
-          <path d="M 620,580 Q 668,554 692,516 Q 712,482 698,448 Q 682,420 660,424 Q 640,428 634,454 L 628,494 L 630,550"
-            fill="rgba(26,95,168,.06)" stroke="rgba(180,210,255,.32)" strokeWidth="1.8" strokeLinejoin="round"/>
-          <line x1="668" y1="468" x2="626" y2="472" stroke="rgba(180,210,255,.18)" strokeWidth="1.2"/>
-          {/* Index finger */}
-          <path d="M 506,550 L 498,310 Q 498,288 514,288 Q 530,288 530,310 L 522,550 Z"
-            fill="rgba(26,95,168,.06)" stroke="rgba(180,210,255,.34)" strokeWidth="1.8"/>
-          {/* Middle finger (longest) */}
-          <path d="M 456,550 L 449,268 Q 449,246 466,246 Q 483,246 483,268 L 476,550 Z"
-            fill="rgba(26,95,168,.07)" stroke="rgba(180,210,255,.38)" strokeWidth="1.8"/>
-          {/* Ring finger */}
-          <path d="M 406,550 L 400,280 Q 400,258 416,258 Q 432,258 432,280 L 426,550 Z"
-            fill="rgba(26,95,168,.06)" stroke="rgba(180,210,255,.32)" strokeWidth="1.8"/>
-          {/* Pinky */}
-          <path d="M 358,550 L 356,360 Q 356,338 370,338 Q 384,338 384,360 L 382,550 Z"
-            fill="rgba(26,95,168,.05)" stroke="rgba(180,210,255,.26)" strokeWidth="1.8"/>
-          {/* PIP joints */}
-          <line x1="498" y1="388" x2="530" y2="388" stroke="rgba(180,210,255,.22)" strokeWidth="1.2"/>
-          <line x1="449" y1="368" x2="483" y2="368" stroke="rgba(180,210,255,.24)" strokeWidth="1.2"/>
-          <line x1="400" y1="378" x2="432" y2="378" stroke="rgba(180,210,255,.20)" strokeWidth="1.2"/>
-          <line x1="356" y1="430" x2="384" y2="430" stroke="rgba(180,210,255,.18)" strokeWidth="1.2"/>
-          {/* DIP joints */}
-          <line x1="499" y1="340" x2="530" y2="340" stroke="rgba(180,210,255,.14)" strokeWidth="1"/>
-          <line x1="450" y1="318" x2="483" y2="318" stroke="rgba(180,210,255,.16)" strokeWidth="1"/>
-          <line x1="401" y1="330" x2="432" y2="330" stroke="rgba(180,210,255,.14)" strokeWidth="1"/>
-          <line x1="357" y1="392" x2="384" y2="392" stroke="rgba(180,210,255,.12)" strokeWidth="1"/>
-          {/* MCP zone line */}
-          <line x1="356" y1="516" x2="630" y2="516" stroke="rgba(180,210,255,.12)" strokeWidth="1" strokeDasharray="6 5"/>
-        </g>
+      <text x={480} y={50} textAnchor="middle"
+            fill="rgba(0,212,255,.30)" fontFamily="ui-sans-serif,system-ui,sans-serif"
+            fontSize={12} fontWeight={700} letterSpacing="0.26em">
+        NERVE DISTRIBUTION · DORSAL HAND · TRIANGLE HAND &amp; SHOULDER
+      </text>
 
-        {/* ═══ INNERVATION TERRITORIES ═══ */}
-        <g opacity={territoryOpacity}>
-          {/* Median territory — thumb, index, middle, lat. ring */}
-          <path d="M 514,516 L 500,298 Q 500,280 514,278 Q 528,276 530,292 L 532,516 L 526,540 L 508,540 Z"
-            fill="#00c8f0" />
-          <path d="M 466,516 L 461,260 Q 461,240 467,238 Q 474,236 481,242 L 484,516 L 476,540 L 460,540 Z"
-            fill="#00c8f0"/>
-          <path d="M 414,516 L 412,294 Q 412,276 418,274 Q 424,272 430,278 L 432,516 L 424,540 L 408,540 Z"
-            fill="#00c8f0" opacity={0.7}/>
-          {/* Ulnar territory — ring full + pinky */}
-          <path d="M 360,516 L 360,352 Q 360,332 370,330 Q 380,328 382,346 L 382,516 L 376,540 L 358,540 Z"
-            fill="#06d6a0"/>
-          {/* Radial territory — dorsal web spaces (simulated) */}
-          <circle cx="555" cy="500" r="40" fill="#ffd700" opacity={0.6}/>
-        </g>
+      {/* ── HAND SKELETON ──────────────────────── */}
+      <g opacity={skelOp}>
+        <path d="M 295,975 Q 278,952 280,926 L 284,902 L 680,902 L 684,926 Q 686,952 669,975 Z"
+              fill="rgba(0,70,180,.05)" stroke="rgba(0,140,255,.26)" strokeWidth={1.4}/>
+        <ellipse cx={464} cy={902} rx={90} ry={20} fill="none"
+                 stroke={`${MEDIAN}50`} strokeWidth={1} strokeDasharray="5 3"/>
+        <ellipse cx={528} cy={902} rx={32} ry={12} fill="none"
+                 stroke={`${ULNAR}40`} strokeWidth={0.8} strokeDasharray="3 3"/>
+        <path d="M 295,902 L 295,738 Q 295,726 308,726 L 660,726 Q 672,726 672,738 L 672,902 Z"
+              fill="rgba(0,70,180,.04)" stroke="rgba(0,140,255,.20)" strokeWidth={1.2}/>
+        <line x1={295} y1={726} x2={672} y2={726} stroke="rgba(0,140,255,.10)" strokeWidth={0.8} strokeDasharray="5 4"/>
 
-        {/* ═══ NERVE PATHWAYS ═══ */}
-        {/* Median nerve (blue) */}
-        <AnimatedPath
-          d="M 480,640 L 480,580 L 470,552 L 462,516 L 514,516 L 516,390 L 514,296 Q 514,278 514,278"
-          color="#00c8f0" progress={medianProgress} width={3}/>
-        {/* Branch to index */}
-        <AnimatedPath
-          d="M 480,530 L 466,516 L 467,380 L 466,270"
-          color="#00c8f0" progress={medianProgress} width={2.2} glow={false}/>
-        {/* Branch to middle */}
-        <AnimatedPath
-          d="M 480,530 L 478,516 L 466,430 L 418,516 L 416,380"
-          color="#00c8f0" progress={medianProgress > 0.6 ? (medianProgress - 0.6) / 0.4 : 0} width={2.2} glow={false}/>
+        {/* Thumb */}
+        <path d="M 302,862 Q 276,840 246,800 Q 216,754 214,718 Q 212,684 232,670 Q 254,656 272,676 Q 288,698 290,730 L 298,822"
+              fill="rgba(0,70,180,.04)" stroke="rgba(0,140,255,.24)" strokeWidth={1.2} strokeLinejoin="round"/>
+        <line x1={232} y1={692} x2={280} y2={696} stroke="rgba(0,140,255,.17)" strokeWidth={0.9}/>
+        <path d="M 236,670 Q 225,642 222,614 Q 220,594 226,578 Q 232,562 242,558 Q 253,554 260,566 Q 266,582 262,604 L 258,628"
+              fill="rgba(0,70,180,.05)" stroke="rgba(0,140,255,.22)" strokeWidth={1.1}/>
 
-        {/* Ulnar nerve (teal) */}
-        <AnimatedPath
-          d="M 440,640 L 442,580 L 440,550 L 380,516 L 370,430 L 364,360"
-          color="#06d6a0" progress={ulnarProgress} width={2.8}/>
+        {/* Index */}
+        <path d="M 340,726 L 337,222 Q 337,210 358,210 Q 377,210 377,222 L 374,726 Z"
+              fill="rgba(0,70,180,.04)" stroke="rgba(0,140,255,.22)" strokeWidth={1.1}/>
+        <line x1={337} y1={418} x2={377} y2={418} stroke="rgba(0,140,255,.16)" strokeWidth={0.9}/>
+        <line x1={337} y1={308} x2={377} y2={308} stroke="rgba(0,140,255,.13)" strokeWidth={0.8}/>
 
-        {/* Radial sensory (gold) */}
-        <AnimatedPath
-          d="M 520,640 L 518,580 L 530,550 L 560,516 L 580,480 L 590,430"
-          color="#ffd700" progress={radialProgress} width={2.4}/>
+        {/* Middle */}
+        <path d="M 418,726 L 416,170 Q 416,158 438,158 Q 460,158 460,170 L 458,726 Z"
+              fill="rgba(0,70,180,.04)" stroke="rgba(0,140,255,.24)" strokeWidth={1.2}/>
+        <line x1={416} y1={390} x2={460} y2={390} stroke="rgba(0,140,255,.18)" strokeWidth={0.9}/>
+        <line x1={416} y1={275} x2={460} y2={275} stroke="rgba(0,140,255,.14)" strokeWidth={0.8}/>
 
-        {/* ═══ SIGNAL PULSES ═══ */}
-        <g opacity={pulseOpacity}>
-          {/* Median pulse */}
-          {Array.from({ length: 3 }).map((_, i) => {
-            const t = ((frame - 120 + i * 30) % 90) / 90;
-            const x = interpolate(t, [0, 1], [480, 514], { extrapolateRight: 'clamp', extrapolateLeft: 'clamp' });
-            const y = interpolate(t, [0, 1], [635, 288], { extrapolateRight: 'clamp', extrapolateLeft: 'clamp' });
-            return (
-              <g key={i}>
-                <circle cx={x} cy={y} r={12} fill="#00c8f0" opacity={0.15} filter="url(#blur6)"/>
-                <circle cx={x} cy={y} r={5} fill="#00c8f0" opacity={0.9}/>
-              </g>
-            );
-          })}
-          {/* Ulnar pulse */}
-          {Array.from({ length: 2 }).map((_, i) => {
-            const t = ((frame - 120 + i * 45) % 90) / 90;
-            const x = interpolate(t, [0, 1], [440, 364]);
-            const y = interpolate(t, [0, 1], [635, 358]);
-            return (
-              <g key={i}>
-                <circle cx={x} cy={y} r={10} fill="#06d6a0" opacity={0.14} filter="url(#blur6)"/>
-                <circle cx={x} cy={y} r={4} fill="#06d6a0" opacity={0.9}/>
-              </g>
-            );
-          })}
-        </g>
+        {/* Ring */}
+        <path d="M 506,726 L 504,214 Q 504,202 524,202 Q 544,202 544,214 L 542,726 Z"
+              fill="rgba(0,70,180,.04)" stroke="rgba(0,140,255,.22)" strokeWidth={1.1}/>
+        <line x1={504} y1={404} x2={544} y2={404} stroke="rgba(0,140,255,.16)" strokeWidth={0.9}/>
+        <line x1={504} y1={298} x2={544} y2={298} stroke="rgba(0,140,255,.13)" strokeWidth={0.8}/>
 
-        {/* ═══ CROSS-SECTION CIRCLE (wrist level) ═══ */}
-        <g opacity={interpolate(frame, [60, 90], [0, 1], { extrapolateLeft: 'clamp', extrapolateRight: 'clamp' })}>
-          <circle cx={130} cy={440} r={70} fill="rgba(6,13,26,.85)" stroke="rgba(180,210,255,.15)" strokeWidth="1"/>
-          {/* Wrist tissues */}
-          <ellipse cx={130} cy={440} rx={60} ry={55} fill="rgba(26,95,168,.08)" stroke="rgba(180,210,255,.12)" strokeWidth=".8"/>
-          {/* Nerve cross-sections */}
-          <circle cx={120} cy={435} r={16} fill="none" stroke="#00c8f0" strokeWidth="1.5" strokeDasharray="3 2"/>
-          <circle cx={120} cy={435} r={10} fill="rgba(0,200,240,.12)"/>
-          <text x={120} y={438} textAnchor="middle" fontFamily="ui-sans-serif,system-ui,sans-serif" fontSize={9} fill="#00c8f0" fontWeight="700">MN</text>
-          <circle cx={152} cy={448} r={9} fill="none" stroke="#06d6a0" strokeWidth="1.2" strokeDasharray="2 2"/>
-          <circle cx={152} cy={448} r={5} fill="rgba(6,214,160,.12)"/>
-          <text x={152} y={451} textAnchor="middle" fontFamily="ui-sans-serif,system-ui,sans-serif" fontSize={7} fill="#06d6a0" fontWeight="700">UN</text>
-          <circle cx={140} cy={418} r={7} fill="none" stroke="#ffd700" strokeWidth="1" strokeDasharray="2 2"/>
-          <circle cx={140} cy={418} r={4} fill="rgba(255,215,0,.1)"/>
-          {/* Flexor tendons */}
-          {[108, 100, 94, 88].map((x, i) => (
-            <circle key={i} cx={x} cy={450 + i * 4} r={5} fill="rgba(180,210,255,.06)" stroke="rgba(180,210,255,.2)" strokeWidth=".8"/>
-          ))}
-          <text x={130} y={516} textAnchor="middle" fontFamily="ui-sans-serif,system-ui,sans-serif" fontSize={9.5} fill="rgba(180,210,255,.5)" fontWeight="700" letterSpacing=".1em">CARPAL TUNNEL XS</text>
-          {/* Connector line to anatomy */}
-          <line x1={200} y1={440} x2={318} y2={570} stroke="rgba(0,200,240,.2)" strokeWidth=".8" strokeDasharray="4 3"/>
-        </g>
+        {/* Pinky */}
+        <path d="M 593,726 L 591,374 Q 591,362 608,362 Q 626,362 626,374 L 624,726 Z"
+              fill="rgba(0,70,180,.03)" stroke="rgba(0,140,255,.18)" strokeWidth={1}/>
+        <line x1={591} y1={508} x2={625} y2={508} stroke="rgba(0,140,255,.14)" strokeWidth={0.8}/>
+        <line x1={591} y1={428} x2={625} y2={428} stroke="rgba(0,140,255,.11)" strokeWidth={0.7}/>
 
-        {/* ═══ ANNOTATION LABELS ═══ */}
-        <g fontFamily="ui-sans-serif,system-ui,sans-serif">
-          <Label x={640} y={302} text="MEDIAN NERVE" color="#00c8f0" frame={frame} delay={60}/>
-          <Label x={640} y={380} text="ULNAR NERVE" color="#06d6a0" frame={frame} delay={74}/>
-          <Label x={640} y={456} text="RADIAL SENSORY" color="#ffd700" frame={frame} delay={88}/>
+        {/* Web space curves */}
+        {[[376,726,400,726],[458,726,482,726],[542,726,566,726]].map(([x1,y1,x2,y2],i) => (
+          <path key={i} d={`M ${x1},${y1} Q ${(x1+x2)/2},${y1-14} ${x2},${y2}`}
+                fill="none" stroke="rgba(0,140,255,.12)" strokeWidth={0.8}/>
+        ))}
+        {/* Extensor tendon guides */}
+        {[[358,726,358,222],[438,726,438,170],[524,726,524,214],[608,726,608,374]].map(([x1,y1,x2,y2],i) => (
+          <line key={i} x1={x1} y1={y1} x2={x2} y2={y2}
+                stroke="rgba(0,180,255,.04)" strokeWidth={0.5} strokeDasharray="6 5"/>
+        ))}
+      </g>
 
-          {/* Connection lines to labels */}
-          {frame > 60 && (
-            <line x1={514} y1={302} x2={638} y2={295} stroke="#00c8f0" strokeWidth=".7" opacity={interpolate(frame,[60,78],[0,0.45],{extrapolateRight:'clamp'})}/>
-          )}
-          {frame > 74 && (
-            <line x1={368} y1={396} x2={638} y2={374} stroke="#06d6a0" strokeWidth=".7" opacity={interpolate(frame,[74,92],[0,0.4],{extrapolateRight:'clamp'})}/>
-          )}
-          {frame > 88 && (
-            <line x1={585} y1={456} x2={638} y2={450} stroke="#ffd700" strokeWidth=".7" opacity={interpolate(frame,[88,106],[0,0.4],{extrapolateRight:'clamp'})}/>
-          )}
+      {/* ── TERRITORIES ────────────────────────── */}
+      <g opacity={medTerrOp}>
+        <path d="M 232,670 Q 254,656 298,726 L 302,860 Q 276,840 246,800 Q 212,754 212,718 Q 210,684 230,670 Z" fill="rgba(0,212,255,.065)"/>
+        <path d="M 335,210 L 379,210 L 377,726 L 337,726 Z" fill="rgba(0,212,255,.065)"/>
+        <path d="M 414,158 L 462,158 L 460,726 L 416,726 Z" fill="rgba(0,212,255,.07)"/>
+        <path d="M 502,202 L 524,202 L 524,726 L 504,726 Z" fill="rgba(0,212,255,.045)"/>
+      </g>
+      <g opacity={ulnTerrOp}>
+        <path d="M 524,202 L 546,202 L 544,726 L 524,726 Z" fill="rgba(0,255,200,.055)"/>
+        <path d="M 589,362 L 627,362 L 625,726 L 591,726 Z" fill="rgba(0,255,200,.07)"/>
+      </g>
+      <g opacity={radTerrOp}>
+        <path d="M 337,308 L 379,308 L 378,726 L 338,726 Z" fill="rgba(255,220,0,.04)"/>
+        <path d="M 416,390 L 460,390 L 459,726 L 417,726 Z" fill="rgba(255,220,0,.035)"/>
+      </g>
 
-          {/* Carpal tunnel label with callout */}
-          {frame > 100 && (
-            <g opacity={interpolate(frame,[100,120],[0,1],{extrapolateRight:'clamp'})}>
-              <ellipse cx={480} cy={560} rx={60} ry={14} fill="none" stroke="rgba(0,200,240,.45)" strokeWidth="1" strokeDasharray="4 3"/>
-              <line x1={480} y1={546} x2={480} y2={520} stroke="rgba(0,200,240,.3)" strokeWidth=".8"/>
-              <text x={550} y={518} fontFamily="ui-sans-serif,system-ui,sans-serif" fontSize={11} fill="rgba(0,200,240,.65)" fontWeight="700" letterSpacing=".06em">CARPAL CANAL</text>
+      {/* ── NERVE TRUNKS ───────────────────────── */}
+      <Nerve d="M 464,924 L 464,750" p={medTrunk} stroke={MEDIAN} sw={3.5} glowSw={20} glowOp={0.15} blur={10}/>
+      <Nerve d="M 524,924 L 524,750" p={ulnTrunk} stroke={ULNAR}  sw={3.5} glowSw={20} glowOp={0.13} blur={10}/>
+      <Nerve d="M 358,880 Q 320,852 288,812 Q 258,766 244,722 Q 232,682 230,642"
+             p={radSens} stroke={RADIAL} sw={3} glowSw={18} glowOp={0.12} blur={9}/>
+      <Node cx={464} cy={748} c={MEDIAN} op={nodeOp}/>
+      <Node cx={524} cy={748} c={ULNAR}  op={nodeOp}/>
+
+      {/* ── COMMON DIGITAL NERVES ──────────────── */}
+      <Nerve d="M 464,750 Q 420,744 370,737 Q 330,732 300,726" p={cdnThumb} stroke={MEDIAN} sw={2.2} glowSw={11} glowOp={0.1} blur={6}/>
+      <Nerve d="M 464,750 Q 450,742 399,730 L 358,726"         p={cdn1}     stroke={MEDIAN} sw={2.2} glowSw={11} glowOp={0.1} blur={6}/>
+      <Nerve d="M 464,750 L 482,726"                           p={cdn2}     stroke={MEDIAN} sw={2.2} glowSw={11} glowOp={0.1} blur={6}/>
+      <Nerve d="M 524,750 L 566,726"                           p={cdn3}     stroke={ULNAR}  sw={2.2} glowSw={11} glowOp={0.1} blur={6}/>
+      {[{cx:300,cy:724,c:MEDIAN},{cx:358,cy:724,c:MEDIAN},{cx:482,cy:724,c:MEDIAN},{cx:566,cy:724,c:ULNAR}].map((n,i) => (
+        <Node key={i} {...n} op={f(158, 175)}/>
+      ))}
+
+      {/* ── PROPER DIGITAL NERVES ──────────────── */}
+      {/* Thumb */}
+      <Nerve d="M 230,644 Q 222,618 219,590 Q 217,570 223,554 Q 229,540 240,536" p={pdnThmR} stroke={RADIAL} sw={1.8} glowSw={9} glowOp={0.12} blur={5}/>
+      <Nerve d="M 272,678 Q 263,655 260,628 Q 257,606 263,588 Q 269,572 280,562 Q 287,554 296,552" p={pdnThmU} stroke={MEDIAN} sw={1.8} glowSw={9} glowOp={0.10} blur={5}/>
+      {/* Index */}
+      <Nerve d="M 340,726 L 338,222" p={pdnIdxR} stroke={MEDIAN} sw={1.8} glowSw={9} glowOp={0.12} blur={5}/>
+      <Nerve d="M 376,726 L 374,222" p={pdnIdxU} stroke={MEDIAN} sw={1.8} glowSw={9} glowOp={0.12} blur={5}/>
+      {/* Middle */}
+      <Nerve d="M 420,726 L 418,170" p={pdnMidR} stroke={MEDIAN} sw={1.8} glowSw={9} glowOp={0.12} blur={5}/>
+      <Nerve d="M 456,726 L 454,170" p={pdnMidU} stroke={MEDIAN} sw={1.8} glowSw={9} glowOp={0.12} blur={5}/>
+      {/* Ring — radial = median, ulnar = ulnar */}
+      <Nerve d="M 508,726 L 506,214" p={pdnRngR} stroke={MEDIAN} sw={1.8} glowSw={9} glowOp={0.10} blur={5}/>
+      <Nerve d="M 540,726 L 538,214" p={pdnRngU} stroke={ULNAR}  sw={1.8} glowSw={9} glowOp={0.10} blur={5}/>
+      {/* Pinky */}
+      <Nerve d="M 593,726 L 591,374" p={pdnPkyR} stroke={ULNAR}  sw={1.8} glowSw={8} glowOp={0.10} blur={5}/>
+      <Nerve d="M 623,726 L 621,374" p={pdnPkyU} stroke={ULNAR}  sw={1.8} glowSw={8} glowOp={0.10} blur={5}/>
+      {/* Radial dorsal branches */}
+      <Nerve d="M 308,778 L 308,726 L 340,222"   p={radIdx} stroke={RADIAL} sw={1.5} glowSw={7} glowOp={0.09} blur={4}/>
+      <Nerve d="M 295,762 Q 340,740 418,390"     p={radMid} stroke={RADIAL} sw={1.3} glowSw={6} glowOp={0.08} blur={4}/>
+
+      {/* Fingertip anastomotic arcs */}
+      <g opacity={f(220, 242)}>
+        {[[338,222,374,222,MEDIAN],[418,170,454,170,MEDIAN],[506,214,538,214,RADIAL],[591,374,621,374,ULNAR]].map(([x1,y1,x2,y2,c],i) => (
+          <path key={i} d={`M ${x1},${y1} Q ${(x1+x2)/2},${y1-14} ${x2},${y2}`}
+                fill="none" stroke={c} strokeWidth={1.2} strokeLinecap="round" style={{ filter: 'blur(1px)' }} opacity={0.6}/>
+        ))}
+      </g>
+
+      {/* Ring finger median/ulnar boundary */}
+      <g opacity={f(230, 252)}>
+        <line x1={524} y1={460} x2={524} y2={726} stroke="rgba(180,210,255,.15)" strokeWidth={0.6} strokeDasharray="3 2"/>
+        <circle cx={524} cy={460} r={3} fill="none" stroke="rgba(180,210,255,.30)" strokeWidth={0.8}/>
+      </g>
+
+      {/* ── SIGNAL PULSES ──────────────────────── */}
+      <g opacity={pulseOp}>
+        {pulses.map((u, i) => {
+          const pos = lp(u.t, u.x1, u.y1, u.x2, u.y2);
+          return (
+            <g key={i}>
+              <circle cx={pos.x} cy={pos.y} r={u.r * 2.4} fill={u.c} opacity={0.14} style={{ filter: 'blur(7px)' }}/>
+              <circle cx={pos.x} cy={pos.y} r={u.r} fill={u.c} opacity={0.92}/>
+              <circle cx={pos.x} cy={pos.y} r={u.r * 0.42} fill="#fff" opacity={0.72}/>
             </g>
-          )}
-        </g>
+          );
+        })}
+      </g>
 
-        {/* ═══ TITLE OVERLAY ═══ */}
-        <g opacity={interpolate(frame, [0, 20], [0, 1], { extrapolateRight: 'clamp' })}>
-          <text x={48} y={72} fontFamily="'Georgia',serif" fontSize={22} fill="rgba(255,255,255,.88)" fontWeight="700" letterSpacing=".04em">
-            Peripheral Nerve Anatomy
-          </text>
-          <text x={48} y={95} fontFamily="ui-sans-serif,system-ui,sans-serif" fontSize={12} fill="rgba(0,200,240,.7)" fontWeight="600" letterSpacing=".12em">
-            HAND · DORSAL VIEW · NEURAL MAPPING
-          </text>
-          <line x1={48} y1={108} x2={400} y2={108} stroke="rgba(0,200,240,.2)" strokeWidth=".8"/>
-        </g>
+      {/* ── LABELS ─────────────────────────────── */}
+      <g opacity={labelOp}>
+        <line x1={464} y1={900} x2={620} y2={862} stroke={`${MEDIAN}44`} strokeWidth={0.8}/>
+        <rect x={622} y={846} width={120} height={36} rx={5} fill="rgba(0,6,18,.88)" stroke={`${MEDIAN}38`} strokeWidth={0.8}/>
+        <text x={632} y={860} fill={MEDIAN} fontFamily="ui-sans-serif,system-ui,sans-serif" fontSize={9} fontWeight={700} letterSpacing="0.08em">CARPAL TUNNEL</text>
+        <text x={632} y={874} fill={`${MEDIAN}80`} fontFamily="ui-sans-serif,system-ui,sans-serif" fontSize={7.5}>Median N. · CTS site</text>
+
+        <line x1={528} y1={900} x2={644} y2={930} stroke={`${ULNAR}44`} strokeWidth={0.8}/>
+        <text x={648} y={935} fill={ULNAR} fontFamily="ui-sans-serif,system-ui,sans-serif" fontSize={8.5} fontWeight={700} letterSpacing="0.07em">GUYON'S CANAL</text>
+
+        <line x1={335} y1={872} x2={240} y2={900} stroke={`${RADIAL}44`} strokeWidth={0.8}/>
+        <text x={236} y={905} textAnchor="end" fill={RADIAL} fontFamily="ui-sans-serif,system-ui,sans-serif" fontSize={8.5} fontWeight={700} letterSpacing="0.07em">RADIAL SENSORY N.</text>
+
+        <line x1={340} y1={362} x2={268} y2={342} stroke="rgba(180,210,255,.2)" strokeWidth={0.7}/>
+        <text x={264} y={340} textAnchor="end" fill="rgba(180,210,255,.52)" fontFamily="ui-sans-serif,system-ui,sans-serif" fontSize={8} fontWeight={600}>Proper Digital N.</text>
+
+        <line x1={524} y1={462} x2={582} y2={442} stroke="rgba(180,210,255,.2)" strokeWidth={0.7}/>
+        <text x={586} y={440} fill="rgba(180,210,255,.45)" fontFamily="ui-sans-serif,system-ui,sans-serif" fontSize={7.5}>Median | Ulnar</text>
+
+        <text x={268} y={420} fill="rgba(180,210,255,.36)" fontFamily="ui-sans-serif,system-ui,sans-serif" fontSize={8} fontWeight={600} letterSpacing="0.06em">PIP</text>
+        <text x={268} y={310} fill="rgba(180,210,255,.30)" fontFamily="ui-sans-serif,system-ui,sans-serif" fontSize={8} fontWeight={600} letterSpacing="0.06em">DIP</text>
 
         {/* Legend */}
-        <g opacity={interpolate(frame, [80, 110], [0, 1], { extrapolateRight: 'clamp' })}>
-          {[
-            { color: '#00c8f0', label: 'Median Nerve' },
-            { color: '#06d6a0', label: 'Ulnar Nerve' },
-            { color: '#ffd700', label: 'Radial Sensory' },
-          ].map(({ color, label }, i) => (
-            <g key={i} transform={`translate(48, ${148 + i * 30})`}>
-              <line x1={0} y1={0} x2={24} y2={0} stroke={color} strokeWidth={2.5} strokeLinecap="round"/>
-              <circle cx={12} cy={0} r={4} fill={color} opacity={0.8}/>
-              <text x={32} y={4} fontFamily="ui-sans-serif,system-ui,sans-serif" fontSize={12} fill="rgba(255,255,255,.72)" fontWeight="600">{label}</text>
-            </g>
-          ))}
-        </g>
+        <rect x={28} y={1026} width={380} height={44} rx={7} fill="rgba(0,6,18,.78)" stroke="rgba(100,150,255,.10)" strokeWidth={0.8}/>
+        {[{x:44,c:MEDIAN,label:'Median N.'},{x:170,c:ULNAR,label:'Ulnar N.'},{x:288,c:RADIAL,label:'Radial Sensory'}].map((l,i) => (
+          <g key={i}>
+            <line x1={l.x} y1={1044} x2={l.x+26} y2={1044} stroke={l.c} strokeWidth={2.5} strokeLinecap="round" style={{ filter: 'blur(1px)' }}/>
+            <line x1={l.x} y1={1044} x2={l.x+26} y2={1044} stroke={l.c} strokeWidth={1.5} strokeLinecap="round"/>
+            <text x={l.x+32} y={1048} fill={`${l.c}cc`} fontFamily="ui-sans-serif,system-ui,sans-serif" fontSize={9.5} fontWeight={600}>{l.label}</text>
+          </g>
+        ))}
+        <text x={44} y={1062} fill="rgba(180,210,255,.28)" fontFamily="ui-sans-serif,system-ui,sans-serif" fontSize={7.5} letterSpacing="0.08em">
+          PROPER DIGITAL NERVES · COMMON DIGITAL NERVES · DORSAL BRANCHES
+        </text>
+      </g>
 
-      </svg>
-    </AbsoluteFill>
+      {/* ── CARPAL TUNNEL CROSS-SECTION ─────────── */}
+      <g opacity={insetOp} transform="translate(720, 672)">
+        <rect width={220} height={182} rx={9} fill="rgba(1,5,18,.93)" stroke="rgba(100,150,255,.17)" strokeWidth={0.8}/>
+        <text x={110} y={19} textAnchor="middle" fill="rgba(180,210,255,.44)" fontFamily="ui-sans-serif,system-ui,sans-serif" fontSize={8} fontWeight={700} letterSpacing="0.16em">CARPAL TUNNEL</text>
+        <text x={110} y={31} textAnchor="middle" fill="rgba(180,210,255,.28)" fontFamily="ui-sans-serif,system-ui,sans-serif" fontSize={6.5} letterSpacing="0.10em">Axial Cross-Section</text>
+        <path d="M 28,115 Q 40,58 110,50 Q 180,58 192,115 Z" fill="rgba(26,95,168,.1)" stroke="rgba(100,150,255,.28)" strokeWidth={1.2}/>
+        <path d="M 24,120 Q 110,102 196,120" fill="none" stroke="rgba(220,235,255,.44)" strokeWidth={2.2} strokeLinecap="round"/>
+        <text x={110} y={100} textAnchor="middle" fill="rgba(200,220,255,.34)" fontFamily="ui-sans-serif,system-ui,sans-serif" fontSize={6.5}>Flex. Retinaculum</text>
+        <circle cx={85} cy={128} r={10} fill={`${MEDIAN}28`} stroke={MEDIAN} strokeWidth={1.5}/>
+        <circle cx={85} cy={128} r={16} fill="none" stroke={MEDIAN} strokeWidth={0.6} opacity={0.25}/>
+        <text x={85} y={132} textAnchor="middle" fill={MEDIAN} fontFamily="ui-sans-serif,system-ui,sans-serif" fontSize={7} fontWeight={700}>MN</text>
+        {[107,126,145,164].map((cx,i) => (
+          <g key={`fds${i}`}>
+            <circle cx={cx} cy={122} r={6} fill="rgba(200,220,255,.07)" stroke="rgba(200,220,255,.27)" strokeWidth={0.8}/>
+            <text x={cx} y={125} textAnchor="middle" fill="rgba(200,220,255,.38)" fontFamily="ui-sans-serif,system-ui,sans-serif" fontSize={4.5} fontWeight={600}>FDS</text>
+          </g>
+        ))}
+        {[107,126,145,164].map((cx,i) => (
+          <g key={`fdp${i}`}>
+            <circle cx={cx} cy={140} r={6} fill="rgba(200,220,255,.06)" stroke="rgba(200,220,255,.22)" strokeWidth={0.8}/>
+            <text x={cx} y={143} textAnchor="middle" fill="rgba(200,220,255,.33)" fontFamily="ui-sans-serif,system-ui,sans-serif" fontSize={4.5} fontWeight={600}>FDP</text>
+          </g>
+        ))}
+        <circle cx={68} cy={140} r={5.5} fill="rgba(200,220,255,.06)" stroke="rgba(200,220,255,.22)" strokeWidth={0.8}/>
+        <text x={68} y={143} textAnchor="middle" fill="rgba(200,220,255,.33)" fontFamily="ui-sans-serif,system-ui,sans-serif" fontSize={4}>FPL</text>
+        <ellipse cx={30} cy={128} rx={16} ry={12} fill="rgba(0,10,24,.7)" stroke={`${ULNAR}44`} strokeWidth={0.9}/>
+        <text x={30} y={126} textAnchor="middle" fill={`${ULNAR}cc`} fontFamily="ui-sans-serif,system-ui,sans-serif" fontSize={6} fontWeight={700}>UN</text>
+        <text x={30} y={136} textAnchor="middle" fill="rgba(0,255,200,.38)" fontFamily="ui-sans-serif,system-ui,sans-serif" fontSize={5}>Guyon</text>
+        <circle cx={30}  cy={164} r={4.5} fill={`${MEDIAN}28`} stroke={MEDIAN} strokeWidth={0.8}/>
+        <text x={38}  y={168} fill="rgba(0,212,255,.55)" fontFamily="ui-sans-serif,system-ui,sans-serif" fontSize={6.5}>Median N.</text>
+        <circle cx={100} cy={164} r={4.5} fill="rgba(200,220,255,.10)" stroke="rgba(200,220,255,.28)" strokeWidth={0.8}/>
+        <text x={108} y={168} fill="rgba(180,210,255,.45)" fontFamily="ui-sans-serif,system-ui,sans-serif" fontSize={6.5}>9 Tendons</text>
+        <circle cx={168} cy={164} r={4.5} fill="rgba(0,10,24,.70)" stroke={`${ULNAR}44`} strokeWidth={0.8}/>
+        <text x={176} y={168} fill="rgba(0,255,200,.45)" fontFamily="ui-sans-serif,system-ui,sans-serif" fontSize={6.5}>Ulnar N.</text>
+      </g>
+
+    </svg>
   );
 };

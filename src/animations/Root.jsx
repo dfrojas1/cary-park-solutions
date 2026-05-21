@@ -5,7 +5,7 @@ export const RemotionRoot = () => (
   <Composition
     id="NerveMap"
     component={NerveMap}
-    durationInFrames={240}
+    durationInFrames={480}
     fps={30}
     width={960}
     height={1080}
