@@ -53,45 +53,43 @@ header span{font-size:11px;color:var(--text)}
 
   .app{flex-direction:column;height:auto;overflow:visible}
 
-  /* Sidebar → horizontal scroll tab strip */
+  /* Nav → wrapping button grid (no horizontal scroll = no tap conflict) */
   .sb{
     width:100%;height:auto;
-    display:flex;flex-direction:row;align-items:center;
+    display:flex;flex-direction:row;flex-wrap:wrap;
+    align-items:flex-start;
     border-right:none;border-bottom:1px solid var(--br);
-    overflow-x:auto;overflow-y:hidden;
-    -webkit-overflow-scrolling:touch;
-    scrollbar-width:none;
-    padding:6px 10px;gap:4px;
+    overflow:visible;
+    padding:8px 10px 10px;gap:6px;
     flex-shrink:0;
   }
-  .sb::-webkit-scrollbar{display:none}
 
-  /* Section dividers → thin vertical bars between groups */
+  /* Section labels take full row width */
   .sh{
-    flex-shrink:0;width:1px;height:24px;
-    background:var(--br);padding:0;
-    font-size:0;letter-spacing:0;
+    width:100%;
+    padding:8px 2px 2px;
+    font-size:9px;letter-spacing:.15em;color:#2a4a5a;
   }
 
-  /* Buttons → compact horizontal pills */
+  /* Buttons → compact pill chips */
   .nb{
-    flex-shrink:0;width:auto;min-height:44px;
+    flex:0 0 auto;width:auto;min-height:44px;
     padding:8px 14px;
     border-left:none;border-bottom:2px solid transparent;border-top:2px solid transparent;
     border-radius:22px;
     white-space:nowrap;font-size:13px;
   }
   .nb.on{
-    background:rgba(0,212,255,.1);
+    background:rgba(0,212,255,.12);
     border-left-color:transparent;
     border-bottom-color:var(--c6);
   }
-  .nb.on.c5{background:rgba(255,221,0,.08);border-bottom-color:var(--c5)}
-  .nb.on.c7{background:rgba(0,255,200,.08);border-bottom-color:var(--c7)}
-  .nb.on.c8{background:rgba(167,139,250,.08);border-bottom-color:var(--c8)}
-  .nb.on.te{background:rgba(212,168,67,.08);border-bottom-color:var(--tendon)}
-  .nb.on.la{background:rgba(155,107,181,.08);border-bottom-color:var(--labrum)}
-  .nb.on.bu{background:rgba(79,195,247,.08);border-bottom-color:var(--bursa)}
+  .nb.on.c5{color:var(--c5);background:rgba(255,221,0,.1);border-bottom-color:var(--c5)}
+  .nb.on.c7{color:var(--c7);background:rgba(0,255,200,.1);border-bottom-color:var(--c7)}
+  .nb.on.c8{color:var(--c8);background:rgba(167,139,250,.1);border-bottom-color:var(--c8)}
+  .nb.on.te{color:var(--tendon);background:rgba(212,168,67,.1);border-bottom-color:var(--tendon)}
+  .nb.on.la{color:var(--labrum);background:rgba(155,107,181,.1);border-bottom-color:var(--labrum)}
+  .nb.on.bu{color:var(--bursa);background:rgba(79,195,247,.1);border-bottom-color:var(--bursa)}
 
   .viewer{overflow:visible;height:auto}
   .cond{height:auto}
