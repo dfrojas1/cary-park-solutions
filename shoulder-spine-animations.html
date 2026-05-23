@@ -277,7 +277,7 @@ header span{font-size:11px;color:var(--text)}
 </div>
 
 <!-- ── C6 RADICULOPATHY (default) ── -->
-<div class="cond on" id="c6r">
+<div class="cond on" id="c6r" style="display:flex">
 <div class="sa">
 <svg viewBox="0 0 520 500" xmlns="http://www.w3.org/2000/svg" style="max-height:540px">
 <defs>
@@ -887,21 +887,29 @@ header span{font-size:11px;color:var(--text)}
 
 <script>
 function sw(id, btn) {
-  document.querySelectorAll('.cond').forEach(function(c) { c.classList.remove('on'); });
+  // Use inline style to force visibility — bypasses any CSS class-cascade failure on iOS Safari
+  document.querySelectorAll('.cond').forEach(function(c) {
+    c.style.display = 'none';
+    c.classList.remove('on');
+  });
   document.querySelectorAll('.nb').forEach(function(b) { b.classList.remove('on'); });
-  btn.classList.add('on');
+  if (btn) btn.classList.add('on');
+
   var el = document.getElementById(id);
   el.classList.add('on');
-  void el.offsetHeight; // force layout recalculation for iOS Safari
-  // On mobile: scroll content into view (nav is tall, content may be off-screen)
+  el.style.display = 'flex';                          // inline always wins over CSS
+  el.style.flexDirection = window.innerWidth <= 760 ? 'column' : 'row';
+  void el.offsetHeight;                               // force layout before paint
+
   if (window.innerWidth <= 760) {
-    setTimeout(function() {
-      el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }, 60);
+    // Scroll to bring content into view — simple offsetTop, no options object (iOS compat)
+    window.scrollTo(0, el.offsetTop - 8);
   } else {
     // Desktop: restart SVG animations
     var svg = el.querySelector('svg');
-    if (svg) { svg.style.display='none'; void svg.offsetWidth; svg.style.display=''; }
+    if (svg) { svg.style.display = 'none'; void svg.offsetWidth; svg.style.display = ''; }
+  }
+}
   }
 }
 </script>
