@@ -95,13 +95,17 @@ header span{font-size:11px;color:var(--text)}
   .cond{height:auto}
   .cond.on{flex-direction:column}
 
-  /* SVG panel: full width, sensible height */
+  /* SVG panel: kill the flex:1 that collapses in height:auto parent on iOS */
   .sa{
+    flex:none !important;
+    width:100%;
     padding:10px 8px;
-    height:auto;min-height:0;
+    display:flex;
+    align-items:center;
     justify-content:center;
+    overflow:visible;
   }
-  .sa svg{max-height:55vw !important;min-height:270px;width:100%;height:auto}
+  .sa svg{max-height:50vw !important;min-height:250px;width:100%;height:auto;display:block}
 
   /* Info panel: full width below SVG */
   .inf{
@@ -883,14 +887,22 @@ header span{font-size:11px;color:var(--text)}
 
 <script>
 function sw(id, btn) {
-  document.querySelectorAll('.cond').forEach(c => c.classList.remove('on'));
-  document.querySelectorAll('.nb').forEach(b => b.classList.remove('on'));
+  document.querySelectorAll('.cond').forEach(function(c) { c.classList.remove('on'); });
+  document.querySelectorAll('.nb').forEach(function(b) { b.classList.remove('on'); });
   btn.classList.add('on');
-  const el = document.getElementById(id);
+  var el = document.getElementById(id);
   el.classList.add('on');
-  // Restart SVG animations
-  const svg = el.querySelector('svg');
-  if (svg) { svg.style.display='none'; void svg.offsetWidth; svg.style.display=''; }
+  void el.offsetHeight; // force layout recalculation for iOS Safari
+  // On mobile: scroll content into view (nav is tall, content may be off-screen)
+  if (window.innerWidth <= 760) {
+    setTimeout(function() {
+      el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }, 60);
+  } else {
+    // Desktop: restart SVG animations
+    var svg = el.querySelector('svg');
+    if (svg) { svg.style.display='none'; void svg.offsetWidth; svg.style.display=''; }
+  }
 }
 </script>
 </body>
