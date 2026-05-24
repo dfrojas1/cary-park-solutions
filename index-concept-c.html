@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Cary Park Solutions — Concept C: Dark Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,300;0,400;0,500;0,700;1,400&family=Source+Serif+4:opsz,ital,wght@8..60,0,400;8..60,0,600;8..60,0,700;8..60,1,500&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#08090d;
+  --bg1:#0d0f15;
+  --bg2:#111318;
+  --card:#13151c;
+  --border:rgba(255,255,255,.07);
+  --accent:#4f9cf9;
+  --accent2:#7c6af7;
+  --teal:#2dd4bf;
+  --text:#e8eaf0;
+  --dim:#6b7280;
+  --r:14px;
+}
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans',sans-serif;color:var(--text);background:var(--bg);line-height:1.6;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+h1,h2,h3{font-family:'Source Serif 4',serif;line-height:1.2}
+
+.concept-bar{background:#7c6af7;color:#fff;text-align:center;padding:8px;font-size:.72rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase}
+
+/* GRAIN */
+body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+  opacity:.4;
+}
+
+/* NAV */
+nav{position:sticky;top:0;z-index:100;background:rgba(8,9,13,.9);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);padding:0 48px;height:64px;display:flex;align-items:center;justify-content:space-between;position:relative;z-index:50}
+.logo-txt{font-family:'Source Serif 4',serif;font-size:1.1rem;font-weight:600;color:var(--text);letter-spacing:-.01em}
+.logo-txt span{color:var(--accent)}
+.nav-links{display:flex;align-items:center;gap:2px}
+.nav-links a{padding:7px 13px;border-radius:8px;font-size:.86rem;color:var(--dim);transition:color .2s,background .2s}
+.nav-links a:hover{color:var(--text);background:rgba(255,255,255,.04)}
+.nav-cta{background:var(--accent)!important;color:#000!important;font-weight:700!important;border-radius:100px!important}
+.nav-cta:hover{opacity:.88!important}
+@media(max-width:680px){.nav-links{display:none}nav{padding:0 20px}}
+
+/* HERO */
+.hero{position:relative;min-height:94vh;display:flex;align-items:center;padding:0 48px;overflow:hidden}
+@media(max-width:680px){.hero{padding:0 24px;min-height:auto;padding-top:80px;padding-bottom:80px}}
+.hero-glow{position:absolute;width:800px;height:800px;border-radius:50%;top:-200px;right:-200px;background:radial-gradient(circle,rgba(79,156,249,.08) 0%,transparent 65%);pointer-events:none}
+.hero-glow-2{position:absolute;width:500px;height:500px;border-radius:50%;bottom:-100px;left:-100px;background:radial-gradient(circle,rgba(124,106,247,.06) 0%,transparent 60%);pointer-events:none}
+.hero-content{position:relative;z-index:2;max-width:760px}
+.hero-eyebrow{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--border);border-radius:100px;padding:5px 14px;font-size:.72rem;color:var(--dim);letter-spacing:.06em;text-transform:uppercase;margin-bottom:28px}
+.eyebrow-dot{width:5px;height:5px;border-radius:50%;background:var(--teal);animation:glow 2s infinite}
+@keyframes glow{0%,100%{box-shadow:0 0 4px var(--teal)}50%{box-shadow:0 0 10px var(--teal),0 0 20px rgba(45,212,191,.3)}}
+.hero h1{font-size:clamp(2.4rem,5vw,4rem);color:#fff;margin-bottom:20px;letter-spacing:-.03em;font-weight:700}
+.hero h1 .g{background:linear-gradient(90deg,var(--accent),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero-sub{font-size:1.05rem;color:var(--dim);line-height:1.8;max-width:540px;margin-bottom:36px}
+.hero-btns{display:flex;gap:12px;flex-wrap:wrap}
+.btn-accent{background:var(--accent);color:#000;padding:13px 26px;border-radius:100px;font-weight:700;font-size:.9rem;transition:all .2s}
+.btn-accent:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(79,156,249,.3)}
+.btn-ghost{background:rgba(255,255,255,.05);color:var(--text);border:1px solid var(--border);padding:12px 24px;border-radius:100px;font-weight:500;font-size:.9rem;transition:all .2s}
+.btn-ghost:hover{background:rgba(255,255,255,.09);border-color:rgba(255,255,255,.15)}
+.hero-stats{display:flex;gap:36px;margin-top:44px;padding-top:36px;border-top:1px solid var(--border);flex-wrap:wrap}
+.hs-n{font-family:'Source Serif 4',serif;font-size:1.8rem;font-weight:700;color:#fff;line-height:1}
+.hs-l{font-size:.78rem;color:var(--dim);margin-top:5px}
+
+/* MARQUEE */
+.marquee{border-top:1px solid var(--border);border-bottom:1px solid var(--border);background:var(--bg1);padding:14px 0;overflow:hidden;position:relative;z-index:2}
+.marquee-track{display:flex;gap:0;animation:scroll 22s linear infinite;width:max-content}
+@keyframes scroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.marquee-item{display:flex;align-items:center;gap:10px;padding:0 36px;font-size:.8rem;color:var(--dim);font-weight:500;white-space:nowrap}
+.marquee-sep{width:4px;height:4px;border-radius:50%;background:var(--border)}
+
+/* WORK */
+.work{padding:100px 48px;position:relative;z-index:2}
+@media(max-width:600px){.work{padding:70px 24px}}
+.work-inner{max-width:1200px;margin:0 auto}
+.sec-label{font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);margin-bottom:10px}
+.sec-h{font-size:clamp(1.6rem,3vw,2.3rem);color:#fff;margin-bottom:10px}
+.sec-sub{font-size:.95rem;color:var(--dim);line-height:1.75;margin-bottom:52px;max-width:520px}
+.work-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+@media(max-width:720px){.work-grid{grid-template-columns:1fr}}
+.wc{background:var(--card);border:1px solid var(--border);border-radius:20px;overflow:hidden;transition:border-color .2s,transform .2s}
+.wc:hover{border-color:rgba(79,156,249,.25);transform:translateY(-3px)}
+.wc-thumb{height:220px;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
+.wc-thumb.navy{background:linear-gradient(145deg,#1a2d4a 0%,#243a5a 40%,#1a3060 100%)}
+.wc-thumb.dark{background:linear-gradient(145deg,#040810 0%,#061222 50%,#040c1a 100%)}
+.wc-thumb-label{font-size:.7rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.3)}
+.wc-thumb-dot{width:40px;height:40px;border-radius:50%;border:1px solid rgba(255,255,255,.12);display:flex;align-items:center;justify-content:center;font-size:1.2rem;margin-bottom:12px}
+.wc-thumb-inner{display:flex;flex-direction:column;align-items:center}
+.wc-body{padding:24px 26px}
+.wc-tag{font-size:.68rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--teal);margin-bottom:8px}
+.wc-body h3{font-size:1.05rem;color:#fff;margin-bottom:8px}
+.wc-body p{font-size:.84rem;color:var(--dim);line-height:1.65;margin-bottom:14px}
+.wc-link{font-size:.8rem;font-weight:700;color:var(--accent)}
+
+/* SERVICES */
+.services{background:var(--bg1);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:100px 48px;position:relative;z-index:2}
+@media(max-width:600px){.services{padding:70px 24px}}
+.services-inner{max-width:1200px;margin:0 auto}
+.svc-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1px;background:var(--border);border:1px solid var(--border);border-radius:var(--r);overflow:hidden;margin-top:52px}
+.svc{background:var(--bg1);padding:32px 26px;transition:background .2s}
+.svc:hover{background:var(--bg2)}
+.svc-n{width:40px;height:40px;border-radius:10px;background:rgba(79,156,249,.1);border:1px solid rgba(79,156,249,.15);display:flex;align-items:center;justify-content:center;font-size:1.1rem;margin-bottom:18px}
+.svc h3{font-size:1rem;color:#fff;margin-bottom:9px}
+.svc p{font-size:.84rem;color:var(--dim);line-height:1.7}
+.svc-price{font-size:.75rem;font-weight:700;color:var(--accent);margin-top:12px}
+
+/* ABOUT */
+.about{padding:100px 48px;position:relative;z-index:2}
+@media(max-width:600px){.about{padding:70px 24px}}
+.about-inner{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
+@media(max-width:820px){.about-inner{grid-template-columns:1fr;gap:48px}}
+.about-visual{position:relative}
+.about-card{background:var(--card);border:1px solid var(--border);border-radius:24px;padding:36px;display:flex;flex-direction:column;gap:24px}
+.about-card-head{display:flex;align-items:center;gap:16px}
+.about-mono{width:64px;height:64px;border-radius:50%;background:linear-gradient(135deg,rgba(79,156,249,.2),rgba(124,106,247,.2));border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-family:'Source Serif 4',serif;font-size:1.4rem;font-weight:700;color:var(--accent)}
+.about-card-name{font-size:1rem;font-weight:700;color:#fff}
+.about-card-title{font-size:.78rem;color:var(--dim)}
+.about-card-stats{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.about-stat{background:rgba(255,255,255,.03);border:1px solid var(--border);border-radius:10px;padding:14px 16px}
+.about-stat-n{font-family:'Source Serif 4',serif;font-size:1.5rem;font-weight:700;color:#fff}
+.about-stat-l{font-size:.72rem;color:var(--dim);margin-top:2px}
+.about-text h2{margin-bottom:16px}
+.about-text p{color:var(--dim);font-size:.92rem;line-height:1.8;margin-bottom:14px}
+.about-chips{display:flex;flex-wrap:wrap;gap:7px;margin-top:18px}
+.about-chip{background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:100px;padding:5px 13px;font-size:.75rem;color:var(--dim)}
+
+/* PRICING */
+.pricing{background:var(--bg1);border-top:1px solid var(--border);padding:100px 48px;position:relative;z-index:2}
+@media(max-width:600px){.pricing{padding:70px 24px}}
+.pricing-inner{max-width:1100px;margin:0 auto}
+.price-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:52px}
+@media(max-width:820px){.price-grid{grid-template-columns:1fr}}
+.pc{background:var(--card);border:1px solid var(--border);border-radius:20px;padding:32px;position:relative;transition:border-color .2s}
+.pc.pop{border-color:rgba(79,156,249,.35);background:linear-gradient(145deg,rgba(79,156,249,.05) 0%,var(--card) 60%)}
+.pc-tag{position:absolute;top:-11px;left:50%;transform:translateX(-50%);background:var(--accent);color:#000;font-size:.65rem;font-weight:700;padding:4px 14px;border-radius:20px;letter-spacing:.06em;text-transform:uppercase;white-space:nowrap}
+.pc-name{font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--dim);margin-bottom:8px}
+.pc-price{font-family:'Source Serif 4',serif;font-size:2.2rem;font-weight:700;color:#fff;margin-bottom:4px}
+.pc-price span{font-size:1rem;font-weight:400;color:var(--dim)}
+.pc-desc{font-size:.84rem;color:var(--dim);line-height:1.7;margin-bottom:20px}
+.pc-list{list-style:none;display:flex;flex-direction:column;gap:8px;margin-bottom:26px}
+.pc-list li{font-size:.83rem;color:var(--text);display:flex;gap:7px;align-items:flex-start}
+.pc-list li::before{content:'✓';color:var(--teal);font-weight:700;flex-shrink:0;margin-top:2px}
+.pc-btn{width:100%;padding:12px;border-radius:100px;text-align:center;font-weight:700;font-size:.86rem;display:block;transition:all .2s}
+.pc-btn.solid{background:var(--accent);color:#000}
+.pc-btn.solid:hover{transform:translateY(-1px);box-shadow:0 6px 20px rgba(79,156,249,.3)}
+.pc-btn.ghost{border:1px solid var(--border);color:var(--text)}
+.pc-btn.ghost:hover{border-color:rgba(79,156,249,.35);background:rgba(79,156,249,.05)}
+
+/* CTA BAND */
+.cta-band{padding:80px 48px;text-align:center;position:relative;z-index:2;background:linear-gradient(135deg,rgba(79,156,249,.06) 0%,rgba(124,106,247,.06) 100%);border-top:1px solid var(--border)}
+.cta-band h2{font-size:clamp(1.7rem,3vw,2.4rem);color:#fff;margin-bottom:12px}
+.cta-band p{color:var(--dim);font-size:.95rem;margin-bottom:30px}
+.cta-email{color:var(--accent);font-size:.85rem;margin-top:12px}
+
+/* FOOTER */
+footer{background:var(--bg1);border-top:1px solid var(--border);padding:52px 48px 32px;position:relative;z-index:2}
+.footer-inner{max-width:1200px;margin:0 auto}
+.footer-top{display:grid;grid-template-columns:1.5fr 1fr 1fr;gap:40px;padding-bottom:36px;border-bottom:1px solid var(--border);margin-bottom:28px}
+@media(max-width:680px){.footer-top{grid-template-columns:1fr;gap:28px}}
+.footer-logo{font-family:'Source Serif 4',serif;font-size:1.1rem;color:#fff;margin-bottom:10px}
+.footer-logo span{color:var(--accent)}
+.footer-brand p{font-size:.84rem;color:var(--dim);line-height:1.75;max-width:260px}
+.fc h5{font-size:.7rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.25);margin-bottom:12px}
+.fc a{display:block;font-size:.84rem;color:var(--dim);margin-bottom:8px;transition:color .2s}
+.fc a:hover{color:#fff}
+.footer-bottom{display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;font-size:.76rem;color:var(--dim)}
+</style>
+</head>
+<body>
+
+<div class="concept-bar">Concept C — "Dark Portfolio" — Keeps the dark aesthetic · Repositioned as web studio · Work front and center</div>
+
+<nav>
+  <div class="logo-txt">Cary Park <span>Solutions</span></div>
+  <div class="nav-links">
+    <a href="#work">Work</a>
+    <a href="#services">Services</a>
+    <a href="#about">About</a>
+    <a href="#pricing">Pricing</a>
+    <a href="#contact" class="nav-cta">Start a Project</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-glow"></div>
+  <div class="hero-glow-2"></div>
+  <div class="hero-content">
+    <div class="hero-eyebrow"><span class="eyebrow-dot"></span>Web Studio · Triangle NC · Since 2024</div>
+    <h1>Web design for <span class="g">businesses that matter</span> in your neighborhood.</h1>
+    <p class="hero-sub">I build modern, mobile-first websites for medical practices and local businesses across the RDU Triangle. Clean code, real results, no agency overhead.</p>
+    <div class="hero-btns">
+      <a href="#work" class="btn-accent">View My Work</a>
+      <a href="#services" class="btn-ghost">See Services</a>
+    </div>
+    <div class="hero-stats">
+      <div>
+        <div class="hs-n">10+</div>
+        <div class="hs-l">Years building digital products</div>
+      </div>
+      <div>
+        <div class="hs-n">2–4 wk</div>
+        <div class="hs-l">Typical delivery</div>
+      </div>
+      <div>
+        <div class="hs-n">EN/ES</div>
+        <div class="hs-l">Bilingual service</div>
+      </div>
+      <div>
+        <div class="hs-n">1:1</div>
+        <div class="hs-l">You work with me directly</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee" aria-hidden="true">
+  <div class="marquee-track">
+    <span class="marquee-item"><span class="marquee-sep"></span>Medical Practices</span>
+    <span class="marquee-item"><span class="marquee-sep"></span>Local Restaurants</span>
+    <span class="marquee-item"><span class="marquee-sep"></span>Community Services</span>
+    <span class="marquee-item"><span class="marquee-sep"></span>HOA Portals</span>
+    <span class="marquee-item"><span class="marquee-sep"></span>Service Businesses</span>
+    <span class="marquee-item"><span class="marquee-sep"></span>Intake Forms</span>
+    <span class="marquee-item"><span class="marquee-sep"></span>Bilingual Sites</span>
+    <span class="marquee-item"><span class="marquee-sep"></span>Appointment Booking</span>
+    <span class="marquee-item"><span class="marquee-sep"></span>Mobile-First</span>
+    <span class="marquee-item"><span class="marquee-sep"></span>Triangle NC</span>
+    <!-- duplicate for seamless loop -->
+    <span class="marquee-item"><span class="marquee-sep"></span>Medical Practices</span>
+    <span class="marquee-item"><span class="marquee-sep"></span>Local Restaurants</span>
+    <span class="marquee-item"><span class="marquee-sep"></span>Community Services</span>
+    <span class="marquee-item"><span class="marquee-sep"></span>HOA Portals</span>
+    <span class="marquee-item"><span class="marquee-sep"></span>Service Businesses</span>
+    <span class="marquee-item"><span class="marquee-sep"></span>Intake Forms</span>
+    <span class="marquee-item"><span class="marquee-sep"></span>Bilingual Sites</span>
+    <span class="marquee-item"><span class="marquee-sep"></span>Appointment Booking</span>
+    <span class="marquee-item"><span class="marquee-sep"></span>Mobile-First</span>
+    <span class="marquee-item"><span class="marquee-sep"></span>Triangle NC</span>
+  </div>
+</div>
+
+<!-- WORK -->
+<section class="work" id="work">
+  <div class="work-inner">
+    <p class="sec-label">Selected Work</p>
+    <h2 class="sec-h">Built for the Triangle.</h2>
+    <p class="sec-sub">Every demo is a fully working, shippable site. Tap around — try it on your phone.</p>
+    <div class="work-grid">
+      <div class="wc">
+        <div class="wc-thumb navy">
+          <div class="wc-thumb-inner">
+            <div class="wc-thumb-dot">🏥</div>
+            <span class="wc-thumb-label">Triangle Hand &amp; Shoulder Center</span>
+          </div>
+        </div>
+        <div class="wc-body">
+          <div class="wc-tag">Medical Practice · Raleigh, NC</div>
+          <h3>Triangle Hand &amp; Shoulder Center</h3>
+          <p>6 physicians, interactive cervical &amp; shoulder anatomy viewer, condition library, appointment CTAs, and patient portal integration.</p>
+          <a href="cary-park-v2/medical/index.html" class="wc-link">Open demo →</a>
+        </div>
+      </div>
+      <div class="wc">
+        <div class="wc-thumb dark">
+          <div class="wc-thumb-inner">
+            <div class="wc-thumb-dot">🏊</div>
+            <span class="wc-thumb-label">Summer Swim Sessions · Clayton</span>
+          </div>
+        </div>
+        <div class="wc-body">
+          <div class="wc-tag">Community Service · Clayton, NC</div>
+          <h3>Summer Swim Sessions</h3>
+          <p>Registration site with multi-field intake form, preferred-day selection, swimming ability assessment, and Formspree integration.</p>
+          <a href="swim.html" class="wc-link">Open demo →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="services" id="services">
+  <div class="services-inner">
+    <p class="sec-label">Services</p>
+    <h2 class="sec-h">What I build.</h2>
+    <p class="sec-sub">Scoped, designed, built, and shipped by one person. No handoffs, no surprises.</p>
+    <div class="svc-grid">
+      <div class="svc">
+        <div class="svc-n">🏥</div>
+        <h3>Medical Practice Sites</h3>
+        <p>Physician bios, condition libraries with interactive anatomy, appointment CTAs, and patient portal integration. Built to rank locally and convert visitors into booked patients.</p>
+        <div class="svc-price">From $1,500 · 3–4 weeks</div>
+      </div>
+      <div class="svc">
+        <div class="svc-n">🌐</div>
+        <h3>Local Business Sites</h3>
+        <p>Restaurants, salons, contractors, services. Mobile-first, fast, bilingual (EN/ES) available, and live in two weeks from kickoff.</p>
+        <div class="svc-price">From $1,200 · 2–3 weeks</div>
+      </div>
+      <div class="svc">
+        <div class="svc-n">📋</div>
+        <h3>Forms &amp; Signups</h3>
+        <p>Event registration, intake forms, scheduling pages. No backend required — posts directly to your inbox from day one.</p>
+        <div class="svc-price">Add-on from $300</div>
+      </div>
+      <div class="svc">
+        <div class="svc-n">🛡️</div>
+        <h3>Monthly Retainer</h3>
+        <p>Content updates, uptime monitoring, and a real human available same day. No ticket queues, no outsourcing.</p>
+        <div class="svc-price">From $99/month</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="about" id="about">
+  <div class="about-inner">
+    <div class="about-visual">
+      <div class="about-card">
+        <div class="about-card-head">
+          <div class="about-mono">DR</div>
+          <div>
+            <div class="about-card-name">David Rojas</div>
+            <div class="about-card-title">Founder · Cary Park Solutions</div>
+          </div>
+        </div>
+        <div class="about-card-stats">
+          <div class="about-stat">
+            <div class="about-stat-n">10+</div>
+            <div class="about-stat-l">Years of experience</div>
+          </div>
+          <div class="about-stat">
+            <div class="about-stat-n">EN/ES</div>
+            <div class="about-stat-l">Bilingual service</div>
+          </div>
+          <div class="about-stat">
+            <div class="about-stat-n">RTP</div>
+            <div class="about-stat-l">Triangle-based</div>
+          </div>
+          <div class="about-stat">
+            <div class="about-stat-n">1:1</div>
+            <div class="about-stat-l">Direct access</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="about-text">
+      <p class="sec-label">About</p>
+      <h2 class="sec-h">One person. Real expertise.</h2>
+      <p>I'm David — a web builder and IT strategist based in Clayton, NC. I left enterprise tech to build something closer to home: high-quality websites for the local businesses and practices that shape our communities.</p>
+      <p>I've shipped enterprise-scale digital products. Now I apply the same discipline to sites for medical practices, local services, and community organizations across the Triangle — at a price that makes sense for a small business.</p>
+      <p>You call or text me. I build it. No agencies, no middlemen.</p>
+      <div class="about-chips">
+        <span class="about-chip">Clayton, NC</span>
+        <span class="about-chip">Owner-operated</span>
+        <span class="about-chip">Vendor-agnostic</span>
+        <span class="about-chip">No long-term contracts</span>
+        <span class="about-chip">Bilingual EN/ES</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="pricing" id="pricing">
+  <div class="pricing-inner">
+    <p class="sec-label">Pricing</p>
+    <h2 class="sec-h">Flat rates. Free scope call.</h2>
+    <p class="sec-sub">No hourly guesswork. I'll give you a fixed price after a 30-minute call — no charge.</p>
+    <div class="price-grid">
+      <div class="pc">
+        <div class="pc-name">Starter</div>
+        <div class="pc-price">$1,200<span>/project</span></div>
+        <div class="pc-desc">For simple local business sites: home, about, services, and contact.</div>
+        <ul class="pc-list">
+          <li>Up to 4 pages</li>
+          <li>Mobile-first design</li>
+          <li>Contact form</li>
+          <li>Google Maps embed</li>
+          <li>Delivered in 2 weeks</li>
+        </ul>
+        <a href="#contact" class="pc-btn ghost">Get Started</a>
+      </div>
+      <div class="pc pop">
+        <div class="pc-tag">Most Popular</div>
+        <div class="pc-name">Professional</div>
+        <div class="pc-price">$2,400<span>/project</span></div>
+        <div class="pc-desc">Full business site with service pages, staff bios, gallery, and form integrations.</div>
+        <ul class="pc-list">
+          <li>Up to 8 pages</li>
+          <li>Appointment / intake form</li>
+          <li>Staff or physician bios</li>
+          <li>Photo gallery</li>
+          <li>Bilingual EN/ES option</li>
+          <li>Delivered in 3–4 weeks</li>
+        </ul>
+        <a href="#contact" class="pc-btn solid">Get Started</a>
+      </div>
+      <div class="pc">
+        <div class="pc-name">Medical / Custom</div>
+        <div class="pc-price">Custom<span> quote</span></div>
+        <div class="pc-desc">Multi-provider practices, interactive features, condition libraries, and patient portals.</div>
+        <ul class="pc-list">
+          <li>Unlimited pages</li>
+          <li>Interactive anatomy viewer</li>
+          <li>Multiple provider profiles</li>
+          <li>Patient portal integration</li>
+          <li>Post-launch support included</li>
+        </ul>
+        <a href="#contact" class="pc-btn ghost">Schedule a Call</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<div class="cta-band" id="contact">
+  <h2>Ready to start a project?</h2>
+  <p>Free 30-minute scope call. I'll have a concept ready before we talk price.</p>
+  <a href="mailto:info@caryparksolutions.com?subject=Website Project" class="btn-accent">Email David →</a>
+  <p class="cta-email">info@caryparksolutions.com · (919) 000-0000</p>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <div class="footer-logo">Cary Park <span>Solutions</span></div>
+        <p>Web design for local businesses and medical practices across the Research Triangle. Based in Clayton, NC. Bilingual EN/ES.</p>
+      </div>
+      <div class="fc">
+        <h5>Services</h5>
+        <a href="#services">Medical Practice Sites</a>
+        <a href="#services">Local Business</a>
+        <a href="#services">Forms &amp; Signups</a>
+        <a href="#services">Monthly Support</a>
+      </div>
+      <div class="fc">
+        <h5>Contact</h5>
+        <a href="mailto:info@caryparksolutions.com">info@caryparksolutions.com</a>
+        <a href="tel:9190000000">(919) 000-0000</a>
+        <a>Clayton, NC · Triangle Area</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Cary Park Solutions · David Rojas</span>
+      <span>EN / ES · Triangle NC</span>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
