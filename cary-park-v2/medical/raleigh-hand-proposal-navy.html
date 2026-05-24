@@ -322,11 +322,32 @@ button{font-family:inherit;cursor:pointer;-webkit-appearance:none}
 .anatomy-embed-dot{width:8px;height:8px;border-radius:50%;background:var(--accent);box-shadow:0 0 6px rgba(93,184,232,.6)}
 .anatomy-embed-label span{font-size:12px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.6)}
 .anatomy-embed-label strong{font-size:13px;font-weight:600;color:rgba(255,255,255,.9)}
-.anatomy-iframe-container{position:relative;width:100%;padding-bottom:0}
-.anatomy-iframe-container iframe{
-  display:block;width:100%;height:640px;border:none;
+.anatomy-preview{
+  position:relative;width:100%;background:#02080f;
+  border-radius:0 0 var(--radius) var(--radius);
+  overflow:hidden;min-height:360px;
+  display:flex;align-items:center;justify-content:center;
+  flex-direction:column;gap:24px;padding:40px;
 }
-@media(max-width:768px){.anatomy-iframe-container iframe{height:420px}}
+.anatomy-preview-chips{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-bottom:4px}
+.apc{padding:7px 16px;border-radius:100px;border:1px solid;font-size:11px;font-weight:600;letter-spacing:.04em;font-family:'DM Sans',sans-serif}
+.apc.c6{color:#00d4ff;border-color:rgba(0,212,255,.3);background:rgba(0,212,255,.06)}
+.apc.c7{color:#00ffcc;border-color:rgba(0,255,200,.3);background:rgba(0,255,200,.06)}
+.apc.c5{color:#ffdd00;border-color:rgba(255,221,0,.3);background:rgba(255,221,0,.06)}
+.apc.c8{color:#a78bfa;border-color:rgba(167,139,250,.3);background:rgba(167,139,250,.06)}
+.apc.sh{color:#d4a843;border-color:rgba(212,168,67,.3);background:rgba(212,168,67,.06)}
+.apc.la{color:#9b6bb5;border-color:rgba(155,107,181,.3);background:rgba(155,107,181,.06)}
+.anatomy-preview-text{text-align:center;color:rgba(255,255,255,.45);font-size:13px;line-height:1.7;max-width:480px}
+.anatomy-launch{
+  display:inline-flex;align-items:center;gap:9px;
+  background:rgba(93,184,232,.12);border:1px solid rgba(93,184,232,.35);
+  color:#5db8e8;border-radius:100px;padding:12px 28px;
+  font-size:13px;font-weight:700;letter-spacing:.04em;
+  transition:background .2s,border-color .2s;cursor:pointer;text-decoration:none;
+  font-family:'DM Sans',sans-serif;
+}
+.anatomy-launch:hover{background:rgba(93,184,232,.2);border-color:rgba(93,184,232,.6)}
+.anatomy-launch svg{width:16px;height:16px;flex-shrink:0}
 
 /* ── PHYSICAL THERAPY ── */
 .therapy{background:var(--off)}
@@ -733,13 +754,27 @@ footer{background:var(--navy-dk);padding:48px 0 32px}
           <strong style="margin-left:8px">Cervical &amp; Shoulder Conditions — 3D Anatomy Viewer</strong>
         </div>
       </div>
-      <div class="anatomy-iframe-container">
-        <iframe
-          src="../../shoulder-spine-animations.html"
-          title="Cervical and Shoulder 3D Anatomy Viewer"
-          loading="lazy"
-          allow="same-origin">
-        </iframe>
+      <div class="anatomy-preview">
+        <div class="anatomy-preview-chips">
+          <span class="apc c5">C5 Radiculopathy</span>
+          <span class="apc c6">C6 Radiculopathy</span>
+          <span class="apc c7">C7 Radiculopathy</span>
+          <span class="apc c8">C8 Radiculopathy</span>
+          <span class="apc sh">Rotator Cuff Tear</span>
+          <span class="apc sh">Impingement</span>
+          <span class="apc la">SLAP Tear</span>
+          <span class="apc la">Bankart Lesion</span>
+          <span class="apc sh">AC Joint Sep.</span>
+          <span class="apc c6">Frozen Shoulder</span>
+        </div>
+        <p class="anatomy-preview-text">10 interactive anatomy panels — cervical nerve roots, dermatomal maps, and shoulder pathology with animated SVG detail. Opens in a new tab.</p>
+        <a href="../../shoulder-spine-animations.html" target="_blank" class="anatomy-launch">
+          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="8" cy="8" r="6.5"/>
+            <polygon points="6.5,5.5 11,8 6.5,10.5" fill="currentColor" stroke="none"/>
+          </svg>
+          Launch Interactive Viewer
+        </a>
       </div>
     </div>
   </div>
