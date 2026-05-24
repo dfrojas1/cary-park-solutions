@@ -768,13 +768,13 @@ footer{background:var(--navy-dk);padding:48px 0 32px}
           <span class="apc c6">Frozen Shoulder</span>
         </div>
         <p class="anatomy-preview-text">10 interactive anatomy panels — cervical nerve roots, dermatomal maps, and shoulder pathology with animated SVG detail. Opens in a new tab.</p>
-        <a href="../../shoulder-spine-animations.html" target="_blank" class="anatomy-launch">
+        <button onclick="openViewer()" class="anatomy-launch">
           <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
             <circle cx="8" cy="8" r="6.5"/>
             <polygon points="6.5,5.5 11,8 6.5,10.5" fill="currentColor" stroke="none"/>
           </svg>
           Launch Interactive Viewer
-        </a>
+        </button>
       </div>
     </div>
   </div>
@@ -911,7 +911,6 @@ footer{background:var(--navy-dk);padding:48px 0 32px}
 </footer>
 
 <script>
-// Sticky nav
 (function(){
   var nav = document.getElementById('site-nav');
   window.addEventListener('scroll', function(){
@@ -919,6 +918,926 @@ footer{background:var(--navy-dk);padding:48px 0 32px}
     else { nav.classList.remove('scrolled'); }
   }, {passive:true});
 })();
+var _vp1=`<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Cervical &amp; Shoulder Conditions — Triangle Hand &amp; Shoulder Center</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#02080f;--sb:#010407;--pn:#010a14;--br:#081828;
+  --c5:#ffdd00;--c6:#00d4ff;--c7:#00ffcc;--c8:#a78bfa;
+  --bone:#1e3a4a;--disc:#2a1a4a;--tendon:#d4a843;
+  --inflame:#ff4a2a;--labrum:#9b6bb5;--bursa:#4fc3f7;
+  --text:#d0e8f8;--dim:#5a8aaa;
+}
+html,body{height:100%;overflow:hidden}
+body{background:var(--bg);color:var(--text);font-family:'DM Sans',-apple-system,BlinkMacSystemFont,sans-serif;display:flex;flex-direction:column}
+@media(max-width:760px){html,body{height:auto;overflow:auto}}
+
+header{background:#010810;border-bottom:1px solid var(--br);padding:11px 20px;display:flex;align-items:center;gap:12px;flex-shrink:0}
+.hd{width:7px;height:7px;border-radius:50%;background:var(--c6);box-shadow:0 0 8px var(--c6)}
+header h1{font-size:11px;text-transform:uppercase;letter-spacing:.1em;color:var(--dim);font-weight:500}
+header span{font-size:11px;color:var(--text)}
+
+.app{display:flex;flex:1;min-height:0;overflow:hidden}
+
+.sb{width:192px;background:var(--sb);border-right:1px solid var(--br);overflow-y:auto;-webkit-overflow-scrolling:touch;flex-shrink:0;padding:8px 0}
+.sh{padding:10px 14px 3px;font-size:9px;letter-spacing:.15em;text-transform:uppercase;color:#1a3040;font-weight:600}
+.nb{display:flex;align-items:center;gap:9px;width:100%;min-height:44px;padding:10px 14px;background:none;border:none;border-left:2px solid transparent;color:var(--dim);font:13px 'DM Sans',sans-serif;cursor:pointer;text-align:left;transition:color .15s,background .15s;-webkit-tap-highlight-color:transparent;touch-action:manipulation}
+.nb:hover{background:#050e19;color:var(--text)}
+.nb.on{background:#040d18;color:var(--c6);border-left-color:var(--c6)}
+.nb.on.c5{color:var(--c5);border-left-color:var(--c5)}
+.nb.on.c7{color:var(--c7);border-left-color:var(--c7)}
+.nb.on.c8{color:var(--c8);border-left-color:var(--c8)}
+.nb.on.te{color:var(--tendon);border-left-color:var(--tendon)}
+.nb.on.la{color:var(--labrum);border-left-color:var(--labrum)}
+.nb.on.bu{color:var(--bursa);border-left-color:var(--bursa)}
+.dot{width:7px;height:7px;border-radius:50%;flex-shrink:0}
+.nb.on .dot{box-shadow:0 0 6px currentColor}
+
+.viewer{flex:1;overflow:hidden}
+.cond{display:none;height:100%}
+.cond.on{display:flex}
+.sa{flex:1;display:flex;align-items:center;justify-content:center;padding:14px;overflow:hidden}
+.sa svg{max-width:100%;max-height:100%}
+.inf{width:232px;flex-shrink:0;background:var(--pn);border-left:1px solid var(--br);padding:24px 18px;overflow-y:auto;-webkit-overflow-scrolling:touch;display:flex;flex-direction:column;gap:12px}
+
+/* ── MOBILE ── */
+@media(max-width:760px){
+  header span{display:none}
+  header h1{font-size:10.5px}
+  header{padding:10px 14px}
+
+  .app{flex-direction:column;height:auto;overflow:visible}
+
+  /* Nav → wrapping button grid (no horizontal scroll = no tap conflict) */
+  .sb{
+    width:100%;height:auto;
+    display:flex;flex-direction:row;flex-wrap:wrap;
+    align-items:flex-start;
+    border-right:none;border-bottom:1px solid var(--br);
+    overflow:visible;
+    padding:8px 10px 10px;gap:6px;
+    flex-shrink:0;
+  }
+
+  /* Section labels take full row width */
+  .sh{
+    width:100%;
+    padding:8px 2px 2px;
+    font-size:9px;letter-spacing:.15em;color:#2a4a5a;
+  }
+
+  /* Buttons → compact pill chips */
+  .nb{
+    flex:0 0 auto;width:auto;min-height:44px;
+    padding:8px 14px;
+    border-left:none;border-bottom:2px solid transparent;border-top:2px solid transparent;
+    border-radius:22px;
+    white-space:nowrap;font-size:13px;
+  }
+  .nb.on{
+    background:rgba(0,212,255,.12);
+    border-left-color:transparent;
+    border-bottom-color:var(--c6);
+  }
+  .nb.on.c5{color:var(--c5);background:rgba(255,221,0,.1);border-bottom-color:var(--c5)}
+  .nb.on.c7{color:var(--c7);background:rgba(0,255,200,.1);border-bottom-color:var(--c7)}
+  .nb.on.c8{color:var(--c8);background:rgba(167,139,250,.1);border-bottom-color:var(--c8)}
+  .nb.on.te{color:var(--tendon);background:rgba(212,168,67,.1);border-bottom-color:var(--tendon)}
+  .nb.on.la{color:var(--labrum);background:rgba(155,107,181,.1);border-bottom-color:var(--labrum)}
+  .nb.on.bu{color:var(--bursa);background:rgba(79,195,247,.1);border-bottom-color:var(--bursa)}
+
+  .viewer{overflow:visible;height:auto}
+  .cond{height:auto}
+  .cond.on{flex-direction:column}
+
+  /* SVG panel: kill the flex:1 that collapses in height:auto parent on iOS */
+  .sa{
+    flex:none !important;
+    width:100%;
+    padding:10px 8px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    overflow:visible;
+  }
+  .sa svg{max-height:50vw !important;min-height:250px;width:100%;height:auto;display:block}
+
+  /* Info panel: full width below SVG */
+  .inf{
+    width:100%;
+    border-left:none;border-top:1px solid var(--br);
+    padding:20px 16px 32px;
+    overflow-y:visible;
+  }
+  .it{font-size:18px}
+  .id{font-size:13px}
+  .fl li{font-size:12px}
+}
+.ic{font-size:9px;letter-spacing:.15em;text-transform:uppercase;color:var(--dim)}
+.it{font-family:'Source Serif 4',Georgia,serif;font-size:19px;font-weight:600;line-height:1.2;color:#e8f4ff}
+.is{font-size:11px;color:var(--dim);font-style:italic}
+.id{font-size:12.5px;line-height:1.65;color:var(--dim)}
+.tags{display:flex;flex-wrap:wrap;gap:5px}
+.tag{font-size:10px;padding:3px 7px;border-radius:3px;letter-spacing:.04em;font-weight:500}
+.tn{background:rgba(0,212,255,.08);color:var(--c6);border:1px solid rgba(0,212,255,.2)}
+.t7{background:rgba(0,255,200,.08);color:var(--c7);border:1px solid rgba(0,255,200,.2)}
+.t8{background:rgba(167,139,250,.08);color:var(--c8);border:1px solid rgba(167,139,250,.2)}
+.t5{background:rgba(255,221,0,.08);color:var(--c5);border:1px solid rgba(255,221,0,.2)}
+.tt{background:rgba(212,168,67,.08);color:var(--tendon);border:1px solid rgba(212,168,67,.2)}
+.tl{background:rgba(155,107,181,.08);color:var(--labrum);border:1px solid rgba(155,107,181,.2)}
+.ti{background:rgba(255,74,42,.08);color:var(--inflame);border:1px solid rgba(255,74,42,.2)}
+.tp{background:rgba(0,255,200,.05);color:#7fffd4;border:1px solid rgba(0,255,200,.15)}
+.fl{list-style:none;display:flex;flex-direction:column;gap:6px}
+.fl li{font-size:11.5px;color:var(--dim);padding-left:12px;position:relative;line-height:1.4}
+.fl li::before{content:'—';position:absolute;left:0;color:#1a3a4a}
+.fl li strong{color:#8ab8d0;font-weight:500}
+
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+@keyframes drawIn{from{stroke-dashoffset:1000;opacity:0}to{stroke-dashoffset:0;opacity:1}}
+@keyframes gPulse{0%,100%{opacity:.4}50%{opacity:.9}}
+@keyframes inflame{0%,100%{opacity:.2;filter:drop-shadow(0 0 6px #ff4a2a)}50%{opacity:.75;filter:drop-shadow(0 0 18px #ff4a2a) drop-shadow(0 0 36px #ff4a2a)}}
+@keyframes softGlow{0%,100%{opacity:.3}50%{opacity:.65}}
+@keyframes tearOpen{0%,30%{stroke-dashoffset:0}60%,100%{stroke-dashoffset:60}}
+@keyframes cystBreath{0%,100%{transform:scale(1);opacity:.55}50%{transform:scale(1.12);opacity:.9}}
+@keyframes capsuleThick{0%,100%{stroke-width:6;opacity:.45}50%{stroke-width:12;opacity:.85}}
+
+::-webkit-scrollbar{width:4px}
+::-webkit-scrollbar-track{background:transparent}
+::-webkit-scrollbar-thumb{background:#081828;border-radius:2px}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="hd"></div>
+  <h1>Triangle Hand &amp; Shoulder Center</h1>
+  <span>— Cervical &amp; Shoulder Conditions</span>
+</header>
+
+<div class="app">
+<nav class="sb">
+  <div class="sh">Cervical Radiculopathy</div>
+  <button class="nb c5" onclick="sw('c5r',this)"><span class="dot" style="background:var(--c5)"></span>C5 Radiculopathy</button>
+  <button class="nb on"  onclick="sw('c6r',this)"><span class="dot" style="background:var(--c6)"></span>C6 Radiculopathy</button>
+  <button class="nb c7"  onclick="sw('c7r',this)"><span class="dot" style="background:var(--c7)"></span>C7 Radiculopathy</button>
+  <button class="nb c8"  onclick="sw('c8r',this)"><span class="dot" style="background:var(--c8)"></span>C8 Radiculopathy</button>
+  <div class="sh">Shoulder</div>
+  <button class="nb te"  onclick="sw('rct',this)"><span class="dot" style="background:var(--tendon)"></span>Rotator Cuff Tear</button>
+  <button class="nb"     onclick="sw('imp',this)"><span class="dot" style="background:#ff6b42"></span>Impingement</button>
+  <button class="nb la"  onclick="sw('slap',this)"><span class="dot" style="background:var(--labrum)"></span>SLAP Tear</button>
+  <button class="nb la"  onclick="sw('bank',this)"><span class="dot" style="background:var(--labrum)"></span>Bankart Lesion</button>
+  <button class="nb"     onclick="sw('acj',this)"><span class="dot" style="background:#ff6b42"></span>AC Joint Sep.</button>
+  <button class="nb bu"  onclick="sw('cryo',this)"><span class="dot" style="background:var(--bursa)"></span>Frozen Shoulder</button>
+</nav>
+
+<main class="viewer">
+
+<!-- ============================================================
+     SHARED DEFS (referenced by all spine SVGs)
+     ============================================================ -->
+
+<!-- ── C5 RADICULOPATHY ── -->
+<div class="cond" id="c5r">
+<div class="sa">
+<svg viewBox="0 0 520 500" xmlns="http://www.w3.org/2000/svg" style="max-height:540px">
+<defs>
+  <filter id="gL" x="-60%" y="-60%" width="220%" height="220%"><feGaussianBlur stdDeviation="7" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+  <filter id="gS" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="3" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+</defs>
+<!-- spine column labels -->
+<text x="100" y="34" font-size="9" fill="#1a4060" text-anchor="middle" letter-spacing=".1em" style="animation:fadeIn .5s .2s both">CERVICAL SPINE</text>
+<text x="385" y="34" font-size="9" fill="#1a4060" text-anchor="middle" letter-spacing=".1em" style="animation:fadeIn .5s .2s both">DERMATOMAL ZONE</text>
+<line x1="250" y1="44" x2="250" y2="470" stroke="#081828" stroke-width="1" style="animation:fadeIn .3s .3s both"/>
+<!-- vertebral bodies -->
+<rect x="22" y="52" width="150" height="34" rx="5" fill="#0d2035" stroke="#2a5a7a" stroke-width="1.5" style="animation:fadeIn .5s .3s both"/>
+<rect x="26" y="86" width="142" height="8"  rx="3" fill="#1a0f35" stroke="#3a2a5a" stroke-width="1"   style="animation:fadeIn .4s .35s both"/>
+<rect x="20" y="94" width="154" height="36" rx="5" fill="#0d2035" stroke="#2a5a7a" stroke-width="1.5" style="animation:fadeIn .5s .4s both"/>
+<!-- C4-C5 disc — AFFECTED for C5 root -->
+<rect x="24" y="130" width="146" height="9"  rx="3" fill="#2a0a40" stroke="#7a3a9a" stroke-width="1.5" style="animation:fadeIn .4s .45s both"/>
+<!-- disc bulge right side -->
+<ellipse cx="175" cy="135" rx="13" ry="7" fill="#4a1060" opacity="0" style="animation:fadeIn .8s 1.6s both;filter:drop-shadow(0 0 8px #9b3af0)"/>
+<rect x="20" y="139" width="156" height="38" rx="5" fill="#0d2035" stroke="#2a5a7a" stroke-width="1.5" style="animation:fadeIn .5s .5s both"/>
+<rect x="24" y="177" width="148" height="9"  rx="3" fill="#1a0f35" stroke="#3a2a5a" stroke-width="1"   style="animation:fadeIn .4s .55s both"/>
+<rect x="18" y="186" width="158" height="38" rx="5" fill="#0d2035" stroke="#2a5a7a" stroke-width="1.5" style="animation:fadeIn .5s .6s both"/>
+<rect x="22" y="224" width="150" height="9"  rx="3" fill="#1a0f35" stroke="#3a2a5a" stroke-width="1"   style="animation:fadeIn .4s .65s both"/>
+<rect x="18" y="233" width="160" height="40" rx="5" fill="#0d2035" stroke="#2a5a7a" stroke-width="1.5" style="animation:fadeIn .5s .7s both"/>
+<rect x="22" y="273" width="152" height="10" rx="3" fill="#1a0f35" stroke="#3a2a5a" stroke-width="1"   style="animation:fadeIn .4s .75s both"/>
+<rect x="16" y="283" width="164" height="44" rx="5" fill="#0d2035" stroke="#2a5a7a" stroke-width="1.5" style="animation:fadeIn .5s .8s both"/>
+<!-- spinal canal -->
+<rect x="174" y="56" width="26" height="269" rx="3" fill="#020c1a" stroke="#0f2a40" stroke-width="1" style="animation:fadeIn .4s .9s both"/>
+<rect x="179" y="60" width="14" height="261" rx="5" fill="#021018" stroke="#0a3050" stroke-width="1" opacity="0" style="animation:fadeIn .5s 1s both"/>
+<!-- level labels -->
+<text x="10" y="74"  font-size="9" fill="#2a5a7a" style="animation:fadeIn .3s .3s both">C3</text>
+<text x="10" y="117" font-size="9" fill="#2a5a7a" style="animation:fadeIn .3s .4s both">C4</text>
+<text x="8"  y="163" font-size="9.5" fill="#ffdd00" font-weight="bold" style="animation:fadeIn .3s .5s both">C5</text>
+<text x="8"  y="209" font-size="9" fill="#2a5a7a" style="animation:fadeIn .3s .6s both">C6</text>
+<text x="8"  y="257" font-size="9" fill="#2a5a7a" style="animation:fadeIn .3s .7s both">C7</text>
+<text x="8"  y="307" font-size="9" fill="#2a5a7a" style="animation:fadeIn .3s .8s both">T1</text>
+<!-- dim roots -->
+<path d="M174,100 Q200,97 218,88"  stroke="#1e4060" stroke-width="2" fill="none" stroke-linecap="round" stroke-dasharray="1000" stroke-dashoffset="1000" style="animation:drawIn .5s 1.1s both"/>
+<path d="M174,186 Q200,183 220,172" stroke="#1e4060" stroke-width="2" fill="none" stroke-linecap="round" stroke-dasharray="1000" stroke-dashoffset="1000" style="animation:drawIn .5s 1.3s both"/>
+<path d="M174,230 Q200,227 222,216" stroke="#1e4060" stroke-width="2" fill="none" stroke-linecap="round" stroke-dasharray="1000" stroke-dashoffset="1000" style="animation:drawIn .5s 1.4s both"/>
+<path d="M174,278 Q200,275 222,264" stroke="#1e4060" stroke-width="2" fill="none" stroke-linecap="round" stroke-dasharray="1000" stroke-dashoffset="1000" style="animation:drawIn .5s 1.5s both"/>
+<!-- C5 ROOT — affected (exits C4-C5) -->
+<path id="c5root" d="M174,135 Q205,132 232,122 Q248,116 262,108" stroke="#ffdd00" stroke-width="3.5" fill="none" stroke-linecap="round" filter="url(#gL)" stroke-dasharray="1000" stroke-dashoffset="1000" style="animation:drawIn 1.2s 2s both"/>
+<path d="M174,135 Q205,132 232,122 Q248,116 262,108" stroke="#ffdd00" stroke-width="8" fill="none" stroke-linecap="round" opacity="0" style="animation:gPulse 2.8s 3s infinite;filter:blur(5px)"/>
+<!-- compression glow -->
+<circle cx="178" cy="133" r="15" fill="#ff4a2a" opacity="0" style="animation:inflame 2.5s 2.5s infinite;filter:blur(5px)"/>
+<text x="192" y="122" font-size="8.5" fill="#ff6b42" opacity="0" style="animation:fadeIn .4s 2.8s both">C4–C5</text>
+<!-- signal pulse -->
+<circle r="4" fill="#ffdd00" filter="url(#gS)">
+  <animateMotion dur="2.2s" begin="3.2s" repeatCount="indefinite" path="M174,135 Q205,132 232,122 Q248,116 262,108"/>
+  <animate attributeName="opacity" values="0;1;1;0" keyTimes="0;.1;.85;1" dur="2.2s" begin="3.2s" repeatCount="indefinite"/>
+</circle>
+<!-- ARM — right side -->
+<ellipse cx="370" cy="95" rx="46" ry="28" fill="#0a1e30" stroke="#1e4060" stroke-width="1.5" style="animation:fadeIn .4s 1s both"/>
+<!-- upper arm -->
+<path d="M327,115 Q322,190 324,250 L346,252 Q350,192 355,115Z" fill="#0a1e30" stroke="#1e4060" stroke-width="1.5" style="animation:fadeIn .4s 1.1s both"/>
+<path d="M355,115 Q370,190 376,250 L398,248 Q394,190 380,115Z" fill="#0a1e30" stroke="#1e4060" stroke-width="1.5" style="animation:fadeIn .4s 1.1s both"/>
+<!-- elbow -->
+<ellipse cx="362" cy="258" rx="36" ry="18" fill="#0a1e30" stroke="#1e4060" stroke-width="1.5" style="animation:fadeIn .4s 1.2s both"/>
+<!-- forearm -->
+<path d="M328,268 Q330,350 332,390 L352,390 Q352,350 348,268Z" fill="#0a1e30" stroke="#1e4060" stroke-width="1.5" style="animation:fadeIn .4s 1.3s both"/>
+<path d="M352,268 Q358,350 364,390 L386,388 Q384,350 374,268Z" fill="#0a1e30" stroke="#1e4060" stroke-width="1.5" style="animation:fadeIn .4s 1.3s both"/>
+<rect x="328" y="390" width="62" height="18" rx="4" fill="#0a1e30" stroke="#1e4060" stroke-width="1.5" style="animation:fadeIn .4s 1.4s both"/>
+<rect x="328" y="408" width="62" height="40" rx="4" fill="#0a1e30" stroke="#1e4060" stroke-width="1.5" style="animation:fadeIn .4s 1.5s both"/>
+<rect x="330" y="448" width="10" height="34" rx="4" fill="#0a1e30" stroke="#1e4060" stroke-width="1.5" style="animation:fadeIn .3s 1.6s both"/>
+<rect x="342" y="448" width="10" height="36" rx="4" fill="#0a1e30" stroke="#1e4060" stroke-width="1.5" style="animation:fadeIn .3s 1.62s both"/>
+<rect x="354" y="448" width="10" height="34" rx="4" fill="#0a1e30" stroke="#1e4060" stroke-width="1.5" style="animation:fadeIn .3s 1.64s both"/>
+<rect x="366" y="448" width="9" height="30" rx="4" fill="#0a1e30" stroke="#1e4060" stroke-width="1.5" style="animation:fadeIn .3s 1.66s both"/>
+<ellipse cx="323" cy="432" rx="9" ry="22" fill="#0a1e30" stroke="#1e4060" stroke-width="1.5" style="animation:fadeIn .3s 1.5s both"/>
+<!-- C5 dermatomal zone: lateral shoulder + lateral upper arm -->
+<ellipse cx="390" cy="97" rx="30" ry="20" fill="#ffdd00" opacity="0" style="animation:softGlow 3s 3.5s infinite;filter:blur(6px)"/>
+<path d="M373,118 Q385,190 390,248 L400,246 Q396,190 380,118Z" fill="#ffdd00" opacity="0" style="animation:softGlow 3s 3.6s infinite;filter:blur(5px)"/>
+<text x="410" y="160" font-size="9" fill="#ffdd00" opacity="0" style="animation:fadeIn .4s 3.8s both">C5 zone</text>
+<text x="288" y="258" font-size="8.5" fill="#2a5a7a" opacity="0" style="animation:fadeIn .4s 1.5s both">↓ Biceps</text>
+<text x="288" y="270" font-size="8.5" fill="#2a5a7a" opacity="0" style="animation:fadeIn .4s 1.6s both">  reflex</text>
+</svg>
+</div>
+<div class="inf">
+  <div class="ic">Cervical Radiculopathy</div>
+  <div class="it">C5 Radiculopathy</div>
+  <div class="is">C4–C5 Disc Level</div>
+  <p class="id">C4–C5 disc herniation or foraminal stenosis compresses the C5 root, producing lateral shoulder and upper arm pain with deltoid and biceps weakness.</p>
+  <div class="tags"><span class="tag t5">C5 Root</span><span class="tag tp">ACDF</span><span class="tag tp">Foraminotomy</span></div>
+  <ul class="fl">
+    <li><strong>Pain:</strong> Neck → lateral shoulder → lateral upper arm</li>
+    <li><strong>Weakness:</strong> Deltoid, supraspinatus, biceps</li>
+    <li><strong>Reflex:</strong> ↓ Biceps (C5–C6 shared)</li>
+    <li><strong>Sensory:</strong> Lateral shoulder, lateral upper arm patch</li>
+    <li>Shoulder abduction &lt;90° may be limited</li>
+    <li>MRI: C4–C5 foraminal compression</li>
+  </ul>
+</div>
+</div>
+
+<!-- ── C6 RADICULOPATHY (default) ── -->
+<div class="cond on" id="c6r" style="display:flex">
+<div class="sa">
+<svg viewBox="0 0 520 500" xmlns="http://www.w3.org/2000/svg" style="max-height:540px">
+<defs>
+  <filter id="gL6" x="-60%" y="-60%" width="220%" height="220%"><feGaussianBlur stdDeviation="7" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+  <filter id="gS6" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="3" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+</defs>
+<text x="100" y="34" font-size="9" fill="#1a4060" text-anchor="middle" letter-spacing=".1em" style="animation:fadeIn .5s .2s both">CERVICAL SPINE</text>
+<text x="385" y="34" font-size="9" fill="#1a4060" text-anchor="middle" letter-spacing=".1em" style="animation:fadeIn .5s .2s both">DERMATOMAL ZONE</text>
+<line x1="250" y1="44" x2="250" y2="470" stroke="#081828" stroke-width="1" style="animation:fadeIn .3s .3s both"/>
+<rect x="22" y="52" width="150" height="34" rx="5" fill="#0d2035" stroke="#2a5a7a" stroke-width="1.5" style="animation:fadeIn .5s .3s both"/>
+<rect x="26" y="86" width="142" height="8"  rx="3" fill="#1a0f35" stroke="#3a2a5a" stroke-width="1"   style="animation:fadeIn .4s .35s both"/>
+<rect x="20" y="94" width="154" height="36" rx="5" fill="#0d2035" stroke="#2a5a7a" stroke-width="1.5" style="animation:fadeIn .5s .4s both"/>
+<rect x="24" y="130" width="146" height="9"  rx="3" fill="#1a0f35" stroke="#3a2a5a" stroke-width="1"   style="animation:fadeIn .4s .45s both"/>
+<rect x="20" y="139" width="156" height="38" rx="5" fill="#0d2035" stroke="#2a5a7a" stroke-width="1.5" style="animation:fadeIn .5s .5s both"/>
+<!-- C5-C6 disc — AFFECTED -->
+<rect x="24" y="177" width="148" height="10" rx="3" fill="#2a0a40" stroke="#7a3a9a" stroke-width="1.5" style="animation:fadeIn .4s .55s both"/>
+<ellipse cx="177" cy="182" rx="14" ry="7" fill="#4a1060" opacity="0" style="animation:fadeIn .8s 1.7s both;filter:drop-shadow(0 0 8px #9b3af0)"/>
+<rect x="18" y="187" width="158" height="38" rx="5" fill="#0d2035" stroke="#2a5a7a" stroke-width="1.5" style="animation:fadeIn .5s .6s both"/>
+<rect x="22" y="225" width="150" height="9"  rx="3" fill="#1a0f35" stroke="#3a2a5a" stroke-width="1"   style="animation:fadeIn .4s .65s both"/>
+<rect x="18" y="234" width="160" height="40" rx="5" fill="#0d2035" stroke="#2a5a7a" stroke-width="1.5" style="animation:fadeIn .5s .7s both"/>
+<rect x="22" y="274" width="152" height="10" rx="3" fill="#1a0f35" stroke="#3a2a5a" stroke-width="1"   style="animation:fadeIn .4s .75s both"/>
+<rect x="16" y="284" width="164" height="44" rx="5" fill="#0d2035" stroke="#2a5a7a" stroke-width="1.5" style="animation:fadeIn .5s .8s both"/>
+<rect x="174" y="56" width="26" height="270" rx="3" fill="#020c1a" stroke="#0f2a40" stroke-width="1" style="animation:fadeIn .4s .9s both"/>
+<text x="10" y="74"  font-size="9" fill="#2a5a7a" style="animation:fadeIn .3s .3s both">C3</text>
+<text x="10" y="117" font-size="9" fill="#2a5a7a" style="animation:fadeIn .3s .4s both">C4</text>
+<text x="10" y="163" font-size="9" fill="#2a5a7a" style="animation:fadeIn .3s .5s both">C5</text>
+<text x="8"  y="210" font-size="9.5" fill="#00d4ff" font-weight="bold" style="animation:fadeIn .3s .6s both">C6</text>
+<text x="8"  y="257" font-size="9" fill="#2a5a7a" style="animation:fadeIn .3s .7s both">C7</text>
+<text x="8"  y="308" font-size="9" fill="#2a5a7a" style="animation:fadeIn .3s .8s both">T1</text>
+<path d="M174,98  Q200,95 218,86"  stroke="#1e4060" stroke-width="2" fill="none" stroke-linecap="round" stroke-dasharray="1000" stroke-dashoffset="1000" style="animation:drawIn .5s 1.1s both"/>
+<path d="M174,135 Q200,132 220,122" stroke="#1e4060" stroke-width="2" fill="none" stroke-linecap="round" stroke-dasharray="1000" stroke-dashoffset="1000" style="animation:drawIn .5s 1.2s both"/>
+<path d="M174,230 Q200,227 222,217" stroke="#1e4060" stroke-width="2" fill="none" stroke-linecap="round" stroke-dasharray="1000" stroke-dashoffset="1000" style="animation:drawIn .5s 1.3s both"/>
+<path d="M174,279 Q200,276 222,265" stroke="#1e4060" stroke-width="2" fill="none" stroke-linecap="round" stroke-dasharray="1000" stroke-dashoffset="1000" style="animation:drawIn .5s 1.4s both"/>
+<!-- C6 ROOT -->
+<path id="c6root" d="M174,182 Q206,179 232,169 Q250,162 265,153" stroke="#00d4ff" stroke-width="3.5" fill="none" stroke-linecap="round" filter="url(#gL6)" stroke-dasharray="1000" stroke-dashoffset="1000" style="animation:drawIn 1.2s 2s both"/>
+<path d="M174,182 Q206,179 232,169 Q250,162 265,153" stroke="#00d4ff" stroke-width="8" fill="none" stroke-linecap="round" opacity="0" style="animation:gPulse 2.8s 3s infinite;filter:blur(5px)"/>
+<circle cx="178" cy="180" r="15" fill="#ff4a2a" opacity="0" style="animation:inflame 2.5s 2.5s infinite;filter:blur(5px)"/>
+<text x="192" y="168" font-size="8.5" fill="#ff6b42" opacity="0" style="animation:fadeIn .4s 2.8s both">C5–C6</text>
+<circle r="4" fill="#00d4ff" filter="url(#gS6)">
+  <animateMotion dur="2.2s" begin="3.2s" repeatCount="indefinite" path="M174,182 Q206,179 232,169 Q250,162 265,153"/>
+  <animate attributeName="opacity" values="0;1;1;0" keyTimes="0;.1;.85;1" dur="2.2s" begin="3.2s" repeatCount="indefinite"/>
+</circle>
+<!-- ARM -->
+<ellipse cx="370" cy="95" rx="46" ry="28" fill="#0a1e30" stroke="#1e4060" stroke-width="1.5" style="animation:fadeIn .4s 1s both"/>
+<path d="M327,115 Q322,190 324,250 L346,252 Q350,192 355,115Z" fill="#0a1e30" stroke="#1e4060" stroke-width="1.5" style="animation:fadeIn .4s 1.1s both"/>
+<path d="M355,115 Q370,190 376,250 L398,248 Q394,190 380,115Z" fill="#0a1e30" stroke="#1e4060" stroke-width="1.5" style="animation:fadeIn .4s 1.1s both"/>
+<ellipse cx="362" cy="258" rx="36" ry="18" fill="#0a1e30" stroke="#1e4060" stroke-width="1.5" style="animation:fadeIn .4s 1.2s both"/>
+<path d="M328,268 Q330,350 332,390 L352,390 Q352,350 348,268Z" fill="#0a1e30" stroke="#1e4060" stroke-width="1.5" style="animation:fadeIn .4s 1.3s both"/>
+<path d="M352,268 Q358,350 364,390 L386,388 Q384,350 374,268Z" fill="#0a1e30" stroke="#1e4060" stroke-width="1.5" style="animation:fadeIn .4s 1.3s both"/>
+<rect x="328" y="390" width="62" height="18" rx="4" fill="#0a1e30" stroke="#1e4060" stroke-width="1.5" style="animation:fadeIn .4s 1.4s both"/>
+<rect x="328" y="408" width="62" height="40" rx="4" fill="#0a1e30" stroke="#1e4060" stroke-width="1.5" style="animation:fadeIn .4s 1.5s both"/>
+<rect x="330" y="448" width="10" height="34" rx="4" fill="#0a1e30" stroke="#1e4060" stroke-width="1.5" style="animation:fadeIn .3s 1.6s both"/>
+<rect x="342" y="448" width="10" height="36" rx="4" fill="#0a1e30" stroke="#1e4060" stroke-width="1.5" style="animation:fadeIn .3s 1.62s both"/>
+<rect x="354" y="448" width="10" height="34" rx="4" fill="#0a1e30" stroke="#1e4060" stroke-width="1.5" style="animation:fadeIn .3s 1.64s both"/>
+<rect x="366" y="448" width="9"  height="30" rx="4" fill="#0a1e30" stroke="#1e4060" stroke-width="1.5" style="animation:fadeIn .3s 1.66s both"/>
+<ellipse cx="323" cy="432" rx="9" ry="22" fill="#0a1e30" stroke="#1e4060" stroke-width="1.5" style="animation:fadeIn .3s 1.5s both"/>
+<!-- C6 dermatomal zone: lateral forearm + thumb + index -->
+<path d="M355,272 Q362,352 368,390 L388,388 Q384,350 375,272Z" fill="#00d4ff" opacity="0" style="animation:softGlow 3s 3.5s infinite;filter:blur(5px)"/>
+<ellipse cx="323" cy="432" rx="8" ry="20" fill="#00d4ff" opacity="0" style="animation:softGlow 3s 3.6s infinite;filter:blur(4px)"/>
+<rect x="331" y="449" width="9" height="33" rx="4" fill="#00d4ff" opacity="0" style="animation:softGlow 3s 3.7s infinite;filter:blur(3px)"/>
+<rect x="343" y="449" width="5" height="35" rx="3" fill="#00d4ff" opacity="0" style="animation:softGlow 3s 3.8s infinite;filter:blur(3px)"/>
+<text x="408" y="340" font-size="9" fill="#00d4ff" opacity="0" style="animation:fadeIn .4s 3.8s both">C6 zone</text>
+<text x="288" y="258" font-size="8.5" fill="#2a5a7a" opacity="0" style="animation:fadeIn .3s 1.5s both">↓ Biceps /</text>
+<text x="288" y="270" font-size="8.5" fill="#2a5a7a" opacity="0" style="animation:fadeIn .3s 1.6s both">  Brachio-R</text>
+</svg>
+</div>
+<div class="inf">
+  <div class="ic">Cervical Radiculopathy</div>
+  <div class="it">C6 Radiculopathy</div>
+  <div class="is">C5–C6 Disc Level · Most Common</div>
+  <p class="id">The most common cervical radiculopathy (~25% of cases). C5–C6 disc herniation compresses the C6 root, causing lateral forearm, thumb, and index finger pain and paresthesia.</p>
+  <div class="tags"><span class="tag tn">C6 Root</span><span class="tag tp">ACDF</span><span class="tag tp">Foraminotomy</span></div>
+  <ul class="fl">
+    <li><strong>Pain:</strong> Neck → shoulder → lateral forearm → thumb/index</li>
+    <li><strong>Weakness:</strong> Biceps, brachioradialis, wrist extensors</li>
+    <li><strong>Reflex:</strong> ↓ Biceps, ↓ brachioradialis</li>
+    <li><strong>Sensory:</strong> Lateral forearm, thumb, index, lateral middle</li>
+    <li>Positive Spurling's sign</li>
+    <li>MRI C5–C6 foraminal compression</li>
+  </ul>
+</div>
+</div>
+
+<!-- ── C7 RADICULOPATHY ── -->
+<div class="cond" id="c7r">
+<div class="sa">
+<svg viewBox="0 0 520 500" xmlns="http://www.w3.org/2000/svg" style="max-height:540px">
+<defs>
+  <filter id="gL7" x="-60%" y="-60%" width="220%" height="220%"><feGaussianBlur stdDeviation="7" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+  <filter id="gS7" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="3" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+</defs>
+<text x="100" y="34" font-size="9" fill="#1a4060" text-anchor="middle" letter-spacing=".1em" style="animation:fadeIn .5s .2s both">CERVICAL SPINE</text>
+<text x="385" y="34" font-size="9" fill="#1a4060" text-anchor="middle" letter-spacing=".1em" style="animation:fadeIn .5s .2s both">DERMATOMAL ZONE</text>
+<line x1="250" y1="44" x2="250" y2="470" stroke="#081828" stroke-width="1"/>
+<rect x="22" y="52" width="150" height="34" rx="5" fill="#0d2035" stroke="#2a5a7a" stroke-width="1.5" style="animation:fadeIn .5s .3s both"/>
+<rect x="26" y="86" width="142" height="8"  rx="3" fill="#1a0f35" stroke="#3a2a5a" stroke-width="1"   style="animation:fadeIn .4s .35s both"/>
+<rect x="20" y="94" width="154" height="36" rx="5" fill="#0d2035" stroke="#2a5a7a" stroke-width="1.5" style="animation:fadeIn .5s .4s both"/>
+<rect x="24" y="130" width="146" height="9"  rx="3" fill="#1a0f35" stroke="#3a2a5a" stroke-width="1"   style="animation:fadeIn .4s .45s both"/>
+<rect x="20" y="139" width="156" height="38" rx="5" fill="#0d2035" stroke="#2a5a7a" stroke-width="1.5" style="animation:fadeIn .5s .5s both"/>
+<rect x="24" y="177" width="148" height="9"  rx="3" fill="#1a0f35" stroke="#3a2a5a" stroke-width="1"   style="animation:fadeIn .4s .55s both"/>
+<rect x="18" y="186" width="158" height="38" rx="5" fill="#0d2035" stroke="#2a5a7a" stroke-width="1.5" style="animation:fadeIn .5s .6s both"/>
+<!-- C6-C7 disc — AFFECTED -->
+<rect x="22" y="224" width="150" height="10" rx="3" fill="#2a0a40" stroke="#7a3a9a" stroke-width="1.5" style="animation:fadeIn .4s .65s both"/>
+<ellipse cx="177" cy="229" rx="14" ry="7" fill="#4a1060" opacity="0" style="animation:fadeIn .8s 1.7s both;filter:drop-shadow(0 0 8px #9b3af0)"/>
+<rect x="18" y="234" width="160" height="40" rx="5" fill="#0d2035" stroke="#2a5a7a" stroke-width="1.5" style="animation:fadeIn .5s .7s both"/>
+<rect x="22" y="274" width="152" height="10" rx="3" fill="#1a0f35" stroke="#3a2a5a" stroke-width="1"   style="animation:fadeIn .4s .75s both"/>
+<rect x="16" y="284" width="164" height="44" rx="5" fill="#0d2035" stroke="#2a5a7a" stroke-width="1.5" style="animation:fadeIn .5s .8s both"/>
+<rect x="174" y="56" width="26" height="270" rx="3" fill="#020c1a" stroke="#0f2a40" stroke-width="1" style="animation:fadeIn .4s .9s both"/>
+<text x="10" y="74"  font-size="9" fill="#2a5a7a" style="animation:fadeIn .3s .3s both">C3</text>
+<text x="10" y="117" font-size="9" fill="#2a5a7a" style="animation:fadeIn .3s .4s both">C4</text>
+<text x="10" y="163" font-size="9" fill="#2a5a7a" style="animation:fadeIn .3s .5s both">C5</text>
+<text x="10" y="210" font-size="9" fill="#2a5a7a" style="animation:fadeIn .3s .6s both">C6</text>
+<text x="8"  y="257" font-size="9.5" fill="#00ffcc" font-weight="bold" style="animation:fadeIn .3s .7s both">C7</text>
+<text x="8"  y="308" font-size="9" fill="#2a5a7a" style="animation:fadeIn .3s .8s both">T1</text>
+<path d="M174,98  Q200,95 218,86"  stroke="#1e4060" stroke-width="2" fill="none" stroke-linecap="round" stroke-dasharray="1000" stroke-dashoffset="1000" style="animation:drawIn .5s 1.1s both"/>
+<path d="M174,135 Q200,132 220,122" stroke="#1e4060" stroke-width="2" fill="none" stroke-linecap="round" stroke-dasharray="1000" stroke-dashoffset="1000" style="animation:drawIn .5s 1.2s both"/>
+<path d="M174,182 Q200,179 222,169" stroke="#1e4060" stroke-width="2" fill="none" stroke-linecap="round" stroke-dasharray="1000" stroke-dashoffset="1000" style="animation:drawIn .5s 1.3s both"/>
+<path d="M174,279 Q200,276 222,265" stroke="#1e4060" stroke-width="2" fill="none" stroke-linecap="round" stroke-dasharray="1000" stroke-dashoffset="1000" style="animation:drawIn .5s 1.4s both"/>
+<!-- C7 ROOT -->
+<path id="c7root" d="M174,229 Q208,226 234,215 Q252,207 268,197" stroke="#00ffcc" stroke-width="3.5" fill="none" stroke-linecap="round" filter="url(#gL7)" stroke-dasharray="1000" stroke-dashoffset="1000" style="animation:drawIn 1.2s 2s both"/>
+<path d="M174,229 Q208,226 234,215 Q252,207 268,197" stroke="#00ffcc" stroke-width="8" fill="none" stroke-linecap="round" opacity="0" style="animation:gPulse 2.8s 3s infinite;filter:blur(5px)"/>
+<circle cx="178" cy="227" r="15" fill="#ff4a2a" opacity="0" style="animation:inflame 2.5s 2.5s infinite;filter:blur(5px)"/>
+<text x="192" y="216" font-size="8.5" fill="#ff6b42" opacity="0" style="animation:fadeIn .4s 2.8s both">C6–C7</text>
+<circle r="4" fill="#00ffcc" filter="url(#gS7)">
+  <animateMotion dur="2.2s" begin="3.2s" repeatCount="indefinite" path="M174,229 Q208,226 234,215 Q252,207 268,197"/>
+  <animate attributeName="opacity" values="0;1;1;0" keyTimes="0;.1;.85;1" dur="2.2s" begin="3.2s" repeatCount="indefinite"/>
+</circle>
+<!-- ARM -->
+<ellipse cx="370" cy="95" rx="46" ry="28" fill="#0a1e30" stroke="#1e4060" stroke-width="1.5" style="animation:fadeIn .4s 1s both"/>
+<path d="M327,115 Q322,190 324,250 L346,252 Q350,192 355,115Z" fill="#0a1e30" stroke="#1e4060" stroke-width="1.5" style="animation:fadeIn .4s 1.1s both"/>
+<path d="M355,115 Q370,190 376,250 L398,248 Q394,190 380,115Z" fill="#0a1e30" stroke="#1e4060" stroke-width="1.5" style="animation:fadeIn .4s 1.1s both"/>
+<ellipse cx="362" cy="258" rx="36" ry="18" fill="#0a1e30" stroke="#1e4060" stroke-width="1.5" style="animation:fadeIn .4s 1.2s both"/>
+<path d="M328,268 Q330,350 332,390 L352,390 Q352,350 348,268Z" fill="#0a1e30" stroke="#1e4060" stroke-width="1.5" style="animation:fadeIn .4s 1.3s both"/>
+<path d="M352,268 Q358,350 364,390 L386,388 Q384,350 374,268Z" fill="#0a1e30" stroke="#1e4060" stroke-width="1.5" style="animation:fadeIn .4s 1.3s both"/>
+<rect x="328" y="390" width="62" height="18" rx="4" fill="#0a1e30" stroke="#1e4060" stroke-width="1.5" style="animation:fadeIn .4s 1.4s both"/>
+<rect x="328" y="408" width="62" height="40" rx="4" fill="#0a1e30" stroke="#1e4060" stroke-width="1.5" style="animation:fadeIn .4s 1.5s both"/>
+<rect x="330" y="448" width="10" height="34" rx="4" fill="#0a1e30" stroke="#1e4060" stroke-width="1.5" style="animation:fadeIn .3s 1.6s both"/>
+<rect x="342" y="448" width="10" height="36" rx="4" fill="#0a1e30" stroke="#1e4060" stroke-width="1.5" style="animation:fadeIn .3s 1.62s both"/>
+<rect x="354" y="448" width="10" height="34" rx="4" fill="#0a1e30" stroke="#1e4060" stroke-width="1.5" style="animation:fadeIn .3s 1.64s both"/>
+<rect x="366" y="448" width="9"  height="30" rx="4" fill="#0a1e30" stroke="#1e4060" stroke-width="1.5" style="animation:fadeIn .3s 1.66s both"/>
+<ellipse cx="323" cy="432" rx="9" ry="22" fill="#0a1e30" stroke="#1e4060" stroke-width="1.5" style="animation:fadeIn .3s 1.5s both"/>
+<!-- C7 zone: posterior arm + middle finger -->
+<path d="M337,120 Q332,192 334,252 L350,250 Q350,190 352,120Z" fill="#00ffcc" opacity="0" style="animation:softGlow 3s 3.5s infinite;filter:blur(6px)"/>
+<rect x="343" y="449" width="10" height="36" rx="4" fill="#00ffcc" opacity="0" style="animation:softGlow 3s 3.6s infinite;filter:blur(4px)"/>
+<text x="410" y="195" font-size="9" fill="#00ffcc" opacity="0" style="animation:fadeIn .4s 3.8s both">C7 zone</text>
+<text x="288" y="258" font-size="8.5" fill="#2a5a7a" opacity="0" style="animation:fadeIn .3s 1.5s both">↓ Triceps</text>
+<text x="288" y="270" font-size="8.5" fill="#2a5a7a" opacity="0" style="animation:fadeIn .3s 1.6s both">  reflex</text>
+</svg>
+</div>
+<div class="inf">
+  <div class="ic">Cervical Radiculopathy</div>
+  <div class="it">C7 Radiculopathy</div>
+  <div class="is">C6–C7 Disc Level · 2nd Most Common</div>
+  <p class="id">C6–C7 disc herniation is the second most common cervical radiculopathy. The C7 root is compressed, producing posterior arm/forearm pain and middle finger paresthesia.</p>
+  <div class="tags"><span class="tag t7">C7 Root</span><span class="tag tp">ACDF</span><span class="tag tp">Foraminotomy</span></div>
+  <ul class="fl">
+    <li><strong>Pain:</strong> Neck → posterior shoulder → posterior forearm → middle finger</li>
+    <li><strong>Weakness:</strong> Triceps, wrist flexors, finger extensors</li>
+    <li><strong>Reflex:</strong> ↓ Triceps (most specific C7 reflex)</li>
+    <li><strong>Sensory:</strong> Posterior arm, middle finger</li>
+    <li>Triceps press-down weakness on exam</li>
+    <li>Often presents as deep aching arm pain</li>
+  </ul>
+</div>
+</div>
+
+<!-- ── C8 RADICULOPATHY ── -->
+<div class="cond" id="c8r">
+<div class="sa">
+<svg viewBox="0 0 520 500" xmlns="http://www.w3.org/2000/svg" style="max-height:540px">
+<defs>
+  <filter id="gL8" x="-60%" y="-60%" width="220%" height="220%"><feGaussianBlur stdDeviation="7" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+  <filter id="gS8" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="3" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+</defs>
+<text x="100" y="34" font-size="9" fill="#1a4060" text-anchor="middle" letter-spacing=".1em" style="animation:fadeIn .5s .2s both">CERVICAL SPINE</text>
+<text x="385" y="34" font-size="9" fill="#1a4060" text-anchor="middle" letter-spacing=".1em" style="animation:fadeIn .5s .2s both">DERMATOMAL ZONE</text>
+<line x1="250" y1="44" x2="250" y2="470" stroke="#081828" stroke-width="1"/>
+<rect x="22" y="52" width="150" height="34" rx="5" fill="#0d2035" stroke="#2a5a7a" stroke-width="1.5" style="animation:fadeIn .5s .3s both"/>
+<rect x="26" y="86" width="142" height="8"  rx="3" fill="#1a0f35" stroke="#3a2a5a" stroke-width="1"   style="animation:fadeIn .4s .35s both"/>
+<rect x="20" y="94" width="154" height="36" rx="5" fill="#0d2035" stroke="#2a5a7a" stroke-width="1.5" style="animation:fadeIn .5s .4s both"/>
+<rect x="24" y="130" width="146" height="9"  rx="3" fill="#1a0f35" stroke="#3a2a5a" stroke-width="1"   style="animation:fadeIn .4s .45s both"/>
+<rect x="20" y="139" width="156" height="38" rx="5" fill="#0d2035" stroke="#2a5a7a" stroke-width="1.5" style="animation:fadeIn .5s .5s both"/>
+<rect x="24" y="177" width="148" height="9"  rx="3" fill="#1a0f35" stroke="#3a2a5a" stroke-width="1"   style="animation:fadeIn .4s .55s both"/>
+<rect x="18" y="186" width="158" height="38" rx="5" fill="#0d2035" stroke="#2a5a7a" stroke-width="1.5" style="animation:fadeIn .5s .6s both"/>
+<rect x="22" y="224" width="150" height="9"  rx="3" fill="#1a0f35" stroke="#3a2a5a" stroke-width="1"   style="animation:fadeIn .4s .65s both"/>
+<rect x="18" y="233" width="160" height="40" rx="5" fill="#0d2035" stroke="#2a5a7a" stroke-width="1.5" style="animation:fadeIn .5s .7s both"/>
+<!-- C7-T1 disc — AFFECTED -->
+<rect x="22" y="273" width="152" height="11" rx="3" fill="#2a0a40" stroke="#7a3a9a" stroke-width="1.5" style="animation:fadeIn .4s .75s both"/>
+<ellipse cx="179" cy="279" rx="14" ry="7" fill="#4a1060" opacity="0" style="animation:fadeIn .8s 1.7s both;filter:drop-shadow(0 0 8px #9b3af0)"/>
+<rect x="16" y="284" width="164" height="44" rx="5" fill="#0d2035" stroke="#2a5a7a" stroke-width="1.5" style="animation:fadeIn .5s .8s both"/>
+<rect x="174" y="56" width="26" height="270" rx="3" fill="#020c1a" stroke="#0f2a40" stroke-width="1" style="animation:fadeIn .4s .9s both"/>
+<text x="10" y="74"  font-size="9" fill="#2a5a7a" style="animation:fadeIn .3s .3s both">C3</text>
+<text x="10" y="117" font-size="9" fill="#2a5a7a" style="animation:fadeIn .3s .4s both">C4</text>
+<text x="10" y="163" font-size="9" fill="#2a5a7a" style="animation:fadeIn .3s .5s both">C5</text>
+<text x="10" y="210" font-size="9" fill="#2a5a7a" style="animation:fadeIn .3s .6s both">C6</text>
+<text x="10" y="257" font-size="9" fill="#2a5a7a" style="animation:fadeIn .3s .7s both">C7</text>
+<text x="8"  y="308" font-size="9.5" fill="#a78bfa" font-weight="bold" style="animation:fadeIn .3s .8s both">C8</text>
+<path d="M174,98  Q200,95 218,86"  stroke="#1e4060" stroke-width="2" fill="none" stroke-linecap="round" stroke-dasharray="1000" stroke-dashoffset="1000" style="animation:drawIn .5s 1.1s both"/>
+<path d="M174,135 Q200,132 220,122" stroke="#1e4060" stroke-width="2" fill="none" stroke-linecap="round" stroke-dasharray="1000" stroke-dashoffset="1000" style="animation:drawIn .5s 1.2s both"/>
+<path d="M174,182 Q200,179 222,169" stroke="#1e4060" stroke-width="2" fill="none" stroke-linecap="round" stroke-dasharray="1000" stroke-dashoffset="1000" style="animation:drawIn .5s 1.3s both"/>
+<path d="M174,230 Q200,227 222,217" stroke="#1e4060" stroke-width="2" fill="none" stroke-linecap="round" stroke-dasharray="1000" stroke-dashoffset="1000" style="animation:drawIn .5s 1.4s both"/>
+<!-- C8 ROOT -->
+<path id="c8root" d="M174,279 Q208,275 235,264 Q254,256 270,245" stroke="#a78bfa" stroke-width="3.5" fill="none" stroke-linecap="round" filter="url(#gL8)" stroke-dasharray="1000" stroke-dashoffset="1000" style="animation:drawIn 1.2s 2s both"/>
+<path d="M174,279 Q208,275 235,264 Q254,256 270,245" stroke="#a78bfa" stroke-width="8" fill="none" stroke-linecap="round" opacity="0" style="animation:gPulse 2.8s 3s infinite;filter:blur(5px)"/>
+<circle cx="178" cy="277" r="15" fill="#ff4a2a" opacity="0" style="animation:inflame 2.5s 2.5s infinite;filter:blur(5px)"/>
+<text x="192" y="265" font-size="8.5" fill="#ff6b42" opacity="0" style="animation:fadeIn .4s 2.8s both">C7–T1</text>
+<circle r="4" fill="#a78bfa" filter="url(#gS8)">
+  <animateMotion dur="2.2s" begin="3.2s" repeatCount="indefinite" path="M174,279 Q208,275 235,264 Q254,256 270,245"/>
+  <animate attributeName="opacity" values="0;1;1;0" keyTimes="0;.1;.85;1" dur="2.2s" begin="3.2s" repeatCount="indefinite"/>
+</circle>
+<!-- ARM -->
+<ellipse cx="370" cy="95" rx="46" ry="28" fill="#0a1e30" stroke="#1e4060" stroke-width="1.5" style="animation:fadeIn .4s 1s both"/>
+<path d="M327,115 Q322,190 324,250 L346,252 Q350,192 355,115Z" fill="#0a1e30" stroke="#1e4060" stroke-width="1.5" style="animation:fadeIn .4s 1.1s both"/>
+<path d="M355,115 Q370,190 376,250 L398,248 Q394,190 380,115Z" fill="#0a1e30" stroke="#1e4060" stroke-width="1.5" style="animation:fadeIn .4s 1.1s both"/>
+<ellipse cx="362" cy="258" rx="36" ry="18" fill="#0a1e30" stroke="#1e4060" stroke-width="1.5" style="animation:fadeIn .4s 1.2s both"/>
+<path d="M328,268 Q330,350 332,390 L352,390 Q352,350 348,268Z" fill="#0a1e30" stroke="#1e4060" stroke-width="1.5" style="animation:fadeIn .4s 1.3s both"/>
+<path d="M352,268 Q358,350 364,390 L386,388 Q384,350 374,268Z" fill="#0a1e30" stroke="#1e4060" stroke-width="1.5" style="animation:fadeIn .4s 1.3s both"/>
+<rect x="328" y="390" width="62" height="18" rx="4" fill="#0a1e30" stroke="#1e4060" stroke-width="1.5" style="animation:fadeIn .4s 1.4s both"/>
+<rect x="328" y="408" width="62" height="40" rx="4" fill="#0a1e30" stroke="#1e4060" stroke-width="1.5" style="animation:fadeIn .4s 1.5s both"/>
+<rect x="330" y="448" width="10" height="34" rx="4" fill="#0a1e30" stroke="#1e4060" stroke-width="1.5" style="animation:fadeIn .3s 1.6s both"/>
+<rect x="342" y="448" width="10" height="36" rx="4" fill="#0a1e30" stroke="#1e4060" stroke-width="1.5" style="animation:fadeIn .3s 1.62s both"/>
+<rect x="354" y="448" width="10" height="34" rx="4" fill="#0a1e30" stroke="#1e4060" stroke-width="1.5" style="animation:fadeIn .3s 1.64s both"/>
+<rect x="366" y="448" width="9"  height="30" rx="4" fill="#0a1e30" stroke="#1e4060" stroke-width="1.5" style="animation:fadeIn .3s 1.66s both"/>
+<ellipse cx="323" cy="432" rx="9" ry="22" fill="#0a1e30" stroke="#1e4060" stroke-width="1.5" style="animation:fadeIn .3s 1.5s both"/>
+<!-- C8 zone: medial forearm + ring + small -->
+<path d="M330,272 Q330,352 332,390 L350,390 Q350,352 346,272Z" fill="#a78bfa" opacity="0" style="animation:softGlow 3s 3.5s infinite;filter:blur(6px)"/>
+<rect x="355" y="449" width="9"  height="34" rx="4" fill="#a78bfa" opacity="0" style="animation:softGlow 3s 3.6s infinite;filter:blur(3px)"/>
+<rect x="367" y="449" width="8"  height="30" rx="4" fill="#a78bfa" opacity="0" style="animation:softGlow 3s 3.7s infinite;filter:blur(3px)"/>
+<text x="408" y="340" font-size="9" fill="#a78bfa" opacity="0" style="animation:fadeIn .4s 3.8s both">C8 zone</text>
+<text x="288" y="258" font-size="8.5" fill="#2a5a7a" opacity="0" style="animation:fadeIn .3s 1.5s both">↓ Finger</text>
+<text x="288" y="270" font-size="8.5" fill="#2a5a7a" opacity="0" style="animation:fadeIn .3s 1.6s both">  flexors</text>
+</svg>
+</div>
+<div class="inf">
+  <div class="ic">Cervical Radiculopathy</div>
+  <div class="it">C8 Radiculopathy</div>
+  <div class="is">C7–T1 Disc Level</div>
+  <p class="id">C7–T1 disc herniation or foraminal stenosis compresses the C8 root. Produces medial forearm and ring/small finger paresthesia with intrinsic hand muscle weakness.</p>
+  <div class="tags"><span class="tag t8">C8 Root</span><span class="tag tp">ACDF</span><span class="tag tp">Foraminotomy</span></div>
+  <ul class="fl">
+    <li><strong>Pain:</strong> Neck → medial arm → medial forearm → ring/small fingers</li>
+    <li><strong>Weakness:</strong> FDP (ring/small), intrinsic hand muscles</li>
+    <li><strong>Reflex:</strong> ↓ Finger flexors (Hoffman's)</li>
+    <li><strong>Sensory:</strong> Medial forearm, ring, small finger</li>
+    <li>Grip strength decreased; fine motor impaired</li>
+    <li>Differentiate from ulnar neuropathy at elbow</li>
+  </ul>
+</div>
+</div>
+
+<!-- ── ROTATOR CUFF TEAR ── -->
+<div class="cond" id="rct">
+<div class="sa">
+<svg viewBox="0 0 520 490" xmlns="http://www.w3.org/2000/svg" style="max-height:530px">
+<defs>
+  <filter id="gLr" x="-60%" y="-60%" width="220%" height="220%"><feGaussianBlur stdDeviation="7" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+  <filter id="gSr" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="3" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+</defs>
+<text x="260" y="30" font-size="9" fill="#1a4060" text-anchor="middle" letter-spacing=".1em" style="animation:fadeIn .5s .2s both">RIGHT SHOULDER — CORONAL VIEW</text>
+<!-- Clavicle -->
+<path d="M30,148 Q110,140 188,150" stroke="#2a5a7a" stroke-width="10" fill="none" stroke-linecap="round" style="animation:fadeIn .5s .4s both"/>
+<path d="M30,148 Q110,140 188,150" stroke="#0d2035" stroke-width="7" fill="none" stroke-linecap="round" style="animation:fadeIn .5s .4s both"/>
+<text x="30" y="136" font-size="9" fill="#2a5a7a" style="animation:fadeIn .3s .5s both">Clavicle</text>
+<!-- Acromion -->
+<path d="M188,150 Q210,152 242,164" stroke="#2a5a7a" stroke-width="12" fill="none" stroke-linecap="round" style="animation:fadeIn .5s .5s both"/>
+<path d="M188,150 Q210,152 242,164" stroke="#0d2035" stroke-width="9" fill="none" stroke-linecap="round" style="animation:fadeIn .5s .5s both"/>
+<text x="196" y="142" font-size="9" fill="#2a5a7a" style="animation:fadeIn .3s .6s both">Acromion</text>
+<!-- Scapular glenoid fossa -->
+<ellipse cx="188" cy="295" rx="24" ry="72" fill="#0d2035" stroke="#2a5a7a" stroke-width="2" style="animation:fadeIn .5s .6s both"/>
+<text x="145" y="298" font-size="9" fill="#2a5a7a" text-anchor="end" style="animation:fadeIn .3s .7s both">Glenoid</text>
+<!-- Labrum outline -->
+<path d="M174,226 Q160,248 160,296 Q160,342 174,364" stroke="#9b6bb5" stroke-width="3" fill="none" stroke-linecap="round" stroke-dasharray="1000" stroke-dashoffset="1000" style="animation:drawIn .8s 1.4s both;filter:drop-shadow(0 0 4px #9b6bb5)"/>
+<!-- Humeral head -->
+<circle cx="320" cy="290" r="84" fill="#0d2035" stroke="#2a5a7a" stroke-width="2" style="animation:fadeIn .5s .7s both"/>
+<!-- Humeral shaft -->
+<path d="M274,356 Q270,430 268,470" stroke="#2a5a7a" stroke-width="14" fill="none" stroke-linecap="round" style="animation:fadeIn .4s .8s both"/>
+<path d="M274,356 Q270,430 268,470" stroke="#0d2035" stroke-width="10" fill="none" stroke-linecap="round" style="animation:fadeIn .4s .8s both"/>
+<path d="M368,362 Q374,436 376,470" stroke="#2a5a7a" stroke-width="14" fill="none" stroke-linecap="round" style="animation:fadeIn .4s .8s both"/>
+<path d="M368,362 Q374,436 376,470" stroke="#0d2035" stroke-width="10" fill="none" stroke-linecap="round" style="animation:fadeIn .4s .8s both"/>
+<!-- Subacromial bursa -->
+<path d="M244,182 Q290,176 340,184 Q370,188 385,200" stroke="#4fc3f7" stroke-width="4" fill="none" stroke-linecap="round" opacity="0" style="animation:fadeIn .6s 1.6s both;filter:drop-shadow(0 0 5px #4fc3f7)"/>
+<text x="388" y="198" font-size="8.5" fill="#4fc3f7" opacity="0" style="animation:fadeIn .3s 1.8s both">Bursa</text>
+<!-- SUPRASPINATUS TENDON (intact left half, torn right) -->
+<!-- Intact portion (medial) -->
+<path d="M210,210 Q258,198 295,206" stroke="#d4a843" stroke-width="5" fill="none" stroke-linecap="round" stroke-dasharray="1000" stroke-dashoffset="1000" style="animation:drawIn 1s 1s both;filter:drop-shadow(0 0 4px #d4a843)"/>
+<!-- Tear gap highlight -->
+<line x1="296" y1="204" x2="296" y2="222" stroke="#ff4a2a" stroke-width="2" stroke-dasharray="3 2" opacity="0" style="animation:fadeIn .4s 2.8s both"/>
+<!-- Torn / retracted distal stump -->
+<path d="M320,215 Q348,220 368,228" stroke="#d4a843" stroke-width="4" fill="none" stroke-linecap="round" stroke-dasharray="1000" stroke-dashoffset="1000" opacity="0.6" style="animation:drawIn .8s 2s both"/>
+<!-- Tear gap glow -->
+<ellipse cx="308" cy="214" rx="18" ry="10" fill="#ff4a2a" opacity="0" style="animation:inflame 2.5s 2.8s infinite;filter:blur(6px)"/>
+<text x="300" y="194" font-size="9" fill="#ff6b42" opacity="0" style="animation:fadeIn .4s 3s both">Full-thickness tear</text>
+<!-- Tendon labels -->
+<text x="205" y="200" font-size="8.5" fill="#d4a843" opacity="0" style="animation:fadeIn .3s 1.2s both">Supraspinatus</text>
+<!-- Subscapularis (anterior) -->
+<path d="M210,280 Q212,296 214,314" stroke="#d4a843" stroke-width="4" fill="none" stroke-linecap="round" opacity="0.5" stroke-dasharray="1000" stroke-dashoffset="1000" style="animation:drawIn .8s 1.8s both"/>
+<text x="145" y="306" font-size="8.5" fill="#d4a843" opacity="0" text-anchor="end" style="animation:fadeIn .3s 2s both">Subscapularis</text>
+<!-- Biceps tendon in groove -->
+<line x1="330" y1="213" x2="336" y2="356" stroke="#00d4ff" stroke-width="2.5" stroke-linecap="round" stroke-dasharray="1000" stroke-dashoffset="1000" style="animation:drawIn 1s 2.2s both;filter:drop-shadow(0 0 3px #00d4ff)"/>
+<text x="348" y="270" font-size="8.5" fill="#00d4ff" opacity="0" style="animation:fadeIn .3s 2.4s both">Biceps LH</text>
+<!-- GT label -->
+<text x="390" y="240" font-size="8.5" fill="#2a5a7a" opacity="0" style="animation:fadeIn .3s 1s both">Greater</text>
+<text x="390" y="252" font-size="8.5" fill="#2a5a7a" opacity="0" style="animation:fadeIn .3s 1.1s both">Tuberosity</text>
+</svg>
+</div>
+<div class="inf">
+  <div class="ic">Shoulder</div>
+  <div class="it">Rotator Cuff Tear</div>
+  <div class="is">Supraspinatus · Most Common</div>
+  <p class="id">Full-thickness supraspinatus tear at its insertion on the greater tuberosity. The most common rotator cuff injury, often from chronic impingement or acute trauma.</p>
+  <div class="tags"><span class="tag tt">Supraspinatus</span><span class="tag tp">Arthroscopic Repair</span><span class="tag tp">Open Repair</span></div>
+  <ul class="fl">
+    <li><strong>Pain:</strong> Lateral shoulder, worse at night and overhead</li>
+    <li><strong>Weakness:</strong> Shoulder abduction (supraspinatus), external rotation</li>
+    <li>Positive drop-arm test, empty can test</li>
+    <li>MRI: tendon discontinuity, retraction, fatty atrophy</li>
+    <li>Acute tear: often from fall on outstretched hand</li>
+    <li>Massive tear: involves &gt;2 tendons</li>
+  </ul>
+</div>
+</div>
+
+<!-- ── SUBACROMIAL IMPINGEMENT ── -->
+<div class="cond" id="imp">
+<div class="sa">
+<svg viewBox="0 0 520 490" xmlns="http://www.w3.org/2000/svg" style="max-height:530px">
+<defs>
+  <filter id="gLi" x="-60%" y="-60%" width="220%" height="220%"><feGaussianBlur stdDeviation="7" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+</defs>
+<text x="260" y="30" font-size="9" fill="#1a4060" text-anchor="middle" letter-spacing=".1em" style="animation:fadeIn .5s .2s both">RIGHT SHOULDER — CORONAL VIEW · ARM ELEVATED</text>
+<!-- Clavicle -->
+<path d="M30,148 Q110,140 188,150" stroke="#2a5a7a" stroke-width="10" fill="none" stroke-linecap="round" style="animation:fadeIn .5s .4s both"/>
+<path d="M30,148 Q110,140 188,150" stroke="#0d2035" stroke-width="7" fill="none" stroke-linecap="round" style="animation:fadeIn .5s .4s both"/>
+<!-- Acromion -->
+<path d="M188,150 Q210,152 242,164" stroke="#2a5a7a" stroke-width="12" fill="none" stroke-linecap="round" style="animation:fadeIn .5s .5s both"/>
+<path d="M188,150 Q210,152 242,164" stroke="#0d2035" stroke-width="9" fill="none" stroke-linecap="round" style="animation:fadeIn .5s .5s both"/>
+<!-- Subacromial space label + arrows showing narrowing -->
+<text x="270" y="158" font-size="9" fill="#ff6b42" opacity="0" style="animation:fadeIn .4s 2.2s both">↓ Space</text>
+<line x1="252" y1="166" x2="252" y2="196" stroke="#ff4a2a" stroke-width="1.5" stroke-dasharray="3 2" opacity="0" style="animation:fadeIn .4s 2.4s both"/>
+<!-- Glenoid -->
+<ellipse cx="188" cy="295" rx="24" ry="72" fill="#0d2035" stroke="#2a5a7a" stroke-width="2" style="animation:fadeIn .5s .6s both"/>
+<!-- Labrum -->
+<path d="M174,226 Q160,248 160,296 Q160,342 174,364" stroke="#9b6bb5" stroke-width="3" fill="none" stroke-linecap="round" stroke-dasharray="1000" stroke-dashoffset="1000" style="animation:drawIn .8s 1.4s both;filter:drop-shadow(0 0 4px #9b6bb5)"/>
+<!-- Humeral head elevated -->
+<circle cx="318" cy="272" r="84" fill="#0d2035" stroke="#2a5a7a" stroke-width="2" style="animation:fadeIn .5s .7s both"/>
+<!-- Shaft -->
+<path d="M272,338 Q268,420 266,460" stroke="#2a5a7a" stroke-width="14" fill="none" stroke-linecap="round" style="animation:fadeIn .4s .8s both"/>
+<path d="M272,338 Q268,420 266,460" stroke="#0d2035" stroke-width="10" fill="none" stroke-linecap="round" style="animation:fadeIn .4s .8s both"/>
+<!-- Supraspinatus tendon being pinched -->
+<path d="M210,200 Q258,190 296,196 Q310,198 320,200" stroke="#d4a843" stroke-width="5" fill="none" stroke-linecap="round" stroke-dasharray="1000" stroke-dashoffset="1000" style="animation:drawIn 1s 1s both;filter:drop-shadow(0 0 4px #d4a843)"/>
+<!-- Impingement zone (acromion compresses tendon) -->
+<ellipse cx="252" cy="183" rx="22" ry="12" fill="#ff4a2a" opacity="0" style="animation:inflame 2.2s 2s infinite;filter:blur(7px)"/>
+<ellipse cx="252" cy="183" rx="14" ry="8" fill="#ff4a2a" opacity="0" style="animation:inflame 2.2s 2.1s infinite;filter:blur(3px)"/>
+<text x="270" y="178" font-size="9" fill="#ff4a2a" opacity="0" style="animation:fadeIn .4s 2.5s both">Impingement</text>
+<!-- Thickened bursa from chronic inflammation -->
+<path d="M244,174 Q292,168 338,176" stroke="#4fc3f7" stroke-width="7" fill="none" stroke-linecap="round" opacity="0" style="animation:gPulse 3s 2.8s infinite;filter:drop-shadow(0 0 6px #4fc3f7)"/>
+<text x="342" y="172" font-size="8.5" fill="#4fc3f7" opacity="0" style="animation:fadeIn .3s 3s both">Inflamed bursa</text>
+<!-- Labels -->
+<text x="205" y="188" font-size="8.5" fill="#d4a843" opacity="0" style="animation:fadeIn .3s 1.2s both">Supraspinatus</text>
+<text x="145" y="298" font-size="9" fill="#2a5a7a" text-anchor="end" style="animation:fadeIn .3s .7s both">Glenoid</text>
+</svg>
+</div>
+<div class="inf">
+  <div class="ic">Shoulder</div>
+  <div class="it">Subacromial Impingement</div>
+  <div class="is">Neer Stages I–III</div>
+  <p class="id">Mechanical compression of the supraspinatus tendon and subacromial bursa between the humeral head and the undersurface of the acromion, especially with overhead arm elevation.</p>
+  <div class="tags"><span class="tag ti">Impingement</span><span class="tag tp">Subacromial Injection</span><span class="tag tp">Acromioplasty</span></div>
+  <ul class="fl">
+    <li><strong>Pain:</strong> Lateral shoulder, painful arc 60°–120° abduction</li>
+    <li>Positive Neer sign, Hawkins-Kennedy test</li>
+    <li>Stage I: edema/hemorrhage; Stage II: fibrosis; Stage III: tear</li>
+    <li>X-ray: acromial spur, reduced subacromial space (&lt;7mm)</li>
+    <li>Conservative: PT, NSAIDs, subacromial injection</li>
+    <li>Surgical: arthroscopic acromioplasty ± bursectomy</li>
+  </ul>
+</div>
+</div>
+
+<!-- ── SLAP TEAR ── -->
+<div class="cond" id="slap">
+<div class="sa">
+<svg viewBox="0 0 520 490" xmlns="http://www.w3.org/2000/svg" style="max-height:530px">
+<defs>
+  <filter id="gLs" x="-60%" y="-60%" width="220%" height="220%"><feGaussianBlur stdDeviation="7" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+</defs>
+<text x="260" y="30" font-size="9" fill="#1a4060" text-anchor="middle" letter-spacing=".1em" style="animation:fadeIn .5s .2s both">RIGHT SHOULDER — CORONAL VIEW</text>
+<!-- Clavicle + acromion -->
+<path d="M30,148 Q110,140 188,150" stroke="#2a5a7a" stroke-width="10" fill="none" stroke-linecap="round" style="animation:fadeIn .5s .4s both"/>
+<path d="M30,148 Q110,140 188,150" stroke="#0d2035" stroke-width="7" fill="none" stroke-linecap="round" style="animation:fadeIn .5s .4s both"/>
+<path d="M188,150 Q210,152 242,164" stroke="#2a5a7a" stroke-width="12" fill="none" stroke-linecap="round" style="animation:fadeIn .5s .5s both"/>
+<path d="M188,150 Q210,152 242,164" stroke="#0d2035" stroke-width="9" fill="none" stroke-linecap="round" style="animation:fadeIn .5s .5s both"/>
+<!-- Glenoid + labrum -->
+<ellipse cx="188" cy="295" rx="24" ry="72" fill="#0d2035" stroke="#2a5a7a" stroke-width="2" style="animation:fadeIn .5s .6s both"/>
+<!-- Superior labrum (SLAP) intact right -->
+<path d="M174,226 Q164,240 162,260" stroke="#9b6bb5" stroke-width="4" fill="none" stroke-linecap="round" stroke-dasharray="1000" stroke-dashoffset="1000" style="animation:drawIn .8s 1.4s both;filter:drop-shadow(0 0 5px #9b6bb5)"/>
+<!-- Superior labrum TORN (SLAP) -->
+<path d="M175,226 Q188,218 202,220" stroke="#9b6bb5" stroke-width="4" fill="none" stroke-linecap="round" stroke-dasharray="1000" stroke-dashoffset="1000" style="animation:drawIn .8s 1.6s both"/>
+<!-- SLAP tear gap -->
+<ellipse cx="185" cy="223" rx="16" ry="8" fill="#9b6bb5" opacity="0" style="animation:gPulse 2.5s 2.5s infinite;filter:blur(6px)"/>
+<text x="170" y="204" font-size="9" fill="#9b6bb5" opacity="0" style="animation:fadeIn .4s 2.8s both">SLAP tear</text>
+<!-- Biceps anchor at top of glenoid -->
+<path d="M196,218 Q230,195 254,186" stroke="#00d4ff" stroke-width="3" fill="none" stroke-linecap="round" stroke-dasharray="1000" stroke-dashoffset="1000" style="animation:drawIn .8s 2s both;filter:drop-shadow(0 0 4px #00d4ff)"/>
+<path d="M254,186 Q280,192 320,205" stroke="#00d4ff" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-dasharray="1000" stroke-dashoffset="1000" style="animation:drawIn .8s 2.4s both"/>
+<text x="260" y="177" font-size="9" fill="#00d4ff" opacity="0" style="animation:fadeIn .3s 2.6s both">Biceps anchor</text>
+<!-- Tear glow -->
+<ellipse cx="188" cy="222" rx="20" ry="10" fill="#ff4a2a" opacity="0" style="animation:inflame 2.5s 2.6s infinite;filter:blur(6px)"/>
+<!-- Humeral head -->
+<circle cx="320" cy="290" r="84" fill="#0d2035" stroke="#2a5a7a" stroke-width="2" style="animation:fadeIn .5s .7s both"/>
+<path d="M274,356 Q270,430 268,470" stroke="#2a5a7a" stroke-width="14" fill="none" stroke-linecap="round" style="animation:fadeIn .4s .8s both"/>
+<path d="M274,356 Q270,430 268,470" stroke="#0d2035" stroke-width="10" fill="none" stroke-linecap="round" style="animation:fadeIn .4s .8s both"/>
+<!-- Inferior labrum intact -->
+<path d="M162,330 Q162,345 174,364" stroke="#9b6bb5" stroke-width="3" fill="none" stroke-linecap="round" stroke-dasharray="1000" stroke-dashoffset="1000" style="animation:drawIn .6s 1.5s both;filter:drop-shadow(0 0 4px #9b6bb5)"/>
+<text x="145" y="298" font-size="9" fill="#2a5a7a" text-anchor="end" style="animation:fadeIn .3s .7s both">Glenoid</text>
+<text x="145" y="244" font-size="9" fill="#9b6bb5" text-anchor="end" style="animation:fadeIn .3s 1.8s both">Labrum</text>
+</svg>
+</div>
+<div class="inf">
+  <div class="ic">Shoulder</div>
+  <div class="it">SLAP Tear</div>
+  <div class="is">Superior Labrum Anterior to Posterior</div>
+  <p class="id">Tear of the superior glenoid labrum at the biceps anchor. Common in overhead athletes (pitchers, swimmers). The biceps long head anchor detaches from the superior glenoid.</p>
+  <div class="tags"><span class="tag tl">Superior Labrum</span><span class="tag tp">Biceps Tenodesis</span><span class="tag tp">SLAP Repair</span></div>
+  <ul class="fl">
+    <li><strong>Pain:</strong> Deep shoulder, worse with overhead and throwing</li>
+    <li>Positive O'Brien (active compression) test</li>
+    <li>Positive biceps load test in throwers</li>
+    <li>MRI arthrogram: superior labral tear, fluid at anchor</li>
+    <li>Type II most common (anchor detachment)</li>
+    <li>Age &gt;35: often treated with biceps tenodesis</li>
+  </ul>
+</div>
+</div>
+
+<!-- ── BANKART LESION ── -->
+<div class="cond" id="bank">
+<div class="sa">
+<svg viewBox="0 0 520 490" xmlns="http://www.w3.org/2000/svg" style="max-height:530px">
+<text x="260" y="30" font-size="9" fill="#1a4060" text-anchor="middle" letter-spacing=".1em" style="animation:fadeIn .5s .2s both">RIGHT SHOULDER — AXIAL VIEW (LOOKING DOWN)</text>
+<!-- Axial cross-section of shoulder: glenoid center, humeral head right, labrum ring -->
+<!-- Glenoid (center-left oval) -->
+<ellipse cx="195" cy="270" rx="44" ry="54" fill="#0d2035" stroke="#2a5a7a" stroke-width="2" style="animation:fadeIn .5s .5s both"/>
+<ellipse cx="195" cy="270" rx="30" ry="40" fill="#060f20" stroke="#1e4060" stroke-width="1" style="animation:fadeIn .4s .6s both"/>
+<text x="195" y="274" font-size="9" fill="#2a5a7a" text-anchor="middle" style="animation:fadeIn .3s .7s both">Glenoid</text>
+<!-- Intact posterior labrum -->
+<path d="M196,216 Q240,220 238,270 Q238,318 196,324" stroke="#9b6bb5" stroke-width="5" fill="none" stroke-linecap="round" stroke-dasharray="1000" stroke-dashoffset="1000" style="animation:drawIn .8s 1.2s both;filter:drop-shadow(0 0 5px #9b6bb5)"/>
+<!-- ANTERIOR LABRUM — TORN (Bankart) -->
+<path d="M196,216 Q152,218 152,270 Q152,316 196,324" stroke="#9b6bb5" stroke-width="3" fill="none" stroke-linecap="round" stroke-dasharray="8 5" opacity="0.5" style="animation:fadeIn .6s 2s both"/>
+<!-- Bankart fragment -->
+<ellipse cx="145" cy="255" rx="14" ry="10" fill="#9b6bb5" opacity="0" style="animation:gPulse 2.5s 2.5s infinite;filter:blur(5px)"/>
+<ellipse cx="145" cy="255" rx="8" ry="6" fill="#6b3a9a" opacity="0" style="animation:gPulse 2.5s 2.6s infinite"/>
+<text x="104" y="248" font-size="9" fill="#9b6bb5" opacity="0" style="animation:fadeIn .4s 2.8s both">Bankart</text>
+<text x="104" y="260" font-size="9" fill="#9b6bb5" opacity="0" style="animation:fadeIn .4s 2.9s both">fragment</text>
+<!-- Tear glow at anterior labrum -->
+<ellipse cx="152" cy="270" rx="16" ry="22" fill="#ff4a2a" opacity="0" style="animation:inflame 2.5s 2.5s infinite;filter:blur(8px)"/>
+<!-- Humeral head (right) translating anteriorly -->
+<circle cx="355" cy="270" r="86" fill="#0d2035" stroke="#2a5a7a" stroke-width="2" style="animation:fadeIn .5s .7s both"/>
+<text x="355" y="274" font-size="9" fill="#2a5a7a" text-anchor="middle" style="animation:fadeIn .3s .9s both">Humeral head</text>
+<!-- Hill-Sachs lesion on humeral head (posterior compression fracture) -->
+<path d="M408,220 Q418,230 416,245" stroke="#ff4a2a" stroke-width="3" fill="none" stroke-linecap="round" opacity="0" style="animation:fadeIn .5s 3s both"/>
+<text x="422" y="234" font-size="9" fill="#ff6b42" opacity="0" style="animation:fadeIn .4s 3.2s both">Hill-Sachs</text>
+<!-- Anterior direction arrow -->
+<text x="104" y="325" font-size="8.5" fill="#2a5a7a" opacity="0" style="animation:fadeIn .3s 1.5s both">← ANTERIOR</text>
+<text x="420" y="325" font-size="8.5" fill="#2a5a7a" text-anchor="end" opacity="0" style="animation:fadeIn .3s 1.5s both">POSTERIOR →</text>
+<!-- Subscapularis tendon anterior -->
+<path d="M151,262 Q190,248 200,240" stroke="#d4a843" stroke-width="3" fill="none" stroke-linecap="round" stroke-dasharray="1000" stroke-dashoffset="1000" opacity="0.6" style="animation:drawIn .8s 1.6s both"/>
+<text x="188" y="232" font-size="8.5" fill="#d4a843" opacity="0" style="animation:fadeIn .3s 1.8s both">Subscap.</text>
+<text x="228" y="344" font-size="9" fill="#9b6bb5" opacity="0" style="animation:fadeIn .3s 1.6s both">Intact posterior labrum</text>
+</svg>
+</div>
+<div class="inf">
+  <div class="ic">Shoulder</div>
+  <div class="it">Bankart Lesion</div>
+  <div class="is">Anterior Labral Tear · Instability</div>
+  <p class="id">Detachment of the anteroinferior glenoid labrum from the glenoid rim, typically from anterior shoulder dislocation. The labrum fails to contain the humeral head, causing recurrent instability.</p>
+  <div class="tags"><span class="tag tl">Anterior Labrum</span><span class="tag tp">Bankart Repair</span><span class="tag tp">Latarjet</span></div>
+  <ul class="fl">
+    <li><strong>Mechanism:</strong> Anterior dislocation (fall on abducted/ER arm)</li>
+    <li>Associated Hill-Sachs lesion (~80% of cases)</li>
+    <li>Positive apprehension / relocation test</li>
+    <li>MRI arthrogram: anterior labral tear, fluid in tear</li>
+    <li>Bony Bankart: glenoid rim fracture present</li>
+    <li>Latarjet: for glenoid bone loss &gt;20–25%</li>
+  </ul>
+</div>
+</div>
+
+<!-- ── AC JOINT SEPARATION ── -->
+<div class="cond" id="acj">
+<div class="sa">
+<svg viewBox="0 0 520 490" xmlns="http://www.w3.org/2000/svg" style="max-height:530px">
+<defs>
+  <filter id="gLa" x="-60%" y="-60%" width="220%" height="220%"><feGaussianBlur stdDeviation="7" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+</defs>
+<text x="260" y="30" font-size="9" fill="#1a4060" text-anchor="middle" letter-spacing=".1em" style="animation:fadeIn .5s .2s both">AC JOINT — CORONAL VIEW · GRADE III SEPARATION</text>
+<!-- Clavicle — elevated (displaced upward in Grade III) -->
+<path d="M28,128 Q108,120 178,130" stroke="#2a5a7a" stroke-width="10" fill="none" stroke-linecap="round" style="animation:fadeIn .5s .4s both"/>
+<path d="M28,128 Q108,120 178,130" stroke="#0d2035" stroke-width="7" fill="none" stroke-linecap="round" style="animation:fadeIn .5s .4s both"/>
+<text x="28" y="114" font-size="9" fill="#2a5a7a" style="animation:fadeIn .3s .5s both">Clavicle (elevated)</text>
+<!-- Distal clavicle end -->
+<ellipse cx="178" cy="130" rx="12" ry="16" fill="#0d2035" stroke="#2a5a7a" stroke-width="2" style="animation:fadeIn .4s .6s both"/>
+<!-- Acromion — stays with scapula, drops down relative to clavicle -->
+<path d="M196,168 Q218,170 248,178" stroke="#2a5a7a" stroke-width="12" fill="none" stroke-linecap="round" style="animation:fadeIn .5s .5s both"/>
+<path d="M196,168 Q218,170 248,178" stroke="#0d2035" stroke-width="9" fill="none" stroke-linecap="round" style="animation:fadeIn .5s .5s both"/>
+<ellipse cx="195" cy="168" rx="12" ry="16" fill="#0d2035" stroke="#2a5a7a" stroke-width="2" style="animation:fadeIn .4s .7s both"/>
+<text x="260" y="172" font-size="9" fill="#2a5a7a" style="animation:fadeIn .3s .6s both">Acromion</text>
+<!-- AC joint gap (Grade III — wide) -->
+<line x1="182" y1="130" x2="190" y2="165" stroke="#ff4a2a" stroke-width="2" stroke-dasharray="4 3" opacity="0" style="animation:fadeIn .5s 2s both"/>
+<!-- Gap measurement -->
+<ellipse cx="186" cy="148" rx="12" ry="20" fill="#ff4a2a" opacity="0" style="animation:inflame 2.5s 2.2s infinite;filter:blur(7px)"/>
+<text x="204" y="142" font-size="9" fill="#ff4a2a" opacity="0" style="animation:fadeIn .4s 2.5s both">AC gap</text>
+<!-- CC ligaments (torn in Grade III) -->
+<!-- Coracoid process -->
+<path d="M178,230 Q168,218 174,198" stroke="#2a5a7a" stroke-width="8" fill="none" stroke-linecap="round" style="animation:fadeIn .5s .8s both"/>
+<path d="M178,230 Q168,218 174,198" stroke="#0d2035" stroke-width="5" fill="none" stroke-linecap="round" style="animation:fadeIn .5s .8s both"/>
+<text x="126" y="233" font-size="9" fill="#2a5a7a" style="animation:fadeIn .3s .9s both">Coracoid</text>
+<!-- CC ligaments (torn) — dashed -->
+<path d="M172,196 Q148,158 152,130" stroke="#9b6bb5" stroke-width="2.5" fill="none" stroke-dasharray="5 4" opacity="0.5" stroke-linecap="round" style="animation:fadeIn .6s 1.8s both"/>
+<path d="M172,196 Q162,158 168,130" stroke="#9b6bb5" stroke-width="2.5" fill="none" stroke-dasharray="5 4" opacity="0.5" stroke-linecap="round" style="animation:fadeIn .6s 1.9s both"/>
+<text x="126" y="165" font-size="9" fill="#9b6bb5" opacity="0" style="animation:fadeIn .3s 2s both">CC ligaments</text>
+<text x="126" y="177" font-size="9" fill="#9b6bb5" opacity="0" style="animation:fadeIn .3s 2.1s both">(torn)</text>
+<!-- Glenoid + head for reference -->
+<ellipse cx="210" cy="330" rx="22" ry="60" fill="#0d2035" stroke="#2a5a7a" stroke-width="1.5" style="animation:fadeIn .4s .8s both"/>
+<circle cx="336" cy="330" r="72" fill="#0d2035" stroke="#2a5a7a" stroke-width="1.5" style="animation:fadeIn .4s .9s both"/>
+<path d="M290,390 Q286,450 284,475" stroke="#2a5a7a" stroke-width="12" fill="none" stroke-linecap="round" style="animation:fadeIn .3s 1s both"/>
+<path d="M290,390 Q286,450 284,475" stroke="#0d2035" stroke-width="8" fill="none" stroke-linecap="round" style="animation:fadeIn .3s 1s both"/>
+<!-- Grade labels -->
+<text x="28" y="430" font-size="9" fill="#2a5a7a" style="animation:fadeIn .3s 2.5s both">Grade I: sprain only</text>
+<text x="28" y="443" font-size="9" fill="#2a5a7a" style="animation:fadeIn .3s 2.6s both">Grade II: AC tear, CC intact</text>
+<text x="28" y="456" font-size="9.5" fill="#ff6b42" style="animation:fadeIn .3s 2.7s both">Grade III: AC + CC torn ← shown</text>
+</svg>
+</div>
+<div class="inf">
+  <div class="ic">Shoulder</div>
+  <div class="it">AC Joint Separation</div>
+  <div class="is">Acromioclavicular Joint · Grade I–VI</div>
+  <p class="id">Disruption of the acromioclavicular (AC) and coracoclavicular (CC) ligaments. Grades I–II: conservative. Grade III+: often surgical with CC ligament reconstruction.</p>
+  <div class="tags"><span class="tag ti">Ligament Tear</span><span class="tag tp">CC Reconstruction</span><span class="tag tp">Hook Plate</span></div>
+  <ul class="fl">
+    <li><strong>Mechanism:</strong> Direct blow to shoulder point (fall, tackle)</li>
+    <li><strong>Sign:</strong> Elevated clavicle "piano key" deformity</li>
+    <li>Grade I: AC sprain; Grade II: AC tear; Grade III: +CC torn</li>
+    <li>X-ray: weighted views show AC gap, CC distance</li>
+    <li>Grade III management remains debated (operative vs. conservative)</li>
+    <li>Grade IV–VI: all operative</li>
+  </ul>
+</div>
+</div>
+
+<!-- ── FROZEN SHOULDER ── -->
+<div class="cond" id="cryo">
+<div class="sa">
+<svg viewBox="0 0 520 490" xmlns="http://www.w3.org/2000/svg" style="max-height:530px">
+<defs>
+  <filter id="gLc" x="-60%" y="-60%" width="220%" height="220%"><feGaussianBlur stdDeviation="8" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+</defs>
+<text x="260" y="30" font-size="9" fill="#1a4060" text-anchor="middle" letter-spacing=".1em" style="animation:fadeIn .5s .2s both">RIGHT SHOULDER — CORONAL VIEW · ADHESIVE CAPSULITIS</text>
+<!-- Clavicle + acromion -->
+<path d="M30,148 Q110,140 188,150" stroke="#2a5a7a" stroke-width="10" fill="none" stroke-linecap="round" style="animation:fadeIn .5s .4s both"/>
+<path d="M30,148 Q110,140 188,150" stroke="#0d2035" stroke-width="7" fill="none" stroke-linecap="round" style="animation:fadeIn .5s .4s both"/>
+<path d="M188,150 Q210,152 242,164" stroke="#2a5a7a" stroke-width="12" fill="none" stroke-linecap="round" style="animation:fadeIn .5s .5s both"/>
+<path d="M188,150 Q210,152 242,164" stroke="#0d2035" stroke-width="9" fill="none" stroke-linecap="round" style="animation:fadeIn .5s .5s both"/>
+<!-- Glenoid -->
+<ellipse cx="188" cy="295" rx="24" ry="72" fill="#0d2035" stroke="#2a5a7a" stroke-width="2" style="animation:fadeIn .5s .6s both"/>
+<!-- Humeral head -->
+<circle cx="320" cy="290" r="84" fill="#0d2035" stroke="#2a5a7a" stroke-width="2" style="animation:fadeIn .5s .7s both"/>
+<path d="M274,356 Q270,430 268,470" stroke="#2a5a7a" stroke-width="14" fill="none" stroke-linecap="round" style="animation:fadeIn .4s .8s both"/>
+<path d="M274,356 Q270,430 268,470" stroke="#0d2035" stroke-width="10" fill="none" stroke-linecap="round" style="animation:fadeIn .4s .8s both"/>
+<!-- THICKENED JOINT CAPSULE (layered rings, pulsing) -->
+<path d="M215,206 Q234,198 260,195 Q306,192 340,205 Q370,218 380,250 Q388,280 382,312 Q374,344 354,362 Q326,378 298,376 Q272,374 252,360 Q228,342 218,316 Q208,288 210,254 Q212,228 215,206Z"
+  stroke="#4fc3f7" stroke-width="6" fill="none" stroke-linecap="round" opacity="0" style="animation:capsuleThick 3s 1.5s infinite;filter:drop-shadow(0 0 8px #4fc3f7)"/>
+<path d="M218,214 Q240,206 265,203 Q306,200 338,212 Q364,224 374,255 Q382,284 376,314 Q368,342 350,358 Q324,372 298,372 Q274,370 256,356 Q234,338 226,314 Q218,288 220,256 Q222,233 218,214Z"
+  stroke="#4fc3f7" stroke-width="10" fill="rgba(79,195,247,0.04)" stroke-linecap="round" opacity="0" style="animation:capsuleThick 3s 1.6s infinite"/>
+<!-- Small joint volume indicator -->
+<text x="310" y="294" font-size="9" fill="#4fc3f7" text-anchor="middle" opacity="0" style="animation:fadeIn .4s 2.5s both">↓ Volume</text>
+<text x="310" y="306" font-size="9" fill="#4fc3f7" text-anchor="middle" opacity="0" style="animation:fadeIn .4s 2.6s both">&lt; 10 mL</text>
+<!-- Axillary recess contracted -->
+<path d="M236,358 Q242,374 258,378" stroke="#ff4a2a" stroke-width="3" fill="none" stroke-dasharray="4 3" opacity="0" style="animation:fadeIn .5s 2.8s both"/>
+<text x="192" y="386" font-size="9" fill="#ff6b42" opacity="0" style="animation:fadeIn .4s 3s both">Contracted axillary recess</text>
+<text x="392" y="178" font-size="9" fill="#4fc3f7" opacity="0" style="animation:fadeIn .4s 2.4s both">Thickened</text>
+<text x="392" y="190" font-size="9" fill="#4fc3f7" opacity="0" style="animation:fadeIn .4s 2.5s both">capsule</text>
+<text x="145" y="298" font-size="9" fill="#2a5a7a" text-anchor="end" style="animation:fadeIn .3s .7s both">Glenoid</text>
+<!-- ROM arcs showing restriction -->
+<path d="M270,200 A120,120 0 0,1 400,290" stroke="#ffdd00" stroke-width="1.5" fill="none" stroke-dasharray="4 4" opacity="0" style="animation:fadeIn .6s 3.2s both"/>
+<text x="408" y="288" font-size="8.5" fill="#ffdd00" opacity="0" style="animation:fadeIn .4s 3.4s both">Restricted ROM</text>
+</svg>
+</div>
+<div class="inf">
+  <div class="ic">Shoulder</div>
+  <div class="it">Frozen Shoulder</div>
+  <div class="is">Adhesive Capsulitis · 3 Phases</div>
+  <p class="id">Progressive fibrosis and contracture of the glenohumeral joint capsule, dramatically reducing range of motion. The axillary recess is obliterated. Joint volume drops to &lt;10 mL (normal ~28 mL).</p>
+  <div class="tags"><span class="tag tn">Capsule</span><span class="tag tp">Manipulation Under Anesthesia</span><span class="tag tp">Capsular Release</span></div>
+  <ul class="fl">
+    <li><strong>Phase 1 (Freezing):</strong> Painful, insidious 3–9 months</li>
+    <li><strong>Phase 2 (Frozen):</strong> Stiff, less pain, 9–15 months</li>
+    <li><strong>Phase 3 (Thawing):</strong> Gradual recovery 15–24 months</li>
+    <li>ER most limited; abduction also restricted</li>
+    <li>Associated: diabetes, thyroid disease, post-immobilization</li>
+    <li>MRI: thickened rotator interval, coracohumeral ligament</li>
+  </ul>
+</div>
+</div>
+
+</main>
+</div><!-- .app -->
+
+<script>
+function sw(id, btn) {
+  // Use inline style to force visibility — bypasses any CSS class-cascade failure on iOS Safari
+  document.querySelectorAll('.cond').forEach(function(c) {
+    c.style.display = 'none';
+    c.classList.remove('on');
+  });
+  document.querySelectorAll('.nb').forEach(function(b) { b.classList.remove('on'); });
+  if (btn) btn.classList.add('on');
+
+  var el = document.getElementById(id);
+  el.classList.add('on');
+  el.style.display = 'flex';                          // inline always wins over CSS
+  el.style.flexDirection = window.innerWidth <= 760 ? 'column' : 'row';
+  void el.offsetHeight;                               // force layout before paint
+
+  if (window.innerWidth <= 760) {
+    // Scroll to bring content into view — simple offsetTop, no options object (iOS compat)
+    window.scrollTo(0, el.offsetTop - 8);
+  } else {
+    // Desktop: restart SVG animations
+    var svg = el.querySelector('svg');
+    if (svg) { svg.style.display = 'none'; void svg.offsetWidth; svg.style.display = ''; }
+  }
+}
+`;
+var _vhtml=_vp1+'\x3C/script>\x3C/body>\x3C/html>';
+function openViewer(){
+  var b=new Blob([_vhtml],{type:'text/html'});
+  var u=URL.createObjectURL(b);
+  window.open(u,'_blank');
+  setTimeout(function(){URL.revokeObjectURL(u);},60000);
+}
 </script>
 
 </body>
