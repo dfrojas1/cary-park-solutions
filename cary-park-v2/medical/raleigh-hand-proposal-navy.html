@@ -1,0 +1,890 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"/>
+<meta name="theme-color" content="#1a2d4a"/>
+<title>Raleigh Hand to Shoulder Center | Upper Extremity Specialists — Raleigh, NC</title>
+<meta name="description" content="Fellowship-trained hand and upper extremity surgeons serving the Triangle for 30+ years. Same-week appointments."/>
+
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+
+:root{
+  --navy:    #1a2d4a;
+  --navy-dk: #0f1d30;
+  --steel:   #3a8fce;
+  --accent:  #5db8e8;
+  --sky:     #e6f1fb;
+  --white:   #ffffff;
+  --off:     #f7f9fc;
+  --g100:    #eef2f7;
+  --g200:    #dde6f0;
+  --g400:    #8fa5bc;
+  --text:    #1a2d4a;
+  --text-md: #3a5272;
+  --text-lt: #6b8299;
+  --gold:    #f59e0b;
+  --radius:  14px;
+  --shadow:  0 4px 24px rgba(26,45,74,.10);
+  --shadow-lg: 0 8px 48px rgba(26,45,74,.16);
+}
+
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{font-family:'DM Sans',-apple-system,sans-serif;color:var(--text);background:var(--white);overflow-x:hidden;line-height:1.6}
+img{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+button{font-family:inherit;cursor:pointer;-webkit-appearance:none}
+
+/* ── UTILITIES ── */
+.container{max-width:1120px;margin:0 auto;padding:0 24px}
+.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)}
+
+/* ── NAV ── */
+#site-nav{
+  position:fixed;top:0;left:0;right:0;z-index:900;
+  background:transparent;
+  transition:background .3s,box-shadow .3s;
+}
+#site-nav.scrolled{
+  background:rgba(255,255,255,.97);
+  box-shadow:0 1px 16px rgba(26,45,74,.10);
+  -webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);
+}
+.nav-inner{
+  display:flex;align-items:center;justify-content:space-between;
+  height:66px;
+  max-width:1120px;margin:0 auto;padding:0 24px;
+}
+.nav-brand{
+  font-size:15px;font-weight:600;letter-spacing:-.01em;
+  color:var(--white);transition:color .3s;
+  display:flex;align-items:center;gap:10px;
+}
+#site-nav.scrolled .nav-brand{color:var(--navy)}
+.nav-brand-dot{
+  width:8px;height:8px;border-radius:50%;
+  background:var(--accent);box-shadow:0 0 8px rgba(93,184,232,.7);
+  flex-shrink:0;
+}
+.nav-links{display:flex;align-items:center;gap:2px}
+.nav-links a{
+  padding:8px 13px;border-radius:7px;
+  font-size:13.5px;font-weight:500;
+  color:rgba(255,255,255,.82);transition:background .15s,color .15s;
+}
+.nav-links a:hover{background:rgba(255,255,255,.12);color:var(--white)}
+#site-nav.scrolled .nav-links a{color:var(--text-md)}
+#site-nav.scrolled .nav-links a:hover{background:var(--sky);color:var(--navy)}
+.nav-cta{
+  padding:10px 20px;border-radius:8px;
+  background:var(--steel);color:var(--white)!important;
+  font-size:13.5px;font-weight:600;
+  transition:background .15s,transform .1s!important;
+}
+.nav-cta:hover{background:var(--navy-dk)!important;transform:translateY(-1px)}
+.nav-hamburger{display:none;background:none;border:none;padding:8px;color:var(--white)}
+#site-nav.scrolled .nav-hamburger{color:var(--navy)}
+.hamburger-icon{display:flex;flex-direction:column;gap:5px;width:22px}
+.hamburger-icon span{display:block;height:2px;background:currentColor;border-radius:2px;transition:all .2s}
+
+/* ── HERO ── */
+.hero{
+  min-height:85vh;display:flex;flex-direction:column;justify-content:flex-end;
+  padding-bottom:0;
+  position:relative;overflow:hidden;
+  background:linear-gradient(145deg, #0f1d30 0%, #1a2d4a 45%, #1c3560 100%);
+}
+.hero-bg-glow{
+  position:absolute;inset:0;pointer-events:none;
+  background:
+    radial-gradient(ellipse 70% 50% at 80% 15%, rgba(93,184,232,.18) 0%, transparent 65%),
+    radial-gradient(ellipse 40% 60% at 10% 80%, rgba(58,143,206,.12) 0%, transparent 60%);
+}
+.hero-grid{
+  position:absolute;inset:0;pointer-events:none;opacity:.04;
+  background-image:linear-gradient(rgba(255,255,255,.6) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.6) 1px,transparent 1px);
+  background-size:48px 48px;
+}
+
+/* Inline SVG cross-section accent (top-right) */
+.hero-anatomy-accent{
+  position:absolute;right:-20px;top:50%;transform:translateY(-52%);
+  width:340px;opacity:.09;pointer-events:none;
+}
+@media(max-width:768px){.hero-anatomy-accent{display:none}}
+
+.hero-content{
+  position:relative;z-index:2;
+  max-width:1120px;margin:0 auto;padding:0 24px;
+  padding-top:130px;padding-bottom:72px;
+}
+.hero-stat-strip{
+  display:flex;align-items:center;gap:0;
+  margin-bottom:32px;
+  flex-wrap:wrap;gap:0;
+}
+.hero-stat{
+  padding:8px 20px;border-right:1px solid rgba(255,255,255,.14);
+  font-size:13px;font-weight:500;color:rgba(255,255,255,.65);
+  letter-spacing:.04em;text-transform:uppercase;
+}
+.hero-stat:first-child{padding-left:0}
+.hero-stat:last-child{border-right:none}
+.hero-stat strong{color:var(--accent);font-weight:700;font-size:15px}
+.hero-h1{
+  font-family:'Source Serif 4',Georgia,serif;
+  font-size:clamp(38px,6vw,72px);font-weight:700;line-height:1.05;
+  color:var(--white);letter-spacing:-.02em;
+  margin-bottom:16px;
+}
+.hero-h1 em{font-style:italic;color:var(--accent)}
+.hero-h2{
+  font-size:clamp(16px,2.5vw,22px);font-weight:400;
+  color:rgba(255,255,255,.72);margin-bottom:12px;
+  letter-spacing:.01em;
+}
+.hero-sub{
+  font-size:clamp(14px,1.8vw,17px);font-weight:400;
+  color:rgba(255,255,255,.55);max-width:540px;
+  margin-bottom:40px;line-height:1.55;
+}
+.hero-ctas{display:flex;gap:14px;flex-wrap:wrap}
+.btn-primary{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:14px 28px;border-radius:10px;
+  background:var(--steel);color:var(--white);
+  font-size:15px;font-weight:600;
+  box-shadow:0 4px 20px rgba(58,143,206,.35);
+  transition:background .15s,transform .1s,box-shadow .15s;
+  border:none;
+}
+.btn-primary:hover{background:#2a7ab8;transform:translateY(-2px);box-shadow:0 6px 28px rgba(58,143,206,.45)}
+.btn-outline{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:14px 28px;border-radius:10px;
+  background:transparent;color:var(--white);
+  font-size:15px;font-weight:600;
+  border:1.5px solid rgba(255,255,255,.38);
+  transition:background .15s,border-color .15s,transform .1s;
+}
+.btn-outline:hover{background:rgba(255,255,255,.1);border-color:rgba(255,255,255,.7);transform:translateY(-2px)}
+
+/* ── CASE STUDY BAND ── */
+.case-band{
+  background:linear-gradient(90deg,#0f1d30 0%,#1a2d4a 100%);
+  padding:28px 0;
+  border-top:1px solid rgba(93,184,232,.15);
+  border-bottom:1px solid rgba(93,184,232,.15);
+}
+.case-band-inner{
+  max-width:1120px;margin:0 auto;padding:0 24px;
+  display:flex;align-items:flex-start;gap:20px;
+}
+.case-band-quote{
+  width:3px;min-height:60px;flex-shrink:0;
+  background:linear-gradient(180deg,var(--accent),var(--steel));
+  border-radius:2px;margin-top:4px;
+}
+.case-band-text blockquote{
+  font-family:'Source Serif 4',Georgia,serif;
+  font-size:clamp(14px,2vw,18px);font-style:italic;
+  color:rgba(255,255,255,.88);line-height:1.6;margin-bottom:10px;
+}
+.case-band-attr{
+  font-size:12.5px;font-weight:500;
+  color:var(--accent);letter-spacing:.03em;text-transform:uppercase;
+}
+
+/* ── SECTION SHARED ── */
+.section{padding:88px 0}
+.section-label{
+  font-size:11px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--steel);margin-bottom:12px;
+}
+.section-title{
+  font-family:'Source Serif 4',Georgia,serif;
+  font-size:clamp(26px,4vw,42px);font-weight:700;line-height:1.15;
+  color:var(--navy);letter-spacing:-.02em;margin-bottom:16px;
+}
+.section-sub{font-size:16px;color:var(--text-lt);max-width:540px;line-height:1.65}
+.section-header{margin-bottom:52px}
+.section-header.center{text-align:center}
+.section-header.center .section-sub{margin:0 auto}
+
+/* ── GOOGLE REVIEWS ── */
+.reviews{background:var(--white)}
+.reviews-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+@media(max-width:900px){.reviews-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:580px){.reviews-grid{grid-template-columns:1fr}}
+.review-card{
+  background:var(--off);border:1.5px solid var(--g200);
+  border-radius:var(--radius);padding:28px;
+  display:flex;flex-direction:column;gap:14px;
+  transition:transform .15s,box-shadow .15s;
+}
+.review-card:hover{transform:translateY(-3px);box-shadow:var(--shadow)}
+.review-stars{display:flex;gap:3px}
+.review-star{
+  width:16px;height:16px;
+  background:var(--gold);
+  -webkit-clip-path:polygon(50% 0%,61% 35%,98% 35%,68% 57%,79% 91%,50% 70%,21% 91%,32% 57%,2% 35%,39% 35%);
+  clip-path:polygon(50% 0%,61% 35%,98% 35%,68% 57%,79% 91%,50% 70%,21% 91%,32% 57%,2% 35%,39% 35%);
+}
+.review-text{
+  font-size:14.5px;line-height:1.65;color:var(--text-md);
+  font-style:italic;flex:1;
+}
+.review-author{font-size:12.5px;font-weight:600;color:var(--text-lt);letter-spacing:.03em}
+.review-source{display:flex;align-items:center;gap:6px;margin-top:4px}
+.google-g{
+  width:14px;height:14px;border-radius:50%;
+  background:linear-gradient(135deg,#4285F4,#34A853,#FBBC05,#EA4335);
+  flex-shrink:0;
+}
+.review-source span{font-size:11px;color:var(--text-lt);letter-spacing:.04em}
+.reviews-footer{margin-top:36px;text-align:center}
+.reviews-footer a{
+  display:inline-flex;align-items:center;gap:8px;
+  font-size:14px;font-weight:600;color:var(--steel);
+  border:1.5px solid var(--g200);border-radius:8px;
+  padding:10px 22px;transition:background .15s,border-color .15s;
+}
+.reviews-footer a:hover{background:var(--sky);border-color:var(--accent)}
+
+/* ── PHYSICIANS ── */
+.physicians{background:var(--off)}
+.physicians-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+@media(max-width:900px){.physicians-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:540px){.physicians-grid{grid-template-columns:1fr}}
+.physician-card{
+  background:var(--white);border:1.5px solid var(--g200);
+  border-radius:var(--radius);padding:28px 24px;
+  display:flex;flex-direction:column;align-items:flex-start;gap:12px;
+  transition:transform .15s,box-shadow .15s,border-color .15s;
+}
+.physician-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-lg);border-color:var(--accent)}
+.physician-avatar{
+  width:60px;height:60px;border-radius:50%;
+  background:linear-gradient(135deg,var(--navy) 0%,var(--steel) 100%);
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Source Serif 4',Georgia,serif;
+  font-size:20px;font-weight:700;color:var(--white);letter-spacing:.02em;
+  flex-shrink:0;
+}
+.physician-name{
+  font-family:'Source Serif 4',Georgia,serif;
+  font-size:18px;font-weight:700;color:var(--navy);line-height:1.2;
+}
+.physician-title{font-size:12.5px;font-weight:500;color:var(--steel);letter-spacing:.04em;text-transform:uppercase}
+.physician-credentials{
+  display:flex;flex-wrap:wrap;gap:6px;margin-top:4px;
+}
+.cred-tag{
+  font-size:11px;padding:3px 9px;border-radius:20px;
+  background:var(--sky);color:var(--navy);
+  border:1px solid var(--g200);font-weight:500;
+}
+.physician-focus{font-size:13px;color:var(--text-lt);line-height:1.5;margin-top:auto;padding-top:8px;border-top:1px solid var(--g100)}
+
+/* ── WHAT WE TREAT ── */
+.conditions{background:var(--white)}
+.conditions-intro-grid{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:12px;
+  margin-bottom:52px;
+}
+@media(max-width:900px){.conditions-intro-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:480px){.conditions-intro-grid{grid-template-columns:1fr}}
+.condition-chip{
+  background:var(--off);border:1.5px solid var(--g200);
+  border-radius:10px;padding:16px;
+  display:flex;align-items:center;gap:10px;
+  font-size:13.5px;font-weight:500;color:var(--text-md);
+  transition:background .15s,border-color .15s;
+}
+.condition-chip:hover{background:var(--sky);border-color:var(--accent);color:var(--navy)}
+.condition-chip-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.anatomy-embed-wrap{
+  border-radius:16px;overflow:hidden;
+  border:1.5px solid var(--g200);
+  box-shadow:var(--shadow-lg);
+  background:var(--navy-dk);
+}
+.anatomy-embed-label{
+  background:var(--navy);padding:14px 20px;
+  display:flex;align-items:center;gap:10px;
+  border-bottom:1px solid rgba(93,184,232,.15);
+}
+.anatomy-embed-dot{width:8px;height:8px;border-radius:50%;background:var(--accent);box-shadow:0 0 6px rgba(93,184,232,.6)}
+.anatomy-embed-label span{font-size:12px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.6)}
+.anatomy-embed-label strong{font-size:13px;font-weight:600;color:rgba(255,255,255,.9)}
+.anatomy-iframe-container{position:relative;width:100%;padding-bottom:0}
+.anatomy-iframe-container iframe{
+  display:block;width:100%;height:640px;border:none;
+}
+@media(max-width:768px){.anatomy-iframe-container iframe{height:420px}}
+
+/* ── PHYSICAL THERAPY ── */
+.therapy{background:var(--off)}
+.therapy-grid{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center}
+@media(max-width:768px){.therapy-grid{grid-template-columns:1fr}}
+.therapy-visual{
+  border-radius:var(--radius);overflow:hidden;
+  background:linear-gradient(135deg,#1a2d4a 0%,#1c3560 100%);
+  padding:40px 32px;
+  display:flex;flex-direction:column;gap:20px;
+  min-height:340px;justify-content:center;
+}
+.therapy-stat-row{display:flex;gap:32px;flex-wrap:wrap}
+.therapy-stat{text-align:center}
+.therapy-stat-number{
+  font-family:'Source Serif 4',Georgia,serif;
+  font-size:42px;font-weight:700;color:var(--accent);line-height:1;
+  margin-bottom:4px;
+}
+.therapy-stat-label{font-size:12px;color:rgba(255,255,255,.55);letter-spacing:.06em;text-transform:uppercase;font-weight:500}
+.therapy-features{list-style:none;display:flex;flex-direction:column;gap:14px;margin-top:8px}
+.therapy-features li{
+  display:flex;align-items:flex-start;gap:12px;
+  font-size:14px;color:var(--text-md);line-height:1.5;
+}
+.therapy-check{
+  width:20px;height:20px;border-radius:50%;
+  background:var(--sky);color:var(--steel);
+  display:flex;align-items:center;justify-content:center;
+  font-size:11px;font-weight:700;flex-shrink:0;margin-top:1px;
+}
+
+/* ── PATIENT PORTAL CTA ── */
+.portal-cta{
+  background:linear-gradient(135deg,#0f1d30 0%,#1a2d4a 50%,#1c3560 100%);
+  padding:80px 0;text-align:center;position:relative;overflow:hidden;
+}
+.portal-cta::before{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse 60% 80% at 50% 50%,rgba(93,184,232,.1) 0%,transparent 70%);
+}
+.portal-cta-content{position:relative;z-index:1;max-width:640px;margin:0 auto;padding:0 24px}
+.portal-cta h2{
+  font-family:'Source Serif 4',Georgia,serif;
+  font-size:clamp(26px,4vw,40px);font-weight:700;
+  color:var(--white);margin-bottom:16px;letter-spacing:-.02em;
+}
+.portal-cta p{font-size:16px;color:rgba(255,255,255,.6);margin-bottom:36px;line-height:1.65}
+.portal-ctas{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+.portal-detail{display:flex;align-items:center;gap:20px;justify-content:center;margin-top:28px;flex-wrap:wrap}
+.portal-detail-item{font-size:12.5px;color:rgba(255,255,255,.4);letter-spacing:.05em;display:flex;align-items:center;gap:6px}
+.portal-detail-item::before{content:'';width:4px;height:4px;border-radius:50%;background:var(--accent);flex-shrink:0}
+
+/* ── FOOTER ── */
+footer{background:var(--navy-dk);padding:48px 0 32px}
+.footer-grid{
+  display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:40px;
+  padding-bottom:40px;
+  border-bottom:1px solid rgba(255,255,255,.08);
+  margin-bottom:32px;
+}
+@media(max-width:768px){.footer-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:480px){.footer-grid{grid-template-columns:1fr}}
+.footer-brand{font-family:'Source Serif 4',Georgia,serif;font-size:17px;font-weight:700;color:var(--white);margin-bottom:10px}
+.footer-tagline{font-size:13px;color:rgba(255,255,255,.35);line-height:1.6;margin-bottom:16px;max-width:260px}
+.footer-contact-item{font-size:13px;color:rgba(255,255,255,.5);margin-bottom:6px}
+.footer-col h4{font-size:11px;font-weight:600;letter-spacing:.15em;text-transform:uppercase;color:rgba(255,255,255,.35);margin-bottom:14px}
+.footer-col ul{list-style:none}
+.footer-col ul li{margin-bottom:8px}
+.footer-col ul li a{font-size:13px;color:rgba(255,255,255,.5);transition:color .15s}
+.footer-col ul li a:hover{color:var(--accent)}
+.footer-bottom{display:flex;align-items:center;justify-content:space-between;flex-wrap:gap;gap:12px}
+.footer-copy{font-size:12px;color:rgba(255,255,255,.25)}
+.footer-built{font-size:12px;color:rgba(255,255,255,.2)}
+.footer-built a{color:var(--accent);opacity:.7;transition:opacity .15s}
+.footer-built a:hover{opacity:1}
+
+/* ── PROPOSAL WATERMARK BANNER ── */
+.proposal-banner{
+  background:var(--steel);color:var(--white);
+  text-align:center;padding:10px 20px;
+  font-size:12.5px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;
+}
+
+/* ── MOBILE NAV DRAWER ── */
+.mobile-nav{
+  display:none;position:fixed;inset:0;z-index:800;
+  background:rgba(15,29,48,.96);-webkit-backdrop-filter:blur(16px);backdrop-filter:blur(16px);
+  flex-direction:column;justify-content:center;align-items:center;gap:8px;
+  padding:24px;
+}
+.mobile-nav.open{display:flex}
+.mobile-nav a{
+  display:block;width:100%;max-width:320px;
+  padding:16px 24px;border-radius:10px;
+  font-size:18px;font-weight:600;color:var(--white);text-align:center;
+  background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);
+  transition:background .15s;
+}
+.mobile-nav a:hover{background:rgba(93,184,232,.15)}
+.mobile-nav .mobile-close{
+  position:absolute;top:20px;right:20px;
+  background:none;border:none;color:rgba(255,255,255,.5);
+  font-size:28px;padding:8px;cursor:pointer;
+}
+
+/* ── ANIMATIONS ── */
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+.hero-content>*{animation:fadeUp .7s ease both}
+.hero-stat-strip{animation-delay:.05s}
+.hero-h1{animation-delay:.15s}
+.hero-h2{animation-delay:.25s}
+.hero-sub{animation-delay:.32s}
+.hero-ctas{animation-delay:.4s}
+
+/* ── MOBILE ── */
+@media(max-width:768px){
+  .nav-links{display:none}
+  .nav-hamburger{display:flex}
+  .section{padding:60px 0}
+  .therapy-grid{grid-template-columns:1fr}
+  .footer-grid{grid-template-columns:1fr 1fr;gap:28px}
+}
+@media(max-width:480px){
+  .hero-stat-strip{gap:0;flex-direction:column;align-items:flex-start}
+  .hero-stat{border-right:none;padding:4px 0;font-size:12px}
+  .footer-grid{grid-template-columns:1fr;gap:24px}
+}
+
+::-webkit-scrollbar{width:6px}
+::-webkit-scrollbar-track{background:transparent}
+::-webkit-scrollbar-thumb{background:var(--g200);border-radius:3px}
+</style>
+</head>
+<body>
+
+<!-- Proposal watermark -->
+<div class="proposal-banner">
+  Web Design Proposal — Prepared by Cary Park Solutions · David Rojas · info@caryparksolutions.com
+</div>
+
+<!-- ── NAVIGATION ── -->
+<nav id="site-nav" role="navigation" aria-label="Main navigation">
+  <div class="nav-inner">
+    <a href="#" class="nav-brand">
+      <div class="nav-brand-dot"></div>
+      Raleigh Hand to Shoulder Center
+    </a>
+    <div class="nav-links">
+      <a href="#hero">Home</a>
+      <a href="#physicians">Physicians</a>
+      <a href="#conditions">What We Treat</a>
+      <a href="#anatomy">3D Anatomy</a>
+      <a href="#therapy">PT / Therapy</a>
+      <a href="#portal" class="nav-cta">Patient Portal</a>
+    </div>
+    <button class="nav-hamburger" aria-label="Open menu" onclick="document.getElementById('mobile-nav').classList.add('open')">
+      <div class="hamburger-icon"><span></span><span></span><span></span></div>
+    </button>
+  </div>
+</nav>
+
+<!-- Mobile nav -->
+<div class="mobile-nav" id="mobile-nav">
+  <button class="mobile-close" aria-label="Close menu" onclick="document.getElementById('mobile-nav').classList.remove('open')">✕</button>
+  <a href="#hero"        onclick="document.getElementById('mobile-nav').classList.remove('open')">Home</a>
+  <a href="#physicians"  onclick="document.getElementById('mobile-nav').classList.remove('open')">Physicians</a>
+  <a href="#conditions"  onclick="document.getElementById('mobile-nav').classList.remove('open')">What We Treat</a>
+  <a href="#anatomy"     onclick="document.getElementById('mobile-nav').classList.remove('open')">3D Anatomy</a>
+  <a href="#therapy"     onclick="document.getElementById('mobile-nav').classList.remove('open')">PT / Therapy</a>
+  <a href="#portal"      onclick="document.getElementById('mobile-nav').classList.remove('open')">Patient Portal</a>
+</div>
+
+<!-- ── HERO ── -->
+<section class="hero" id="hero">
+  <div class="hero-bg-glow"></div>
+  <div class="hero-grid"></div>
+
+  <!-- Decorative anatomy SVG (shoulder coronal cross-section) -->
+  <div class="hero-anatomy-accent" aria-hidden="true">
+    <svg viewBox="0 0 340 480" xmlns="http://www.w3.org/2000/svg">
+      <!-- Humerus head -->
+      <circle cx="210" cy="220" r="90" fill="none" stroke="#5db8e8" stroke-width="1.5"/>
+      <!-- Glenoid -->
+      <ellipse cx="100" cy="220" rx="28" ry="70" fill="none" stroke="#5db8e8" stroke-width="1.5"/>
+      <!-- Clavicle -->
+      <path d="M20,110 Q90,100 160,112" stroke="#5db8e8" stroke-width="2" fill="none"/>
+      <!-- Acromion -->
+      <path d="M160,112 Q185,118 200,134" stroke="#5db8e8" stroke-width="2.5" fill="none"/>
+      <!-- Supraspinatus -->
+      <path d="M135,155 Q185,140 230,160" stroke="#3a8fce" stroke-width="2" fill="none" stroke-dasharray="6 3"/>
+      <!-- Humeral shaft -->
+      <line x1="170" y1="298" x2="164" y2="460" stroke="#5db8e8" stroke-width="10" stroke-linecap="round" opacity=".6"/>
+      <!-- Labrum -->
+      <path d="M88,158 Q76,180 76,220 Q76,258 88,280" stroke="#3a8fce" stroke-width="3" fill="none"/>
+      <!-- Biceps tendon -->
+      <line x1="218" y1="148" x2="225" y2="310" stroke="#3a8fce" stroke-width="1.5" stroke-dasharray="4 3"/>
+    </svg>
+  </div>
+
+  <div class="hero-content">
+    <div class="hero-stat-strip">
+      <div class="hero-stat"><strong>30+</strong> Years Serving Triangle NC</div>
+      <div class="hero-stat"><strong>6</strong> Fellowship-Trained Surgeons</div>
+      <div class="hero-stat"><strong>Same-Week</strong> Appointments Available</div>
+    </div>
+    <h1 class="hero-h1">Upper Extremity<br><em>Specialists.</em></h1>
+    <p class="hero-h2">Triangle's Independent Practice.</p>
+    <p class="hero-sub">Fellowship-trained surgeons and certified hand therapists — under one roof. Raleigh's trusted name in hand, wrist, elbow, and shoulder care.</p>
+    <div class="hero-ctas">
+      <a href="#portal" class="btn-primary">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/></svg>
+        Book Appointment
+      </a>
+      <a href="#physicians" class="btn-outline">Our Physicians →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ── FOUNDER CASE STUDY BAND ── -->
+<div class="case-band">
+  <div class="case-band-inner">
+    <div class="case-band-quote"></div>
+    <div class="case-band-text">
+      <blockquote>
+        "[PLACEHOLDER — David Rojas personal case study: After a pedestrian accident, Dr. Erickson performed two surgeries that restored full function. The care at Raleigh Hand was exceptional at every step — from the first appointment through months of physical therapy. This practice changed my life, and that's why I built this site for them.]"
+      </blockquote>
+      <div class="case-band-attr">David Rojas · Founder, Cary Park Solutions · Patient, Raleigh Hand to Shoulder Center</div>
+    </div>
+  </div>
+</div>
+
+<!-- ── GOOGLE REVIEWS ── -->
+<section class="section reviews" id="reviews">
+  <div class="container">
+    <div class="section-header center">
+      <div class="section-label">Patient Experience</div>
+      <h2 class="section-title">What Our Patients Say</h2>
+      <p class="section-sub">Hundreds of 5-star reviews across Google, Healthgrades, and Yelp — reflecting 30 years of exceptional outcomes.</p>
+    </div>
+    <div class="reviews-grid">
+      <div class="review-card">
+        <div class="review-stars">
+          <div class="review-star"></div><div class="review-star"></div><div class="review-star"></div><div class="review-star"></div><div class="review-star"></div>
+        </div>
+        <p class="review-text">"The doctors, nurses, and desk staff are exceptional. From my first visit through my surgery and recovery, every person I encountered was knowledgeable, compassionate, and professional."</p>
+        <div>
+          <div class="review-author">Google Review</div>
+          <div class="review-source"><div class="google-g"></div><span>Verified Patient · Google</span></div>
+        </div>
+      </div>
+      <div class="review-card">
+        <div class="review-stars">
+          <div class="review-star"></div><div class="review-star"></div><div class="review-star"></div><div class="review-star"></div><div class="review-star"></div>
+        </div>
+        <p class="review-text">"The therapy team is incredible. I am so thankful for the care I received. They pushed me at just the right pace and celebrated every milestone with me. I'm back to full function."</p>
+        <div>
+          <div class="review-author">Google Review</div>
+          <div class="review-source"><div class="google-g"></div><span>Verified Patient · Google</span></div>
+        </div>
+      </div>
+      <div class="review-card">
+        <div class="review-stars">
+          <div class="review-star"></div><div class="review-star"></div><div class="review-star"></div><div class="review-star"></div><div class="review-star"></div>
+        </div>
+        <p class="review-text">"The therapists contributed significantly to restoring my mobility over months of rehabilitation. Their expertise in upper extremity therapy is unmatched in the Triangle."</p>
+        <div>
+          <div class="review-author">Google Review</div>
+          <div class="review-source"><div class="google-g"></div><span>Verified Patient · Google</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="reviews-footer">
+      <a href="#">
+        <div class="google-g"></div>
+        See all reviews on Google →
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ── PHYSICIANS ── -->
+<section class="section physicians" id="physicians">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-label">Our Team</div>
+      <h2 class="section-title">Fellowship-Trained Surgeons</h2>
+      <p class="section-sub">Board-certified orthopedic surgeons, each with subspecialty fellowship training in hand, wrist, elbow, and shoulder surgery.</p>
+    </div>
+    <div class="physicians-grid">
+
+      <div class="physician-card">
+        <div class="physician-avatar">JP</div>
+        <div>
+          <div class="physician-name">Dr. James Post</div>
+          <div class="physician-title">MD · Hand &amp; Upper Extremity</div>
+        </div>
+        <div class="physician-credentials">
+          <span class="cred-tag">ABOS Board Certified</span>
+          <span class="cred-tag">Hand Surgery Fellowship</span>
+        </div>
+        <p class="physician-focus">Wrist reconstruction · Carpal tunnel · Distal radius fractures · Microsurgery</p>
+      </div>
+
+      <div class="physician-card">
+        <div class="physician-avatar">TM</div>
+        <div>
+          <div class="physician-name">Dr. Terry Messer</div>
+          <div class="physician-title">MD · Hand &amp; Upper Extremity</div>
+        </div>
+        <div class="physician-credentials">
+          <span class="cred-tag">ABOS Board Certified</span>
+          <span class="cred-tag">Hand Surgery Fellowship</span>
+        </div>
+        <p class="physician-focus">Nerve injuries · Dupuytren's · Tendon repair · Pediatric hand conditions</p>
+      </div>
+
+      <div class="physician-card" style="border-color:var(--accent);box-shadow:0 0 0 1px rgba(93,184,232,.3)">
+        <div class="physician-avatar" style="background:linear-gradient(135deg,var(--steel) 0%,var(--accent) 100%)">JE</div>
+        <div>
+          <div class="physician-name">Dr. John Erickson</div>
+          <div class="physician-title">MD · Hand, Elbow &amp; Shoulder</div>
+        </div>
+        <div class="physician-credentials">
+          <span class="cred-tag">ABOS Board Certified</span>
+          <span class="cred-tag">Hand &amp; Shoulder Fellowship</span>
+        </div>
+        <p class="physician-focus">Shoulder reconstruction · Rotator cuff repair · Complex fractures · Trauma</p>
+      </div>
+
+      <div class="physician-card">
+        <div class="physician-avatar">GE</div>
+        <div>
+          <div class="physician-name">Dr. George Edwards III</div>
+          <div class="physician-title">MD · Hand &amp; Wrist</div>
+        </div>
+        <div class="physician-credentials">
+          <span class="cred-tag">ABOS Board Certified</span>
+          <span class="cred-tag">Hand Surgery Fellowship</span>
+        </div>
+        <p class="physician-focus">Arthritis reconstruction · Joint replacement · Wrist arthroscopy</p>
+      </div>
+
+      <div class="physician-card">
+        <div class="physician-avatar">TL</div>
+        <div>
+          <div class="physician-name">Dr. Timothy Luchetti</div>
+          <div class="physician-title">MD · Hand &amp; Upper Extremity</div>
+        </div>
+        <div class="physician-credentials">
+          <span class="cred-tag">ABOS Board Certified</span>
+          <span class="cred-tag">Hand Surgery Fellowship</span>
+        </div>
+        <p class="physician-focus">Trigger finger · Tendon reconstruction · Cubital tunnel · Sports hand injuries</p>
+      </div>
+
+      <div class="physician-card">
+        <div class="physician-avatar">PS</div>
+        <div>
+          <div class="physician-name">Dr. Paul Schricker</div>
+          <div class="physician-title">MD · Shoulder &amp; Elbow</div>
+        </div>
+        <div class="physician-credentials">
+          <span class="cred-tag">ABOS Board Certified</span>
+          <span class="cred-tag">Shoulder &amp; Elbow Fellowship</span>
+        </div>
+        <p class="physician-focus">Shoulder instability · SLAP repairs · Elbow arthroscopy · AC joint injuries</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ── WHAT WE TREAT ── -->
+<section class="section conditions" id="conditions">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-label">Conditions Treated</div>
+      <h2 class="section-title">What We Treat</h2>
+      <p class="section-sub">From common conditions to complex reconstructive surgery — comprehensive upper extremity care at a single practice.</p>
+    </div>
+
+    <div class="conditions-intro-grid">
+      <div class="condition-chip"><div class="condition-chip-dot" style="background:#3a8fce"></div> Carpal Tunnel Syndrome</div>
+      <div class="condition-chip"><div class="condition-chip-dot" style="background:#3a8fce"></div> Cubital Tunnel Syndrome</div>
+      <div class="condition-chip"><div class="condition-chip-dot" style="background:#5db8e8"></div> Thoracic Outlet Syndrome</div>
+      <div class="condition-chip"><div class="condition-chip-dot" style="background:#f59e0b"></div> Rotator Cuff Tears</div>
+      <div class="condition-chip"><div class="condition-chip-dot" style="background:#f59e0b"></div> Tennis &amp; Golfer's Elbow</div>
+      <div class="condition-chip"><div class="condition-chip-dot" style="background:#d4a843"></div> De Quervain's Tenosynovitis</div>
+      <div class="condition-chip"><div class="condition-chip-dot" style="background:#d4a843"></div> Trigger Finger</div>
+      <div class="condition-chip"><div class="condition-chip-dot" style="background:#9b6bb5"></div> SLAP &amp; Bankart Tears</div>
+      <div class="condition-chip"><div class="condition-chip-dot" style="background:#9b6bb5"></div> Ganglion Cysts</div>
+      <div class="condition-chip"><div class="condition-chip-dot" style="background:#6b9fa5"></div> Scapholunate Tears</div>
+      <div class="condition-chip"><div class="condition-chip-dot" style="background:#6b9fa5"></div> Dupuytren's Contracture</div>
+      <div class="condition-chip"><div class="condition-chip-dot" style="background:#f59e0b"></div> AC Joint Separation</div>
+    </div>
+
+    <!-- 3D Anatomy Embed -->
+    <div class="anatomy-embed-wrap" id="anatomy">
+      <div class="anatomy-embed-label">
+        <div class="anatomy-embed-dot"></div>
+        <div>
+          <span>Interactive</span>
+          <strong style="margin-left:8px">Cervical &amp; Shoulder Conditions — 3D Anatomy Viewer</strong>
+        </div>
+      </div>
+      <div class="anatomy-iframe-container">
+        <iframe
+          src="../../shoulder-spine-animations.html"
+          title="Cervical and Shoulder 3D Anatomy Viewer"
+          loading="lazy"
+          allow="same-origin">
+        </iframe>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── PT / THERAPY ── -->
+<section class="section therapy" id="therapy">
+  <div class="container">
+    <div class="therapy-grid">
+      <div>
+        <div class="section-label">Physical Therapy</div>
+        <h2 class="section-title">Certified Hand Therapists On-Site</h2>
+        <p class="section-sub" style="margin-bottom:28px">Our CHT-certified therapists work alongside surgeons — no referrals to outside facilities, no gaps in communication. Pre-op conditioning to post-op return to function, all in one building.</p>
+        <ul class="therapy-features">
+          <li>
+            <div class="therapy-check">✓</div>
+            <span><strong style="color:var(--navy)">Certified Hand Therapists (CHT)</strong> — the highest credential in hand rehabilitation</span>
+          </li>
+          <li>
+            <div class="therapy-check">✓</div>
+            <span><strong style="color:var(--navy)">Custom orthotic fabrication</strong> — static and dynamic splinting on-site</span>
+          </li>
+          <li>
+            <div class="therapy-check">✓</div>
+            <span><strong style="color:var(--navy)">Work hardening &amp; FCE</strong> — functional capacity evaluations and return-to-work programs</span>
+          </li>
+          <li>
+            <div class="therapy-check">✓</div>
+            <span><strong style="color:var(--navy)">Direct surgeon collaboration</strong> — therapists and surgeons review your case together</span>
+          </li>
+          <li>
+            <div class="therapy-check">✓</div>
+            <span><strong style="color:var(--navy)">Most insurances accepted</strong> — including Blue Cross Blue Shield, Aetna, Cigna, UnitedHealthcare, Medicare</span>
+          </li>
+        </ul>
+      </div>
+      <div class="therapy-visual">
+        <div>
+          <div style="font-size:11px;font-weight:600;letter-spacing:.15em;text-transform:uppercase;color:rgba(93,184,232,.6);margin-bottom:20px">Therapy at a Glance</div>
+          <div class="therapy-stat-row">
+            <div class="therapy-stat">
+              <div class="therapy-stat-number">CHT</div>
+              <div class="therapy-stat-label">Certified</div>
+            </div>
+            <div class="therapy-stat">
+              <div class="therapy-stat-number">5k+</div>
+              <div class="therapy-stat-label">Patients Treated</div>
+            </div>
+            <div class="therapy-stat">
+              <div class="therapy-stat-number">30+</div>
+              <div class="therapy-stat-label">Years Experience</div>
+            </div>
+          </div>
+        </div>
+        <div style="border-top:1px solid rgba(255,255,255,.08);padding-top:20px">
+          <div style="font-size:12px;color:rgba(255,255,255,.35);font-weight:500;letter-spacing:.06em;text-transform:uppercase;margin-bottom:14px">Common Therapy Diagnoses</div>
+          <div style="display:flex;flex-wrap:wrap;gap:8px">
+            <span style="font-size:12px;padding:5px 12px;border-radius:20px;background:rgba(93,184,232,.1);color:rgba(255,255,255,.6);border:1px solid rgba(93,184,232,.2)">Post-op Fracture</span>
+            <span style="font-size:12px;padding:5px 12px;border-radius:20px;background:rgba(93,184,232,.1);color:rgba(255,255,255,.6);border:1px solid rgba(93,184,232,.2)">Tendon Repair</span>
+            <span style="font-size:12px;padding:5px 12px;border-radius:20px;background:rgba(93,184,232,.1);color:rgba(255,255,255,.6);border:1px solid rgba(93,184,232,.2)">Rotator Cuff</span>
+            <span style="font-size:12px;padding:5px 12px;border-radius:20px;background:rgba(93,184,232,.1);color:rgba(255,255,255,.6);border:1px solid rgba(93,184,232,.2)">Carpal Tunnel</span>
+            <span style="font-size:12px;padding:5px 12px;border-radius:20px;background:rgba(93,184,232,.1);color:rgba(255,255,255,.6);border:1px solid rgba(93,184,232,.2)">Lymphedema</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── PATIENT PORTAL CTA ── -->
+<section class="portal-cta" id="portal">
+  <div class="portal-cta-content">
+    <h2>Ready to See a Specialist?</h2>
+    <p>Same-week appointments available. Most insurance plans accepted. Conveniently located in Raleigh with ample parking.</p>
+    <div class="portal-ctas">
+      <a href="tel:9190000000" class="btn-primary">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.5 19.79 19.79 0 01.58 4.18 2 2 0 012.55 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.91 9.91a16 16 0 006.18 6.18l1.37-1.37a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg>
+        (919) 000-0000
+      </a>
+      <a href="#" class="btn-outline">Request Online →</a>
+    </div>
+    <div class="portal-detail">
+      <span class="portal-detail-item">3701 Wake Forest Rd Suite 100, Raleigh NC 27609</span>
+      <span class="portal-detail-item">Mon–Fri 8am–5pm</span>
+      <span class="portal-detail-item">Most Insurance Accepted</span>
+    </div>
+  </div>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-brand">Raleigh Hand to Shoulder Center</div>
+        <p class="footer-tagline">Serving the Triangle for over 30 years. Fellowship-trained surgeons, certified hand therapists, and personalized care — under one roof.</p>
+        <div class="footer-contact-item">(919) 000-0000</div>
+        <div class="footer-contact-item">3701 Wake Forest Rd Suite 100</div>
+        <div class="footer-contact-item">Raleigh, NC 27609</div>
+      </div>
+      <div class="footer-col">
+        <h4>Our Practice</h4>
+        <ul>
+          <li><a href="#physicians">Physicians</a></li>
+          <li><a href="#therapy">Therapy Team</a></li>
+          <li><a href="#">About Us</a></li>
+          <li><a href="#">Locations</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Conditions</h4>
+        <ul>
+          <li><a href="#conditions">What We Treat</a></li>
+          <li><a href="#anatomy">3D Anatomy</a></li>
+          <li><a href="#">Patient Education</a></li>
+          <li><a href="#">Surgery FAQs</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Patients</h4>
+        <ul>
+          <li><a href="#portal">Book Appointment</a></li>
+          <li><a href="#">Patient Portal</a></li>
+          <li><a href="#">Insurance</a></li>
+          <li><a href="#">New Patients</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-copy">© 2026 Raleigh Hand to Shoulder Center · All rights reserved</div>
+      <div class="footer-built">Site design by <a href="https://caryparksolutions.com">Cary Park Solutions</a></div>
+    </div>
+  </div>
+</footer>
+
+<script>
+// Sticky nav
+(function(){
+  var nav = document.getElementById('site-nav');
+  window.addEventListener('scroll', function(){
+    if(window.scrollY > 40){ nav.classList.add('scrolled'); }
+    else { nav.classList.remove('scrolled'); }
+  }, {passive:true});
+})();
+</script>
+
+</body>
+</html>
