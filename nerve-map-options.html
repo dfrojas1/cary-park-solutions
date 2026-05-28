@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Nerve Map — Visual Options</title>
+<style>
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:#111;font-family:system-ui,-apple-system,sans-serif;padding:32px 20px;color:#fff}
+  h1{text-align:center;font-size:1.1rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#888;margin-bottom:8px}
+  p.sub{text-align:center;font-size:.82rem;color:#555;margin-bottom:36px}
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;max-width:1100px;margin:0 auto}
+  .card{border-radius:16px;overflow:hidden;position:relative;cursor:pointer;transition:transform .2s,box-shadow .2s}
+  .card:hover{transform:translateY(-4px)}
+  .label{position:absolute;bottom:0;left:0;right:0;padding:16px 20px;display:flex;align-items:flex-end;justify-content:space-between}
+  .label h2{font-size:1rem;font-weight:700;letter-spacing:.04em}
+  .label p{font-size:.75rem;margin-top:3px;opacity:.7;line-height:1.4}
+  .badge{font-size:.65rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:4px 10px;border-radius:20px;flex-shrink:0;margin-left:12px;margin-bottom:2px;align-self:flex-start}
+  svg.preview{width:100%;height:auto;display:block}
+
+  @keyframes drawNerve{from{stroke-dashoffset:800}to{stroke-dashoffset:0}}
+  @keyframes drawNerve2{from{stroke-dashoffset:600}to{stroke-dashoffset:0}}
+  @keyframes drawNerve3{from{stroke-dashoffset:500}to{stroke-dashoffset:0}}
+  @keyframes fadeUp{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+  @keyframes fadeIn{from{opacity:0}to{opacity:1}}
+  @keyframes pulse{0%,100%{opacity:.6}50%{opacity:1}}
+  @keyframes glow{0%,100%{opacity:.4}50%{opacity:.9}}
+
+  /* A: Surgical Atlas */
+  .nerve-a-median{stroke-dasharray:800;stroke-dashoffset:800;animation:drawNerve 2s ease .5s both}
+  .nerve-a-ulnar{stroke-dasharray:600;stroke-dashoffset:600;animation:drawNerve2 2s ease 1.2s both}
+  .nerve-a-radial{stroke-dasharray:500;stroke-dashoffset:500;animation:drawNerve3 1.8s ease 1.8s both}
+  .terr-a{animation:fadeIn 1.5s ease 2.5s both}
+  .label-a{animation:fadeUp .6s ease 3s both}
+
+  /* B: OR Monitor */
+  .nerve-b-1{stroke-dasharray:800;stroke-dashoffset:800;animation:drawNerve 1.8s ease .3s both}
+  .nerve-b-2{stroke-dasharray:600;stroke-dashoffset:600;animation:drawNerve2 1.8s ease .9s both}
+  .nerve-b-3{stroke-dasharray:500;stroke-dashoffset:500;animation:drawNerve3 1.6s ease 1.4s both}
+  .scan-b{animation:glow 2s ease-in-out 2s infinite}
+
+  /* C: Anatomy Poster */
+  .nerve-c-1{stroke-dasharray:800;stroke-dashoffset:800;animation:drawNerve 2.2s ease .4s both}
+  .nerve-c-2{stroke-dasharray:600;stroke-dashoffset:600;animation:drawNerve2 2.2s ease 1s both}
+  .nerve-c-3{stroke-dasharray:500;stroke-dashoffset:500;animation:drawNerve3 2s ease 1.6s both}
+  .terr-c{animation:fadeIn 1.8s ease 2.4s both}
+
+  /* D: Bioluminescent */
+  .nerve-d-1{stroke-dasharray:800;stroke-dashoffset:800;animation:drawNerve 1.5s ease .2s both}
+  .nerve-d-2{stroke-dasharray:600;stroke-dashoffset:600;animation:drawNerve2 1.5s ease .8s both}
+  .nerve-d-3{stroke-dasharray:500;stroke-dashoffset:500;animation:drawNerve3 1.4s ease 1.2s both}
+  .pulse-d{animation:pulse 1.8s ease-in-out 2s infinite}
+
+  @media(max-width:680px){.grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<h1>Nerve Map — Visual Options</h1>
+<p class="sub">All animations play live. Pick A, B, C, or D.</p>
+
+<div class="grid">
+
+  <!-- ═══ OPTION A: SURGICAL ATLAS ═══ -->
+  <div class="card" style="box-shadow:0 0 40px rgba(26,95,168,.25)">
+    <svg class="preview" viewBox="0 0 480 580" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <filter id="ga" x="-20%" y="-20%" width="140%" height="140%">
+          <feGaussianBlur in="SourceGraphic" stdDeviation="2.5" result="b"/>
+          <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+        </filter>
+        <linearGradient id="bg-a" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#0d1f3c"/>
+          <stop offset="100%" stop-color="#071428"/>
+        </linearGradient>
+      </defs>
+      <rect width="480" height="580" fill="url(#bg-a)"/>
+      <!-- Subtle grid -->
+      <line x1="0" y1="100" x2="480" y2="100" stroke="rgba(255,255,255,.03)" stroke-width="1"/>
+      <line x1="0" y1="200" x2="480" y2="200" stroke="rgba(255,255,255,.03)" stroke-width="1"/>
+      <line x1="0" y1="300" x2="480" y2="300" stroke="rgba(255,255,255,.03)" stroke-width="1"/>
+      <line x1="0" y1="400" x2="480" y2="400" stroke="rgba(255,255,255,.03)" stroke-width="1"/>
+      <line x1="120" y1="0" x2="120" y2="580" stroke="rgba(255,255,255,.03)" stroke-width="1"/>
+      <line x1="240" y1="0" x2="240" y2="580" stroke="rgba(255,255,255,.03)" stroke-width="1"/>
+      <line x1="360" y1="0" x2="360" y2="580" stroke="rgba(255,255,255,.03)" stroke-width="1"/>
+
+      <!-- Hand skeleton — clean lines -->
+      <!-- Wrist -->
+      <path d="M 155,520 Q 148,505 150,490 L 152,475 L 330,475 L 332,490 Q 334,505 327,520 Z"
+            fill="rgba(100,150,255,.06)" stroke="rgba(150,190,255,.3)" stroke-width="1.2"/>
+      <!-- Palm -->
+      <path d="M 155,475 L 155,390 L 330,390 L 330,475 Z"
+            fill="rgba(100,150,255,.04)" stroke="rgba(150,190,255,.22)" stroke-width="1"/>
+      <!-- Thumb -->
+      <path d="M 158,455 Q 138,438 114,410 Q 92,378 96,354 Q 100,332 114,326 Q 130,320 140,336 Q 150,352 152,378 L 156,432"
+            fill="rgba(100,150,255,.04)" stroke="rgba(150,190,255,.25)" stroke-width="1.1" stroke-linejoin="round"/>
+      <!-- Fingers -->
+      <path d="M 178,390 L 175,128 Q 175,118 184,118 Q 193,118 193,128 L 190,390 Z" fill="rgba(100,150,255,.04)" stroke="rgba(150,190,255,.22)" stroke-width="1.1"/>
+      <path d="M 214,390 L 212,95 Q 212,85 222,85 Q 232,85 232,95 L 230,390 Z" fill="rgba(100,150,255,.04)" stroke="rgba(150,190,255,.24)" stroke-width="1.1"/>
+      <path d="M 252,390 L 250,118 Q 250,108 260,108 Q 270,108 270,118 L 268,390 Z" fill="rgba(100,150,255,.04)" stroke="rgba(150,190,255,.22)" stroke-width="1.1"/>
+      <path d="M 290,390 L 288,174 Q 288,164 297,164 Q 306,164 306,174 L 305,390 Z" fill="rgba(100,150,255,.03)" stroke="rgba(150,190,255,.18)" stroke-width="1"/>
+
+      <!-- Joint lines -->
+      <line x1="175" y1="228" x2="193" y2="228" stroke="rgba(150,190,255,.14)" stroke-width=".8"/>
+      <line x1="212" y1="210" x2="232" y2="210" stroke="rgba(150,190,255,.16)" stroke-width=".8"/>
+      <line x1="250" y1="222" x2="270" y2="222" stroke="rgba(150,190,255,.14)" stroke-width=".8"/>
+      <line x1="288" y1="252" x2="306" y2="252" stroke="rgba(150,190,255,.12)" stroke-width=".8"/>
+      <line x1="155" y1="390" x2="330" y2="390" stroke="rgba(150,190,255,.1)" stroke-width=".8" stroke-dasharray="4 3"/>
+
+      <!-- Innervation territories -->
+      <g class="terr-a">
+        <path d="M 96,324 Q 112,318 156,376 L 158,454 Q 136,438 110,408 Q 88,376 90,352 Z" fill="rgba(77,184,255,.09)"/>
+        <path d="M 173,118 L 193,118 L 192,390 L 174,390 Z" fill="rgba(77,184,255,.08)"/>
+        <path d="M 210,85 L 232,85 L 230,390 L 212,390 Z" fill="rgba(77,184,255,.09)"/>
+        <path d="M 286,164 L 308,164 L 306,390 L 288,390 Z" fill="rgba(0,230,160,.07)"/>
+        <path d="M 248,108 L 272,108 L 270,390 L 250,390 Z" fill="rgba(0,230,160,.06)"/>
+      </g>
+
+      <!-- MEDIAN NERVE — bright clinical blue -->
+      <path class="nerve-a-median" pathLength="800"
+            d="M 228,476 L 228,400 Q 222,392 210,390 L 192,128"
+            fill="none" stroke="#4db8ff" stroke-width="2.2" stroke-linecap="round" filter="url(#ga)"/>
+      <path class="nerve-a-median" pathLength="800"
+            d="M 228,476 L 228,400 L 228,90"
+            fill="none" stroke="#4db8ff" stroke-width="2.2" stroke-linecap="round" filter="url(#ga)" style="animation-delay:.7s"/>
+      <path class="nerve-a-median" pathLength="800"
+            d="M 228,476 Q 210,468 186,442 Q 158,410 136,374 Q 112,334 106,300"
+            fill="none" stroke="#4db8ff" stroke-width="2" stroke-linecap="round" filter="url(#ga)" style="animation-delay:.9s"/>
+
+      <!-- ULNAR — teal -->
+      <path class="nerve-a-ulnar" pathLength="600"
+            d="M 258,476 L 260,400 L 298,390 L 297,168"
+            fill="none" stroke="#26e7b0" stroke-width="2.2" stroke-linecap="round" filter="url(#ga)"/>
+      <path class="nerve-a-ulnar" pathLength="600"
+            d="M 258,476 L 260,400 L 262,390 L 262,110"
+            fill="none" stroke="#26e7b0" stroke-width="1.8" stroke-linecap="round" filter="url(#ga)" style="animation-delay:1.4s"/>
+
+      <!-- RADIAL — gold -->
+      <path class="nerve-a-radial" pathLength="500"
+            d="M 192,468 Q 168,446 148,418 Q 124,384 108,346 Q 96,316 94,292"
+            fill="none" stroke="#ffd700" stroke-width="1.9" stroke-linecap="round" filter="url(#ga)"/>
+
+      <!-- Labels -->
+      <g class="label-a">
+        <text x="240" y="30" text-anchor="middle" fill="rgba(200,220,255,.55)"
+              font-family="ui-sans-serif,system-ui,sans-serif" font-size="9" font-weight="700" letter-spacing=".25em">NERVE DISTRIBUTION · DORSAL HAND</text>
+        <!-- Legend -->
+        <line x1="30" y1="548" x2="58" y2="548" stroke="#4db8ff" stroke-width="2.5" stroke-linecap="round"/>
+        <text x="63" y="552" fill="rgba(200,220,255,.65)" font-family="ui-sans-serif,system-ui,sans-serif" font-size="8.5" font-weight="600">Median</text>
+        <line x1="130" y1="548" x2="158" y2="548" stroke="#26e7b0" stroke-width="2.5" stroke-linecap="round"/>
+        <text x="163" y="552" fill="rgba(200,220,255,.65)" font-family="ui-sans-serif,system-ui,sans-serif" font-size="8.5" font-weight="600">Ulnar</text>
+        <line x1="218" y1="548" x2="246" y2="548" stroke="#ffd700" stroke-width="2.5" stroke-linecap="round"/>
+        <text x="251" y="552" fill="rgba(200,220,255,.65)" font-family="ui-sans-serif,system-ui,sans-serif" font-size="8.5" font-weight="600">Radial Sensory</text>
+      </g>
+    </svg>
+
+    <div class="label" style="background:linear-gradient(transparent,rgba(7,20,40,.95));padding-bottom:20px">
+      <div>
+        <h2 style="color:#4db8ff">A — Surgical Atlas</h2>
+        <p style="color:rgba(200,230,255,.65)">Deep navy · Clinical blue · Grid overlay<br>Precise, trustworthy, textbook-clean</p>
+      </div>
+      <span class="badge" style="background:rgba(77,184,255,.15);color:#4db8ff;border:1px solid rgba(77,184,255,.3)">CURRENT</span>
+    </div>
+  </div>
+
+  <!-- ═══ OPTION B: OR MONITOR ═══ -->
+  <div class="card" style="box-shadow:0 0 40px rgba(0,255,120,.15)">
+    <svg class="preview" viewBox="0 0 480 580" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <filter id="gb" x="-30%" y="-30%" width="160%" height="160%">
+          <feGaussianBlur in="SourceGraphic" stdDeviation="4" result="b"/>
+          <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+        </filter>
+        <filter id="gb2" x="-20%" y="-20%" width="140%" height="140%">
+          <feGaussianBlur in="SourceGraphic" stdDeviation="1.5" result="b"/>
+          <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+        </filter>
+      </defs>
+      <rect width="480" height="580" fill="#020c06"/>
+      <!-- Scanline effect -->
+      <rect width="480" height="580" fill="none" stroke="rgba(0,255,100,.015)" stroke-width="580"
+            stroke-dasharray="1 2" paint-order="stroke"/>
+      <!-- Horizontal scan lines (subtle) -->
+      <line x1="0" y1="0" x2="480" y2="0" stroke="rgba(0,255,100,.03)" stroke-width="1"/>
+      <line x1="0" y1="2" x2="480" y2="2" stroke="rgba(0,255,100,.03)" stroke-width="1"/>
+
+      <!-- Phosphor glow background halo -->
+      <ellipse cx="240" cy="280" rx="160" ry="220" fill="rgba(0,80,40,.15)"/>
+
+      <!-- Scan pulse (horizontal bar) -->
+      <rect class="scan-b" x="0" y="260" width="480" height="2" fill="rgba(0,255,100,.4)"/>
+
+      <!-- Hand — monochrome skeleton -->
+      <path d="M 155,520 Q 148,505 150,490 L 152,475 L 330,475 L 332,490 Q 334,505 327,520 Z"
+            fill="rgba(0,255,100,.04)" stroke="rgba(0,200,80,.2)" stroke-width="1"/>
+      <path d="M 155,475 L 155,390 L 330,390 L 330,475 Z" fill="rgba(0,255,100,.03)" stroke="rgba(0,200,80,.16)" stroke-width=".9"/>
+      <path d="M 158,455 Q 138,438 114,410 Q 92,378 96,354 Q 100,332 114,326 Q 130,320 140,336 Q 150,352 152,378 L 156,432"
+            fill="rgba(0,255,100,.03)" stroke="rgba(0,200,80,.18)" stroke-width="1" stroke-linejoin="round"/>
+      <path d="M 178,390 L 175,128 Q 175,118 184,118 Q 193,118 193,128 L 190,390 Z" fill="rgba(0,255,100,.03)" stroke="rgba(0,200,80,.16)" stroke-width="1"/>
+      <path d="M 214,390 L 212,95 Q 212,85 222,85 Q 232,85 232,95 L 230,390 Z" fill="rgba(0,255,100,.03)" stroke="rgba(0,200,80,.18)" stroke-width="1"/>
+      <path d="M 252,390 L 250,118 Q 250,108 260,108 Q 270,108 270,118 L 268,390 Z" fill="rgba(0,255,100,.03)" stroke="rgba(0,200,80,.16)" stroke-width="1"/>
+      <path d="M 290,390 L 288,174 Q 288,164 297,164 Q 306,164 306,174 L 305,390 Z" fill="rgba(0,255,100,.02)" stroke="rgba(0,200,80,.14)" stroke-width=".9"/>
+      <line x1="155" y1="390" x2="330" y2="390" stroke="rgba(0,200,80,.08)" stroke-width=".7" stroke-dasharray="4 3"/>
+
+      <!-- MEDIAN — bright green phosphor -->
+      <path class="nerve-b-1" pathLength="800"
+            d="M 228,476 L 228,400 L 228,90"
+            fill="none" stroke="#00ff88" stroke-width="2.5" stroke-linecap="round" filter="url(#gb)"/>
+      <path class="nerve-b-1" pathLength="800"
+            d="M 228,400 Q 218,392 205,390 L 190,128"
+            fill="none" stroke="#00ff88" stroke-width="2" stroke-linecap="round" filter="url(#gb)" style="animation-delay:.6s"/>
+      <path class="nerve-b-1" pathLength="800"
+            d="M 228,420 Q 210,465 188,442 Q 155,408 134,372 Q 110,334 104,298"
+            fill="none" stroke="#00ff88" stroke-width="1.8" stroke-linecap="round" filter="url(#gb)" style="animation-delay:.8s"/>
+
+      <!-- ULNAR — cyan -->
+      <path class="nerve-b-2" pathLength="600"
+            d="M 258,476 L 260,400 L 297,390 L 296,168"
+            fill="none" stroke="#00e5cc" stroke-width="2.5" stroke-linecap="round" filter="url(#gb)"/>
+      <path class="nerve-b-2" pathLength="600"
+            d="M 260,400 L 262,390 L 262,110"
+            fill="none" stroke="#00e5cc" stroke-width="1.9" stroke-linecap="round" filter="url(#gb)" style="animation-delay:1.2s"/>
+
+      <!-- RADIAL — yellow-green -->
+      <path class="nerve-b-3" pathLength="500"
+            d="M 192,468 Q 168,446 148,418 Q 122,382 106,344 Q 94,314 92,290"
+            fill="none" stroke="#aaff44" stroke-width="2" stroke-linecap="round" filter="url(#gb)"/>
+
+      <!-- Data readout -->
+      <g style="animation:fadeUp .6s ease 2.5s both">
+        <rect x="12" y="12" width="160" height="54" rx="4" fill="rgba(0,255,100,.05)" stroke="rgba(0,255,100,.2)" stroke-width=".8"/>
+        <text x="22" y="28" fill="rgba(0,255,100,.5)" font-family="ui-monospace,monospace" font-size="7" font-weight="400" letter-spacing=".1em">NERVE MAPPING ACTIVE</text>
+        <text x="22" y="42" fill="#00ff88" font-family="ui-monospace,monospace" font-size="9" font-weight="700" letter-spacing=".08em">3 NERVES TRACED</text>
+        <text x="22" y="56" fill="rgba(0,255,100,.45)" font-family="ui-monospace,monospace" font-size="7" letter-spacing=".08em">SIG: NOMINAL</text>
+        <circle cx="152" cy="20" r="4" fill="#00ff88" style="animation:pulse 1.2s ease infinite"/>
+      </g>
+
+      <!-- Legend -->
+      <g style="animation:fadeUp .6s ease 3s both">
+        <text x="240" y="552" text-anchor="middle" fill="rgba(0,255,100,.4)"
+              font-family="ui-monospace,monospace" font-size="8" letter-spacing=".2em">MEDIAN · ULNAR · RADIAL SENSORY</text>
+      </g>
+    </svg>
+
+    <div class="label" style="background:linear-gradient(transparent,rgba(2,12,6,.95));padding-bottom:20px">
+      <div>
+        <h2 style="color:#00ff88">B — OR Monitor</h2>
+        <p style="color:rgba(180,255,200,.55)">Phosphor green · Near-black · Data readout<br>Surgical suite, high-tech, commanding</p>
+      </div>
+      <span class="badge" style="background:rgba(0,255,136,.12);color:#00ff88;border:1px solid rgba(0,255,136,.25)">NEW</span>
+    </div>
+  </div>
+
+  <!-- ═══ OPTION C: ANATOMY POSTER (LIGHT) ═══ -->
+  <div class="card" style="box-shadow:0 0 40px rgba(0,0,0,.4)">
+    <svg class="preview" viewBox="0 0 480 580" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <filter id="gc" x="-10%" y="-10%" width="120%" height="120%">
+          <feGaussianBlur in="SourceGraphic" stdDeviation="1" result="b"/>
+          <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+        </filter>
+        <linearGradient id="bg-c" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#f7f3ec"/>
+          <stop offset="100%" stop-color="#eee8dc"/>
+        </linearGradient>
+      </defs>
+      <rect width="480" height="580" fill="url(#bg-c)"/>
+      <!-- Plate lines (anatomy textbook border) -->
+      <rect x="12" y="12" width="456" height="556" rx="2" fill="none" stroke="rgba(40,40,40,.12)" stroke-width="1"/>
+      <rect x="16" y="16" width="448" height="548" rx="1" fill="none" stroke="rgba(40,40,40,.06)" stroke-width=".5"/>
+
+      <!-- Title -->
+      <text x="240" y="44" text-anchor="middle" fill="rgba(20,20,40,.55)"
+            font-family="Georgia,serif" font-size="11" font-weight="700" letter-spacing=".18em">HAND · DORSAL NERVE DISTRIBUTION</text>
+      <line x1="60" y1="50" x2="420" y2="50" stroke="rgba(20,20,40,.15)" stroke-width=".8"/>
+
+      <!-- Hand skeleton — ink style -->
+      <path d="M 155,510 Q 148,498 150,484 L 152,470 L 330,470 L 332,484 Q 334,498 327,510 Z"
+            fill="rgba(40,40,80,.06)" stroke="rgba(40,40,80,.4)" stroke-width="1.4"/>
+      <path d="M 155,470 L 155,388 L 330,388 L 330,470 Z" fill="rgba(40,40,80,.04)" stroke="rgba(40,40,80,.32)" stroke-width="1.2"/>
+      <path d="M 158,452 Q 138,436 114,408 Q 92,376 96,352 Q 100,330 114,324 Q 130,318 140,334 Q 150,350 152,376 L 156,430"
+            fill="rgba(40,40,80,.04)" stroke="rgba(40,40,80,.35)" stroke-width="1.3" stroke-linejoin="round"/>
+      <path d="M 178,388 L 175,128 Q 175,118 184,118 Q 193,118 193,128 L 190,388 Z" fill="rgba(40,40,80,.04)" stroke="rgba(40,40,80,.3)" stroke-width="1.2"/>
+      <path d="M 214,388 L 212,95 Q 212,85 222,85 Q 232,85 232,95 L 230,388 Z" fill="rgba(40,40,80,.04)" stroke="rgba(40,40,80,.32)" stroke-width="1.2"/>
+      <path d="M 252,388 L 250,118 Q 250,108 260,108 Q 270,108 270,118 L 268,388 Z" fill="rgba(40,40,80,.04)" stroke="rgba(40,40,80,.3)" stroke-width="1.2"/>
+      <path d="M 290,388 L 288,174 Q 288,164 297,164 Q 306,164 306,174 L 305,388 Z" fill="rgba(40,40,80,.03)" stroke="rgba(40,40,80,.26)" stroke-width="1.1"/>
+      <!-- Joint lines -->
+      <line x1="175" y1="228" x2="193" y2="228" stroke="rgba(40,40,80,.25)" stroke-width="1"/>
+      <line x1="212" y1="210" x2="232" y2="210" stroke="rgba(40,40,80,.28)" stroke-width="1"/>
+      <line x1="250" y1="222" x2="270" y2="222" stroke="rgba(40,40,80,.25)" stroke-width="1"/>
+      <line x1="288" y1="252" x2="306" y2="252" stroke="rgba(40,40,80,.22)" stroke-width="1"/>
+      <line x1="175" y1="158" x2="193" y2="158" stroke="rgba(40,40,80,.18)" stroke-width=".8"/>
+      <line x1="212" y1="140" x2="232" y2="140" stroke="rgba(40,40,80,.2)" stroke-width=".8"/>
+      <line x1="250" y1="152" x2="270" y2="152" stroke="rgba(40,40,80,.18)" stroke-width=".8"/>
+      <line x1="155" y1="388" x2="330" y2="388" stroke="rgba(40,40,80,.15)" stroke-width=".8" stroke-dasharray="4 3"/>
+
+      <!-- Territories (light tints) -->
+      <g class="terr-c">
+        <path d="M 96,322 Q 112,316 156,374 L 158,450 Q 136,436 110,406 Q 88,374 90,350 Z" fill="rgba(21,101,192,.1)"/>
+        <path d="M 173,118 L 193,118 L 192,388 L 174,388 Z" fill="rgba(21,101,192,.09)"/>
+        <path d="M 210,85 L 232,85 L 230,388 L 212,388 Z" fill="rgba(21,101,192,.1)"/>
+        <path d="M 248,108 L 272,108 L 270,388 L 250,388 Z" fill="rgba(0,105,92,.08)"/>
+        <path d="M 286,164 L 308,164 L 306,388 L 288,388 Z" fill="rgba(0,105,92,.09)"/>
+      </g>
+
+      <!-- MEDIAN — rich blue -->
+      <path class="nerve-c-1" pathLength="800"
+            d="M 228,472 L 228,396 L 228,90"
+            fill="none" stroke="#1565c0" stroke-width="2.4" stroke-linecap="round"/>
+      <path class="nerve-c-1" pathLength="800"
+            d="M 228,396 Q 216,390 204,388 L 190,128"
+            fill="none" stroke="#1565c0" stroke-width="2" stroke-linecap="round" style="animation-delay:.6s"/>
+      <path class="nerve-c-1" pathLength="800"
+            d="M 228,420 Q 208,462 185,440 Q 154,406 132,370 Q 108,332 102,296"
+            fill="none" stroke="#1565c0" stroke-width="1.9" stroke-linecap="round" style="animation-delay:.8s"/>
+
+      <!-- ULNAR — deep teal -->
+      <path class="nerve-c-2" pathLength="600"
+            d="M 258,472 L 260,396 L 297,388 L 296,168"
+            fill="none" stroke="#00695c" stroke-width="2.4" stroke-linecap="round"/>
+      <path class="nerve-c-2" pathLength="600"
+            d="M 260,396 L 262,388 L 261,110"
+            fill="none" stroke="#00695c" stroke-width="2" stroke-linecap="round" style="animation-delay:1.2s"/>
+
+      <!-- RADIAL — amber -->
+      <path class="nerve-c-3" pathLength="500"
+            d="M 192,464 Q 168,442 147,414 Q 122,378 105,340 Q 93,310 91,288"
+            fill="none" stroke="#e65100" stroke-width="2.1" stroke-linecap="round"/>
+
+      <!-- Callout lines (anatomy textbook style) -->
+      <g style="animation:fadeIn 1s ease 3s both">
+        <line x1="228" y1="472" x2="380" y2="495" stroke="rgba(40,40,80,.3)" stroke-width=".7"/>
+        <text x="384" y="499" fill="rgba(40,40,80,.6)" font-family="Georgia,serif" font-size="8.5" font-style="italic">Carpal tunnel</text>
+        <line x1="184" y1="118" x2="100" y2="105" stroke="rgba(21,101,192,.35)" stroke-width=".7"/>
+        <text x="96" y="103" text-anchor="end" fill="#1565c0" font-family="Georgia,serif" font-size="8" font-style="italic">n. digitalis</text>
+        <line x1="296" y1="168" x2="390" y2="155" stroke="rgba(0,105,92,.35)" stroke-width=".7"/>
+        <text x="394" y="159" fill="#00695c" font-family="Georgia,serif" font-size="8" font-style="italic">n. ulnaris</text>
+      </g>
+
+      <!-- Legend (textbook plate style) -->
+      <g style="animation:fadeIn .8s ease 3.5s both">
+        <line x1="30" y1="546" x2="52" y2="546" stroke="#1565c0" stroke-width="2.5" stroke-linecap="round"/>
+        <text x="56" y="550" fill="rgba(30,30,60,.65)" font-family="Georgia,serif" font-size="8.5" font-style="italic">n. medianus</text>
+        <line x1="148" y1="546" x2="170" y2="546" stroke="#00695c" stroke-width="2.5" stroke-linecap="round"/>
+        <text x="174" y="550" fill="rgba(30,30,60,.65)" font-family="Georgia,serif" font-size="8.5" font-style="italic">n. ulnaris</text>
+        <line x1="252" y1="546" x2="274" y2="546" stroke="#e65100" stroke-width="2.5" stroke-linecap="round"/>
+        <text x="278" y="550" fill="rgba(30,30,60,.65)" font-family="Georgia,serif" font-size="8.5" font-style="italic">r. superficialis n. radialis</text>
+      </g>
+    </svg>
+
+    <div class="label" style="background:linear-gradient(transparent,rgba(220,210,195,.98));padding-bottom:20px">
+      <div>
+        <h2 style="color:#1a1a3e">C — Anatomy Poster</h2>
+        <p style="color:rgba(30,30,80,.55)">Cream parchment · Ink-style · Latin labels<br>Gray's Anatomy textbook, print-quality</p>
+      </div>
+      <span class="badge" style="background:rgba(21,101,192,.12);color:#1565c0;border:1px solid rgba(21,101,192,.3)">NEW</span>
+    </div>
+  </div>
+
+  <!-- ═══ OPTION D: BIOLUMINESCENT ═══ -->
+  <div class="card" style="box-shadow:0 0 60px rgba(0,180,255,.2),0 0 120px rgba(0,255,180,.1)">
+    <svg class="preview" viewBox="0 0 480 580" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <filter id="gd1" x="-40%" y="-40%" width="180%" height="180%">
+          <feGaussianBlur in="SourceGraphic" stdDeviation="6" result="b"/>
+          <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+        </filter>
+        <filter id="gd2" x="-20%" y="-20%" width="140%" height="140%">
+          <feGaussianBlur in="SourceGraphic" stdDeviation="2" result="b"/>
+          <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+        </filter>
+        <radialGradient id="bg-d" cx="50%" cy="45%" r="55%">
+          <stop offset="0%" stop-color="#02080f"/>
+          <stop offset="100%" stop-color="#010408"/>
+        </radialGradient>
+        <radialGradient id="halo-d" cx="50%" cy="45%" r="50%">
+          <stop offset="0%" stop-color="rgba(0,120,255,.08)"/>
+          <stop offset="100%" stop-color="transparent"/>
+        </radialGradient>
+      </defs>
+      <rect width="480" height="580" fill="url(#bg-d)"/>
+      <ellipse cx="240" cy="280" rx="200" ry="260" fill="url(#halo-d)"/>
+
+      <!-- Hand — barely visible, very dark -->
+      <path d="M 155,520 Q 148,505 150,490 L 152,475 L 330,475 L 332,490 Q 334,505 327,520 Z"
+            fill="rgba(0,80,200,.04)" stroke="rgba(0,120,255,.15)" stroke-width="1"/>
+      <path d="M 155,475 L 155,390 L 330,390 L 330,475 Z" fill="rgba(0,80,200,.03)" stroke="rgba(0,120,255,.1)" stroke-width=".9"/>
+      <path d="M 158,455 Q 138,438 114,410 Q 92,378 96,354 Q 100,332 114,326 Q 130,320 140,336 Q 150,352 152,378 L 156,432"
+            fill="rgba(0,80,200,.03)" stroke="rgba(0,120,255,.12)" stroke-width="1" stroke-linejoin="round"/>
+      <path d="M 178,390 L 175,128 Q 175,118 184,118 Q 193,118 193,128 L 190,390 Z" fill="rgba(0,80,200,.03)" stroke="rgba(0,120,255,.1)" stroke-width=".9"/>
+      <path d="M 214,390 L 212,95 Q 212,85 222,85 Q 232,85 232,95 L 230,390 Z" fill="rgba(0,80,200,.03)" stroke="rgba(0,120,255,.11)" stroke-width=".9"/>
+      <path d="M 252,390 L 250,118 Q 250,108 260,108 Q 270,108 270,118 L 268,390 Z" fill="rgba(0,80,200,.03)" stroke="rgba(0,120,255,.1)" stroke-width=".9"/>
+      <path d="M 290,390 L 288,174 Q 288,164 297,164 Q 306,164 306,174 L 305,390 Z" fill="rgba(0,80,200,.02)" stroke="rgba(0,120,255,.08)" stroke-width=".8"/>
+
+      <!-- MEDIAN — electric blue, wide bloom -->
+      <path class="nerve-d-1" pathLength="800"
+            d="M 228,476 L 228,396 L 228,90"
+            fill="none" stroke="#00d4ff" stroke-width="1.5" stroke-linecap="round" filter="url(#gd1)"/>
+      <path class="nerve-d-1" pathLength="800"
+            d="M 228,476 L 228,396 L 228,90"
+            fill="none" stroke="#ffffff" stroke-width=".8" stroke-linecap="round" filter="url(#gd2)"/>
+      <path class="nerve-d-1" pathLength="800"
+            d="M 228,396 Q 216,390 204,388 L 190,128"
+            fill="none" stroke="#00d4ff" stroke-width="1.5" stroke-linecap="round" filter="url(#gd1)" style="animation-delay:.5s"/>
+      <path class="nerve-d-1" pathLength="800"
+            d="M 228,396 Q 216,390 204,388 L 190,128"
+            fill="none" stroke="#ffffff" stroke-width=".7" stroke-linecap="round" filter="url(#gd2)" style="animation-delay:.5s"/>
+      <path class="nerve-d-1" pathLength="800"
+            d="M 228,420 Q 208,462 185,440 Q 154,406 132,370 Q 108,332 102,296"
+            fill="none" stroke="#00d4ff" stroke-width="1.4" stroke-linecap="round" filter="url(#gd1)" style="animation-delay:.7s"/>
+
+      <!-- ULNAR — electric teal, wide bloom -->
+      <path class="nerve-d-2" pathLength="600"
+            d="M 258,476 L 260,396 L 297,388 L 296,168"
+            fill="none" stroke="#00ffcc" stroke-width="1.5" stroke-linecap="round" filter="url(#gd1)"/>
+      <path class="nerve-d-2" pathLength="600"
+            d="M 258,476 L 260,396 L 297,388 L 296,168"
+            fill="none" stroke="#aaffee" stroke-width=".6" stroke-linecap="round" filter="url(#gd2)"/>
+      <path class="nerve-d-2" pathLength="600"
+            d="M 260,396 L 262,388 L 261,110"
+            fill="none" stroke="#00ffcc" stroke-width="1.3" stroke-linecap="round" filter="url(#gd1)" style="animation-delay:1s"/>
+
+      <!-- RADIAL — electric gold, bloom -->
+      <path class="nerve-d-3" pathLength="500"
+            d="M 192,468 Q 168,446 147,418 Q 122,380 105,342 Q 93,312 91,290"
+            fill="none" stroke="#ffdd00" stroke-width="1.5" stroke-linecap="round" filter="url(#gd1)"/>
+      <path class="nerve-d-3" pathLength="500"
+            d="M 192,468 Q 168,446 147,418 Q 122,380 105,342 Q 93,312 91,290"
+            fill="none" stroke="#fffaaa" stroke-width=".6" stroke-linecap="round" filter="url(#gd2)"/>
+
+      <!-- Pulsing territory glow -->
+      <g class="pulse-d">
+        <path d="M 210,85 L 232,85 L 230,390 L 212,390 Z" fill="rgba(0,212,255,.06)"/>
+        <path d="M 173,118 L 193,118 L 191,390 L 173,390 Z" fill="rgba(0,212,255,.05)"/>
+        <path d="M 286,164 L 308,164 L 306,390 L 286,390 Z" fill="rgba(0,255,200,.05)"/>
+      </g>
+
+      <!-- Title -->
+      <g style="animation:fadeIn .8s ease 2.8s both">
+        <text x="240" y="30" text-anchor="middle" fill="rgba(0,210,255,.4)"
+              font-family="ui-sans-serif,system-ui,sans-serif" font-size="8.5" font-weight="700" letter-spacing=".28em">NERVE MAPPING · TRIANGLE HAND &amp; SHOULDER</text>
+      </g>
+
+      <!-- Signal dots on nerves -->
+      <circle r="4" fill="#00d4ff" filter="url(#gd1)" style="animation:fadeIn .1s ease 2.5s both">
+        <animateMotion dur="2.5s" begin="2.5s" repeatCount="indefinite">
+          <mpath href="#mp-d1"/>
+        </animateMotion>
+      </circle>
+      <circle r="3.5" fill="#00ffcc" filter="url(#gd1)" style="animation:fadeIn .1s ease 3s both">
+        <animateMotion dur="2.2s" begin="3s" repeatCount="indefinite">
+          <mpath href="#mp-d2"/>
+        </animateMotion>
+      </circle>
+      <circle r="3" fill="#ffdd00" filter="url(#gd1)" style="animation:fadeIn .1s ease 3.3s both">
+        <animateMotion dur="2.8s" begin="3.3s" repeatCount="indefinite">
+          <mpath href="#mp-d3"/>
+        </animateMotion>
+      </circle>
+      <defs>
+        <path id="mp-d1" d="M 228,476 L 228,396 L 228,90"/>
+        <path id="mp-d2" d="M 258,476 L 260,396 L 297,388 L 296,168"/>
+        <path id="mp-d3" d="M 192,468 Q 168,446 147,418 Q 122,380 105,342 Q 93,312 91,290"/>
+      </defs>
+
+      <!-- Legend -->
+      <g style="animation:fadeIn .8s ease 3.5s both">
+        <line x1="28" y1="550" x2="52" y2="550" stroke="#00d4ff" stroke-width="2.5" stroke-linecap="round" filter="url(#gd2)"/>
+        <text x="57" y="554" fill="rgba(0,210,255,.65)" font-family="ui-sans-serif,system-ui,sans-serif" font-size="8.5" font-weight="600">Median</text>
+        <line x1="130" y1="550" x2="154" y2="550" stroke="#00ffcc" stroke-width="2.5" stroke-linecap="round" filter="url(#gd2)"/>
+        <text x="159" y="554" fill="rgba(0,255,200,.65)" font-family="ui-sans-serif,system-ui,sans-serif" font-size="8.5" font-weight="600">Ulnar</text>
+        <line x1="218" y1="550" x2="242" y2="550" stroke="#ffdd00" stroke-width="2.5" stroke-linecap="round" filter="url(#gd2)"/>
+        <text x="247" y="554" fill="rgba(255,220,0,.65)" font-family="ui-sans-serif,system-ui,sans-serif" font-size="8.5" font-weight="600">Radial</text>
+      </g>
+    </svg>
+
+    <div class="label" style="background:linear-gradient(transparent,rgba(1,4,8,.96));padding-bottom:20px">
+      <div>
+        <h2 style="color:#00d4ff">D — Bioluminescent</h2>
+        <p style="color:rgba(0,210,255,.55)">Near-black · Neon bloom glow · Signal pulses<br>Cinematic, dramatic, unforgettable</p>
+      </div>
+      <span class="badge" style="background:rgba(0,212,255,.12);color:#00d4ff;border:1px solid rgba(0,212,255,.25)">NEW</span>
+    </div>
+  </div>
+
+</div>
+
+<p style="text-align:center;margin-top:32px;font-size:.8rem;color:#444">
+  Reply with A, B, C, or D — or mix (e.g. "C but with glowing nerves like D")
+</p>
+
+</body>
+</html>

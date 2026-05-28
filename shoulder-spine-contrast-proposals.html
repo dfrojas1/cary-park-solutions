@@ -1,0 +1,788 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Info Panel Contrast Proposals — Shoulder/Spine Viewer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Source+Serif+4:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'DM Sans', system-ui, sans-serif;
+    background: #f4f6f8;
+    color: #1a2d3d;
+    padding: 40px 24px 64px;
+    min-height: 100vh;
+  }
+
+  h1.page-title {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 1.05rem;
+    font-weight: 500;
+    color: #5a7080;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    margin-bottom: 6px;
+  }
+  h2.page-subtitle {
+    font-family: 'Source Serif 4', serif;
+    font-size: 1.6rem;
+    font-weight: 600;
+    color: #0d1e2e;
+    margin-bottom: 4px;
+  }
+  .page-desc {
+    font-size: 0.875rem;
+    color: #5a7080;
+    margin-bottom: 40px;
+    max-width: 600px;
+    line-height: 1.6;
+  }
+
+  /* ── Comparison row ── */
+  .option-block {
+    margin-bottom: 48px;
+  }
+
+  .option-label {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #8a9ab0;
+    margin-bottom: 10px;
+  }
+
+  .option-label span.opt-name {
+    color: #1a2d3d;
+    font-size: 0.9rem;
+    text-transform: none;
+    letter-spacing: 0;
+    font-weight: 600;
+    margin-left: 6px;
+  }
+
+  /* The side-by-side viewer mockup */
+  .viewer-mock {
+    display: flex;
+    width: 100%;
+    max-width: 520px;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.18);
+  }
+
+  /* ── Dark SVG preview strip ── */
+  .anatomy-preview {
+    flex: 0 0 160px;
+    width: 160px;
+    background: #010a14;
+    position: relative;
+    min-height: 340px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .anatomy-preview svg {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0; left: 0;
+  }
+
+  /* ── Info panel — shared reset ── */
+  .info-panel {
+    flex: 1 1 auto;
+    min-width: 0;
+    padding: 20px 18px 22px;
+    overflow: hidden;
+  }
+
+  /* ══════════════════════════════════
+     OPTION A — Clinical White
+  ══════════════════════════════════ */
+  .panel-a {
+    background: #ffffff;
+  }
+  .panel-a .cat-label {
+    font-size: 0.62rem;
+    font-weight: 600;
+    letter-spacing: 0.13em;
+    text-transform: uppercase;
+    color: #1a5fa8;
+    margin-bottom: 6px;
+    font-variant: small-caps;
+  }
+  .panel-a .panel-title {
+    font-family: 'Source Serif 4', serif;
+    font-size: 1.15rem;
+    font-weight: 600;
+    color: #0d1e2e;
+    line-height: 1.25;
+    margin-bottom: 4px;
+  }
+  .panel-a .panel-subtitle {
+    font-size: 0.76rem;
+    font-style: italic;
+    color: #5a7080;
+    margin-bottom: 12px;
+  }
+  .panel-a .divider {
+    height: 1px;
+    background: #e0eaf0;
+    margin-bottom: 12px;
+  }
+  .panel-a .panel-body {
+    font-size: 0.775rem;
+    color: #3d5060;
+    line-height: 1.6;
+    margin-bottom: 12px;
+  }
+  .panel-a .tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: 14px;
+  }
+  .panel-a .tag-cyan {
+    font-size: 0.65rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    padding: 3px 9px;
+    border-radius: 20px;
+    background: #e6f8fd;
+    color: #0d7a9a;
+    border: 1px solid #b0e4f0;
+  }
+  .panel-a .tag-teal {
+    font-size: 0.65rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    padding: 3px 9px;
+    border-radius: 20px;
+    background: #e6faf7;
+    color: #0d7a6a;
+    border: 1px solid #b0ede3;
+  }
+  .panel-a .bullet-list {
+    list-style: none;
+    font-size: 0.75rem;
+    color: #3d5060;
+    line-height: 1.55;
+  }
+  .panel-a .bullet-list li {
+    display: flex;
+    gap: 7px;
+    margin-bottom: 4px;
+  }
+  .panel-a .bullet-list li::before {
+    content: '—';
+    color: #b0c8d8;
+    flex-shrink: 0;
+    font-size: 0.7rem;
+    line-height: 1.7;
+  }
+  .panel-a .bullet-list strong {
+    color: #0d1e2e;
+    font-weight: 600;
+  }
+
+  /* ══════════════════════════════════
+     OPTION B — Elevated Dark
+  ══════════════════════════════════ */
+  .panel-b {
+    background: #131e2c;
+  }
+  .panel-b .cat-label {
+    font-size: 0.62rem;
+    font-weight: 600;
+    letter-spacing: 0.13em;
+    text-transform: uppercase;
+    color: #4a9fd4;
+    margin-bottom: 6px;
+    font-variant: small-caps;
+  }
+  .panel-b .panel-title {
+    font-family: 'Source Serif 4', serif;
+    font-size: 1.15rem;
+    font-weight: 600;
+    color: #f0f8ff;
+    line-height: 1.25;
+    margin-bottom: 4px;
+  }
+  .panel-b .panel-subtitle {
+    font-size: 0.76rem;
+    font-style: italic;
+    color: #6a96b0;
+    margin-bottom: 12px;
+  }
+  .panel-b .divider {
+    height: 1px;
+    background: rgba(255,255,255,0.08);
+    margin-bottom: 12px;
+  }
+  .panel-b .panel-body {
+    font-size: 0.775rem;
+    color: #98b8cc;
+    line-height: 1.6;
+    margin-bottom: 12px;
+  }
+  .panel-b .tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: 14px;
+  }
+  .panel-b .tag-cyan {
+    font-size: 0.65rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    padding: 3px 9px;
+    border-radius: 20px;
+    background: rgba(0,212,255,0.15);
+    color: #40d8ff;
+    border: 1px solid rgba(0,212,255,0.25);
+  }
+  .panel-b .tag-teal {
+    font-size: 0.65rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    padding: 3px 9px;
+    border-radius: 20px;
+    background: rgba(0,255,200,0.12);
+    color: #40ffcc;
+    border: 1px solid rgba(0,255,200,0.22);
+  }
+  .panel-b .bullet-list {
+    list-style: none;
+    font-size: 0.75rem;
+    color: #90b0c8;
+    line-height: 1.55;
+  }
+  .panel-b .bullet-list li {
+    display: flex;
+    gap: 7px;
+    margin-bottom: 4px;
+  }
+  .panel-b .bullet-list li::before {
+    content: '—';
+    color: rgba(255,255,255,0.18);
+    flex-shrink: 0;
+    font-size: 0.7rem;
+    line-height: 1.7;
+  }
+  .panel-b .bullet-list strong {
+    color: #c8e4f4;
+    font-weight: 600;
+  }
+
+  /* ══════════════════════════════════
+     OPTION C — Split (dark header + white body)
+  ══════════════════════════════════ */
+  .panel-c {
+    background: #fff;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+  }
+  .panel-c .c-header {
+    background: #1a2d4a;
+    padding: 14px 18px 14px;
+    flex-shrink: 0;
+  }
+  .panel-c .cat-label {
+    font-size: 0.62rem;
+    font-weight: 600;
+    letter-spacing: 0.13em;
+    text-transform: uppercase;
+    color: #5db8e8;
+    margin-bottom: 5px;
+    font-variant: small-caps;
+  }
+  .panel-c .panel-title {
+    font-family: 'Source Serif 4', serif;
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: #ffffff;
+    line-height: 1.25;
+  }
+  .panel-c .c-body {
+    padding: 14px 18px 18px;
+    flex: 1;
+  }
+  .panel-c .panel-subtitle {
+    font-size: 0.76rem;
+    font-style: italic;
+    color: #5a7080;
+    margin-bottom: 10px;
+  }
+  .panel-c .divider {
+    height: 1px;
+    background: #e0eaf0;
+    margin-bottom: 10px;
+  }
+  .panel-c .panel-body {
+    font-size: 0.775rem;
+    color: #1a2d3d;
+    line-height: 1.6;
+    margin-bottom: 12px;
+  }
+  .panel-c .tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: 14px;
+  }
+  .panel-c .tag-cyan {
+    font-size: 0.65rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    padding: 3px 9px;
+    border-radius: 20px;
+    background: #e6f8fd;
+    color: #0d7a9a;
+    border: 1px solid #b0e4f0;
+  }
+  .panel-c .tag-teal {
+    font-size: 0.65rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    padding: 3px 9px;
+    border-radius: 20px;
+    background: #e6faf7;
+    color: #0d7a6a;
+    border: 1px solid #b0ede3;
+  }
+  .panel-c .bullet-list {
+    list-style: none;
+    font-size: 0.75rem;
+    color: #3d5060;
+    line-height: 1.55;
+  }
+  .panel-c .bullet-list li {
+    display: flex;
+    gap: 7px;
+    margin-bottom: 4px;
+  }
+  .panel-c .bullet-list li::before {
+    content: '—';
+    color: #b0c8d8;
+    flex-shrink: 0;
+    font-size: 0.7rem;
+    line-height: 1.7;
+  }
+  .panel-c .bullet-list strong {
+    color: #0d1e2e;
+    font-weight: 600;
+  }
+
+  /* ══════════════════════════════════
+     CURRENT (reference) panel
+  ══════════════════════════════════ */
+  .panel-current {
+    background: #010a14;
+  }
+  .panel-current .cat-label {
+    font-size: 0.62rem;
+    font-weight: 600;
+    letter-spacing: 0.13em;
+    text-transform: uppercase;
+    color: #5a8aaa;
+    margin-bottom: 6px;
+    font-variant: small-caps;
+  }
+  .panel-current .panel-title {
+    font-family: 'Source Serif 4', serif;
+    font-size: 1.15rem;
+    font-weight: 600;
+    color: #00d4ff;
+    line-height: 1.25;
+    margin-bottom: 4px;
+  }
+  .panel-current .panel-subtitle {
+    font-size: 0.76rem;
+    font-style: italic;
+    color: #5a8aaa;
+    margin-bottom: 12px;
+  }
+  .panel-current .divider {
+    height: 1px;
+    background: rgba(255,255,255,0.06);
+    margin-bottom: 12px;
+  }
+  .panel-current .panel-body {
+    font-size: 0.775rem;
+    color: #5a8aaa;
+    line-height: 1.6;
+    margin-bottom: 12px;
+  }
+  .panel-current .tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: 14px;
+  }
+  .panel-current .tag-cyan {
+    font-size: 0.65rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    padding: 3px 9px;
+    border-radius: 20px;
+    background: rgba(0,212,255,0.10);
+    color: #00d4ff;
+    border: 1px solid rgba(0,212,255,0.18);
+  }
+  .panel-current .tag-teal {
+    font-size: 0.65rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    padding: 3px 9px;
+    border-radius: 20px;
+    background: rgba(0,255,204,0.08);
+    color: #00ffcc;
+    border: 1px solid rgba(0,255,204,0.16);
+  }
+  .panel-current .bullet-list {
+    list-style: none;
+    font-size: 0.75rem;
+    color: #5a8aaa;
+    line-height: 1.55;
+  }
+  .panel-current .bullet-list li {
+    display: flex;
+    gap: 7px;
+    margin-bottom: 4px;
+  }
+  .panel-current .bullet-list li::before {
+    content: '—';
+    color: rgba(255,255,255,0.12);
+    flex-shrink: 0;
+    font-size: 0.7rem;
+    line-height: 1.7;
+  }
+  .panel-current .bullet-list strong {
+    color: #d0e8f8;
+    font-weight: 600;
+  }
+
+  /* ── Reference note strip ── */
+  .ref-note {
+    margin-top: 56px;
+    padding-top: 32px;
+    border-top: 2px solid #d8e4ec;
+  }
+  .ref-note .ref-label {
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #8a9ab0;
+    margin-bottom: 8px;
+  }
+  .ref-note .ref-desc {
+    font-size: 0.8rem;
+    color: #5a7080;
+    margin-bottom: 20px;
+    max-width: 460px;
+    line-height: 1.55;
+  }
+
+  /* ── Contrast badge annotations ── */
+  .contrast-note {
+    margin-top: 8px;
+    font-size: 0.72rem;
+    color: #6a8090;
+    line-height: 1.5;
+    max-width: 520px;
+  }
+  .contrast-note strong { color: #1a2d3d; }
+
+  /* ── Responsive ── */
+  @media (max-width: 560px) {
+    .anatomy-preview { flex: 0 0 100px; width: 100px; min-height: 280px; }
+    .viewer-mock { max-width: 100%; }
+    body { padding: 24px 16px 48px; }
+  }
+</style>
+</head>
+<body>
+
+<p class="page-title">Cary Park Solutions · Shoulder/Spine Viewer</p>
+<h2 class="page-subtitle">Info Panel Contrast Proposals</h2>
+<p class="page-desc">Three redesign directions for the clinical info sidebar. Current dark scheme (bottom reference) uses cyan/teal/yellow text on near-black — poor contrast and fatiguing. Each option uses the same C6 Radiculopathy content. Dark left strip simulates the anatomy panel.</p>
+
+<!-- ════════════════════════════════
+     OPTION A — Clinical White
+════════════════════════════════ -->
+<div class="option-block">
+  <div class="option-label">OPTION A <span class="opt-name">Clinical White</span></div>
+
+  <div class="viewer-mock">
+    <!-- Anatomy preview strip -->
+    <div class="anatomy-preview">
+      <svg viewBox="0 0 160 340" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+        <rect width="160" height="340" fill="#010a14"/>
+        <!-- Subtle grid lines -->
+        <line x1="0" y1="85" x2="160" y2="85" stroke="rgba(255,255,255,0.04)" stroke-width="1"/>
+        <line x1="0" y1="170" x2="160" y2="170" stroke="rgba(255,255,255,0.04)" stroke-width="1"/>
+        <line x1="0" y1="255" x2="160" y2="255" stroke="rgba(255,255,255,0.04)" stroke-width="1"/>
+        <line x1="53" y1="0" x2="53" y2="340" stroke="rgba(255,255,255,0.04)" stroke-width="1"/>
+        <line x1="107" y1="0" x2="107" y2="340" stroke="rgba(255,255,255,0.04)" stroke-width="1"/>
+        <!-- Spine column silhouette -->
+        <rect x="70" y="40" width="20" height="260" rx="2" fill="rgba(255,255,255,0.04)"/>
+        <!-- Vertebrae discs -->
+        <rect x="65" y="55"  width="30" height="8"  rx="3" fill="rgba(30,100,180,0.35)"/>
+        <rect x="65" y="80"  width="30" height="8"  rx="3" fill="rgba(30,100,180,0.35)"/>
+        <rect x="65" y="105" width="30" height="8"  rx="3" fill="rgba(30,100,180,0.35)"/>
+        <rect x="65" y="130" width="30" height="8"  rx="3" fill="rgba(30,100,180,0.55)" stroke="#00d4ff" stroke-width="1"/>
+        <rect x="65" y="155" width="30" height="8"  rx="3" fill="rgba(30,100,180,0.35)"/>
+        <rect x="65" y="180" width="30" height="8"  rx="3" fill="rgba(30,100,180,0.35)"/>
+        <rect x="65" y="205" width="30" height="8"  rx="3" fill="rgba(30,100,180,0.35)"/>
+        <!-- Highlighted C5-C6 disc glow -->
+        <ellipse cx="80" cy="134" rx="22" ry="8" fill="rgba(0,212,255,0.18)"/>
+        <!-- Nerve root lines -->
+        <line x1="65" y1="134" x2="30" y2="134" stroke="#00d4ff" stroke-width="1.5" stroke-dasharray="3,3"/>
+        <line x1="95" y1="134" x2="130" y2="134" stroke="#00d4ff" stroke-width="1.5" stroke-dasharray="3,3"/>
+        <!-- Glow dot at nerve -->
+        <circle cx="30" cy="134" r="4" fill="rgba(0,212,255,0.9)"/>
+        <circle cx="30" cy="134" r="8" fill="rgba(0,212,255,0.18)"/>
+        <circle cx="130" cy="134" r="4" fill="rgba(0,212,255,0.9)"/>
+        <circle cx="130" cy="134" r="8" fill="rgba(0,212,255,0.18)"/>
+        <!-- Smaller ambient dots -->
+        <circle cx="25"  cy="90"  r="2" fill="rgba(0,255,200,0.5)"/>
+        <circle cx="135" cy="80"  r="2" fill="rgba(0,255,200,0.5)"/>
+        <circle cx="20"  cy="175" r="1.5" fill="rgba(0,212,255,0.4)"/>
+        <circle cx="140" cy="195" r="1.5" fill="rgba(0,212,255,0.4)"/>
+        <!-- Label -->
+        <text x="80" y="310" text-anchor="middle" font-family="DM Sans, sans-serif" font-size="9" fill="rgba(0,212,255,0.6)" letter-spacing="1">C5–C6</text>
+      </svg>
+    </div>
+
+    <!-- Info panel A -->
+    <div class="info-panel panel-a">
+      <div class="cat-label">Cervical Radiculopathy</div>
+      <div class="panel-title">C6 Radiculopathy</div>
+      <div class="panel-subtitle">C5–C6 Disc Level · Most Common</div>
+      <div class="divider"></div>
+      <div class="panel-body">The most common cervical radiculopathy (~25% of cases). C5–C6 disc herniation compresses the C6 root, causing lateral forearm, thumb, and index finger pain and paresthesia.</div>
+      <div class="tags">
+        <span class="tag-cyan">C6 Root</span>
+        <span class="tag-teal">ACDF</span>
+        <span class="tag-teal">Foraminotomy</span>
+      </div>
+      <ul class="bullet-list">
+        <li><span><strong>Pain:</strong> Neck → shoulder → lateral forearm → thumb/index</span></li>
+        <li><span><strong>Weakness:</strong> Biceps, brachioradialis, wrist extensors</span></li>
+        <li><span><strong>Reflex:</strong> ↓ Biceps, ↓ brachioradialis</span></li>
+        <li><span><strong>Sensory:</strong> Lateral forearm, thumb, index, lateral middle</span></li>
+        <li><span>Positive Spurling's sign</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <p class="contrast-note"><strong>White background with navy text.</strong> Maximum readability; clinical, clean. Pill tags use light tinted backgrounds — no color bleed. Feels like a medical chart or reference card. Best for readability-first use cases.</p>
+</div>
+
+
+<!-- ════════════════════════════════
+     OPTION B — Elevated Dark
+════════════════════════════════ -->
+<div class="option-block">
+  <div class="option-label">OPTION B <span class="opt-name">Elevated Dark</span></div>
+
+  <div class="viewer-mock">
+    <div class="anatomy-preview">
+      <svg viewBox="0 0 160 340" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+        <rect width="160" height="340" fill="#010a14"/>
+        <line x1="0" y1="85" x2="160" y2="85" stroke="rgba(255,255,255,0.04)" stroke-width="1"/>
+        <line x1="0" y1="170" x2="160" y2="170" stroke="rgba(255,255,255,0.04)" stroke-width="1"/>
+        <line x1="0" y1="255" x2="160" y2="255" stroke="rgba(255,255,255,0.04)" stroke-width="1"/>
+        <line x1="53" y1="0" x2="53" y2="340" stroke="rgba(255,255,255,0.04)" stroke-width="1"/>
+        <line x1="107" y1="0" x2="107" y2="340" stroke="rgba(255,255,255,0.04)" stroke-width="1"/>
+        <rect x="70" y="40" width="20" height="260" rx="2" fill="rgba(255,255,255,0.04)"/>
+        <rect x="65" y="55"  width="30" height="8"  rx="3" fill="rgba(30,100,180,0.35)"/>
+        <rect x="65" y="80"  width="30" height="8"  rx="3" fill="rgba(30,100,180,0.35)"/>
+        <rect x="65" y="105" width="30" height="8"  rx="3" fill="rgba(30,100,180,0.35)"/>
+        <rect x="65" y="130" width="30" height="8"  rx="3" fill="rgba(30,100,180,0.55)" stroke="#00d4ff" stroke-width="1"/>
+        <rect x="65" y="155" width="30" height="8"  rx="3" fill="rgba(30,100,180,0.35)"/>
+        <rect x="65" y="180" width="30" height="8"  rx="3" fill="rgba(30,100,180,0.35)"/>
+        <rect x="65" y="205" width="30" height="8"  rx="3" fill="rgba(30,100,180,0.35)"/>
+        <ellipse cx="80" cy="134" rx="22" ry="8" fill="rgba(0,212,255,0.18)"/>
+        <line x1="65" y1="134" x2="30" y2="134" stroke="#00d4ff" stroke-width="1.5" stroke-dasharray="3,3"/>
+        <line x1="95" y1="134" x2="130" y2="134" stroke="#00d4ff" stroke-width="1.5" stroke-dasharray="3,3"/>
+        <circle cx="30" cy="134" r="4" fill="rgba(0,212,255,0.9)"/>
+        <circle cx="30" cy="134" r="8" fill="rgba(0,212,255,0.18)"/>
+        <circle cx="130" cy="134" r="4" fill="rgba(0,212,255,0.9)"/>
+        <circle cx="130" cy="134" r="8" fill="rgba(0,212,255,0.18)"/>
+        <circle cx="25"  cy="90"  r="2" fill="rgba(0,255,200,0.5)"/>
+        <circle cx="135" cy="80"  r="2" fill="rgba(0,255,200,0.5)"/>
+        <circle cx="20"  cy="175" r="1.5" fill="rgba(0,212,255,0.4)"/>
+        <circle cx="140" cy="195" r="1.5" fill="rgba(0,212,255,0.4)"/>
+        <text x="80" y="310" text-anchor="middle" font-family="DM Sans, sans-serif" font-size="9" fill="rgba(0,212,255,0.6)" letter-spacing="1">C5–C6</text>
+      </svg>
+    </div>
+
+    <!-- Info panel B -->
+    <div class="info-panel panel-b">
+      <div class="cat-label">Cervical Radiculopathy</div>
+      <div class="panel-title">C6 Radiculopathy</div>
+      <div class="panel-subtitle">C5–C6 Disc Level · Most Common</div>
+      <div class="divider"></div>
+      <div class="panel-body">The most common cervical radiculopathy (~25% of cases). C5–C6 disc herniation compresses the C6 root, causing lateral forearm, thumb, and index finger pain and paresthesia.</div>
+      <div class="tags">
+        <span class="tag-cyan">C6 Root</span>
+        <span class="tag-teal">ACDF</span>
+        <span class="tag-teal">Foraminotomy</span>
+      </div>
+      <ul class="bullet-list">
+        <li><span><strong>Pain:</strong> Neck → shoulder → lateral forearm → thumb/index</span></li>
+        <li><span><strong>Weakness:</strong> Biceps, brachioradialis, wrist extensors</span></li>
+        <li><span><strong>Reflex:</strong> ↓ Biceps, ↓ brachioradialis</span></li>
+        <li><span><strong>Sensory:</strong> Lateral forearm, thumb, index, lateral middle</span></li>
+        <li><span>Positive Spurling's sign</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <p class="contrast-note"><strong>Dark theme with boosted contrast.</strong> Body text bumped from <code>#5a8aaa</code> → <code>#98b8cc</code>; primary text near-white <code>#e8f2fa</code>; tag colors brighter but not neon. Matches the anatomy panel's dark aesthetic while hitting WCAG AA on body copy. Smallest visual change from current.</p>
+</div>
+
+
+<!-- ════════════════════════════════
+     OPTION C — Split Dark/White
+════════════════════════════════ -->
+<div class="option-block">
+  <div class="option-label">OPTION C <span class="opt-name">Split — Dark Header · White Body</span></div>
+
+  <div class="viewer-mock">
+    <div class="anatomy-preview">
+      <svg viewBox="0 0 160 340" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+        <rect width="160" height="340" fill="#010a14"/>
+        <line x1="0" y1="85" x2="160" y2="85" stroke="rgba(255,255,255,0.04)" stroke-width="1"/>
+        <line x1="0" y1="170" x2="160" y2="170" stroke="rgba(255,255,255,0.04)" stroke-width="1"/>
+        <line x1="0" y1="255" x2="160" y2="255" stroke="rgba(255,255,255,0.04)" stroke-width="1"/>
+        <line x1="53" y1="0" x2="53" y2="340" stroke="rgba(255,255,255,0.04)" stroke-width="1"/>
+        <line x1="107" y1="0" x2="107" y2="340" stroke="rgba(255,255,255,0.04)" stroke-width="1"/>
+        <rect x="70" y="40" width="20" height="260" rx="2" fill="rgba(255,255,255,0.04)"/>
+        <rect x="65" y="55"  width="30" height="8"  rx="3" fill="rgba(30,100,180,0.35)"/>
+        <rect x="65" y="80"  width="30" height="8"  rx="3" fill="rgba(30,100,180,0.35)"/>
+        <rect x="65" y="105" width="30" height="8"  rx="3" fill="rgba(30,100,180,0.35)"/>
+        <rect x="65" y="130" width="30" height="8"  rx="3" fill="rgba(30,100,180,0.55)" stroke="#00d4ff" stroke-width="1"/>
+        <rect x="65" y="155" width="30" height="8"  rx="3" fill="rgba(30,100,180,0.35)"/>
+        <rect x="65" y="180" width="30" height="8"  rx="3" fill="rgba(30,100,180,0.35)"/>
+        <rect x="65" y="205" width="30" height="8"  rx="3" fill="rgba(30,100,180,0.35)"/>
+        <ellipse cx="80" cy="134" rx="22" ry="8" fill="rgba(0,212,255,0.18)"/>
+        <line x1="65" y1="134" x2="30" y2="134" stroke="#00d4ff" stroke-width="1.5" stroke-dasharray="3,3"/>
+        <line x1="95" y1="134" x2="130" y2="134" stroke="#00d4ff" stroke-width="1.5" stroke-dasharray="3,3"/>
+        <circle cx="30" cy="134" r="4" fill="rgba(0,212,255,0.9)"/>
+        <circle cx="30" cy="134" r="8" fill="rgba(0,212,255,0.18)"/>
+        <circle cx="130" cy="134" r="4" fill="rgba(0,212,255,0.9)"/>
+        <circle cx="130" cy="134" r="8" fill="rgba(0,212,255,0.18)"/>
+        <circle cx="25"  cy="90"  r="2" fill="rgba(0,255,200,0.5)"/>
+        <circle cx="135" cy="80"  r="2" fill="rgba(0,255,200,0.5)"/>
+        <circle cx="20"  cy="175" r="1.5" fill="rgba(0,212,255,0.4)"/>
+        <circle cx="140" cy="195" r="1.5" fill="rgba(0,212,255,0.4)"/>
+        <text x="80" y="310" text-anchor="middle" font-family="DM Sans, sans-serif" font-size="9" fill="rgba(0,212,255,0.6)" letter-spacing="1">C5–C6</text>
+      </svg>
+    </div>
+
+    <!-- Info panel C -->
+    <div class="info-panel panel-c">
+      <div class="c-header">
+        <div class="cat-label">Cervical Radiculopathy</div>
+        <div class="panel-title">C6 Radiculopathy</div>
+      </div>
+      <div class="c-body">
+        <div class="panel-subtitle">C5–C6 Disc Level · Most Common</div>
+        <div class="divider"></div>
+        <div class="panel-body">The most common cervical radiculopathy (~25% of cases). C5–C6 disc herniation compresses the C6 root, causing lateral forearm, thumb, and index finger pain and paresthesia.</div>
+        <div class="tags">
+          <span class="tag-cyan">C6 Root</span>
+          <span class="tag-teal">ACDF</span>
+          <span class="tag-teal">Foraminotomy</span>
+        </div>
+        <ul class="bullet-list">
+          <li><span><strong>Pain:</strong> Neck → shoulder → lateral forearm → thumb/index</span></li>
+          <li><span><strong>Weakness:</strong> Biceps, brachioradialis, wrist extensors</span></li>
+          <li><span><strong>Reflex:</strong> ↓ Biceps, ↓ brachioradialis</span></li>
+          <li><span><strong>Sensory:</strong> Lateral forearm, thumb, index, lateral middle</span></li>
+          <li><span>Positive Spurling's sign</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <p class="contrast-note"><strong>Split card design.</strong> Dark <code>#1a2d4a</code> header strip anchors the identity label and title (matches anatomy panel energy); white body below for all readable detail. The hard horizontal cut signals a clear "info begins here" boundary. Best of both: branding + readability.</p>
+</div>
+
+
+<!-- ════════════════════════════════
+     CURRENT SCHEME — Reference
+════════════════════════════════ -->
+<div class="ref-note">
+  <div class="ref-label">Current Palette — Reference</div>
+  <p class="ref-desc">Existing dark scheme: <code>bg #010a14</code>, body text <code>#5a8aaa</code>, dim labels <code>#5a8aaa</code>. Cyan neon titles on near-black. Body text fails WCAG AA contrast at small sizes.</p>
+
+  <div class="viewer-mock" style="max-width:520px;">
+    <div class="anatomy-preview">
+      <svg viewBox="0 0 160 340" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+        <rect width="160" height="340" fill="#010a14"/>
+        <line x1="0" y1="85" x2="160" y2="85" stroke="rgba(255,255,255,0.04)" stroke-width="1"/>
+        <line x1="0" y1="170" x2="160" y2="170" stroke="rgba(255,255,255,0.04)" stroke-width="1"/>
+        <line x1="0" y1="255" x2="160" y2="255" stroke="rgba(255,255,255,0.04)" stroke-width="1"/>
+        <line x1="53" y1="0" x2="53" y2="340" stroke="rgba(255,255,255,0.04)" stroke-width="1"/>
+        <line x1="107" y1="0" x2="107" y2="340" stroke="rgba(255,255,255,0.04)" stroke-width="1"/>
+        <rect x="70" y="40" width="20" height="260" rx="2" fill="rgba(255,255,255,0.04)"/>
+        <rect x="65" y="55"  width="30" height="8"  rx="3" fill="rgba(30,100,180,0.35)"/>
+        <rect x="65" y="80"  width="30" height="8"  rx="3" fill="rgba(30,100,180,0.35)"/>
+        <rect x="65" y="105" width="30" height="8"  rx="3" fill="rgba(30,100,180,0.35)"/>
+        <rect x="65" y="130" width="30" height="8"  rx="3" fill="rgba(30,100,180,0.55)" stroke="#00d4ff" stroke-width="1"/>
+        <rect x="65" y="155" width="30" height="8"  rx="3" fill="rgba(30,100,180,0.35)"/>
+        <rect x="65" y="180" width="30" height="8"  rx="3" fill="rgba(30,100,180,0.35)"/>
+        <rect x="65" y="205" width="30" height="8"  rx="3" fill="rgba(30,100,180,0.35)"/>
+        <ellipse cx="80" cy="134" rx="22" ry="8" fill="rgba(0,212,255,0.18)"/>
+        <line x1="65" y1="134" x2="30" y2="134" stroke="#00d4ff" stroke-width="1.5" stroke-dasharray="3,3"/>
+        <line x1="95" y1="134" x2="130" y2="134" stroke="#00d4ff" stroke-width="1.5" stroke-dasharray="3,3"/>
+        <circle cx="30" cy="134" r="4" fill="rgba(0,212,255,0.9)"/>
+        <circle cx="30" cy="134" r="8" fill="rgba(0,212,255,0.18)"/>
+        <circle cx="130" cy="134" r="4" fill="rgba(0,212,255,0.9)"/>
+        <circle cx="130" cy="134" r="8" fill="rgba(0,212,255,0.18)"/>
+        <circle cx="25"  cy="90"  r="2" fill="rgba(0,255,200,0.5)"/>
+        <circle cx="135" cy="80"  r="2" fill="rgba(0,255,200,0.5)"/>
+        <circle cx="20"  cy="175" r="1.5" fill="rgba(0,212,255,0.4)"/>
+        <circle cx="140" cy="195" r="1.5" fill="rgba(0,212,255,0.4)"/>
+        <text x="80" y="310" text-anchor="middle" font-family="DM Sans, sans-serif" font-size="9" fill="rgba(0,212,255,0.6)" letter-spacing="1">C5–C6</text>
+      </svg>
+    </div>
+
+    <div class="info-panel panel-current">
+      <div class="cat-label">Cervical Radiculopathy</div>
+      <div class="panel-title">C6 Radiculopathy</div>
+      <div class="panel-subtitle">C5–C6 Disc Level · Most Common</div>
+      <div class="divider"></div>
+      <div class="panel-body">The most common cervical radiculopathy (~25% of cases). C5–C6 disc herniation compresses the C6 root, causing lateral forearm, thumb, and index finger pain and paresthesia.</div>
+      <div class="tags">
+        <span class="tag-cyan">C6 Root</span>
+        <span class="tag-teal">ACDF</span>
+        <span class="tag-teal">Foraminotomy</span>
+      </div>
+      <ul class="bullet-list">
+        <li><span><strong>Pain:</strong> Neck → shoulder → lateral forearm → thumb/index</span></li>
+        <li><span><strong>Weakness:</strong> Biceps, brachioradialis, wrist extensors</span></li>
+        <li><span><strong>Reflex:</strong> ↓ Biceps, ↓ brachioradialis</span></li>
+        <li><span><strong>Sensory:</strong> Lateral forearm, thumb, index, lateral middle</span></li>
+        <li><span>Positive Spurling's sign</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <p class="contrast-note" style="margin-top:8px;"><strong>Problems with current:</strong> Body text <code>#5a8aaa</code> on <code>#010a14</code> = approx. 3.1:1 contrast ratio (fails WCAG AA 4.5:1 for normal text). Category label is same color as body text — no visual hierarchy. Neon cyan title draws the eye but overwhelms the subtitle and body.</p>
+</div>
+
+</body>
+</html>

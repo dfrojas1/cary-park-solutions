@@ -1,0 +1,1844 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"/>
+<meta name="theme-color" content="#1a2d4a"/>
+<title>Raleigh Hand to Shoulder Center | Upper Extremity Specialists — Raleigh, NC</title>
+<meta name="description" content="Fellowship-trained hand and upper extremity surgeons serving the Triangle for 30+ years. Same-week appointments."/>
+
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+
+:root{
+  --navy:    #1a2d4a;
+  --navy-dk: #0f1d30;
+  --steel:   #3a8fce;
+  --accent:  #5db8e8;
+  --sky:     #e6f1fb;
+  --white:   #ffffff;
+  --off:     #f7f9fc;
+  --g100:    #eef2f7;
+  --g200:    #dde6f0;
+  --g400:    #8fa5bc;
+  --text:    #1a2d4a;
+  --text-md: #3a5272;
+  --text-lt: #6b8299;
+  --gold:    #f59e0b;
+  --radius:  14px;
+  --shadow:  0 4px 24px rgba(26,45,74,.10);
+  --shadow-lg: 0 8px 48px rgba(26,45,74,.16);
+}
+
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{font-family:'DM Sans',-apple-system,sans-serif;color:var(--text);background:var(--white);overflow-x:hidden;line-height:1.6}
+img{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+button{font-family:inherit;cursor:pointer;-webkit-appearance:none}
+
+/* ── UTILITIES ── */
+.container{max-width:1120px;margin:0 auto;padding:0 24px}
+.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)}
+
+/* ── NAV ── */
+#site-nav{
+  position:fixed;top:0;left:0;right:0;z-index:900;
+  background:transparent;
+  transition:background .3s,box-shadow .3s;
+}
+#site-nav.scrolled{
+  background:rgba(255,255,255,.97);
+  box-shadow:0 1px 16px rgba(26,45,74,.10);
+  -webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);
+}
+.nav-inner{
+  display:flex;align-items:center;justify-content:space-between;
+  height:66px;
+  max-width:1120px;margin:0 auto;padding:0 24px;
+}
+.nav-brand{
+  font-size:15px;font-weight:600;letter-spacing:-.01em;
+  color:var(--white);transition:color .3s;
+  display:flex;align-items:center;gap:10px;
+}
+#site-nav.scrolled .nav-brand{color:var(--navy)}
+.nav-brand-dot{
+  width:8px;height:8px;border-radius:50%;
+  background:var(--accent);box-shadow:0 0 8px rgba(93,184,232,.7);
+  flex-shrink:0;
+}
+.nav-links{display:flex;align-items:center;gap:2px}
+.nav-links a{
+  padding:8px 13px;border-radius:7px;
+  font-size:13.5px;font-weight:500;
+  color:rgba(255,255,255,.82);transition:background .15s,color .15s;
+}
+.nav-links a:hover{background:rgba(255,255,255,.12);color:var(--white)}
+#site-nav.scrolled .nav-links a{color:var(--text-md)}
+#site-nav.scrolled .nav-links a:hover{background:var(--sky);color:var(--navy)}
+.nav-cta{
+  padding:10px 20px;border-radius:8px;
+  background:var(--steel);color:var(--white)!important;
+  font-size:13.5px;font-weight:600;
+  transition:background .15s,transform .1s!important;
+}
+.nav-cta:hover{background:var(--navy-dk)!important;transform:translateY(-1px)}
+.nav-hamburger{display:none;background:none;border:none;padding:8px;color:var(--white)}
+#site-nav.scrolled .nav-hamburger{color:var(--navy)}
+.hamburger-icon{display:flex;flex-direction:column;gap:5px;width:22px}
+.hamburger-icon span{display:block;height:2px;background:currentColor;border-radius:2px;transition:all .2s}
+
+/* ── HERO ── */
+.hero{
+  min-height:85vh;display:flex;flex-direction:column;justify-content:flex-end;
+  padding-bottom:0;
+  position:relative;overflow:hidden;
+  background:linear-gradient(145deg, #0f1d30 0%, #1a2d4a 45%, #1c3560 100%);
+}
+.hero-bg-glow{
+  position:absolute;inset:0;pointer-events:none;
+  background:
+    radial-gradient(ellipse 70% 50% at 80% 15%, rgba(93,184,232,.18) 0%, transparent 65%),
+    radial-gradient(ellipse 40% 60% at 10% 80%, rgba(58,143,206,.12) 0%, transparent 60%);
+}
+.hero-grid{
+  position:absolute;inset:0;pointer-events:none;opacity:.04;
+  background-image:linear-gradient(rgba(255,255,255,.6) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.6) 1px,transparent 1px);
+  background-size:48px 48px;
+}
+
+/* Inline SVG cross-section accent (top-right) */
+.hero-anatomy-accent{
+  position:absolute;right:-20px;top:50%;transform:translateY(-52%);
+  width:340px;opacity:.09;pointer-events:none;
+}
+@media(max-width:768px){.hero-anatomy-accent{display:none}}
+
+.hero-content{
+  position:relative;z-index:2;
+  max-width:1120px;margin:0 auto;padding:0 24px;
+  padding-top:130px;padding-bottom:72px;
+}
+.hero-stat-strip{
+  display:flex;align-items:center;gap:0;
+  margin-bottom:32px;
+  flex-wrap:wrap;gap:0;
+}
+.hero-stat{
+  padding:8px 20px;border-right:1px solid rgba(255,255,255,.14);
+  font-size:13px;font-weight:500;color:rgba(255,255,255,.65);
+  letter-spacing:.04em;text-transform:uppercase;
+}
+.hero-stat:first-child{padding-left:0}
+.hero-stat:last-child{border-right:none}
+.hero-stat strong{color:var(--accent);font-weight:700;font-size:15px}
+.hero-h1{
+  font-family:'Source Serif 4',Georgia,serif;
+  font-size:clamp(38px,6vw,72px);font-weight:700;line-height:1.05;
+  color:var(--white);letter-spacing:-.02em;
+  margin-bottom:16px;
+}
+.hero-h1 em{font-style:italic;color:var(--accent)}
+.hero-h2{
+  font-size:clamp(16px,2.5vw,22px);font-weight:400;
+  color:rgba(255,255,255,.72);margin-bottom:12px;
+  letter-spacing:.01em;
+}
+.hero-sub{
+  font-size:clamp(14px,1.8vw,17px);font-weight:400;
+  color:rgba(255,255,255,.55);max-width:540px;
+  margin-bottom:40px;line-height:1.55;
+}
+.hero-ctas{display:flex;gap:14px;flex-wrap:wrap}
+.btn-primary{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:14px 28px;border-radius:10px;
+  background:var(--steel);color:var(--white);
+  font-size:15px;font-weight:600;
+  box-shadow:0 4px 20px rgba(58,143,206,.35);
+  transition:background .15s,transform .1s,box-shadow .15s;
+  border:none;
+}
+.btn-primary:hover{background:#2a7ab8;transform:translateY(-2px);box-shadow:0 6px 28px rgba(58,143,206,.45)}
+.btn-outline{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:14px 28px;border-radius:10px;
+  background:transparent;color:var(--white);
+  font-size:15px;font-weight:600;
+  border:1.5px solid rgba(255,255,255,.38);
+  transition:background .15s,border-color .15s,transform .1s;
+}
+.btn-outline:hover{background:rgba(255,255,255,.1);border-color:rgba(255,255,255,.7);transform:translateY(-2px)}
+
+/* ── CASE STUDY BAND ── */
+.case-band{
+  background:linear-gradient(90deg,#0f1d30 0%,#1a2d4a 100%);
+  padding:28px 0;
+  border-top:1px solid rgba(93,184,232,.15);
+  border-bottom:1px solid rgba(93,184,232,.15);
+}
+.case-band-inner{
+  max-width:1120px;margin:0 auto;padding:0 24px;
+  display:flex;align-items:flex-start;gap:20px;
+}
+.case-band-quote{
+  width:3px;min-height:60px;flex-shrink:0;
+  background:linear-gradient(180deg,var(--accent),var(--steel));
+  border-radius:2px;margin-top:4px;
+}
+.case-band-text blockquote{
+  font-family:'Source Serif 4',Georgia,serif;
+  font-size:clamp(14px,2vw,18px);font-style:italic;
+  color:rgba(255,255,255,.88);line-height:1.6;margin-bottom:10px;
+}
+.case-band-attr{
+  font-size:12.5px;font-weight:500;
+  color:var(--accent);letter-spacing:.03em;text-transform:uppercase;
+}
+
+/* ── SECTION SHARED ── */
+.section{padding:88px 0}
+.section-label{
+  font-size:11px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--steel);margin-bottom:12px;
+}
+.section-title{
+  font-family:'Source Serif 4',Georgia,serif;
+  font-size:clamp(26px,4vw,42px);font-weight:700;line-height:1.15;
+  color:var(--navy);letter-spacing:-.02em;margin-bottom:16px;
+}
+.section-sub{font-size:16px;color:var(--text-lt);max-width:540px;line-height:1.65}
+.section-header{margin-bottom:52px}
+.section-header.center{text-align:center}
+.section-header.center .section-sub{margin:0 auto}
+
+/* ── GOOGLE REVIEWS ── */
+.reviews{background:var(--white)}
+.reviews-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+@media(max-width:900px){.reviews-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:580px){.reviews-grid{grid-template-columns:1fr}}
+.review-card{
+  background:var(--off);border:1.5px solid var(--g200);
+  border-radius:var(--radius);padding:28px;
+  display:flex;flex-direction:column;gap:14px;
+  transition:transform .15s,box-shadow .15s;
+}
+.review-card:hover{transform:translateY(-3px);box-shadow:var(--shadow)}
+.review-stars{display:flex;gap:3px}
+.review-star{
+  width:16px;height:16px;
+  background:var(--gold);
+  -webkit-clip-path:polygon(50% 0%,61% 35%,98% 35%,68% 57%,79% 91%,50% 70%,21% 91%,32% 57%,2% 35%,39% 35%);
+  clip-path:polygon(50% 0%,61% 35%,98% 35%,68% 57%,79% 91%,50% 70%,21% 91%,32% 57%,2% 35%,39% 35%);
+}
+.review-text{
+  font-size:14.5px;line-height:1.65;color:var(--text-md);
+  font-style:italic;flex:1;
+}
+.review-author{font-size:12.5px;font-weight:600;color:var(--text-lt);letter-spacing:.03em}
+.review-source{display:flex;align-items:center;gap:6px;margin-top:4px}
+.google-g{
+  width:14px;height:14px;border-radius:50%;
+  background:linear-gradient(135deg,#4285F4,#34A853,#FBBC05,#EA4335);
+  flex-shrink:0;
+}
+.review-source span{font-size:11px;color:var(--text-lt);letter-spacing:.04em}
+.reviews-footer{margin-top:36px;text-align:center}
+.reviews-footer a{
+  display:inline-flex;align-items:center;gap:8px;
+  font-size:14px;font-weight:600;color:var(--steel);
+  border:1.5px solid var(--g200);border-radius:8px;
+  padding:10px 22px;transition:background .15s,border-color .15s;
+}
+.reviews-footer a:hover{background:var(--sky);border-color:var(--accent)}
+
+/* ── PHYSICIANS ── */
+.physicians{background:var(--off)}
+.physicians-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+@media(max-width:900px){.physicians-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:540px){.physicians-grid{grid-template-columns:1fr}}
+.physician-card{
+  background:var(--white);border:1.5px solid var(--g200);
+  border-radius:var(--radius);padding:28px 24px;
+  display:flex;flex-direction:column;align-items:flex-start;gap:12px;
+  transition:transform .15s,box-shadow .15s,border-color .15s;
+}
+.physician-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-lg);border-color:var(--accent)}
+.physician-avatar{
+  width:60px;height:60px;border-radius:50%;
+  background:linear-gradient(135deg,var(--navy) 0%,var(--steel) 100%);
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Source Serif 4',Georgia,serif;
+  font-size:20px;font-weight:700;color:var(--white);letter-spacing:.02em;
+  flex-shrink:0;
+}
+.physician-name{
+  font-family:'Source Serif 4',Georgia,serif;
+  font-size:18px;font-weight:700;color:var(--navy);line-height:1.2;
+}
+.physician-title{font-size:12.5px;font-weight:500;color:var(--steel);letter-spacing:.04em;text-transform:uppercase}
+.physician-credentials{
+  display:flex;flex-wrap:wrap;gap:6px;margin-top:4px;
+}
+.cred-tag{
+  font-size:11px;padding:3px 9px;border-radius:20px;
+  background:var(--sky);color:var(--navy);
+  border:1px solid var(--g200);font-weight:500;
+}
+.physician-focus{font-size:13px;color:var(--text-lt);line-height:1.5;margin-top:auto;padding-top:8px;border-top:1px solid var(--g100)}
+
+/* ── WHAT WE TREAT ── */
+.conditions{background:var(--white)}
+.conditions-intro-grid{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:12px;
+  margin-bottom:52px;
+}
+@media(max-width:900px){.conditions-intro-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:480px){.conditions-intro-grid{grid-template-columns:1fr}}
+.condition-chip{
+  background:var(--off);border:1.5px solid var(--g200);
+  border-radius:10px;padding:16px;
+  display:flex;align-items:center;gap:10px;
+  font-size:13.5px;font-weight:500;color:var(--text-md);
+  transition:background .15s,border-color .15s;
+}
+.condition-chip:hover{background:var(--sky);border-color:var(--accent);color:var(--navy)}
+.condition-chip-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.anatomy-embed-wrap{
+  border-radius:16px;overflow:hidden;
+  border:1.5px solid var(--g200);
+  box-shadow:var(--shadow-lg);
+  background:var(--navy-dk);
+}
+.anatomy-embed-label{
+  background:var(--navy);padding:14px 20px;
+  display:flex;align-items:center;gap:10px;
+  border-bottom:1px solid rgba(93,184,232,.15);
+}
+.anatomy-embed-dot{width:8px;height:8px;border-radius:50%;background:var(--accent);box-shadow:0 0 6px rgba(93,184,232,.6)}
+.anatomy-embed-label span{font-size:12px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.6)}
+.anatomy-embed-label strong{font-size:13px;font-weight:600;color:rgba(255,255,255,.9)}
+.anatomy-preview{
+  position:relative;width:100%;background:#02080f;
+  border-radius:0 0 var(--radius) var(--radius);
+  overflow:hidden;min-height:360px;
+  display:flex;align-items:center;justify-content:center;
+  flex-direction:column;gap:24px;padding:40px;
+}
+.anatomy-preview-chips{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-bottom:4px}
+.apc{padding:7px 16px;border-radius:100px;border:1px solid;font-size:11px;font-weight:600;letter-spacing:.04em;font-family:'DM Sans',sans-serif}
+.apc.c6{color:#00d4ff;border-color:rgba(0,212,255,.3);background:rgba(0,212,255,.06)}
+.apc.c7{color:#00ffcc;border-color:rgba(0,255,200,.3);background:rgba(0,255,200,.06)}
+.apc.c5{color:#ffdd00;border-color:rgba(255,221,0,.3);background:rgba(255,221,0,.06)}
+.apc.c8{color:#a78bfa;border-color:rgba(167,139,250,.3);background:rgba(167,139,250,.06)}
+.apc.sh{color:#d4a843;border-color:rgba(212,168,67,.3);background:rgba(212,168,67,.06)}
+.apc.la{color:#9b6bb5;border-color:rgba(155,107,181,.3);background:rgba(155,107,181,.06)}
+.anatomy-preview-text{text-align:center;color:rgba(255,255,255,.45);font-size:13px;line-height:1.7;max-width:480px}
+.anatomy-launch{
+  display:inline-flex;align-items:center;gap:9px;
+  background:rgba(93,184,232,.12);border:1px solid rgba(93,184,232,.35);
+  color:#5db8e8;border-radius:100px;padding:12px 28px;
+  font-size:13px;font-weight:700;letter-spacing:.04em;
+  transition:background .2s,border-color .2s;cursor:pointer;text-decoration:none;
+  font-family:'DM Sans',sans-serif;
+}
+.anatomy-launch:hover{background:rgba(93,184,232,.2);border-color:rgba(93,184,232,.6)}
+.anatomy-launch svg{width:16px;height:16px;flex-shrink:0}
+
+/* ── PHYSICAL THERAPY ── */
+.therapy{background:var(--off)}
+.therapy-grid{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center}
+@media(max-width:768px){.therapy-grid{grid-template-columns:1fr}}
+.therapy-visual{
+  border-radius:var(--radius);overflow:hidden;
+  background:linear-gradient(135deg,#1a2d4a 0%,#1c3560 100%);
+  padding:40px 32px;
+  display:flex;flex-direction:column;gap:20px;
+  min-height:340px;justify-content:center;
+}
+.therapy-stat-row{display:flex;gap:32px;flex-wrap:wrap}
+.therapy-stat{text-align:center}
+.therapy-stat-number{
+  font-family:'Source Serif 4',Georgia,serif;
+  font-size:42px;font-weight:700;color:var(--accent);line-height:1;
+  margin-bottom:4px;
+}
+.therapy-stat-label{font-size:12px;color:rgba(255,255,255,.55);letter-spacing:.06em;text-transform:uppercase;font-weight:500}
+.therapy-features{list-style:none;display:flex;flex-direction:column;gap:14px;margin-top:8px}
+.therapy-features li{
+  display:flex;align-items:flex-start;gap:12px;
+  font-size:14px;color:var(--text-md);line-height:1.5;
+}
+.therapy-check{
+  width:20px;height:20px;border-radius:50%;
+  background:var(--sky);color:var(--steel);
+  display:flex;align-items:center;justify-content:center;
+  font-size:11px;font-weight:700;flex-shrink:0;margin-top:1px;
+}
+
+/* ── PATIENT PORTAL CTA ── */
+.portal-cta{
+  background:linear-gradient(135deg,#0f1d30 0%,#1a2d4a 50%,#1c3560 100%);
+  padding:80px 0;text-align:center;position:relative;overflow:hidden;
+}
+.portal-cta::before{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse 60% 80% at 50% 50%,rgba(93,184,232,.1) 0%,transparent 70%);
+}
+.portal-cta-content{position:relative;z-index:1;max-width:640px;margin:0 auto;padding:0 24px}
+.portal-cta h2{
+  font-family:'Source Serif 4',Georgia,serif;
+  font-size:clamp(26px,4vw,40px);font-weight:700;
+  color:var(--white);margin-bottom:16px;letter-spacing:-.02em;
+}
+.portal-cta p{font-size:16px;color:rgba(255,255,255,.6);margin-bottom:36px;line-height:1.65}
+.portal-ctas{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+.portal-detail{display:flex;align-items:center;gap:20px;justify-content:center;margin-top:28px;flex-wrap:wrap}
+.portal-detail-item{font-size:12.5px;color:rgba(255,255,255,.4);letter-spacing:.05em;display:flex;align-items:center;gap:6px}
+.portal-detail-item::before{content:'';width:4px;height:4px;border-radius:50%;background:var(--accent);flex-shrink:0}
+
+/* ── FOOTER ── */
+footer{background:var(--navy-dk);padding:48px 0 32px}
+.footer-grid{
+  display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:40px;
+  padding-bottom:40px;
+  border-bottom:1px solid rgba(255,255,255,.08);
+  margin-bottom:32px;
+}
+@media(max-width:768px){.footer-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:480px){.footer-grid{grid-template-columns:1fr}}
+.footer-brand{font-family:'Source Serif 4',Georgia,serif;font-size:17px;font-weight:700;color:var(--white);margin-bottom:10px}
+.footer-tagline{font-size:13px;color:rgba(255,255,255,.35);line-height:1.6;margin-bottom:16px;max-width:260px}
+.footer-contact-item{font-size:13px;color:rgba(255,255,255,.5);margin-bottom:6px}
+.footer-col h4{font-size:11px;font-weight:600;letter-spacing:.15em;text-transform:uppercase;color:rgba(255,255,255,.35);margin-bottom:14px}
+.footer-col ul{list-style:none}
+.footer-col ul li{margin-bottom:8px}
+.footer-col ul li a{font-size:13px;color:rgba(255,255,255,.5);transition:color .15s}
+.footer-col ul li a:hover{color:var(--accent)}
+.footer-bottom{display:flex;align-items:center;justify-content:space-between;flex-wrap:gap;gap:12px}
+.footer-copy{font-size:12px;color:rgba(255,255,255,.25)}
+.footer-built{font-size:12px;color:rgba(255,255,255,.2)}
+.footer-built a{color:var(--accent);opacity:.7;transition:opacity .15s}
+.footer-built a:hover{opacity:1}
+
+/* ── PROPOSAL WATERMARK BANNER ── */
+.proposal-banner{
+  background:var(--steel);color:var(--white);
+  text-align:center;padding:10px 20px;
+  font-size:12.5px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;
+}
+
+/* ── MOBILE NAV DRAWER ── */
+.mobile-nav{
+  display:none;position:fixed;inset:0;z-index:800;
+  background:rgba(15,29,48,.96);-webkit-backdrop-filter:blur(16px);backdrop-filter:blur(16px);
+  flex-direction:column;justify-content:center;align-items:center;gap:8px;
+  padding:24px;
+}
+.mobile-nav.open{display:flex}
+.mobile-nav a{
+  display:block;width:100%;max-width:320px;
+  padding:16px 24px;border-radius:10px;
+  font-size:18px;font-weight:600;color:var(--white);text-align:center;
+  background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);
+  transition:background .15s;
+}
+.mobile-nav a:hover{background:rgba(93,184,232,.15)}
+.mobile-nav .mobile-close{
+  position:absolute;top:20px;right:20px;
+  background:none;border:none;color:rgba(255,255,255,.5);
+  font-size:28px;padding:8px;cursor:pointer;
+}
+
+/* ── ANIMATIONS ── */
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+.hero-content>*{animation:fadeUp .7s ease both}
+.hero-stat-strip{animation-delay:.05s}
+.hero-h1{animation-delay:.15s}
+.hero-h2{animation-delay:.25s}
+.hero-sub{animation-delay:.32s}
+.hero-ctas{animation-delay:.4s}
+
+/* ── MOBILE ── */
+@media(max-width:768px){
+  .nav-links{display:none}
+  .nav-hamburger{display:flex}
+  .section{padding:60px 0}
+  .therapy-grid{grid-template-columns:1fr}
+  .footer-grid{grid-template-columns:1fr 1fr;gap:28px}
+}
+@media(max-width:480px){
+  .hero-stat-strip{gap:0;flex-direction:column;align-items:flex-start}
+  .hero-stat{border-right:none;padding:4px 0;font-size:12px}
+  .footer-grid{grid-template-columns:1fr;gap:24px}
+}
+
+::-webkit-scrollbar{width:6px}
+::-webkit-scrollbar-track{background:transparent}
+::-webkit-scrollbar-thumb{background:var(--g200);border-radius:3px}
+</style>
+</head>
+<body>
+
+<!-- Proposal watermark -->
+<div class="proposal-banner">
+  Web Design Proposal — Prepared by Cary Park Solutions · David Rojas · info@caryparksolutions.com
+</div>
+
+<!-- ── NAVIGATION ── -->
+<nav id="site-nav" role="navigation" aria-label="Main navigation">
+  <div class="nav-inner">
+    <a href="#" class="nav-brand">
+      <div class="nav-brand-dot"></div>
+      Raleigh Hand to Shoulder Center
+    </a>
+    <div class="nav-links">
+      <a href="#hero">Home</a>
+      <a href="#physicians">Physicians</a>
+      <a href="#conditions">What We Treat</a>
+      <a href="#anatomy">3D Anatomy</a>
+      <a href="#therapy">PT / Therapy</a>
+      <a href="#portal" class="nav-cta">Patient Portal</a>
+    </div>
+    <button class="nav-hamburger" aria-label="Open menu" onclick="document.getElementById('mobile-nav').classList.add('open')">
+      <div class="hamburger-icon"><span></span><span></span><span></span></div>
+    </button>
+  </div>
+</nav>
+
+<!-- Mobile nav -->
+<div class="mobile-nav" id="mobile-nav">
+  <button class="mobile-close" aria-label="Close menu" onclick="document.getElementById('mobile-nav').classList.remove('open')">✕</button>
+  <a href="#hero"        onclick="document.getElementById('mobile-nav').classList.remove('open')">Home</a>
+  <a href="#physicians"  onclick="document.getElementById('mobile-nav').classList.remove('open')">Physicians</a>
+  <a href="#conditions"  onclick="document.getElementById('mobile-nav').classList.remove('open')">What We Treat</a>
+  <a href="#anatomy"     onclick="document.getElementById('mobile-nav').classList.remove('open')">3D Anatomy</a>
+  <a href="#therapy"     onclick="document.getElementById('mobile-nav').classList.remove('open')">PT / Therapy</a>
+  <a href="#portal"      onclick="document.getElementById('mobile-nav').classList.remove('open')">Patient Portal</a>
+</div>
+
+<!-- ── HERO ── -->
+<section class="hero" id="hero">
+  <div class="hero-bg-glow"></div>
+  <div class="hero-grid"></div>
+
+  <!-- Decorative anatomy SVG (shoulder coronal cross-section) -->
+  <div class="hero-anatomy-accent" aria-hidden="true">
+    <svg viewBox="0 0 340 480" xmlns="http://www.w3.org/2000/svg">
+      <!-- Humerus head -->
+      <circle cx="210" cy="220" r="90" fill="none" stroke="#5db8e8" stroke-width="1.5"/>
+      <!-- Glenoid -->
+      <ellipse cx="100" cy="220" rx="28" ry="70" fill="none" stroke="#5db8e8" stroke-width="1.5"/>
+      <!-- Clavicle -->
+      <path d="M20,110 Q90,100 160,112" stroke="#5db8e8" stroke-width="2" fill="none"/>
+      <!-- Acromion -->
+      <path d="M160,112 Q185,118 200,134" stroke="#5db8e8" stroke-width="2.5" fill="none"/>
+      <!-- Supraspinatus -->
+      <path d="M135,155 Q185,140 230,160" stroke="#3a8fce" stroke-width="2" fill="none" stroke-dasharray="6 3"/>
+      <!-- Humeral shaft -->
+      <line x1="170" y1="298" x2="164" y2="460" stroke="#5db8e8" stroke-width="10" stroke-linecap="round" opacity=".6"/>
+      <!-- Labrum -->
+      <path d="M88,158 Q76,180 76,220 Q76,258 88,280" stroke="#3a8fce" stroke-width="3" fill="none"/>
+      <!-- Biceps tendon -->
+      <line x1="218" y1="148" x2="225" y2="310" stroke="#3a8fce" stroke-width="1.5" stroke-dasharray="4 3"/>
+    </svg>
+  </div>
+
+  <div class="hero-content">
+    <div class="hero-stat-strip">
+      <div class="hero-stat"><strong>30+</strong> Years Serving Triangle NC</div>
+      <div class="hero-stat"><strong>6</strong> Fellowship-Trained Surgeons</div>
+      <div class="hero-stat"><strong>Same-Week</strong> Appointments Available</div>
+    </div>
+    <h1 class="hero-h1">Upper Extremity<br><em>Specialists.</em></h1>
+    <p class="hero-h2">Triangle's Independent Practice.</p>
+    <p class="hero-sub">Fellowship-trained surgeons and certified hand therapists — under one roof. Raleigh's trusted name in hand, wrist, elbow, and shoulder care.</p>
+    <div class="hero-ctas">
+      <a href="#portal" class="btn-primary">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/></svg>
+        Book Appointment
+      </a>
+      <a href="#physicians" class="btn-outline">Our Physicians →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ── FOUNDER CASE STUDY BAND ── -->
+<div class="case-band">
+  <div class="case-band-inner">
+    <div class="case-band-quote"></div>
+    <div class="case-band-text">
+      <blockquote>
+        "[PLACEHOLDER — David Rojas personal case study: After a pedestrian accident, Dr. Erickson performed two surgeries that restored full function. The care at Raleigh Hand was exceptional at every step — from the first appointment through months of physical therapy. This practice changed my life, and that's why I built this site for them.]"
+      </blockquote>
+      <div class="case-band-attr">David Rojas · Founder, Cary Park Solutions · Patient, Raleigh Hand to Shoulder Center</div>
+    </div>
+  </div>
+</div>
+
+<!-- ── GOOGLE REVIEWS ── -->
+<section class="section reviews" id="reviews">
+  <div class="container">
+    <div class="section-header center">
+      <div class="section-label">Patient Experience</div>
+      <h2 class="section-title">What Our Patients Say</h2>
+      <p class="section-sub">Hundreds of 5-star reviews across Google, Healthgrades, and Yelp — reflecting 30 years of exceptional outcomes.</p>
+    </div>
+    <div class="reviews-grid">
+      <div class="review-card">
+        <div class="review-stars">
+          <div class="review-star"></div><div class="review-star"></div><div class="review-star"></div><div class="review-star"></div><div class="review-star"></div>
+        </div>
+        <p class="review-text">"The doctors, nurses, and desk staff are exceptional. From my first visit through my surgery and recovery, every person I encountered was knowledgeable, compassionate, and professional."</p>
+        <div>
+          <div class="review-author">Google Review</div>
+          <div class="review-source"><div class="google-g"></div><span>Verified Patient · Google</span></div>
+        </div>
+      </div>
+      <div class="review-card">
+        <div class="review-stars">
+          <div class="review-star"></div><div class="review-star"></div><div class="review-star"></div><div class="review-star"></div><div class="review-star"></div>
+        </div>
+        <p class="review-text">"The therapy team is incredible. I am so thankful for the care I received. They pushed me at just the right pace and celebrated every milestone with me. I'm back to full function."</p>
+        <div>
+          <div class="review-author">Google Review</div>
+          <div class="review-source"><div class="google-g"></div><span>Verified Patient · Google</span></div>
+        </div>
+      </div>
+      <div class="review-card">
+        <div class="review-stars">
+          <div class="review-star"></div><div class="review-star"></div><div class="review-star"></div><div class="review-star"></div><div class="review-star"></div>
+        </div>
+        <p class="review-text">"The therapists contributed significantly to restoring my mobility over months of rehabilitation. Their expertise in upper extremity therapy is unmatched in the Triangle."</p>
+        <div>
+          <div class="review-author">Google Review</div>
+          <div class="review-source"><div class="google-g"></div><span>Verified Patient · Google</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="reviews-footer">
+      <a href="#">
+        <div class="google-g"></div>
+        See all reviews on Google →
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ── PHYSICIANS ── -->
+<section class="section physicians" id="physicians">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-label">Our Team</div>
+      <h2 class="section-title">Fellowship-Trained Surgeons</h2>
+      <p class="section-sub">Board-certified orthopedic surgeons, each with subspecialty fellowship training in hand, wrist, elbow, and shoulder surgery.</p>
+    </div>
+    <div class="physicians-grid">
+
+      <div class="physician-card">
+        <div class="physician-avatar">JP</div>
+        <div>
+          <div class="physician-name">Dr. James Post</div>
+          <div class="physician-title">MD · Hand &amp; Upper Extremity</div>
+        </div>
+        <div class="physician-credentials">
+          <span class="cred-tag">ABOS Board Certified</span>
+          <span class="cred-tag">Hand Surgery Fellowship</span>
+        </div>
+        <p class="physician-focus">Wrist reconstruction · Carpal tunnel · Distal radius fractures · Microsurgery</p>
+      </div>
+
+      <div class="physician-card">
+        <div class="physician-avatar">TM</div>
+        <div>
+          <div class="physician-name">Dr. Terry Messer</div>
+          <div class="physician-title">MD · Hand &amp; Upper Extremity</div>
+        </div>
+        <div class="physician-credentials">
+          <span class="cred-tag">ABOS Board Certified</span>
+          <span class="cred-tag">Hand Surgery Fellowship</span>
+        </div>
+        <p class="physician-focus">Nerve injuries · Dupuytren's · Tendon repair · Pediatric hand conditions</p>
+      </div>
+
+      <div class="physician-card" style="border-color:var(--accent);box-shadow:0 0 0 1px rgba(93,184,232,.3)">
+        <div class="physician-avatar" style="background:linear-gradient(135deg,var(--steel) 0%,var(--accent) 100%)">JE</div>
+        <div>
+          <div class="physician-name">Dr. John Erickson</div>
+          <div class="physician-title">MD · Hand, Elbow &amp; Shoulder</div>
+        </div>
+        <div class="physician-credentials">
+          <span class="cred-tag">ABOS Board Certified</span>
+          <span class="cred-tag">Hand &amp; Shoulder Fellowship</span>
+        </div>
+        <p class="physician-focus">Shoulder reconstruction · Rotator cuff repair · Complex fractures · Trauma</p>
+      </div>
+
+      <div class="physician-card">
+        <div class="physician-avatar">GE</div>
+        <div>
+          <div class="physician-name">Dr. George Edwards III</div>
+          <div class="physician-title">MD · Hand &amp; Wrist</div>
+        </div>
+        <div class="physician-credentials">
+          <span class="cred-tag">ABOS Board Certified</span>
+          <span class="cred-tag">Hand Surgery Fellowship</span>
+        </div>
+        <p class="physician-focus">Arthritis reconstruction · Joint replacement · Wrist arthroscopy</p>
+      </div>
+
+      <div class="physician-card">
+        <div class="physician-avatar">TL</div>
+        <div>
+          <div class="physician-name">Dr. Timothy Luchetti</div>
+          <div class="physician-title">MD · Hand &amp; Upper Extremity</div>
+        </div>
+        <div class="physician-credentials">
+          <span class="cred-tag">ABOS Board Certified</span>
+          <span class="cred-tag">Hand Surgery Fellowship</span>
+        </div>
+        <p class="physician-focus">Trigger finger · Tendon reconstruction · Cubital tunnel · Sports hand injuries</p>
+      </div>
+
+      <div class="physician-card">
+        <div class="physician-avatar">PS</div>
+        <div>
+          <div class="physician-name">Dr. Paul Schricker</div>
+          <div class="physician-title">MD · Shoulder &amp; Elbow</div>
+        </div>
+        <div class="physician-credentials">
+          <span class="cred-tag">ABOS Board Certified</span>
+          <span class="cred-tag">Shoulder &amp; Elbow Fellowship</span>
+        </div>
+        <p class="physician-focus">Shoulder instability · SLAP repairs · Elbow arthroscopy · AC joint injuries</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ── WHAT WE TREAT ── -->
+<section class="section conditions" id="conditions">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-label">Conditions Treated</div>
+      <h2 class="section-title">What We Treat</h2>
+      <p class="section-sub">From common conditions to complex reconstructive surgery — comprehensive upper extremity care at a single practice.</p>
+    </div>
+
+    <div class="conditions-intro-grid">
+      <div class="condition-chip"><div class="condition-chip-dot" style="background:#3a8fce"></div> Carpal Tunnel Syndrome</div>
+      <div class="condition-chip"><div class="condition-chip-dot" style="background:#3a8fce"></div> Cubital Tunnel Syndrome</div>
+      <div class="condition-chip"><div class="condition-chip-dot" style="background:#5db8e8"></div> Thoracic Outlet Syndrome</div>
+      <div class="condition-chip"><div class="condition-chip-dot" style="background:#f59e0b"></div> Rotator Cuff Tears</div>
+      <div class="condition-chip"><div class="condition-chip-dot" style="background:#f59e0b"></div> Tennis &amp; Golfer's Elbow</div>
+      <div class="condition-chip"><div class="condition-chip-dot" style="background:#d4a843"></div> De Quervain's Tenosynovitis</div>
+      <div class="condition-chip"><div class="condition-chip-dot" style="background:#d4a843"></div> Trigger Finger</div>
+      <div class="condition-chip"><div class="condition-chip-dot" style="background:#9b6bb5"></div> SLAP &amp; Bankart Tears</div>
+      <div class="condition-chip"><div class="condition-chip-dot" style="background:#9b6bb5"></div> Ganglion Cysts</div>
+      <div class="condition-chip"><div class="condition-chip-dot" style="background:#6b9fa5"></div> Scapholunate Tears</div>
+      <div class="condition-chip"><div class="condition-chip-dot" style="background:#6b9fa5"></div> Dupuytren's Contracture</div>
+      <div class="condition-chip"><div class="condition-chip-dot" style="background:#f59e0b"></div> AC Joint Separation</div>
+    </div>
+
+    <!-- 3D Anatomy Embed -->
+    <div class="anatomy-embed-wrap" id="anatomy">
+      <div class="anatomy-embed-label">
+        <div class="anatomy-embed-dot"></div>
+        <div>
+          <span>Interactive</span>
+          <strong style="margin-left:8px">Cervical &amp; Shoulder Conditions — 3D Anatomy Viewer</strong>
+        </div>
+      </div>
+      <div class="anatomy-preview">
+        <div class="anatomy-preview-chips">
+          <span class="apc c5">C5 Radiculopathy</span>
+          <span class="apc c6">C6 Radiculopathy</span>
+          <span class="apc c7">C7 Radiculopathy</span>
+          <span class="apc c8">C8 Radiculopathy</span>
+          <span class="apc sh">Rotator Cuff Tear</span>
+          <span class="apc sh">Impingement</span>
+          <span class="apc la">SLAP Tear</span>
+          <span class="apc la">Bankart Lesion</span>
+          <span class="apc sh">AC Joint Sep.</span>
+          <span class="apc c6">Frozen Shoulder</span>
+        </div>
+        <p class="anatomy-preview-text">10 interactive anatomy panels — cervical nerve roots, dermatomal maps, and shoulder pathology with animated SVG detail. Opens in a new tab.</p>
+        <button onclick="openViewer()" class="anatomy-launch">
+          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="8" cy="8" r="6.5"/>
+            <polygon points="6.5,5.5 11,8 6.5,10.5" fill="currentColor" stroke="none"/>
+          </svg>
+          Launch Interactive Viewer
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── PT / THERAPY ── -->
+<section class="section therapy" id="therapy">
+  <div class="container">
+    <div class="therapy-grid">
+      <div>
+        <div class="section-label">Physical Therapy</div>
+        <h2 class="section-title">Certified Hand Therapists On-Site</h2>
+        <p class="section-sub" style="margin-bottom:28px">Our CHT-certified therapists work alongside surgeons — no referrals to outside facilities, no gaps in communication. Pre-op conditioning to post-op return to function, all in one building.</p>
+        <ul class="therapy-features">
+          <li>
+            <div class="therapy-check">✓</div>
+            <span><strong style="color:var(--navy)">Certified Hand Therapists (CHT)</strong> — the highest credential in hand rehabilitation</span>
+          </li>
+          <li>
+            <div class="therapy-check">✓</div>
+            <span><strong style="color:var(--navy)">Custom orthotic fabrication</strong> — static and dynamic splinting on-site</span>
+          </li>
+          <li>
+            <div class="therapy-check">✓</div>
+            <span><strong style="color:var(--navy)">Work hardening &amp; FCE</strong> — functional capacity evaluations and return-to-work programs</span>
+          </li>
+          <li>
+            <div class="therapy-check">✓</div>
+            <span><strong style="color:var(--navy)">Direct surgeon collaboration</strong> — therapists and surgeons review your case together</span>
+          </li>
+          <li>
+            <div class="therapy-check">✓</div>
+            <span><strong style="color:var(--navy)">Most insurances accepted</strong> — including Blue Cross Blue Shield, Aetna, Cigna, UnitedHealthcare, Medicare</span>
+          </li>
+        </ul>
+      </div>
+      <div class="therapy-visual">
+        <div>
+          <div style="font-size:11px;font-weight:600;letter-spacing:.15em;text-transform:uppercase;color:rgba(93,184,232,.6);margin-bottom:20px">Therapy at a Glance</div>
+          <div class="therapy-stat-row">
+            <div class="therapy-stat">
+              <div class="therapy-stat-number">CHT</div>
+              <div class="therapy-stat-label">Certified</div>
+            </div>
+            <div class="therapy-stat">
+              <div class="therapy-stat-number">5k+</div>
+              <div class="therapy-stat-label">Patients Treated</div>
+            </div>
+            <div class="therapy-stat">
+              <div class="therapy-stat-number">30+</div>
+              <div class="therapy-stat-label">Years Experience</div>
+            </div>
+          </div>
+        </div>
+        <div style="border-top:1px solid rgba(255,255,255,.08);padding-top:20px">
+          <div style="font-size:12px;color:rgba(255,255,255,.35);font-weight:500;letter-spacing:.06em;text-transform:uppercase;margin-bottom:14px">Common Therapy Diagnoses</div>
+          <div style="display:flex;flex-wrap:wrap;gap:8px">
+            <span style="font-size:12px;padding:5px 12px;border-radius:20px;background:rgba(93,184,232,.1);color:rgba(255,255,255,.6);border:1px solid rgba(93,184,232,.2)">Post-op Fracture</span>
+            <span style="font-size:12px;padding:5px 12px;border-radius:20px;background:rgba(93,184,232,.1);color:rgba(255,255,255,.6);border:1px solid rgba(93,184,232,.2)">Tendon Repair</span>
+            <span style="font-size:12px;padding:5px 12px;border-radius:20px;background:rgba(93,184,232,.1);color:rgba(255,255,255,.6);border:1px solid rgba(93,184,232,.2)">Rotator Cuff</span>
+            <span style="font-size:12px;padding:5px 12px;border-radius:20px;background:rgba(93,184,232,.1);color:rgba(255,255,255,.6);border:1px solid rgba(93,184,232,.2)">Carpal Tunnel</span>
+            <span style="font-size:12px;padding:5px 12px;border-radius:20px;background:rgba(93,184,232,.1);color:rgba(255,255,255,.6);border:1px solid rgba(93,184,232,.2)">Lymphedema</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── PATIENT PORTAL CTA ── -->
+<section class="portal-cta" id="portal">
+  <div class="portal-cta-content">
+    <h2>Ready to See a Specialist?</h2>
+    <p>Same-week appointments available. Most insurance plans accepted. Conveniently located in Raleigh with ample parking.</p>
+    <div class="portal-ctas">
+      <a href="tel:9190000000" class="btn-primary">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.5 19.79 19.79 0 01.58 4.18 2 2 0 012.55 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.91 9.91a16 16 0 006.18 6.18l1.37-1.37a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg>
+        (919) 000-0000
+      </a>
+      <a href="#" class="btn-outline">Request Online →</a>
+    </div>
+    <div class="portal-detail">
+      <span class="portal-detail-item">3701 Wake Forest Rd Suite 100, Raleigh NC 27609</span>
+      <span class="portal-detail-item">Mon–Fri 8am–5pm</span>
+      <span class="portal-detail-item">Most Insurance Accepted</span>
+    </div>
+  </div>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-brand">Raleigh Hand to Shoulder Center</div>
+        <p class="footer-tagline">Serving the Triangle for over 30 years. Fellowship-trained surgeons, certified hand therapists, and personalized care — under one roof.</p>
+        <div class="footer-contact-item">(919) 000-0000</div>
+        <div class="footer-contact-item">3701 Wake Forest Rd Suite 100</div>
+        <div class="footer-contact-item">Raleigh, NC 27609</div>
+      </div>
+      <div class="footer-col">
+        <h4>Our Practice</h4>
+        <ul>
+          <li><a href="#physicians">Physicians</a></li>
+          <li><a href="#therapy">Therapy Team</a></li>
+          <li><a href="#">About Us</a></li>
+          <li><a href="#">Locations</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Conditions</h4>
+        <ul>
+          <li><a href="#conditions">What We Treat</a></li>
+          <li><a href="#anatomy">3D Anatomy</a></li>
+          <li><a href="#">Patient Education</a></li>
+          <li><a href="#">Surgery FAQs</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Patients</h4>
+        <ul>
+          <li><a href="#portal">Book Appointment</a></li>
+          <li><a href="#">Patient Portal</a></li>
+          <li><a href="#">Insurance</a></li>
+          <li><a href="#">New Patients</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-copy">© 2026 Raleigh Hand to Shoulder Center · All rights reserved</div>
+      <div class="footer-built">Site design by <a href="https://caryparksolutions.com">Cary Park Solutions</a></div>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var nav = document.getElementById('site-nav');
+  window.addEventListener('scroll', function(){
+    if(window.scrollY > 40){ nav.classList.add('scrolled'); }
+    else { nav.classList.remove('scrolled'); }
+  }, {passive:true});
+})();
+var _vp1=`<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Cervical &amp; Shoulder Conditions — Triangle Hand &amp; Shoulder Center</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#02080f;--sb:#010407;--pn:#010a14;--br:#081828;
+  --c5:#ffdd00;--c6:#00d4ff;--c7:#00ffcc;--c8:#a78bfa;
+  --bone:#1e3a4a;--disc:#2a1a4a;--tendon:#d4a843;
+  --inflame:#ff4a2a;--labrum:#9b6bb5;--bursa:#4fc3f7;
+  --text:#d0e8f8;--dim:#5a8aaa;
+}
+html,body{height:100%;overflow:hidden}
+body{background:var(--bg);color:var(--text);font-family:'DM Sans',-apple-system,BlinkMacSystemFont,sans-serif;display:flex;flex-direction:column}
+@media(max-width:760px){html,body{height:auto;overflow:auto}}
+
+header{background:#010810;border-bottom:1px solid var(--br);padding:11px 20px;display:flex;align-items:center;gap:12px;flex-shrink:0}
+.hd{width:7px;height:7px;border-radius:50%;background:var(--c6);box-shadow:0 0 8px var(--c6)}
+header h1{font-size:11px;text-transform:uppercase;letter-spacing:.1em;color:var(--dim);font-weight:500}
+header span{font-size:11px;color:var(--text)}
+
+.app{display:flex;flex:1;min-height:0;overflow:hidden}
+
+.sb{width:192px;background:var(--sb);border-right:1px solid var(--br);overflow-y:auto;-webkit-overflow-scrolling:touch;flex-shrink:0;padding:8px 0}
+.sh{padding:10px 14px 3px;font-size:9px;letter-spacing:.15em;text-transform:uppercase;color:#1a3040;font-weight:600}
+.nb{display:flex;align-items:center;gap:9px;width:100%;min-height:44px;padding:10px 14px;background:none;border:none;border-left:2px solid transparent;color:var(--dim);font:13px 'DM Sans',sans-serif;cursor:pointer;text-align:left;transition:color .15s,background .15s;-webkit-tap-highlight-color:transparent;touch-action:manipulation}
+.nb:hover{background:#050e19;color:var(--text)}
+.nb.on{background:#040d18;color:var(--c6);border-left-color:var(--c6)}
+.nb.on.c5{color:var(--c5);border-left-color:var(--c5)}
+.nb.on.c7{color:var(--c7);border-left-color:var(--c7)}
+.nb.on.c8{color:var(--c8);border-left-color:var(--c8)}
+.nb.on.te{color:var(--tendon);border-left-color:var(--tendon)}
+.nb.on.la{color:var(--labrum);border-left-color:var(--labrum)}
+.nb.on.bu{color:var(--bursa);border-left-color:var(--bursa)}
+.dot{width:7px;height:7px;border-radius:50%;flex-shrink:0}
+.nb.on .dot{box-shadow:0 0 6px currentColor}
+
+.viewer{flex:1;overflow:hidden}
+.cond{display:none;height:100%}
+.cond.on{display:flex}
+.sa{flex:1;display:flex;align-items:center;justify-content:center;padding:14px;overflow:hidden}
+.sa svg{max-width:100%;max-height:100%}
+.inf{width:232px;flex-shrink:0;background:var(--pn);border-left:1px solid var(--br);padding:24px 18px;overflow-y:auto;-webkit-overflow-scrolling:touch;display:flex;flex-direction:column;gap:12px}
+
+/* ── MOBILE ── */
+@media(max-width:760px){
+  header span{display:none}
+  header h1{font-size:10.5px}
+  header{padding:10px 14px}
+
+  .app{flex-direction:column;height:auto;overflow:visible}
+
+  /* Nav → wrapping button grid (no horizontal scroll = no tap conflict) */
+  .sb{
+    width:100%;height:auto;
+    display:flex;flex-direction:row;flex-wrap:wrap;
+    align-items:flex-start;
+    border-right:none;border-bottom:1px solid var(--br);
+    overflow:visible;
+    padding:8px 10px 10px;gap:6px;
+    flex-shrink:0;
+  }
+
+  /* Section labels take full row width */
+  .sh{
+    width:100%;
+    padding:8px 2px 2px;
+    font-size:9px;letter-spacing:.15em;color:#2a4a5a;
+  }
+
+  /* Buttons → compact pill chips */
+  .nb{
+    flex:0 0 auto;width:auto;min-height:44px;
+    padding:8px 14px;
+    border-left:none;border-bottom:2px solid transparent;border-top:2px solid transparent;
+    border-radius:22px;
+    white-space:nowrap;font-size:13px;
+  }
+  .nb.on{
+    background:rgba(0,212,255,.12);
+    border-left-color:transparent;
+    border-bottom-color:var(--c6);
+  }
+  .nb.on.c5{color:var(--c5);background:rgba(255,221,0,.1);border-bottom-color:var(--c5)}
+  .nb.on.c7{color:var(--c7);background:rgba(0,255,200,.1);border-bottom-color:var(--c7)}
+  .nb.on.c8{color:var(--c8);background:rgba(167,139,250,.1);border-bottom-color:var(--c8)}
+  .nb.on.te{color:var(--tendon);background:rgba(212,168,67,.1);border-bottom-color:var(--tendon)}
+  .nb.on.la{color:var(--labrum);background:rgba(155,107,181,.1);border-bottom-color:var(--labrum)}
+  .nb.on.bu{color:var(--bursa);background:rgba(79,195,247,.1);border-bottom-color:var(--bursa)}
+
+  .viewer{overflow:visible;height:auto}
+  .cond{height:auto}
+  .cond.on{flex-direction:column}
+
+  /* SVG panel: kill the flex:1 that collapses in height:auto parent on iOS */
+  .sa{
+    flex:none !important;
+    width:100%;
+    padding:10px 8px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    overflow:visible;
+  }
+  .sa svg{max-height:50vw !important;min-height:250px;width:100%;height:auto;display:block}
+
+  /* Info panel: full width below SVG */
+  .inf{
+    width:100%;
+    border-left:none;border-top:1px solid var(--br);
+    padding:20px 16px 32px;
+    overflow-y:visible;
+  }
+  .it{font-size:18px}
+  .id{font-size:13px}
+  .fl li{font-size:12px}
+}
+.ic{font-size:9px;letter-spacing:.15em;text-transform:uppercase;color:var(--dim)}
+.it{font-family:'Source Serif 4',Georgia,serif;font-size:19px;font-weight:600;line-height:1.2;color:#e8f4ff}
+.is{font-size:11px;color:var(--dim);font-style:italic}
+.id{font-size:12.5px;line-height:1.65;color:var(--dim)}
+.tags{display:flex;flex-wrap:wrap;gap:5px}
+.tag{font-size:10px;padding:3px 7px;border-radius:3px;letter-spacing:.04em;font-weight:500}
+.tn{background:rgba(0,212,255,.08);color:var(--c6);border:1px solid rgba(0,212,255,.2)}
+.t7{background:rgba(0,255,200,.08);color:var(--c7);border:1px solid rgba(0,255,200,.2)}
+.t8{background:rgba(167,139,250,.08);color:var(--c8);border:1px solid rgba(167,139,250,.2)}
+.t5{background:rgba(255,221,0,.08);color:var(--c5);border:1px solid rgba(255,221,0,.2)}
+.tt{background:rgba(212,168,67,.08);color:var(--tendon);border:1px solid rgba(212,168,67,.2)}
+.tl{background:rgba(155,107,181,.08);color:var(--labrum);border:1px solid rgba(155,107,181,.2)}
+.ti{background:rgba(255,74,42,.08);color:var(--inflame);border:1px solid rgba(255,74,42,.2)}
+.tp{background:rgba(0,255,200,.05);color:#7fffd4;border:1px solid rgba(0,255,200,.15)}
+.fl{list-style:none;display:flex;flex-direction:column;gap:6px}
+.fl li{font-size:11.5px;color:var(--dim);padding-left:12px;position:relative;line-height:1.4}
+.fl li::before{content:'—';position:absolute;left:0;color:#1a3a4a}
+.fl li strong{color:#8ab8d0;font-weight:500}
+
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+@keyframes drawIn{from{stroke-dashoffset:1000;opacity:0}to{stroke-dashoffset:0;opacity:1}}
+@keyframes gPulse{0%,100%{opacity:.4}50%{opacity:.9}}
+@keyframes inflame{0%,100%{opacity:.2;filter:drop-shadow(0 0 6px #ff4a2a)}50%{opacity:.75;filter:drop-shadow(0 0 18px #ff4a2a) drop-shadow(0 0 36px #ff4a2a)}}
+@keyframes softGlow{0%,100%{opacity:.3}50%{opacity:.65}}
+@keyframes tearOpen{0%,30%{stroke-dashoffset:0}60%,100%{stroke-dashoffset:60}}
+@keyframes cystBreath{0%,100%{transform:scale(1);opacity:.55}50%{transform:scale(1.12);opacity:.9}}
+@keyframes capsuleThick{0%,100%{stroke-width:6;opacity:.45}50%{stroke-width:12;opacity:.85}}
+
+::-webkit-scrollbar{width:4px}
+::-webkit-scrollbar-track{background:transparent}
+::-webkit-scrollbar-thumb{background:#081828;border-radius:2px}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="hd"></div>
+  <h1>Triangle Hand &amp; Shoulder Center</h1>
+  <span>— Cervical &amp; Shoulder Conditions</span>
+</header>
+
+<div class="app">
+<nav class="sb">
+  <div class="sh">Cervical Radiculopathy</div>
+  <button class="nb c5" onclick="sw('c5r',this)"><span class="dot" style="background:var(--c5)"></span>C5 Radiculopathy</button>
+  <button class="nb on"  onclick="sw('c6r',this)"><span class="dot" style="background:var(--c6)"></span>C6 Radiculopathy</button>
+  <button class="nb c7"  onclick="sw('c7r',this)"><span class="dot" style="background:var(--c7)"></span>C7 Radiculopathy</button>
+  <button class="nb c8"  onclick="sw('c8r',this)"><span class="dot" style="background:var(--c8)"></span>C8 Radiculopathy</button>
+  <div class="sh">Shoulder</div>
+  <button class="nb te"  onclick="sw('rct',this)"><span class="dot" style="background:var(--tendon)"></span>Rotator Cuff Tear</button>
+  <button class="nb"     onclick="sw('imp',this)"><span class="dot" style="background:#ff6b42"></span>Impingement</button>
+  <button class="nb la"  onclick="sw('slap',this)"><span class="dot" style="background:var(--labrum)"></span>SLAP Tear</button>
+  <button class="nb la"  onclick="sw('bank',this)"><span class="dot" style="background:var(--labrum)"></span>Bankart Lesion</button>
+  <button class="nb"     onclick="sw('acj',this)"><span class="dot" style="background:#ff6b42"></span>AC Joint Sep.</button>
+  <button class="nb bu"  onclick="sw('cryo',this)"><span class="dot" style="background:var(--bursa)"></span>Frozen Shoulder</button>
+</nav>
+
+<main class="viewer">
+
+<!-- ============================================================
+     SHARED DEFS (referenced by all spine SVGs)
+     ============================================================ -->
+
+<!-- ── C5 RADICULOPATHY ── -->
+<div class="cond" id="c5r">
+<div class="sa">
+<svg viewBox="0 0 520 500" xmlns="http://www.w3.org/2000/svg" style="max-height:540px">
+<defs>
+  <filter id="gL" x="-60%" y="-60%" width="220%" height="220%"><feGaussianBlur stdDeviation="7" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+  <filter id="gS" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="3" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+</defs>
+<!-- spine column labels -->
+<text x="100" y="34" font-size="9" fill="#1a4060" text-anchor="middle" letter-spacing=".1em" style="animation:fadeIn .5s .2s both">CERVICAL SPINE</text>
+<text x="385" y="34" font-size="9" fill="#1a4060" text-anchor="middle" letter-spacing=".1em" style="animation:fadeIn .5s .2s both">DERMATOMAL ZONE</text>
+<line x1="250" y1="44" x2="250" y2="470" stroke="#081828" stroke-width="1" style="animation:fadeIn .3s .3s both"/>
+<!-- vertebral bodies -->
+<rect x="22" y="52" width="150" height="34" rx="5" fill="#0d2035" stroke="#2a5a7a" stroke-width="1.5" style="animation:fadeIn .5s .3s both"/>
+<rect x="26" y="86" width="142" height="8"  rx="3" fill="#1a0f35" stroke="#3a2a5a" stroke-width="1"   style="animation:fadeIn .4s .35s both"/>
+<rect x="20" y="94" width="154" height="36" rx="5" fill="#0d2035" stroke="#2a5a7a" stroke-width="1.5" style="animation:fadeIn .5s .4s both"/>
+<!-- C4-C5 disc — AFFECTED for C5 root -->
+<rect x="24" y="130" width="146" height="9"  rx="3" fill="#2a0a40" stroke="#7a3a9a" stroke-width="1.5" style="animation:fadeIn .4s .45s both"/>
+<!-- disc bulge right side -->
+<ellipse cx="175" cy="135" rx="13" ry="7" fill="#4a1060" opacity="0" style="animation:fadeIn .8s 1.6s both;filter:drop-shadow(0 0 8px #9b3af0)"/>
+<rect x="20" y="139" width="156" height="38" rx="5" fill="#0d2035" stroke="#2a5a7a" stroke-width="1.5" style="animation:fadeIn .5s .5s both"/>
+<rect x="24" y="177" width="148" height="9"  rx="3" fill="#1a0f35" stroke="#3a2a5a" stroke-width="1"   style="animation:fadeIn .4s .55s both"/>
+<rect x="18" y="186" width="158" height="38" rx="5" fill="#0d2035" stroke="#2a5a7a" stroke-width="1.5" style="animation:fadeIn .5s .6s both"/>
+<rect x="22" y="224" width="150" height="9"  rx="3" fill="#1a0f35" stroke="#3a2a5a" stroke-width="1"   style="animation:fadeIn .4s .65s both"/>
+<rect x="18" y="233" width="160" height="40" rx="5" fill="#0d2035" stroke="#2a5a7a" stroke-width="1.5" style="animation:fadeIn .5s .7s both"/>
+<rect x="22" y="273" width="152" height="10" rx="3" fill="#1a0f35" stroke="#3a2a5a" stroke-width="1"   style="animation:fadeIn .4s .75s both"/>
+<rect x="16" y="283" width="164" height="44" rx="5" fill="#0d2035" stroke="#2a5a7a" stroke-width="1.5" style="animation:fadeIn .5s .8s both"/>
+<!-- spinal canal -->
+<rect x="174" y="56" width="26" height="269" rx="3" fill="#020c1a" stroke="#0f2a40" stroke-width="1" style="animation:fadeIn .4s .9s both"/>
+<rect x="179" y="60" width="14" height="261" rx="5" fill="#021018" stroke="#0a3050" stroke-width="1" opacity="0" style="animation:fadeIn .5s 1s both"/>
+<!-- level labels -->
+<text x="10" y="74"  font-size="9" fill="#2a5a7a" style="animation:fadeIn .3s .3s both">C3</text>
+<text x="10" y="117" font-size="9" fill="#2a5a7a" style="animation:fadeIn .3s .4s both">C4</text>
+<text x="8"  y="163" font-size="9.5" fill="#ffdd00" font-weight="bold" style="animation:fadeIn .3s .5s both">C5</text>
+<text x="8"  y="209" font-size="9" fill="#2a5a7a" style="animation:fadeIn .3s .6s both">C6</text>
+<text x="8"  y="257" font-size="9" fill="#2a5a7a" style="animation:fadeIn .3s .7s both">C7</text>
+<text x="8"  y="307" font-size="9" fill="#2a5a7a" style="animation:fadeIn .3s .8s both">T1</text>
+<!-- dim roots -->
+<path d="M174,100 Q200,97 218,88"  stroke="#1e4060" stroke-width="2" fill="none" stroke-linecap="round" stroke-dasharray="1000" stroke-dashoffset="1000" style="animation:drawIn .5s 1.1s both"/>
+<path d="M174,186 Q200,183 220,172" stroke="#1e4060" stroke-width="2" fill="none" stroke-linecap="round" stroke-dasharray="1000" stroke-dashoffset="1000" style="animation:drawIn .5s 1.3s both"/>
+<path d="M174,230 Q200,227 222,216" stroke="#1e4060" stroke-width="2" fill="none" stroke-linecap="round" stroke-dasharray="1000" stroke-dashoffset="1000" style="animation:drawIn .5s 1.4s both"/>
+<path d="M174,278 Q200,275 222,264" stroke="#1e4060" stroke-width="2" fill="none" stroke-linecap="round" stroke-dasharray="1000" stroke-dashoffset="1000" style="animation:drawIn .5s 1.5s both"/>
+<!-- C5 ROOT — affected (exits C4-C5) -->
+<path id="c5root" d="M174,135 Q205,132 232,122 Q248,116 262,108" stroke="#ffdd00" stroke-width="3.5" fill="none" stroke-linecap="round" filter="url(#gL)" stroke-dasharray="1000" stroke-dashoffset="1000" style="animation:drawIn 1.2s 2s both"/>
+<path d="M174,135 Q205,132 232,122 Q248,116 262,108" stroke="#ffdd00" stroke-width="8" fill="none" stroke-linecap="round" opacity="0" style="animation:gPulse 2.8s 3s infinite;filter:blur(5px)"/>
+<!-- compression glow -->
+<circle cx="178" cy="133" r="15" fill="#ff4a2a" opacity="0" style="animation:inflame 2.5s 2.5s infinite;filter:blur(5px)"/>
+<text x="192" y="122" font-size="8.5" fill="#ff6b42" opacity="0" style="animation:fadeIn .4s 2.8s both">C4–C5</text>
+<!-- signal pulse -->
+<circle r="4" fill="#ffdd00" filter="url(#gS)">
+  <animateMotion dur="2.2s" begin="3.2s" repeatCount="indefinite" path="M174,135 Q205,132 232,122 Q248,116 262,108"/>
+  <animate attributeName="opacity" values="0;1;1;0" keyTimes="0;.1;.85;1" dur="2.2s" begin="3.2s" repeatCount="indefinite"/>
+</circle>
+<!-- ARM — right side -->
+<ellipse cx="370" cy="95" rx="46" ry="28" fill="#0a1e30" stroke="#1e4060" stroke-width="1.5" style="animation:fadeIn .4s 1s both"/>
+<!-- upper arm -->
+<path d="M327,115 Q322,190 324,250 L346,252 Q350,192 355,115Z" fill="#0a1e30" stroke="#1e4060" stroke-width="1.5" style="animation:fadeIn .4s 1.1s both"/>
+<path d="M355,115 Q370,190 376,250 L398,248 Q394,190 380,115Z" fill="#0a1e30" stroke="#1e4060" stroke-width="1.5" style="animation:fadeIn .4s 1.1s both"/>
+<!-- elbow -->
+<ellipse cx="362" cy="258" rx="36" ry="18" fill="#0a1e30" stroke="#1e4060" stroke-width="1.5" style="animation:fadeIn .4s 1.2s both"/>
+<!-- forearm -->
+<path d="M328,268 Q330,350 332,390 L352,390 Q352,350 348,268Z" fill="#0a1e30" stroke="#1e4060" stroke-width="1.5" style="animation:fadeIn .4s 1.3s both"/>
+<path d="M352,268 Q358,350 364,390 L386,388 Q384,350 374,268Z" fill="#0a1e30" stroke="#1e4060" stroke-width="1.5" style="animation:fadeIn .4s 1.3s both"/>
+<rect x="328" y="390" width="62" height="18" rx="4" fill="#0a1e30" stroke="#1e4060" stroke-width="1.5" style="animation:fadeIn .4s 1.4s both"/>
+<rect x="328" y="408" width="62" height="40" rx="4" fill="#0a1e30" stroke="#1e4060" stroke-width="1.5" style="animation:fadeIn .4s 1.5s both"/>
+<rect x="330" y="448" width="10" height="34" rx="4" fill="#0a1e30" stroke="#1e4060" stroke-width="1.5" style="animation:fadeIn .3s 1.6s both"/>
+<rect x="342" y="448" width="10" height="36" rx="4" fill="#0a1e30" stroke="#1e4060" stroke-width="1.5" style="animation:fadeIn .3s 1.62s both"/>
+<rect x="354" y="448" width="10" height="34" rx="4" fill="#0a1e30" stroke="#1e4060" stroke-width="1.5" style="animation:fadeIn .3s 1.64s both"/>
+<rect x="366" y="448" width="9" height="30" rx="4" fill="#0a1e30" stroke="#1e4060" stroke-width="1.5" style="animation:fadeIn .3s 1.66s both"/>
+<ellipse cx="323" cy="432" rx="9" ry="22" fill="#0a1e30" stroke="#1e4060" stroke-width="1.5" style="animation:fadeIn .3s 1.5s both"/>
+<!-- C5 dermatomal zone: lateral shoulder + lateral upper arm -->
+<ellipse cx="390" cy="97" rx="30" ry="20" fill="#ffdd00" opacity="0" style="animation:softGlow 3s 3.5s infinite;filter:blur(6px)"/>
+<path d="M373,118 Q385,190 390,248 L400,246 Q396,190 380,118Z" fill="#ffdd00" opacity="0" style="animation:softGlow 3s 3.6s infinite;filter:blur(5px)"/>
+<text x="410" y="160" font-size="9" fill="#ffdd00" opacity="0" style="animation:fadeIn .4s 3.8s both">C5 zone</text>
+<text x="288" y="258" font-size="8.5" fill="#2a5a7a" opacity="0" style="animation:fadeIn .4s 1.5s both">↓ Biceps</text>
+<text x="288" y="270" font-size="8.5" fill="#2a5a7a" opacity="0" style="animation:fadeIn .4s 1.6s both">  reflex</text>
+</svg>
+</div>
+<div class="inf">
+  <div class="ic">Cervical Radiculopathy</div>
+  <div class="it">C5 Radiculopathy</div>
+  <div class="is">C4–C5 Disc Level</div>
+  <p class="id">C4–C5 disc herniation or foraminal stenosis compresses the C5 root, producing lateral shoulder and upper arm pain with deltoid and biceps weakness.</p>
+  <div class="tags"><span class="tag t5">C5 Root</span><span class="tag tp">ACDF</span><span class="tag tp">Foraminotomy</span></div>
+  <ul class="fl">
+    <li><strong>Pain:</strong> Neck → lateral shoulder → lateral upper arm</li>
+    <li><strong>Weakness:</strong> Deltoid, supraspinatus, biceps</li>
+    <li><strong>Reflex:</strong> ↓ Biceps (C5–C6 shared)</li>
+    <li><strong>Sensory:</strong> Lateral shoulder, lateral upper arm patch</li>
+    <li>Shoulder abduction &lt;90° may be limited</li>
+    <li>MRI: C4–C5 foraminal compression</li>
+  </ul>
+</div>
+</div>
+
+<!-- ── C6 RADICULOPATHY (default) ── -->
+<div class="cond on" id="c6r" style="display:flex">
+<div class="sa">
+<svg viewBox="0 0 520 500" xmlns="http://www.w3.org/2000/svg" style="max-height:540px">
+<defs>
+  <filter id="gL6" x="-60%" y="-60%" width="220%" height="220%"><feGaussianBlur stdDeviation="7" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+  <filter id="gS6" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="3" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+</defs>
+<text x="100" y="34" font-size="9" fill="#1a4060" text-anchor="middle" letter-spacing=".1em" style="animation:fadeIn .5s .2s both">CERVICAL SPINE</text>
+<text x="385" y="34" font-size="9" fill="#1a4060" text-anchor="middle" letter-spacing=".1em" style="animation:fadeIn .5s .2s both">DERMATOMAL ZONE</text>
+<line x1="250" y1="44" x2="250" y2="470" stroke="#081828" stroke-width="1" style="animation:fadeIn .3s .3s both"/>
+<rect x="22" y="52" width="150" height="34" rx="5" fill="#0d2035" stroke="#2a5a7a" stroke-width="1.5" style="animation:fadeIn .5s .3s both"/>
+<rect x="26" y="86" width="142" height="8"  rx="3" fill="#1a0f35" stroke="#3a2a5a" stroke-width="1"   style="animation:fadeIn .4s .35s both"/>
+<rect x="20" y="94" width="154" height="36" rx="5" fill="#0d2035" stroke="#2a5a7a" stroke-width="1.5" style="animation:fadeIn .5s .4s both"/>
+<rect x="24" y="130" width="146" height="9"  rx="3" fill="#1a0f35" stroke="#3a2a5a" stroke-width="1"   style="animation:fadeIn .4s .45s both"/>
+<rect x="20" y="139" width="156" height="38" rx="5" fill="#0d2035" stroke="#2a5a7a" stroke-width="1.5" style="animation:fadeIn .5s .5s both"/>
+<!-- C5-C6 disc — AFFECTED -->
+<rect x="24" y="177" width="148" height="10" rx="3" fill="#2a0a40" stroke="#7a3a9a" stroke-width="1.5" style="animation:fadeIn .4s .55s both"/>
+<ellipse cx="177" cy="182" rx="14" ry="7" fill="#4a1060" opacity="0" style="animation:fadeIn .8s 1.7s both;filter:drop-shadow(0 0 8px #9b3af0)"/>
+<rect x="18" y="187" width="158" height="38" rx="5" fill="#0d2035" stroke="#2a5a7a" stroke-width="1.5" style="animation:fadeIn .5s .6s both"/>
+<rect x="22" y="225" width="150" height="9"  rx="3" fill="#1a0f35" stroke="#3a2a5a" stroke-width="1"   style="animation:fadeIn .4s .65s both"/>
+<rect x="18" y="234" width="160" height="40" rx="5" fill="#0d2035" stroke="#2a5a7a" stroke-width="1.5" style="animation:fadeIn .5s .7s both"/>
+<rect x="22" y="274" width="152" height="10" rx="3" fill="#1a0f35" stroke="#3a2a5a" stroke-width="1"   style="animation:fadeIn .4s .75s both"/>
+<rect x="16" y="284" width="164" height="44" rx="5" fill="#0d2035" stroke="#2a5a7a" stroke-width="1.5" style="animation:fadeIn .5s .8s both"/>
+<rect x="174" y="56" width="26" height="270" rx="3" fill="#020c1a" stroke="#0f2a40" stroke-width="1" style="animation:fadeIn .4s .9s both"/>
+<text x="10" y="74"  font-size="9" fill="#2a5a7a" style="animation:fadeIn .3s .3s both">C3</text>
+<text x="10" y="117" font-size="9" fill="#2a5a7a" style="animation:fadeIn .3s .4s both">C4</text>
+<text x="10" y="163" font-size="9" fill="#2a5a7a" style="animation:fadeIn .3s .5s both">C5</text>
+<text x="8"  y="210" font-size="9.5" fill="#00d4ff" font-weight="bold" style="animation:fadeIn .3s .6s both">C6</text>
+<text x="8"  y="257" font-size="9" fill="#2a5a7a" style="animation:fadeIn .3s .7s both">C7</text>
+<text x="8"  y="308" font-size="9" fill="#2a5a7a" style="animation:fadeIn .3s .8s both">T1</text>
+<path d="M174,98  Q200,95 218,86"  stroke="#1e4060" stroke-width="2" fill="none" stroke-linecap="round" stroke-dasharray="1000" stroke-dashoffset="1000" style="animation:drawIn .5s 1.1s both"/>
+<path d="M174,135 Q200,132 220,122" stroke="#1e4060" stroke-width="2" fill="none" stroke-linecap="round" stroke-dasharray="1000" stroke-dashoffset="1000" style="animation:drawIn .5s 1.2s both"/>
+<path d="M174,230 Q200,227 222,217" stroke="#1e4060" stroke-width="2" fill="none" stroke-linecap="round" stroke-dasharray="1000" stroke-dashoffset="1000" style="animation:drawIn .5s 1.3s both"/>
+<path d="M174,279 Q200,276 222,265" stroke="#1e4060" stroke-width="2" fill="none" stroke-linecap="round" stroke-dasharray="1000" stroke-dashoffset="1000" style="animation:drawIn .5s 1.4s both"/>
+<!-- C6 ROOT -->
+<path id="c6root" d="M174,182 Q206,179 232,169 Q250,162 265,153" stroke="#00d4ff" stroke-width="3.5" fill="none" stroke-linecap="round" filter="url(#gL6)" stroke-dasharray="1000" stroke-dashoffset="1000" style="animation:drawIn 1.2s 2s both"/>
+<path d="M174,182 Q206,179 232,169 Q250,162 265,153" stroke="#00d4ff" stroke-width="8" fill="none" stroke-linecap="round" opacity="0" style="animation:gPulse 2.8s 3s infinite;filter:blur(5px)"/>
+<circle cx="178" cy="180" r="15" fill="#ff4a2a" opacity="0" style="animation:inflame 2.5s 2.5s infinite;filter:blur(5px)"/>
+<text x="192" y="168" font-size="8.5" fill="#ff6b42" opacity="0" style="animation:fadeIn .4s 2.8s both">C5–C6</text>
+<circle r="4" fill="#00d4ff" filter="url(#gS6)">
+  <animateMotion dur="2.2s" begin="3.2s" repeatCount="indefinite" path="M174,182 Q206,179 232,169 Q250,162 265,153"/>
+  <animate attributeName="opacity" values="0;1;1;0" keyTimes="0;.1;.85;1" dur="2.2s" begin="3.2s" repeatCount="indefinite"/>
+</circle>
+<!-- ARM -->
+<ellipse cx="370" cy="95" rx="46" ry="28" fill="#0a1e30" stroke="#1e4060" stroke-width="1.5" style="animation:fadeIn .4s 1s both"/>
+<path d="M327,115 Q322,190 324,250 L346,252 Q350,192 355,115Z" fill="#0a1e30" stroke="#1e4060" stroke-width="1.5" style="animation:fadeIn .4s 1.1s both"/>
+<path d="M355,115 Q370,190 376,250 L398,248 Q394,190 380,115Z" fill="#0a1e30" stroke="#1e4060" stroke-width="1.5" style="animation:fadeIn .4s 1.1s both"/>
+<ellipse cx="362" cy="258" rx="36" ry="18" fill="#0a1e30" stroke="#1e4060" stroke-width="1.5" style="animation:fadeIn .4s 1.2s both"/>
+<path d="M328,268 Q330,350 332,390 L352,390 Q352,350 348,268Z" fill="#0a1e30" stroke="#1e4060" stroke-width="1.5" style="animation:fadeIn .4s 1.3s both"/>
+<path d="M352,268 Q358,350 364,390 L386,388 Q384,350 374,268Z" fill="#0a1e30" stroke="#1e4060" stroke-width="1.5" style="animation:fadeIn .4s 1.3s both"/>
+<rect x="328" y="390" width="62" height="18" rx="4" fill="#0a1e30" stroke="#1e4060" stroke-width="1.5" style="animation:fadeIn .4s 1.4s both"/>
+<rect x="328" y="408" width="62" height="40" rx="4" fill="#0a1e30" stroke="#1e4060" stroke-width="1.5" style="animation:fadeIn .4s 1.5s both"/>
+<rect x="330" y="448" width="10" height="34" rx="4" fill="#0a1e30" stroke="#1e4060" stroke-width="1.5" style="animation:fadeIn .3s 1.6s both"/>
+<rect x="342" y="448" width="10" height="36" rx="4" fill="#0a1e30" stroke="#1e4060" stroke-width="1.5" style="animation:fadeIn .3s 1.62s both"/>
+<rect x="354" y="448" width="10" height="34" rx="4" fill="#0a1e30" stroke="#1e4060" stroke-width="1.5" style="animation:fadeIn .3s 1.64s both"/>
+<rect x="366" y="448" width="9"  height="30" rx="4" fill="#0a1e30" stroke="#1e4060" stroke-width="1.5" style="animation:fadeIn .3s 1.66s both"/>
+<ellipse cx="323" cy="432" rx="9" ry="22" fill="#0a1e30" stroke="#1e4060" stroke-width="1.5" style="animation:fadeIn .3s 1.5s both"/>
+<!-- C6 dermatomal zone: lateral forearm + thumb + index -->
+<path d="M355,272 Q362,352 368,390 L388,388 Q384,350 375,272Z" fill="#00d4ff" opacity="0" style="animation:softGlow 3s 3.5s infinite;filter:blur(5px)"/>
+<ellipse cx="323" cy="432" rx="8" ry="20" fill="#00d4ff" opacity="0" style="animation:softGlow 3s 3.6s infinite;filter:blur(4px)"/>
+<rect x="331" y="449" width="9" height="33" rx="4" fill="#00d4ff" opacity="0" style="animation:softGlow 3s 3.7s infinite;filter:blur(3px)"/>
+<rect x="343" y="449" width="5" height="35" rx="3" fill="#00d4ff" opacity="0" style="animation:softGlow 3s 3.8s infinite;filter:blur(3px)"/>
+<text x="408" y="340" font-size="9" fill="#00d4ff" opacity="0" style="animation:fadeIn .4s 3.8s both">C6 zone</text>
+<text x="288" y="258" font-size="8.5" fill="#2a5a7a" opacity="0" style="animation:fadeIn .3s 1.5s both">↓ Biceps /</text>
+<text x="288" y="270" font-size="8.5" fill="#2a5a7a" opacity="0" style="animation:fadeIn .3s 1.6s both">  Brachio-R</text>
+</svg>
+</div>
+<div class="inf">
+  <div class="ic">Cervical Radiculopathy</div>
+  <div class="it">C6 Radiculopathy</div>
+  <div class="is">C5–C6 Disc Level · Most Common</div>
+  <p class="id">The most common cervical radiculopathy (~25% of cases). C5–C6 disc herniation compresses the C6 root, causing lateral forearm, thumb, and index finger pain and paresthesia.</p>
+  <div class="tags"><span class="tag tn">C6 Root</span><span class="tag tp">ACDF</span><span class="tag tp">Foraminotomy</span></div>
+  <ul class="fl">
+    <li><strong>Pain:</strong> Neck → shoulder → lateral forearm → thumb/index</li>
+    <li><strong>Weakness:</strong> Biceps, brachioradialis, wrist extensors</li>
+    <li><strong>Reflex:</strong> ↓ Biceps, ↓ brachioradialis</li>
+    <li><strong>Sensory:</strong> Lateral forearm, thumb, index, lateral middle</li>
+    <li>Positive Spurling's sign</li>
+    <li>MRI C5–C6 foraminal compression</li>
+  </ul>
+</div>
+</div>
+
+<!-- ── C7 RADICULOPATHY ── -->
+<div class="cond" id="c7r">
+<div class="sa">
+<svg viewBox="0 0 520 500" xmlns="http://www.w3.org/2000/svg" style="max-height:540px">
+<defs>
+  <filter id="gL7" x="-60%" y="-60%" width="220%" height="220%"><feGaussianBlur stdDeviation="7" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+  <filter id="gS7" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="3" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+</defs>
+<text x="100" y="34" font-size="9" fill="#1a4060" text-anchor="middle" letter-spacing=".1em" style="animation:fadeIn .5s .2s both">CERVICAL SPINE</text>
+<text x="385" y="34" font-size="9" fill="#1a4060" text-anchor="middle" letter-spacing=".1em" style="animation:fadeIn .5s .2s both">DERMATOMAL ZONE</text>
+<line x1="250" y1="44" x2="250" y2="470" stroke="#081828" stroke-width="1"/>
+<rect x="22" y="52" width="150" height="34" rx="5" fill="#0d2035" stroke="#2a5a7a" stroke-width="1.5" style="animation:fadeIn .5s .3s both"/>
+<rect x="26" y="86" width="142" height="8"  rx="3" fill="#1a0f35" stroke="#3a2a5a" stroke-width="1"   style="animation:fadeIn .4s .35s both"/>
+<rect x="20" y="94" width="154" height="36" rx="5" fill="#0d2035" stroke="#2a5a7a" stroke-width="1.5" style="animation:fadeIn .5s .4s both"/>
+<rect x="24" y="130" width="146" height="9"  rx="3" fill="#1a0f35" stroke="#3a2a5a" stroke-width="1"   style="animation:fadeIn .4s .45s both"/>
+<rect x="20" y="139" width="156" height="38" rx="5" fill="#0d2035" stroke="#2a5a7a" stroke-width="1.5" style="animation:fadeIn .5s .5s both"/>
+<rect x="24" y="177" width="148" height="9"  rx="3" fill="#1a0f35" stroke="#3a2a5a" stroke-width="1"   style="animation:fadeIn .4s .55s both"/>
+<rect x="18" y="186" width="158" height="38" rx="5" fill="#0d2035" stroke="#2a5a7a" stroke-width="1.5" style="animation:fadeIn .5s .6s both"/>
+<!-- C6-C7 disc — AFFECTED -->
+<rect x="22" y="224" width="150" height="10" rx="3" fill="#2a0a40" stroke="#7a3a9a" stroke-width="1.5" style="animation:fadeIn .4s .65s both"/>
+<ellipse cx="177" cy="229" rx="14" ry="7" fill="#4a1060" opacity="0" style="animation:fadeIn .8s 1.7s both;filter:drop-shadow(0 0 8px #9b3af0)"/>
+<rect x="18" y="234" width="160" height="40" rx="5" fill="#0d2035" stroke="#2a5a7a" stroke-width="1.5" style="animation:fadeIn .5s .7s both"/>
+<rect x="22" y="274" width="152" height="10" rx="3" fill="#1a0f35" stroke="#3a2a5a" stroke-width="1"   style="animation:fadeIn .4s .75s both"/>
+<rect x="16" y="284" width="164" height="44" rx="5" fill="#0d2035" stroke="#2a5a7a" stroke-width="1.5" style="animation:fadeIn .5s .8s both"/>
+<rect x="174" y="56" width="26" height="270" rx="3" fill="#020c1a" stroke="#0f2a40" stroke-width="1" style="animation:fadeIn .4s .9s both"/>
+<text x="10" y="74"  font-size="9" fill="#2a5a7a" style="animation:fadeIn .3s .3s both">C3</text>
+<text x="10" y="117" font-size="9" fill="#2a5a7a" style="animation:fadeIn .3s .4s both">C4</text>
+<text x="10" y="163" font-size="9" fill="#2a5a7a" style="animation:fadeIn .3s .5s both">C5</text>
+<text x="10" y="210" font-size="9" fill="#2a5a7a" style="animation:fadeIn .3s .6s both">C6</text>
+<text x="8"  y="257" font-size="9.5" fill="#00ffcc" font-weight="bold" style="animation:fadeIn .3s .7s both">C7</text>
+<text x="8"  y="308" font-size="9" fill="#2a5a7a" style="animation:fadeIn .3s .8s both">T1</text>
+<path d="M174,98  Q200,95 218,86"  stroke="#1e4060" stroke-width="2" fill="none" stroke-linecap="round" stroke-dasharray="1000" stroke-dashoffset="1000" style="animation:drawIn .5s 1.1s both"/>
+<path d="M174,135 Q200,132 220,122" stroke="#1e4060" stroke-width="2" fill="none" stroke-linecap="round" stroke-dasharray="1000" stroke-dashoffset="1000" style="animation:drawIn .5s 1.2s both"/>
+<path d="M174,182 Q200,179 222,169" stroke="#1e4060" stroke-width="2" fill="none" stroke-linecap="round" stroke-dasharray="1000" stroke-dashoffset="1000" style="animation:drawIn .5s 1.3s both"/>
+<path d="M174,279 Q200,276 222,265" stroke="#1e4060" stroke-width="2" fill="none" stroke-linecap="round" stroke-dasharray="1000" stroke-dashoffset="1000" style="animation:drawIn .5s 1.4s both"/>
+<!-- C7 ROOT -->
+<path id="c7root" d="M174,229 Q208,226 234,215 Q252,207 268,197" stroke="#00ffcc" stroke-width="3.5" fill="none" stroke-linecap="round" filter="url(#gL7)" stroke-dasharray="1000" stroke-dashoffset="1000" style="animation:drawIn 1.2s 2s both"/>
+<path d="M174,229 Q208,226 234,215 Q252,207 268,197" stroke="#00ffcc" stroke-width="8" fill="none" stroke-linecap="round" opacity="0" style="animation:gPulse 2.8s 3s infinite;filter:blur(5px)"/>
+<circle cx="178" cy="227" r="15" fill="#ff4a2a" opacity="0" style="animation:inflame 2.5s 2.5s infinite;filter:blur(5px)"/>
+<text x="192" y="216" font-size="8.5" fill="#ff6b42" opacity="0" style="animation:fadeIn .4s 2.8s both">C6–C7</text>
+<circle r="4" fill="#00ffcc" filter="url(#gS7)">
+  <animateMotion dur="2.2s" begin="3.2s" repeatCount="indefinite" path="M174,229 Q208,226 234,215 Q252,207 268,197"/>
+  <animate attributeName="opacity" values="0;1;1;0" keyTimes="0;.1;.85;1" dur="2.2s" begin="3.2s" repeatCount="indefinite"/>
+</circle>
+<!-- ARM -->
+<ellipse cx="370" cy="95" rx="46" ry="28" fill="#0a1e30" stroke="#1e4060" stroke-width="1.5" style="animation:fadeIn .4s 1s both"/>
+<path d="M327,115 Q322,190 324,250 L346,252 Q350,192 355,115Z" fill="#0a1e30" stroke="#1e4060" stroke-width="1.5" style="animation:fadeIn .4s 1.1s both"/>
+<path d="M355,115 Q370,190 376,250 L398,248 Q394,190 380,115Z" fill="#0a1e30" stroke="#1e4060" stroke-width="1.5" style="animation:fadeIn .4s 1.1s both"/>
+<ellipse cx="362" cy="258" rx="36" ry="18" fill="#0a1e30" stroke="#1e4060" stroke-width="1.5" style="animation:fadeIn .4s 1.2s both"/>
+<path d="M328,268 Q330,350 332,390 L352,390 Q352,350 348,268Z" fill="#0a1e30" stroke="#1e4060" stroke-width="1.5" style="animation:fadeIn .4s 1.3s both"/>
+<path d="M352,268 Q358,350 364,390 L386,388 Q384,350 374,268Z" fill="#0a1e30" stroke="#1e4060" stroke-width="1.5" style="animation:fadeIn .4s 1.3s both"/>
+<rect x="328" y="390" width="62" height="18" rx="4" fill="#0a1e30" stroke="#1e4060" stroke-width="1.5" style="animation:fadeIn .4s 1.4s both"/>
+<rect x="328" y="408" width="62" height="40" rx="4" fill="#0a1e30" stroke="#1e4060" stroke-width="1.5" style="animation:fadeIn .4s 1.5s both"/>
+<rect x="330" y="448" width="10" height="34" rx="4" fill="#0a1e30" stroke="#1e4060" stroke-width="1.5" style="animation:fadeIn .3s 1.6s both"/>
+<rect x="342" y="448" width="10" height="36" rx="4" fill="#0a1e30" stroke="#1e4060" stroke-width="1.5" style="animation:fadeIn .3s 1.62s both"/>
+<rect x="354" y="448" width="10" height="34" rx="4" fill="#0a1e30" stroke="#1e4060" stroke-width="1.5" style="animation:fadeIn .3s 1.64s both"/>
+<rect x="366" y="448" width="9"  height="30" rx="4" fill="#0a1e30" stroke="#1e4060" stroke-width="1.5" style="animation:fadeIn .3s 1.66s both"/>
+<ellipse cx="323" cy="432" rx="9" ry="22" fill="#0a1e30" stroke="#1e4060" stroke-width="1.5" style="animation:fadeIn .3s 1.5s both"/>
+<!-- C7 zone: posterior arm + middle finger -->
+<path d="M337,120 Q332,192 334,252 L350,250 Q350,190 352,120Z" fill="#00ffcc" opacity="0" style="animation:softGlow 3s 3.5s infinite;filter:blur(6px)"/>
+<rect x="343" y="449" width="10" height="36" rx="4" fill="#00ffcc" opacity="0" style="animation:softGlow 3s 3.6s infinite;filter:blur(4px)"/>
+<text x="410" y="195" font-size="9" fill="#00ffcc" opacity="0" style="animation:fadeIn .4s 3.8s both">C7 zone</text>
+<text x="288" y="258" font-size="8.5" fill="#2a5a7a" opacity="0" style="animation:fadeIn .3s 1.5s both">↓ Triceps</text>
+<text x="288" y="270" font-size="8.5" fill="#2a5a7a" opacity="0" style="animation:fadeIn .3s 1.6s both">  reflex</text>
+</svg>
+</div>
+<div class="inf">
+  <div class="ic">Cervical Radiculopathy</div>
+  <div class="it">C7 Radiculopathy</div>
+  <div class="is">C6–C7 Disc Level · 2nd Most Common</div>
+  <p class="id">C6–C7 disc herniation is the second most common cervical radiculopathy. The C7 root is compressed, producing posterior arm/forearm pain and middle finger paresthesia.</p>
+  <div class="tags"><span class="tag t7">C7 Root</span><span class="tag tp">ACDF</span><span class="tag tp">Foraminotomy</span></div>
+  <ul class="fl">
+    <li><strong>Pain:</strong> Neck → posterior shoulder → posterior forearm → middle finger</li>
+    <li><strong>Weakness:</strong> Triceps, wrist flexors, finger extensors</li>
+    <li><strong>Reflex:</strong> ↓ Triceps (most specific C7 reflex)</li>
+    <li><strong>Sensory:</strong> Posterior arm, middle finger</li>
+    <li>Triceps press-down weakness on exam</li>
+    <li>Often presents as deep aching arm pain</li>
+  </ul>
+</div>
+</div>
+
+<!-- ── C8 RADICULOPATHY ── -->
+<div class="cond" id="c8r">
+<div class="sa">
+<svg viewBox="0 0 520 500" xmlns="http://www.w3.org/2000/svg" style="max-height:540px">
+<defs>
+  <filter id="gL8" x="-60%" y="-60%" width="220%" height="220%"><feGaussianBlur stdDeviation="7" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+  <filter id="gS8" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="3" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+</defs>
+<text x="100" y="34" font-size="9" fill="#1a4060" text-anchor="middle" letter-spacing=".1em" style="animation:fadeIn .5s .2s both">CERVICAL SPINE</text>
+<text x="385" y="34" font-size="9" fill="#1a4060" text-anchor="middle" letter-spacing=".1em" style="animation:fadeIn .5s .2s both">DERMATOMAL ZONE</text>
+<line x1="250" y1="44" x2="250" y2="470" stroke="#081828" stroke-width="1"/>
+<rect x="22" y="52" width="150" height="34" rx="5" fill="#0d2035" stroke="#2a5a7a" stroke-width="1.5" style="animation:fadeIn .5s .3s both"/>
+<rect x="26" y="86" width="142" height="8"  rx="3" fill="#1a0f35" stroke="#3a2a5a" stroke-width="1"   style="animation:fadeIn .4s .35s both"/>
+<rect x="20" y="94" width="154" height="36" rx="5" fill="#0d2035" stroke="#2a5a7a" stroke-width="1.5" style="animation:fadeIn .5s .4s both"/>
+<rect x="24" y="130" width="146" height="9"  rx="3" fill="#1a0f35" stroke="#3a2a5a" stroke-width="1"   style="animation:fadeIn .4s .45s both"/>
+<rect x="20" y="139" width="156" height="38" rx="5" fill="#0d2035" stroke="#2a5a7a" stroke-width="1.5" style="animation:fadeIn .5s .5s both"/>
+<rect x="24" y="177" width="148" height="9"  rx="3" fill="#1a0f35" stroke="#3a2a5a" stroke-width="1"   style="animation:fadeIn .4s .55s both"/>
+<rect x="18" y="186" width="158" height="38" rx="5" fill="#0d2035" stroke="#2a5a7a" stroke-width="1.5" style="animation:fadeIn .5s .6s both"/>
+<rect x="22" y="224" width="150" height="9"  rx="3" fill="#1a0f35" stroke="#3a2a5a" stroke-width="1"   style="animation:fadeIn .4s .65s both"/>
+<rect x="18" y="233" width="160" height="40" rx="5" fill="#0d2035" stroke="#2a5a7a" stroke-width="1.5" style="animation:fadeIn .5s .7s both"/>
+<!-- C7-T1 disc — AFFECTED -->
+<rect x="22" y="273" width="152" height="11" rx="3" fill="#2a0a40" stroke="#7a3a9a" stroke-width="1.5" style="animation:fadeIn .4s .75s both"/>
+<ellipse cx="179" cy="279" rx="14" ry="7" fill="#4a1060" opacity="0" style="animation:fadeIn .8s 1.7s both;filter:drop-shadow(0 0 8px #9b3af0)"/>
+<rect x="16" y="284" width="164" height="44" rx="5" fill="#0d2035" stroke="#2a5a7a" stroke-width="1.5" style="animation:fadeIn .5s .8s both"/>
+<rect x="174" y="56" width="26" height="270" rx="3" fill="#020c1a" stroke="#0f2a40" stroke-width="1" style="animation:fadeIn .4s .9s both"/>
+<text x="10" y="74"  font-size="9" fill="#2a5a7a" style="animation:fadeIn .3s .3s both">C3</text>
+<text x="10" y="117" font-size="9" fill="#2a5a7a" style="animation:fadeIn .3s .4s both">C4</text>
+<text x="10" y="163" font-size="9" fill="#2a5a7a" style="animation:fadeIn .3s .5s both">C5</text>
+<text x="10" y="210" font-size="9" fill="#2a5a7a" style="animation:fadeIn .3s .6s both">C6</text>
+<text x="10" y="257" font-size="9" fill="#2a5a7a" style="animation:fadeIn .3s .7s both">C7</text>
+<text x="8"  y="308" font-size="9.5" fill="#a78bfa" font-weight="bold" style="animation:fadeIn .3s .8s both">C8</text>
+<path d="M174,98  Q200,95 218,86"  stroke="#1e4060" stroke-width="2" fill="none" stroke-linecap="round" stroke-dasharray="1000" stroke-dashoffset="1000" style="animation:drawIn .5s 1.1s both"/>
+<path d="M174,135 Q200,132 220,122" stroke="#1e4060" stroke-width="2" fill="none" stroke-linecap="round" stroke-dasharray="1000" stroke-dashoffset="1000" style="animation:drawIn .5s 1.2s both"/>
+<path d="M174,182 Q200,179 222,169" stroke="#1e4060" stroke-width="2" fill="none" stroke-linecap="round" stroke-dasharray="1000" stroke-dashoffset="1000" style="animation:drawIn .5s 1.3s both"/>
+<path d="M174,230 Q200,227 222,217" stroke="#1e4060" stroke-width="2" fill="none" stroke-linecap="round" stroke-dasharray="1000" stroke-dashoffset="1000" style="animation:drawIn .5s 1.4s both"/>
+<!-- C8 ROOT -->
+<path id="c8root" d="M174,279 Q208,275 235,264 Q254,256 270,245" stroke="#a78bfa" stroke-width="3.5" fill="none" stroke-linecap="round" filter="url(#gL8)" stroke-dasharray="1000" stroke-dashoffset="1000" style="animation:drawIn 1.2s 2s both"/>
+<path d="M174,279 Q208,275 235,264 Q254,256 270,245" stroke="#a78bfa" stroke-width="8" fill="none" stroke-linecap="round" opacity="0" style="animation:gPulse 2.8s 3s infinite;filter:blur(5px)"/>
+<circle cx="178" cy="277" r="15" fill="#ff4a2a" opacity="0" style="animation:inflame 2.5s 2.5s infinite;filter:blur(5px)"/>
+<text x="192" y="265" font-size="8.5" fill="#ff6b42" opacity="0" style="animation:fadeIn .4s 2.8s both">C7–T1</text>
+<circle r="4" fill="#a78bfa" filter="url(#gS8)">
+  <animateMotion dur="2.2s" begin="3.2s" repeatCount="indefinite" path="M174,279 Q208,275 235,264 Q254,256 270,245"/>
+  <animate attributeName="opacity" values="0;1;1;0" keyTimes="0;.1;.85;1" dur="2.2s" begin="3.2s" repeatCount="indefinite"/>
+</circle>
+<!-- ARM -->
+<ellipse cx="370" cy="95" rx="46" ry="28" fill="#0a1e30" stroke="#1e4060" stroke-width="1.5" style="animation:fadeIn .4s 1s both"/>
+<path d="M327,115 Q322,190 324,250 L346,252 Q350,192 355,115Z" fill="#0a1e30" stroke="#1e4060" stroke-width="1.5" style="animation:fadeIn .4s 1.1s both"/>
+<path d="M355,115 Q370,190 376,250 L398,248 Q394,190 380,115Z" fill="#0a1e30" stroke="#1e4060" stroke-width="1.5" style="animation:fadeIn .4s 1.1s both"/>
+<ellipse cx="362" cy="258" rx="36" ry="18" fill="#0a1e30" stroke="#1e4060" stroke-width="1.5" style="animation:fadeIn .4s 1.2s both"/>
+<path d="M328,268 Q330,350 332,390 L352,390 Q352,350 348,268Z" fill="#0a1e30" stroke="#1e4060" stroke-width="1.5" style="animation:fadeIn .4s 1.3s both"/>
+<path d="M352,268 Q358,350 364,390 L386,388 Q384,350 374,268Z" fill="#0a1e30" stroke="#1e4060" stroke-width="1.5" style="animation:fadeIn .4s 1.3s both"/>
+<rect x="328" y="390" width="62" height="18" rx="4" fill="#0a1e30" stroke="#1e4060" stroke-width="1.5" style="animation:fadeIn .4s 1.4s both"/>
+<rect x="328" y="408" width="62" height="40" rx="4" fill="#0a1e30" stroke="#1e4060" stroke-width="1.5" style="animation:fadeIn .4s 1.5s both"/>
+<rect x="330" y="448" width="10" height="34" rx="4" fill="#0a1e30" stroke="#1e4060" stroke-width="1.5" style="animation:fadeIn .3s 1.6s both"/>
+<rect x="342" y="448" width="10" height="36" rx="4" fill="#0a1e30" stroke="#1e4060" stroke-width="1.5" style="animation:fadeIn .3s 1.62s both"/>
+<rect x="354" y="448" width="10" height="34" rx="4" fill="#0a1e30" stroke="#1e4060" stroke-width="1.5" style="animation:fadeIn .3s 1.64s both"/>
+<rect x="366" y="448" width="9"  height="30" rx="4" fill="#0a1e30" stroke="#1e4060" stroke-width="1.5" style="animation:fadeIn .3s 1.66s both"/>
+<ellipse cx="323" cy="432" rx="9" ry="22" fill="#0a1e30" stroke="#1e4060" stroke-width="1.5" style="animation:fadeIn .3s 1.5s both"/>
+<!-- C8 zone: medial forearm + ring + small -->
+<path d="M330,272 Q330,352 332,390 L350,390 Q350,352 346,272Z" fill="#a78bfa" opacity="0" style="animation:softGlow 3s 3.5s infinite;filter:blur(6px)"/>
+<rect x="355" y="449" width="9"  height="34" rx="4" fill="#a78bfa" opacity="0" style="animation:softGlow 3s 3.6s infinite;filter:blur(3px)"/>
+<rect x="367" y="449" width="8"  height="30" rx="4" fill="#a78bfa" opacity="0" style="animation:softGlow 3s 3.7s infinite;filter:blur(3px)"/>
+<text x="408" y="340" font-size="9" fill="#a78bfa" opacity="0" style="animation:fadeIn .4s 3.8s both">C8 zone</text>
+<text x="288" y="258" font-size="8.5" fill="#2a5a7a" opacity="0" style="animation:fadeIn .3s 1.5s both">↓ Finger</text>
+<text x="288" y="270" font-size="8.5" fill="#2a5a7a" opacity="0" style="animation:fadeIn .3s 1.6s both">  flexors</text>
+</svg>
+</div>
+<div class="inf">
+  <div class="ic">Cervical Radiculopathy</div>
+  <div class="it">C8 Radiculopathy</div>
+  <div class="is">C7–T1 Disc Level</div>
+  <p class="id">C7–T1 disc herniation or foraminal stenosis compresses the C8 root. Produces medial forearm and ring/small finger paresthesia with intrinsic hand muscle weakness.</p>
+  <div class="tags"><span class="tag t8">C8 Root</span><span class="tag tp">ACDF</span><span class="tag tp">Foraminotomy</span></div>
+  <ul class="fl">
+    <li><strong>Pain:</strong> Neck → medial arm → medial forearm → ring/small fingers</li>
+    <li><strong>Weakness:</strong> FDP (ring/small), intrinsic hand muscles</li>
+    <li><strong>Reflex:</strong> ↓ Finger flexors (Hoffman's)</li>
+    <li><strong>Sensory:</strong> Medial forearm, ring, small finger</li>
+    <li>Grip strength decreased; fine motor impaired</li>
+    <li>Differentiate from ulnar neuropathy at elbow</li>
+  </ul>
+</div>
+</div>
+
+<!-- ── ROTATOR CUFF TEAR ── -->
+<div class="cond" id="rct">
+<div class="sa">
+<svg viewBox="0 0 520 490" xmlns="http://www.w3.org/2000/svg" style="max-height:530px">
+<defs>
+  <filter id="gLr" x="-60%" y="-60%" width="220%" height="220%"><feGaussianBlur stdDeviation="7" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+  <filter id="gSr" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="3" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+</defs>
+<text x="260" y="30" font-size="9" fill="#1a4060" text-anchor="middle" letter-spacing=".1em" style="animation:fadeIn .5s .2s both">RIGHT SHOULDER — CORONAL VIEW</text>
+<!-- Clavicle -->
+<path d="M30,148 Q110,140 188,150" stroke="#2a5a7a" stroke-width="10" fill="none" stroke-linecap="round" style="animation:fadeIn .5s .4s both"/>
+<path d="M30,148 Q110,140 188,150" stroke="#0d2035" stroke-width="7" fill="none" stroke-linecap="round" style="animation:fadeIn .5s .4s both"/>
+<text x="30" y="136" font-size="9" fill="#2a5a7a" style="animation:fadeIn .3s .5s both">Clavicle</text>
+<!-- Acromion -->
+<path d="M188,150 Q210,152 242,164" stroke="#2a5a7a" stroke-width="12" fill="none" stroke-linecap="round" style="animation:fadeIn .5s .5s both"/>
+<path d="M188,150 Q210,152 242,164" stroke="#0d2035" stroke-width="9" fill="none" stroke-linecap="round" style="animation:fadeIn .5s .5s both"/>
+<text x="196" y="142" font-size="9" fill="#2a5a7a" style="animation:fadeIn .3s .6s both">Acromion</text>
+<!-- Scapular glenoid fossa -->
+<ellipse cx="188" cy="295" rx="24" ry="72" fill="#0d2035" stroke="#2a5a7a" stroke-width="2" style="animation:fadeIn .5s .6s both"/>
+<text x="145" y="298" font-size="9" fill="#2a5a7a" text-anchor="end" style="animation:fadeIn .3s .7s both">Glenoid</text>
+<!-- Labrum outline -->
+<path d="M174,226 Q160,248 160,296 Q160,342 174,364" stroke="#9b6bb5" stroke-width="3" fill="none" stroke-linecap="round" stroke-dasharray="1000" stroke-dashoffset="1000" style="animation:drawIn .8s 1.4s both;filter:drop-shadow(0 0 4px #9b6bb5)"/>
+<!-- Humeral head -->
+<circle cx="320" cy="290" r="84" fill="#0d2035" stroke="#2a5a7a" stroke-width="2" style="animation:fadeIn .5s .7s both"/>
+<!-- Humeral shaft -->
+<path d="M274,356 Q270,430 268,470" stroke="#2a5a7a" stroke-width="14" fill="none" stroke-linecap="round" style="animation:fadeIn .4s .8s both"/>
+<path d="M274,356 Q270,430 268,470" stroke="#0d2035" stroke-width="10" fill="none" stroke-linecap="round" style="animation:fadeIn .4s .8s both"/>
+<path d="M368,362 Q374,436 376,470" stroke="#2a5a7a" stroke-width="14" fill="none" stroke-linecap="round" style="animation:fadeIn .4s .8s both"/>
+<path d="M368,362 Q374,436 376,470" stroke="#0d2035" stroke-width="10" fill="none" stroke-linecap="round" style="animation:fadeIn .4s .8s both"/>
+<!-- Subacromial bursa -->
+<path d="M244,182 Q290,176 340,184 Q370,188 385,200" stroke="#4fc3f7" stroke-width="4" fill="none" stroke-linecap="round" opacity="0" style="animation:fadeIn .6s 1.6s both;filter:drop-shadow(0 0 5px #4fc3f7)"/>
+<text x="388" y="198" font-size="8.5" fill="#4fc3f7" opacity="0" style="animation:fadeIn .3s 1.8s both">Bursa</text>
+<!-- SUPRASPINATUS TENDON (intact left half, torn right) -->
+<!-- Intact portion (medial) -->
+<path d="M210,210 Q258,198 295,206" stroke="#d4a843" stroke-width="5" fill="none" stroke-linecap="round" stroke-dasharray="1000" stroke-dashoffset="1000" style="animation:drawIn 1s 1s both;filter:drop-shadow(0 0 4px #d4a843)"/>
+<!-- Tear gap highlight -->
+<line x1="296" y1="204" x2="296" y2="222" stroke="#ff4a2a" stroke-width="2" stroke-dasharray="3 2" opacity="0" style="animation:fadeIn .4s 2.8s both"/>
+<!-- Torn / retracted distal stump -->
+<path d="M320,215 Q348,220 368,228" stroke="#d4a843" stroke-width="4" fill="none" stroke-linecap="round" stroke-dasharray="1000" stroke-dashoffset="1000" opacity="0.6" style="animation:drawIn .8s 2s both"/>
+<!-- Tear gap glow -->
+<ellipse cx="308" cy="214" rx="18" ry="10" fill="#ff4a2a" opacity="0" style="animation:inflame 2.5s 2.8s infinite;filter:blur(6px)"/>
+<text x="300" y="194" font-size="9" fill="#ff6b42" opacity="0" style="animation:fadeIn .4s 3s both">Full-thickness tear</text>
+<!-- Tendon labels -->
+<text x="205" y="200" font-size="8.5" fill="#d4a843" opacity="0" style="animation:fadeIn .3s 1.2s both">Supraspinatus</text>
+<!-- Subscapularis (anterior) -->
+<path d="M210,280 Q212,296 214,314" stroke="#d4a843" stroke-width="4" fill="none" stroke-linecap="round" opacity="0.5" stroke-dasharray="1000" stroke-dashoffset="1000" style="animation:drawIn .8s 1.8s both"/>
+<text x="145" y="306" font-size="8.5" fill="#d4a843" opacity="0" text-anchor="end" style="animation:fadeIn .3s 2s both">Subscapularis</text>
+<!-- Biceps tendon in groove -->
+<line x1="330" y1="213" x2="336" y2="356" stroke="#00d4ff" stroke-width="2.5" stroke-linecap="round" stroke-dasharray="1000" stroke-dashoffset="1000" style="animation:drawIn 1s 2.2s both;filter:drop-shadow(0 0 3px #00d4ff)"/>
+<text x="348" y="270" font-size="8.5" fill="#00d4ff" opacity="0" style="animation:fadeIn .3s 2.4s both">Biceps LH</text>
+<!-- GT label -->
+<text x="390" y="240" font-size="8.5" fill="#2a5a7a" opacity="0" style="animation:fadeIn .3s 1s both">Greater</text>
+<text x="390" y="252" font-size="8.5" fill="#2a5a7a" opacity="0" style="animation:fadeIn .3s 1.1s both">Tuberosity</text>
+</svg>
+</div>
+<div class="inf">
+  <div class="ic">Shoulder</div>
+  <div class="it">Rotator Cuff Tear</div>
+  <div class="is">Supraspinatus · Most Common</div>
+  <p class="id">Full-thickness supraspinatus tear at its insertion on the greater tuberosity. The most common rotator cuff injury, often from chronic impingement or acute trauma.</p>
+  <div class="tags"><span class="tag tt">Supraspinatus</span><span class="tag tp">Arthroscopic Repair</span><span class="tag tp">Open Repair</span></div>
+  <ul class="fl">
+    <li><strong>Pain:</strong> Lateral shoulder, worse at night and overhead</li>
+    <li><strong>Weakness:</strong> Shoulder abduction (supraspinatus), external rotation</li>
+    <li>Positive drop-arm test, empty can test</li>
+    <li>MRI: tendon discontinuity, retraction, fatty atrophy</li>
+    <li>Acute tear: often from fall on outstretched hand</li>
+    <li>Massive tear: involves &gt;2 tendons</li>
+  </ul>
+</div>
+</div>
+
+<!-- ── SUBACROMIAL IMPINGEMENT ── -->
+<div class="cond" id="imp">
+<div class="sa">
+<svg viewBox="0 0 520 490" xmlns="http://www.w3.org/2000/svg" style="max-height:530px">
+<defs>
+  <filter id="gLi" x="-60%" y="-60%" width="220%" height="220%"><feGaussianBlur stdDeviation="7" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+</defs>
+<text x="260" y="30" font-size="9" fill="#1a4060" text-anchor="middle" letter-spacing=".1em" style="animation:fadeIn .5s .2s both">RIGHT SHOULDER — CORONAL VIEW · ARM ELEVATED</text>
+<!-- Clavicle -->
+<path d="M30,148 Q110,140 188,150" stroke="#2a5a7a" stroke-width="10" fill="none" stroke-linecap="round" style="animation:fadeIn .5s .4s both"/>
+<path d="M30,148 Q110,140 188,150" stroke="#0d2035" stroke-width="7" fill="none" stroke-linecap="round" style="animation:fadeIn .5s .4s both"/>
+<!-- Acromion -->
+<path d="M188,150 Q210,152 242,164" stroke="#2a5a7a" stroke-width="12" fill="none" stroke-linecap="round" style="animation:fadeIn .5s .5s both"/>
+<path d="M188,150 Q210,152 242,164" stroke="#0d2035" stroke-width="9" fill="none" stroke-linecap="round" style="animation:fadeIn .5s .5s both"/>
+<!-- Subacromial space label + arrows showing narrowing -->
+<text x="270" y="158" font-size="9" fill="#ff6b42" opacity="0" style="animation:fadeIn .4s 2.2s both">↓ Space</text>
+<line x1="252" y1="166" x2="252" y2="196" stroke="#ff4a2a" stroke-width="1.5" stroke-dasharray="3 2" opacity="0" style="animation:fadeIn .4s 2.4s both"/>
+<!-- Glenoid -->
+<ellipse cx="188" cy="295" rx="24" ry="72" fill="#0d2035" stroke="#2a5a7a" stroke-width="2" style="animation:fadeIn .5s .6s both"/>
+<!-- Labrum -->
+<path d="M174,226 Q160,248 160,296 Q160,342 174,364" stroke="#9b6bb5" stroke-width="3" fill="none" stroke-linecap="round" stroke-dasharray="1000" stroke-dashoffset="1000" style="animation:drawIn .8s 1.4s both;filter:drop-shadow(0 0 4px #9b6bb5)"/>
+<!-- Humeral head elevated -->
+<circle cx="318" cy="272" r="84" fill="#0d2035" stroke="#2a5a7a" stroke-width="2" style="animation:fadeIn .5s .7s both"/>
+<!-- Shaft -->
+<path d="M272,338 Q268,420 266,460" stroke="#2a5a7a" stroke-width="14" fill="none" stroke-linecap="round" style="animation:fadeIn .4s .8s both"/>
+<path d="M272,338 Q268,420 266,460" stroke="#0d2035" stroke-width="10" fill="none" stroke-linecap="round" style="animation:fadeIn .4s .8s both"/>
+<!-- Supraspinatus tendon being pinched -->
+<path d="M210,200 Q258,190 296,196 Q310,198 320,200" stroke="#d4a843" stroke-width="5" fill="none" stroke-linecap="round" stroke-dasharray="1000" stroke-dashoffset="1000" style="animation:drawIn 1s 1s both;filter:drop-shadow(0 0 4px #d4a843)"/>
+<!-- Impingement zone (acromion compresses tendon) -->
+<ellipse cx="252" cy="183" rx="22" ry="12" fill="#ff4a2a" opacity="0" style="animation:inflame 2.2s 2s infinite;filter:blur(7px)"/>
+<ellipse cx="252" cy="183" rx="14" ry="8" fill="#ff4a2a" opacity="0" style="animation:inflame 2.2s 2.1s infinite;filter:blur(3px)"/>
+<text x="270" y="178" font-size="9" fill="#ff4a2a" opacity="0" style="animation:fadeIn .4s 2.5s both">Impingement</text>
+<!-- Thickened bursa from chronic inflammation -->
+<path d="M244,174 Q292,168 338,176" stroke="#4fc3f7" stroke-width="7" fill="none" stroke-linecap="round" opacity="0" style="animation:gPulse 3s 2.8s infinite;filter:drop-shadow(0 0 6px #4fc3f7)"/>
+<text x="342" y="172" font-size="8.5" fill="#4fc3f7" opacity="0" style="animation:fadeIn .3s 3s both">Inflamed bursa</text>
+<!-- Labels -->
+<text x="205" y="188" font-size="8.5" fill="#d4a843" opacity="0" style="animation:fadeIn .3s 1.2s both">Supraspinatus</text>
+<text x="145" y="298" font-size="9" fill="#2a5a7a" text-anchor="end" style="animation:fadeIn .3s .7s both">Glenoid</text>
+</svg>
+</div>
+<div class="inf">
+  <div class="ic">Shoulder</div>
+  <div class="it">Subacromial Impingement</div>
+  <div class="is">Neer Stages I–III</div>
+  <p class="id">Mechanical compression of the supraspinatus tendon and subacromial bursa between the humeral head and the undersurface of the acromion, especially with overhead arm elevation.</p>
+  <div class="tags"><span class="tag ti">Impingement</span><span class="tag tp">Subacromial Injection</span><span class="tag tp">Acromioplasty</span></div>
+  <ul class="fl">
+    <li><strong>Pain:</strong> Lateral shoulder, painful arc 60°–120° abduction</li>
+    <li>Positive Neer sign, Hawkins-Kennedy test</li>
+    <li>Stage I: edema/hemorrhage; Stage II: fibrosis; Stage III: tear</li>
+    <li>X-ray: acromial spur, reduced subacromial space (&lt;7mm)</li>
+    <li>Conservative: PT, NSAIDs, subacromial injection</li>
+    <li>Surgical: arthroscopic acromioplasty ± bursectomy</li>
+  </ul>
+</div>
+</div>
+
+<!-- ── SLAP TEAR ── -->
+<div class="cond" id="slap">
+<div class="sa">
+<svg viewBox="0 0 520 490" xmlns="http://www.w3.org/2000/svg" style="max-height:530px">
+<defs>
+  <filter id="gLs" x="-60%" y="-60%" width="220%" height="220%"><feGaussianBlur stdDeviation="7" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+</defs>
+<text x="260" y="30" font-size="9" fill="#1a4060" text-anchor="middle" letter-spacing=".1em" style="animation:fadeIn .5s .2s both">RIGHT SHOULDER — CORONAL VIEW</text>
+<!-- Clavicle + acromion -->
+<path d="M30,148 Q110,140 188,150" stroke="#2a5a7a" stroke-width="10" fill="none" stroke-linecap="round" style="animation:fadeIn .5s .4s both"/>
+<path d="M30,148 Q110,140 188,150" stroke="#0d2035" stroke-width="7" fill="none" stroke-linecap="round" style="animation:fadeIn .5s .4s both"/>
+<path d="M188,150 Q210,152 242,164" stroke="#2a5a7a" stroke-width="12" fill="none" stroke-linecap="round" style="animation:fadeIn .5s .5s both"/>
+<path d="M188,150 Q210,152 242,164" stroke="#0d2035" stroke-width="9" fill="none" stroke-linecap="round" style="animation:fadeIn .5s .5s both"/>
+<!-- Glenoid + labrum -->
+<ellipse cx="188" cy="295" rx="24" ry="72" fill="#0d2035" stroke="#2a5a7a" stroke-width="2" style="animation:fadeIn .5s .6s both"/>
+<!-- Superior labrum (SLAP) intact right -->
+<path d="M174,226 Q164,240 162,260" stroke="#9b6bb5" stroke-width="4" fill="none" stroke-linecap="round" stroke-dasharray="1000" stroke-dashoffset="1000" style="animation:drawIn .8s 1.4s both;filter:drop-shadow(0 0 5px #9b6bb5)"/>
+<!-- Superior labrum TORN (SLAP) -->
+<path d="M175,226 Q188,218 202,220" stroke="#9b6bb5" stroke-width="4" fill="none" stroke-linecap="round" stroke-dasharray="1000" stroke-dashoffset="1000" style="animation:drawIn .8s 1.6s both"/>
+<!-- SLAP tear gap -->
+<ellipse cx="185" cy="223" rx="16" ry="8" fill="#9b6bb5" opacity="0" style="animation:gPulse 2.5s 2.5s infinite;filter:blur(6px)"/>
+<text x="170" y="204" font-size="9" fill="#9b6bb5" opacity="0" style="animation:fadeIn .4s 2.8s both">SLAP tear</text>
+<!-- Biceps anchor at top of glenoid -->
+<path d="M196,218 Q230,195 254,186" stroke="#00d4ff" stroke-width="3" fill="none" stroke-linecap="round" stroke-dasharray="1000" stroke-dashoffset="1000" style="animation:drawIn .8s 2s both;filter:drop-shadow(0 0 4px #00d4ff)"/>
+<path d="M254,186 Q280,192 320,205" stroke="#00d4ff" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-dasharray="1000" stroke-dashoffset="1000" style="animation:drawIn .8s 2.4s both"/>
+<text x="260" y="177" font-size="9" fill="#00d4ff" opacity="0" style="animation:fadeIn .3s 2.6s both">Biceps anchor</text>
+<!-- Tear glow -->
+<ellipse cx="188" cy="222" rx="20" ry="10" fill="#ff4a2a" opacity="0" style="animation:inflame 2.5s 2.6s infinite;filter:blur(6px)"/>
+<!-- Humeral head -->
+<circle cx="320" cy="290" r="84" fill="#0d2035" stroke="#2a5a7a" stroke-width="2" style="animation:fadeIn .5s .7s both"/>
+<path d="M274,356 Q270,430 268,470" stroke="#2a5a7a" stroke-width="14" fill="none" stroke-linecap="round" style="animation:fadeIn .4s .8s both"/>
+<path d="M274,356 Q270,430 268,470" stroke="#0d2035" stroke-width="10" fill="none" stroke-linecap="round" style="animation:fadeIn .4s .8s both"/>
+<!-- Inferior labrum intact -->
+<path d="M162,330 Q162,345 174,364" stroke="#9b6bb5" stroke-width="3" fill="none" stroke-linecap="round" stroke-dasharray="1000" stroke-dashoffset="1000" style="animation:drawIn .6s 1.5s both;filter:drop-shadow(0 0 4px #9b6bb5)"/>
+<text x="145" y="298" font-size="9" fill="#2a5a7a" text-anchor="end" style="animation:fadeIn .3s .7s both">Glenoid</text>
+<text x="145" y="244" font-size="9" fill="#9b6bb5" text-anchor="end" style="animation:fadeIn .3s 1.8s both">Labrum</text>
+</svg>
+</div>
+<div class="inf">
+  <div class="ic">Shoulder</div>
+  <div class="it">SLAP Tear</div>
+  <div class="is">Superior Labrum Anterior to Posterior</div>
+  <p class="id">Tear of the superior glenoid labrum at the biceps anchor. Common in overhead athletes (pitchers, swimmers). The biceps long head anchor detaches from the superior glenoid.</p>
+  <div class="tags"><span class="tag tl">Superior Labrum</span><span class="tag tp">Biceps Tenodesis</span><span class="tag tp">SLAP Repair</span></div>
+  <ul class="fl">
+    <li><strong>Pain:</strong> Deep shoulder, worse with overhead and throwing</li>
+    <li>Positive O'Brien (active compression) test</li>
+    <li>Positive biceps load test in throwers</li>
+    <li>MRI arthrogram: superior labral tear, fluid at anchor</li>
+    <li>Type II most common (anchor detachment)</li>
+    <li>Age &gt;35: often treated with biceps tenodesis</li>
+  </ul>
+</div>
+</div>
+
+<!-- ── BANKART LESION ── -->
+<div class="cond" id="bank">
+<div class="sa">
+<svg viewBox="0 0 520 490" xmlns="http://www.w3.org/2000/svg" style="max-height:530px">
+<text x="260" y="30" font-size="9" fill="#1a4060" text-anchor="middle" letter-spacing=".1em" style="animation:fadeIn .5s .2s both">RIGHT SHOULDER — AXIAL VIEW (LOOKING DOWN)</text>
+<!-- Axial cross-section of shoulder: glenoid center, humeral head right, labrum ring -->
+<!-- Glenoid (center-left oval) -->
+<ellipse cx="195" cy="270" rx="44" ry="54" fill="#0d2035" stroke="#2a5a7a" stroke-width="2" style="animation:fadeIn .5s .5s both"/>
+<ellipse cx="195" cy="270" rx="30" ry="40" fill="#060f20" stroke="#1e4060" stroke-width="1" style="animation:fadeIn .4s .6s both"/>
+<text x="195" y="274" font-size="9" fill="#2a5a7a" text-anchor="middle" style="animation:fadeIn .3s .7s both">Glenoid</text>
+<!-- Intact posterior labrum -->
+<path d="M196,216 Q240,220 238,270 Q238,318 196,324" stroke="#9b6bb5" stroke-width="5" fill="none" stroke-linecap="round" stroke-dasharray="1000" stroke-dashoffset="1000" style="animation:drawIn .8s 1.2s both;filter:drop-shadow(0 0 5px #9b6bb5)"/>
+<!-- ANTERIOR LABRUM — TORN (Bankart) -->
+<path d="M196,216 Q152,218 152,270 Q152,316 196,324" stroke="#9b6bb5" stroke-width="3" fill="none" stroke-linecap="round" stroke-dasharray="8 5" opacity="0.5" style="animation:fadeIn .6s 2s both"/>
+<!-- Bankart fragment -->
+<ellipse cx="145" cy="255" rx="14" ry="10" fill="#9b6bb5" opacity="0" style="animation:gPulse 2.5s 2.5s infinite;filter:blur(5px)"/>
+<ellipse cx="145" cy="255" rx="8" ry="6" fill="#6b3a9a" opacity="0" style="animation:gPulse 2.5s 2.6s infinite"/>
+<text x="104" y="248" font-size="9" fill="#9b6bb5" opacity="0" style="animation:fadeIn .4s 2.8s both">Bankart</text>
+<text x="104" y="260" font-size="9" fill="#9b6bb5" opacity="0" style="animation:fadeIn .4s 2.9s both">fragment</text>
+<!-- Tear glow at anterior labrum -->
+<ellipse cx="152" cy="270" rx="16" ry="22" fill="#ff4a2a" opacity="0" style="animation:inflame 2.5s 2.5s infinite;filter:blur(8px)"/>
+<!-- Humeral head (right) translating anteriorly -->
+<circle cx="355" cy="270" r="86" fill="#0d2035" stroke="#2a5a7a" stroke-width="2" style="animation:fadeIn .5s .7s both"/>
+<text x="355" y="274" font-size="9" fill="#2a5a7a" text-anchor="middle" style="animation:fadeIn .3s .9s both">Humeral head</text>
+<!-- Hill-Sachs lesion on humeral head (posterior compression fracture) -->
+<path d="M408,220 Q418,230 416,245" stroke="#ff4a2a" stroke-width="3" fill="none" stroke-linecap="round" opacity="0" style="animation:fadeIn .5s 3s both"/>
+<text x="422" y="234" font-size="9" fill="#ff6b42" opacity="0" style="animation:fadeIn .4s 3.2s both">Hill-Sachs</text>
+<!-- Anterior direction arrow -->
+<text x="104" y="325" font-size="8.5" fill="#2a5a7a" opacity="0" style="animation:fadeIn .3s 1.5s both">← ANTERIOR</text>
+<text x="420" y="325" font-size="8.5" fill="#2a5a7a" text-anchor="end" opacity="0" style="animation:fadeIn .3s 1.5s both">POSTERIOR →</text>
+<!-- Subscapularis tendon anterior -->
+<path d="M151,262 Q190,248 200,240" stroke="#d4a843" stroke-width="3" fill="none" stroke-linecap="round" stroke-dasharray="1000" stroke-dashoffset="1000" opacity="0.6" style="animation:drawIn .8s 1.6s both"/>
+<text x="188" y="232" font-size="8.5" fill="#d4a843" opacity="0" style="animation:fadeIn .3s 1.8s both">Subscap.</text>
+<text x="228" y="344" font-size="9" fill="#9b6bb5" opacity="0" style="animation:fadeIn .3s 1.6s both">Intact posterior labrum</text>
+</svg>
+</div>
+<div class="inf">
+  <div class="ic">Shoulder</div>
+  <div class="it">Bankart Lesion</div>
+  <div class="is">Anterior Labral Tear · Instability</div>
+  <p class="id">Detachment of the anteroinferior glenoid labrum from the glenoid rim, typically from anterior shoulder dislocation. The labrum fails to contain the humeral head, causing recurrent instability.</p>
+  <div class="tags"><span class="tag tl">Anterior Labrum</span><span class="tag tp">Bankart Repair</span><span class="tag tp">Latarjet</span></div>
+  <ul class="fl">
+    <li><strong>Mechanism:</strong> Anterior dislocation (fall on abducted/ER arm)</li>
+    <li>Associated Hill-Sachs lesion (~80% of cases)</li>
+    <li>Positive apprehension / relocation test</li>
+    <li>MRI arthrogram: anterior labral tear, fluid in tear</li>
+    <li>Bony Bankart: glenoid rim fracture present</li>
+    <li>Latarjet: for glenoid bone loss &gt;20–25%</li>
+  </ul>
+</div>
+</div>
+
+<!-- ── AC JOINT SEPARATION ── -->
+<div class="cond" id="acj">
+<div class="sa">
+<svg viewBox="0 0 520 490" xmlns="http://www.w3.org/2000/svg" style="max-height:530px">
+<defs>
+  <filter id="gLa" x="-60%" y="-60%" width="220%" height="220%"><feGaussianBlur stdDeviation="7" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+</defs>
+<text x="260" y="30" font-size="9" fill="#1a4060" text-anchor="middle" letter-spacing=".1em" style="animation:fadeIn .5s .2s both">AC JOINT — CORONAL VIEW · GRADE III SEPARATION</text>
+<!-- Clavicle — elevated (displaced upward in Grade III) -->
+<path d="M28,128 Q108,120 178,130" stroke="#2a5a7a" stroke-width="10" fill="none" stroke-linecap="round" style="animation:fadeIn .5s .4s both"/>
+<path d="M28,128 Q108,120 178,130" stroke="#0d2035" stroke-width="7" fill="none" stroke-linecap="round" style="animation:fadeIn .5s .4s both"/>
+<text x="28" y="114" font-size="9" fill="#2a5a7a" style="animation:fadeIn .3s .5s both">Clavicle (elevated)</text>
+<!-- Distal clavicle end -->
+<ellipse cx="178" cy="130" rx="12" ry="16" fill="#0d2035" stroke="#2a5a7a" stroke-width="2" style="animation:fadeIn .4s .6s both"/>
+<!-- Acromion — stays with scapula, drops down relative to clavicle -->
+<path d="M196,168 Q218,170 248,178" stroke="#2a5a7a" stroke-width="12" fill="none" stroke-linecap="round" style="animation:fadeIn .5s .5s both"/>
+<path d="M196,168 Q218,170 248,178" stroke="#0d2035" stroke-width="9" fill="none" stroke-linecap="round" style="animation:fadeIn .5s .5s both"/>
+<ellipse cx="195" cy="168" rx="12" ry="16" fill="#0d2035" stroke="#2a5a7a" stroke-width="2" style="animation:fadeIn .4s .7s both"/>
+<text x="260" y="172" font-size="9" fill="#2a5a7a" style="animation:fadeIn .3s .6s both">Acromion</text>
+<!-- AC joint gap (Grade III — wide) -->
+<line x1="182" y1="130" x2="190" y2="165" stroke="#ff4a2a" stroke-width="2" stroke-dasharray="4 3" opacity="0" style="animation:fadeIn .5s 2s both"/>
+<!-- Gap measurement -->
+<ellipse cx="186" cy="148" rx="12" ry="20" fill="#ff4a2a" opacity="0" style="animation:inflame 2.5s 2.2s infinite;filter:blur(7px)"/>
+<text x="204" y="142" font-size="9" fill="#ff4a2a" opacity="0" style="animation:fadeIn .4s 2.5s both">AC gap</text>
+<!-- CC ligaments (torn in Grade III) -->
+<!-- Coracoid process -->
+<path d="M178,230 Q168,218 174,198" stroke="#2a5a7a" stroke-width="8" fill="none" stroke-linecap="round" style="animation:fadeIn .5s .8s both"/>
+<path d="M178,230 Q168,218 174,198" stroke="#0d2035" stroke-width="5" fill="none" stroke-linecap="round" style="animation:fadeIn .5s .8s both"/>
+<text x="126" y="233" font-size="9" fill="#2a5a7a" style="animation:fadeIn .3s .9s both">Coracoid</text>
+<!-- CC ligaments (torn) — dashed -->
+<path d="M172,196 Q148,158 152,130" stroke="#9b6bb5" stroke-width="2.5" fill="none" stroke-dasharray="5 4" opacity="0.5" stroke-linecap="round" style="animation:fadeIn .6s 1.8s both"/>
+<path d="M172,196 Q162,158 168,130" stroke="#9b6bb5" stroke-width="2.5" fill="none" stroke-dasharray="5 4" opacity="0.5" stroke-linecap="round" style="animation:fadeIn .6s 1.9s both"/>
+<text x="126" y="165" font-size="9" fill="#9b6bb5" opacity="0" style="animation:fadeIn .3s 2s both">CC ligaments</text>
+<text x="126" y="177" font-size="9" fill="#9b6bb5" opacity="0" style="animation:fadeIn .3s 2.1s both">(torn)</text>
+<!-- Glenoid + head for reference -->
+<ellipse cx="210" cy="330" rx="22" ry="60" fill="#0d2035" stroke="#2a5a7a" stroke-width="1.5" style="animation:fadeIn .4s .8s both"/>
+<circle cx="336" cy="330" r="72" fill="#0d2035" stroke="#2a5a7a" stroke-width="1.5" style="animation:fadeIn .4s .9s both"/>
+<path d="M290,390 Q286,450 284,475" stroke="#2a5a7a" stroke-width="12" fill="none" stroke-linecap="round" style="animation:fadeIn .3s 1s both"/>
+<path d="M290,390 Q286,450 284,475" stroke="#0d2035" stroke-width="8" fill="none" stroke-linecap="round" style="animation:fadeIn .3s 1s both"/>
+<!-- Grade labels -->
+<text x="28" y="430" font-size="9" fill="#2a5a7a" style="animation:fadeIn .3s 2.5s both">Grade I: sprain only</text>
+<text x="28" y="443" font-size="9" fill="#2a5a7a" style="animation:fadeIn .3s 2.6s both">Grade II: AC tear, CC intact</text>
+<text x="28" y="456" font-size="9.5" fill="#ff6b42" style="animation:fadeIn .3s 2.7s both">Grade III: AC + CC torn ← shown</text>
+</svg>
+</div>
+<div class="inf">
+  <div class="ic">Shoulder</div>
+  <div class="it">AC Joint Separation</div>
+  <div class="is">Acromioclavicular Joint · Grade I–VI</div>
+  <p class="id">Disruption of the acromioclavicular (AC) and coracoclavicular (CC) ligaments. Grades I–II: conservative. Grade III+: often surgical with CC ligament reconstruction.</p>
+  <div class="tags"><span class="tag ti">Ligament Tear</span><span class="tag tp">CC Reconstruction</span><span class="tag tp">Hook Plate</span></div>
+  <ul class="fl">
+    <li><strong>Mechanism:</strong> Direct blow to shoulder point (fall, tackle)</li>
+    <li><strong>Sign:</strong> Elevated clavicle "piano key" deformity</li>
+    <li>Grade I: AC sprain; Grade II: AC tear; Grade III: +CC torn</li>
+    <li>X-ray: weighted views show AC gap, CC distance</li>
+    <li>Grade III management remains debated (operative vs. conservative)</li>
+    <li>Grade IV–VI: all operative</li>
+  </ul>
+</div>
+</div>
+
+<!-- ── FROZEN SHOULDER ── -->
+<div class="cond" id="cryo">
+<div class="sa">
+<svg viewBox="0 0 520 490" xmlns="http://www.w3.org/2000/svg" style="max-height:530px">
+<defs>
+  <filter id="gLc" x="-60%" y="-60%" width="220%" height="220%"><feGaussianBlur stdDeviation="8" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+</defs>
+<text x="260" y="30" font-size="9" fill="#1a4060" text-anchor="middle" letter-spacing=".1em" style="animation:fadeIn .5s .2s both">RIGHT SHOULDER — CORONAL VIEW · ADHESIVE CAPSULITIS</text>
+<!-- Clavicle + acromion -->
+<path d="M30,148 Q110,140 188,150" stroke="#2a5a7a" stroke-width="10" fill="none" stroke-linecap="round" style="animation:fadeIn .5s .4s both"/>
+<path d="M30,148 Q110,140 188,150" stroke="#0d2035" stroke-width="7" fill="none" stroke-linecap="round" style="animation:fadeIn .5s .4s both"/>
+<path d="M188,150 Q210,152 242,164" stroke="#2a5a7a" stroke-width="12" fill="none" stroke-linecap="round" style="animation:fadeIn .5s .5s both"/>
+<path d="M188,150 Q210,152 242,164" stroke="#0d2035" stroke-width="9" fill="none" stroke-linecap="round" style="animation:fadeIn .5s .5s both"/>
+<!-- Glenoid -->
+<ellipse cx="188" cy="295" rx="24" ry="72" fill="#0d2035" stroke="#2a5a7a" stroke-width="2" style="animation:fadeIn .5s .6s both"/>
+<!-- Humeral head -->
+<circle cx="320" cy="290" r="84" fill="#0d2035" stroke="#2a5a7a" stroke-width="2" style="animation:fadeIn .5s .7s both"/>
+<path d="M274,356 Q270,430 268,470" stroke="#2a5a7a" stroke-width="14" fill="none" stroke-linecap="round" style="animation:fadeIn .4s .8s both"/>
+<path d="M274,356 Q270,430 268,470" stroke="#0d2035" stroke-width="10" fill="none" stroke-linecap="round" style="animation:fadeIn .4s .8s both"/>
+<!-- THICKENED JOINT CAPSULE (layered rings, pulsing) -->
+<path d="M215,206 Q234,198 260,195 Q306,192 340,205 Q370,218 380,250 Q388,280 382,312 Q374,344 354,362 Q326,378 298,376 Q272,374 252,360 Q228,342 218,316 Q208,288 210,254 Q212,228 215,206Z"
+  stroke="#4fc3f7" stroke-width="6" fill="none" stroke-linecap="round" opacity="0" style="animation:capsuleThick 3s 1.5s infinite;filter:drop-shadow(0 0 8px #4fc3f7)"/>
+<path d="M218,214 Q240,206 265,203 Q306,200 338,212 Q364,224 374,255 Q382,284 376,314 Q368,342 350,358 Q324,372 298,372 Q274,370 256,356 Q234,338 226,314 Q218,288 220,256 Q222,233 218,214Z"
+  stroke="#4fc3f7" stroke-width="10" fill="rgba(79,195,247,0.04)" stroke-linecap="round" opacity="0" style="animation:capsuleThick 3s 1.6s infinite"/>
+<!-- Small joint volume indicator -->
+<text x="310" y="294" font-size="9" fill="#4fc3f7" text-anchor="middle" opacity="0" style="animation:fadeIn .4s 2.5s both">↓ Volume</text>
+<text x="310" y="306" font-size="9" fill="#4fc3f7" text-anchor="middle" opacity="0" style="animation:fadeIn .4s 2.6s both">&lt; 10 mL</text>
+<!-- Axillary recess contracted -->
+<path d="M236,358 Q242,374 258,378" stroke="#ff4a2a" stroke-width="3" fill="none" stroke-dasharray="4 3" opacity="0" style="animation:fadeIn .5s 2.8s both"/>
+<text x="192" y="386" font-size="9" fill="#ff6b42" opacity="0" style="animation:fadeIn .4s 3s both">Contracted axillary recess</text>
+<text x="392" y="178" font-size="9" fill="#4fc3f7" opacity="0" style="animation:fadeIn .4s 2.4s both">Thickened</text>
+<text x="392" y="190" font-size="9" fill="#4fc3f7" opacity="0" style="animation:fadeIn .4s 2.5s both">capsule</text>
+<text x="145" y="298" font-size="9" fill="#2a5a7a" text-anchor="end" style="animation:fadeIn .3s .7s both">Glenoid</text>
+<!-- ROM arcs showing restriction -->
+<path d="M270,200 A120,120 0 0,1 400,290" stroke="#ffdd00" stroke-width="1.5" fill="none" stroke-dasharray="4 4" opacity="0" style="animation:fadeIn .6s 3.2s both"/>
+<text x="408" y="288" font-size="8.5" fill="#ffdd00" opacity="0" style="animation:fadeIn .4s 3.4s both">Restricted ROM</text>
+</svg>
+</div>
+<div class="inf">
+  <div class="ic">Shoulder</div>
+  <div class="it">Frozen Shoulder</div>
+  <div class="is">Adhesive Capsulitis · 3 Phases</div>
+  <p class="id">Progressive fibrosis and contracture of the glenohumeral joint capsule, dramatically reducing range of motion. The axillary recess is obliterated. Joint volume drops to &lt;10 mL (normal ~28 mL).</p>
+  <div class="tags"><span class="tag tn">Capsule</span><span class="tag tp">Manipulation Under Anesthesia</span><span class="tag tp">Capsular Release</span></div>
+  <ul class="fl">
+    <li><strong>Phase 1 (Freezing):</strong> Painful, insidious 3–9 months</li>
+    <li><strong>Phase 2 (Frozen):</strong> Stiff, less pain, 9–15 months</li>
+    <li><strong>Phase 3 (Thawing):</strong> Gradual recovery 15–24 months</li>
+    <li>ER most limited; abduction also restricted</li>
+    <li>Associated: diabetes, thyroid disease, post-immobilization</li>
+    <li>MRI: thickened rotator interval, coracohumeral ligament</li>
+  </ul>
+</div>
+</div>
+
+</main>
+</div><!-- .app -->
+
+<script>
+function sw(id, btn) {
+  // Use inline style to force visibility — bypasses any CSS class-cascade failure on iOS Safari
+  document.querySelectorAll('.cond').forEach(function(c) {
+    c.style.display = 'none';
+    c.classList.remove('on');
+  });
+  document.querySelectorAll('.nb').forEach(function(b) { b.classList.remove('on'); });
+  if (btn) btn.classList.add('on');
+
+  var el = document.getElementById(id);
+  el.classList.add('on');
+  el.style.display = 'flex';                          // inline always wins over CSS
+  el.style.flexDirection = window.innerWidth <= 760 ? 'column' : 'row';
+  void el.offsetHeight;                               // force layout before paint
+
+  if (window.innerWidth <= 760) {
+    // Scroll to bring content into view — simple offsetTop, no options object (iOS compat)
+    window.scrollTo(0, el.offsetTop - 8);
+  } else {
+    // Desktop: restart SVG animations
+    var svg = el.querySelector('svg');
+    if (svg) { svg.style.display = 'none'; void svg.offsetWidth; svg.style.display = ''; }
+  }
+}
+`;
+var _vhtml=_vp1+'\x3C/script>\x3C/body>\x3C/html>';
+function openViewer(){
+  var b=new Blob([_vhtml],{type:'text/html'});
+  var u=URL.createObjectURL(b);
+  window.open(u,'_blank');
+  setTimeout(function(){URL.revokeObjectURL(u);},60000);
+}
+</script>
+
+</body>
+</html>

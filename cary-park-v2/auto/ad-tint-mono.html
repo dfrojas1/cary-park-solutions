@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>AD Window Tint — Clayton, NC</title>
+<meta name="description" content="Professional automotive, residential, and commercial window tinting. Owner-operated. Clayton, NC."/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Grotesk:wght@400;500;600;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --black:#1a1a1a;
+  --white:#ffffff;
+  --gray:#888888;
+  --light:#f2f2f2;
+  --hairline:#dddddd;
+  --r:0px;
+}
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans',sans-serif;color:var(--black);background:var(--white);line-height:1.6;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+
+/* DEMO BADGE */
+.demo-bar{background:var(--black);color:var(--white);text-align:center;padding:9px;font-family:'Space Grotesk',sans-serif;font-size:.65rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase}
+.demo-bar a{color:var(--gray);text-decoration:underline}
+
+/* NAV */
+nav{position:sticky;top:0;z-index:100;background:var(--white);border-bottom:3px solid var(--black);padding:0 48px;height:64px;display:flex;align-items:center;justify-content:space-between}
+.nav-logo{display:flex;align-items:center;gap:14px}
+.logo-block{width:38px;height:38px;background:var(--black);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.logo-block span{font-family:'Bebas Neue',sans-serif;font-size:1.3rem;color:var(--white);line-height:1;letter-spacing:.02em}
+.logo-name{font-family:'Space Grotesk',sans-serif;font-size:.75rem;font-weight:700;letter-spacing:.25em;text-transform:uppercase;color:var(--black)}
+.nav-links{display:flex;align-items:center;gap:32px}
+.nav-links a{font-family:'Space Grotesk',sans-serif;font-size:.72rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--black);position:relative;padding-bottom:2px}
+.nav-links a::after{content:'';position:absolute;bottom:0;left:0;width:0;height:2px;background:var(--black);transition:width .2s}
+.nav-links a:hover::after{width:100%}
+.nav-book{background:var(--black);color:var(--white)!important;padding:9px 22px;font-family:'Space Grotesk',sans-serif;font-size:.72rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;transition:opacity .2s}
+.nav-book:hover{opacity:.8}
+.nav-book::after{display:none!important}
+@media(max-width:720px){
+  .nav-links{display:none}
+  nav{padding:0 20px}
+  .logo-name{display:none}
+}
+
+/* HERO */
+.hero{background:var(--white);padding:80px 48px 72px;border-bottom:3px solid var(--black)}
+@media(max-width:720px){.hero{padding:60px 24px 56px}}
+.hero-inner{max-width:1100px;margin:0 auto}
+.hero-h{font-family:'Bebas Neue',sans-serif;font-size:clamp(5rem,14vw,12rem);color:var(--black);line-height:.92;letter-spacing:.01em;margin-bottom:20px}
+.hero-rule{width:100%;height:3px;background:var(--black);margin-bottom:20px}
+.hero-sub-row{display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap}
+.hero-sub{font-family:'Space Grotesk',sans-serif;font-size:clamp(.85rem,2vw,1.05rem);font-weight:700;letter-spacing:.06em;color:var(--black)}
+.hero-sub span{color:var(--gray)}
+.hero-btns{display:flex;gap:12px;flex-wrap:wrap;margin-top:36px}
+.btn-solid{background:var(--black);color:var(--white);padding:14px 32px;font-family:'Space Grotesk',sans-serif;font-size:.78rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;display:inline-block;transition:opacity .15s}
+.btn-solid:hover{opacity:.8}
+.btn-outline{background:transparent;color:var(--black);border:2px solid var(--black);padding:12px 30px;font-family:'Space Grotesk',sans-serif;font-size:.78rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;display:inline-block;transition:background .15s,color .15s}
+.btn-outline:hover{background:var(--black);color:var(--white)}
+
+/* REVIEWS */
+.reviews{background:var(--light);padding:72px 48px;border-bottom:1px solid var(--hairline)}
+@media(max-width:720px){.reviews{padding:56px 24px}}
+.reviews-inner{max-width:1100px;margin:0 auto}
+.sec-label{font-family:'Space Grotesk',sans-serif;font-size:.68rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--gray);margin-bottom:32px}
+.review-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--hairline);border:1px solid var(--hairline)}
+@media(max-width:720px){.review-grid{grid-template-columns:1fr}}
+.review-card{background:var(--white);padding:28px 26px;border:none}
+.review-stars{font-size:.85rem;letter-spacing:2px;margin-bottom:10px;color:var(--black)}
+.review-text{font-size:.88rem;line-height:1.75;color:var(--black);margin-bottom:16px;font-style:italic}
+.review-name{font-family:'Space Grotesk',sans-serif;font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--gray)}
+
+/* SERVICES */
+.services{padding:72px 48px;border-bottom:3px solid var(--black)}
+@media(max-width:720px){.services{padding:56px 24px}}
+.services-inner{max-width:1100px;margin:0 auto}
+.svc-list{margin-top:32px}
+.svc-row{display:grid;grid-template-columns:auto 1fr auto;gap:32px;align-items:baseline;padding:22px 0;border-bottom:1px solid var(--hairline);background:var(--white);transition:background .15s}
+.svc-row:first-child{border-top:1px solid var(--hairline)}
+.svc-row:hover{background:var(--light)}
+@media(max-width:600px){.svc-row{grid-template-columns:1fr;gap:6px;padding:18px 0}}
+.svc-num{font-family:'Bebas Neue',sans-serif;font-size:1.5rem;color:var(--hairline);line-height:1;min-width:36px}
+.svc-name{font-family:'Bebas Neue',sans-serif;font-size:clamp(1.6rem,4vw,2.4rem);color:var(--black);line-height:1}
+.svc-sub{font-size:.84rem;color:var(--gray);margin-top:5px;font-family:'DM Sans',sans-serif;font-weight:300}
+.svc-price{font-family:'Space Grotesk',sans-serif;font-size:.78rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--gray);text-align:right;white-space:nowrap}
+@media(max-width:600px){.svc-price{text-align:left}}
+
+/* ABOUT */
+.about{background:var(--white);padding:72px 48px;border-bottom:1px solid var(--hairline);position:relative;overflow:hidden}
+@media(max-width:720px){.about{padding:56px 24px}}
+.about-watermark{position:absolute;bottom:-30px;right:-20px;font-family:'Bebas Neue',sans-serif;font-size:clamp(6rem,18vw,16rem);color:var(--black);opacity:.03;line-height:1;pointer-events:none;white-space:nowrap;user-select:none}
+.about-inner{max-width:800px;margin:0 auto;position:relative;z-index:1}
+.about-inner .sec-label{margin-bottom:24px}
+.about-h{font-family:'Bebas Neue',sans-serif;font-size:clamp(2.4rem,6vw,5rem);color:var(--black);line-height:1;margin-bottom:28px}
+.about-body{font-size:1rem;color:var(--black);line-height:1.85;font-weight:300;max-width:680px}
+.about-body p{margin-bottom:16px}
+.about-body strong{font-weight:600;color:var(--black)}
+
+/* GALLERY */
+.gallery{background:var(--light);padding:72px 48px;border-bottom:3px solid var(--black)}
+@media(max-width:720px){.gallery{padding:56px 24px}}
+.gallery-inner{max-width:1100px;margin:0 auto}
+.gallery-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:3px;margin-top:32px}
+@media(max-width:600px){.gallery-grid{grid-template-columns:1fr 1fr}}
+.gallery-item{aspect-ratio:4/3;background:var(--hairline);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;border:1px solid var(--hairline);position:relative;overflow:hidden}
+.gallery-item:nth-child(1){background:#e8e8e8}
+.gallery-item:nth-child(2){background:#ececec}
+.gallery-item:nth-child(3){background:#e4e4e4}
+.gallery-item:nth-child(4){background:#efefef}
+.gallery-item:nth-child(5){background:#e6e6e6}
+.gallery-item:nth-child(6){background:#eaeaea}
+.gallery-before-after{position:absolute;bottom:0;left:0;right:0;display:flex}
+.gallery-tag{flex:1;text-align:center;padding:6px;font-family:'Space Grotesk',sans-serif;font-size:.6rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase}
+.gallery-tag.before{background:var(--white);color:var(--black);border-top:1px solid var(--hairline)}
+.gallery-tag.after{background:var(--black);color:var(--white)}
+.gallery-placeholder{font-family:'Bebas Neue',sans-serif;font-size:1.1rem;letter-spacing:.08em;color:var(--gray);opacity:.4}
+
+/* BOOKING / CONTACT */
+.contact{background:var(--white);padding:72px 48px 80px;border-bottom:1px solid var(--hairline)}
+@media(max-width:720px){.contact{padding:56px 24px 64px}}
+.contact-inner{max-width:1100px;margin:0 auto}
+.contact-top{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start;margin-top:48px}
+@media(max-width:820px){.contact-top{grid-template-columns:1fr;gap:48px}}
+.contact-ready{font-family:'Bebas Neue',sans-serif;font-size:clamp(4rem,10vw,9rem);color:var(--black);line-height:.9;margin-bottom:20px}
+.contact-phone{font-family:'Bebas Neue',sans-serif;font-size:clamp(2rem,5vw,3.5rem);color:var(--black);line-height:1;margin-bottom:8px;display:block}
+.contact-phone:hover{color:var(--gray)}
+.contact-address{font-family:'DM Sans',sans-serif;font-size:.9rem;color:var(--gray);line-height:1.8;font-weight:300;margin-bottom:24px}
+.contact-hours{border-top:1px solid var(--hairline);padding-top:16px}
+.contact-hours-row{display:flex;justify-content:space-between;padding:7px 0;border-bottom:1px solid var(--hairline);font-size:.84rem}
+.contact-hours-row:last-child{border-bottom:none}
+.ch-day{font-family:'Space Grotesk',sans-serif;font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--black)}
+.ch-time{font-size:.82rem;color:var(--gray)}
+
+/* FORM */
+.form-wrap{}
+.form-group{margin-bottom:18px}
+.form-group label{display:block;font-family:'Space Grotesk',sans-serif;font-size:.65rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--gray);margin-bottom:6px}
+.form-group input,.form-group select,.form-group textarea{
+  width:100%;padding:12px 14px;
+  background:var(--white);
+  border:1px solid var(--black);
+  color:var(--black);
+  font-family:'DM Sans',sans-serif;font-size:.9rem;
+  outline:none;border-radius:0;
+  -webkit-appearance:none;
+  transition:border-color .15s;
+}
+.form-group input:focus,.form-group select:focus,.form-group textarea:focus{border-color:var(--black);border-width:2px}
+.form-group textarea{min-height:90px;resize:vertical;font-weight:300}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:480px){.form-row{grid-template-columns:1fr}}
+
+/* SMS CONSENT */
+.sms-consent{border:1px solid var(--hairline);padding:18px;margin-bottom:18px;background:var(--light)}
+.sms-consent-check{display:flex;gap:12px;align-items:flex-start;margin-bottom:10px}
+.sms-consent-check input[type=checkbox]{width:18px;height:18px;border:2px solid var(--black);border-radius:0;cursor:pointer;flex-shrink:0;margin-top:2px;accent-color:var(--black)}
+.sms-consent-check label{font-size:.82rem;color:var(--black);line-height:1.6;cursor:pointer;font-weight:400}
+.sms-consent-legal{font-size:.72rem;color:var(--gray);line-height:1.65;font-weight:300}
+.sms-consent-legal strong{font-weight:600;color:var(--black)}
+
+.form-submit{background:var(--black);color:var(--white);width:100%;padding:15px;font-family:'Space Grotesk',sans-serif;font-size:.8rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;border:none;cursor:pointer;transition:opacity .15s;font-family:'Space Grotesk',sans-serif}
+.form-submit:hover{opacity:.8}
+.form-submit:disabled{opacity:.4;cursor:not-allowed}
+.form-note{font-size:.72rem;color:var(--gray);margin-top:10px;line-height:1.65;font-weight:300}
+
+/* BOOKING CONFIRMATION STATE */
+.booking-success{display:none;padding:40px 0;text-align:center}
+.bs-h{font-family:'Bebas Neue',sans-serif;font-size:3rem;color:var(--black);margin-bottom:12px}
+.bs-p{font-size:.9rem;color:var(--gray);line-height:1.7;max-width:400px;margin:0 auto}
+
+/* FOOTER */
+footer{background:var(--black);padding:32px 48px;border-top:none}
+@media(max-width:720px){footer{padding:28px 24px}}
+.footer-inner{max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:14px;border-bottom:1px solid rgba(255,255,255,.12);padding-bottom:24px;margin-bottom:20px}
+.footer-name{font-family:'Bebas Neue',sans-serif;font-size:1.4rem;color:var(--white);letter-spacing:.04em}
+.footer-loc{font-family:'Space Grotesk',sans-serif;font-size:.65rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.4)}
+.footer-credit{text-align:center;font-size:.72rem;color:rgba(255,255,255,.3);font-weight:300}
+.footer-credit a{color:rgba(255,255,255,.5);text-decoration:underline}
+
+/* MOBILE NAV TOGGLE */
+.nav-hamburger{display:none;background:none;border:none;cursor:pointer;padding:4px;flex-direction:column;gap:5px}
+.nav-hamburger span{display:block;width:24px;height:2px;background:var(--black)}
+@media(max-width:720px){.nav-hamburger{display:flex}}
+.mobile-nav{display:none;position:fixed;inset:64px 0 0 0;background:var(--white);z-index:99;padding:32px 24px;border-top:3px solid var(--black);flex-direction:column;gap:4px}
+.mobile-nav.open{display:flex}
+.mobile-nav a{font-family:'Space Grotesk',sans-serif;font-size:1.1rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--black);padding:14px 0;border-bottom:1px solid var(--hairline)}
+.mobile-nav .m-book{background:var(--black);color:var(--white);text-align:center;padding:16px;margin-top:8px;border-bottom:none}
+</style>
+</head>
+<body>
+
+<div class="demo-bar">DEMO — Cary Park Solutions · <a href="../../index.html">caryparksolutions.com</a></div>
+
+<!-- NAV -->
+<nav id="site-nav">
+  <div class="nav-logo">
+    <div class="logo-block"><span>AD</span></div>
+    <span class="logo-name">Window Tint</span>
+  </div>
+  <div class="nav-links">
+    <a href="#services">Services</a>
+    <a href="#about">About</a>
+    <a href="#gallery">Gallery</a>
+    <a href="#book" class="nav-book">Book Now</a>
+  </div>
+  <button class="nav-hamburger" id="nav-toggle" aria-label="Open menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<div class="mobile-nav" id="mobile-nav">
+  <a href="#services" onclick="closeMobileNav()">Services</a>
+  <a href="#about" onclick="closeMobileNav()">About</a>
+  <a href="#gallery" onclick="closeMobileNav()">Gallery</a>
+  <a href="#book" onclick="closeMobileNav()" class="m-book">Book Now</a>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-h">TINT.<br/>DONE RIGHT.</div>
+    <div class="hero-rule"></div>
+    <div class="hero-sub-row">
+      <div class="hero-sub">One Bay · Owner-Operated · <span>Clayton, NC</span></div>
+    </div>
+    <div class="hero-btns">
+      <a href="tel:9190000000" class="btn-solid">Call Now</a>
+      <a href="#gallery" class="btn-outline">Our Work</a>
+    </div>
+  </div>
+</section>
+
+<!-- REVIEWS -->
+<section class="reviews" id="reviews">
+  <div class="reviews-inner">
+    <div class="sec-label">Google Reviews</div>
+    <div class="review-grid">
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">"Dropped my car off in the morning, picked it up by noon. The tint is perfect — no bubbles, no edges lifting. This guy is the real deal."</p>
+        <div class="review-name">Marcus T. — Clayton, NC</div>
+      </div>
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">"Had three cars done here. Prices are fair, work is clean, and he's honest about what film makes sense for your situation. Won't go anywhere else."</p>
+        <div class="review-name">Sarah K. — Garner, NC</div>
+      </div>
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">"Got my home's front windows tinted for privacy and heat. Big difference. Told him my budget and he worked with it. Highly recommend."</p>
+        <div class="review-name">James R. — Johnston County</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="services" id="services">
+  <div class="services-inner">
+    <div class="sec-label">What We Do</div>
+    <div class="svc-list">
+      <div class="svc-row">
+        <div class="svc-num">01</div>
+        <div>
+          <div class="svc-name">Automotive Tinting</div>
+          <div class="svc-sub">Cars, trucks, SUVs. All windows including rear and windshield strip. Legal compliance guidance included.</div>
+        </div>
+        <div class="svc-price">From $149</div>
+      </div>
+      <div class="svc-row">
+        <div class="svc-num">02</div>
+        <div>
+          <div class="svc-name">Residential</div>
+          <div class="svc-sub">Home windows, sliding doors, skylights. Heat rejection, UV blocking, and privacy film options.</div>
+        </div>
+        <div class="svc-price">Quote Required</div>
+      </div>
+      <div class="svc-row">
+        <div class="svc-num">03</div>
+        <div>
+          <div class="svc-name">Commercial</div>
+          <div class="svc-sub">Storefronts, offices, and multi-unit properties. Safety film and anti-graffiti options available.</div>
+        </div>
+        <div class="svc-price">Quote Required</div>
+      </div>
+      <div class="svc-row">
+        <div class="svc-num">04</div>
+        <div>
+          <div class="svc-name">Paint Protection Film</div>
+          <div class="svc-sub">Clear bra for hoods, bumpers, mirrors, and full wraps. Self-healing film available.</div>
+        </div>
+        <div class="svc-price">From $299</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="about" id="about">
+  <div class="about-inner">
+    <div class="sec-label">About</div>
+    <div class="about-h">CRAFT OVER QUANTITY.</div>
+    <div class="about-body">
+      <p>AD Window Tint is one bay, one operator, one standard: <strong>right or not at all.</strong> Every vehicle and window is worked by hand — no rushing, no cutting corners to fit five cars in a day.</p>
+      <p>I've been working with window film for over a decade. I know which products hold up in a NC summer and which ones look great in the showroom but fail after two years. I'll tell you the difference before you pay anything.</p>
+      <p>If you want the cheapest shop on Google, there are plenty. If you want it done once and done right — this is the place.</p>
+    </div>
+  </div>
+  <div class="about-watermark" aria-hidden="true">TINT.<br/>DONE RIGHT.</div>
+</section>
+
+<!-- GALLERY -->
+<section class="gallery" id="gallery">
+  <div class="gallery-inner">
+    <div class="sec-label">Gallery</div>
+    <div class="gallery-grid">
+      <div class="gallery-item">
+        <div class="gallery-placeholder">SEDAN · FULL</div>
+        <div class="gallery-before-after">
+          <span class="gallery-tag before">Before</span>
+          <span class="gallery-tag after">After</span>
+        </div>
+      </div>
+      <div class="gallery-item">
+        <div class="gallery-placeholder">TRUCK · REAR</div>
+        <div class="gallery-before-after">
+          <span class="gallery-tag before">Before</span>
+          <span class="gallery-tag after">After</span>
+        </div>
+      </div>
+      <div class="gallery-item">
+        <div class="gallery-placeholder">SUV · FULL</div>
+        <div class="gallery-before-after">
+          <span class="gallery-tag before">Before</span>
+          <span class="gallery-tag after">After</span>
+        </div>
+      </div>
+      <div class="gallery-item">
+        <div class="gallery-placeholder">HOME · LIVING ROOM</div>
+        <div class="gallery-before-after">
+          <span class="gallery-tag before">Before</span>
+          <span class="gallery-tag after">After</span>
+        </div>
+      </div>
+      <div class="gallery-item">
+        <div class="gallery-placeholder">STOREFRONT</div>
+        <div class="gallery-before-after">
+          <span class="gallery-tag before">Before</span>
+          <span class="gallery-tag after">After</span>
+        </div>
+      </div>
+      <div class="gallery-item">
+        <div class="gallery-placeholder">COUPE · PPF HOOD</div>
+        <div class="gallery-before-after">
+          <span class="gallery-tag before">Before</span>
+          <span class="gallery-tag after">After</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BOOKING / CONTACT -->
+<section class="contact" id="book">
+  <div class="contact-inner">
+    <div class="sec-label">Book an Appointment</div>
+    <div class="contact-top">
+      <!-- LEFT: info -->
+      <div>
+        <div class="contact-ready">READY?</div>
+        <a href="tel:9190000000" class="contact-phone">(919) 000-0000</a>
+        <div class="contact-address">
+          Clayton, NC<br/>
+          Monday – Saturday<br/>
+          By appointment preferred
+        </div>
+        <div class="contact-hours">
+          <div class="contact-hours-row">
+            <span class="ch-day">Mon – Fri</span>
+            <span class="ch-time">8:00 AM – 6:00 PM</span>
+          </div>
+          <div class="contact-hours-row">
+            <span class="ch-day">Saturday</span>
+            <span class="ch-time">9:00 AM – 3:00 PM</span>
+          </div>
+          <div class="contact-hours-row">
+            <span class="ch-day">Sunday</span>
+            <span class="ch-time">Closed</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- RIGHT: form -->
+      <div>
+        <div id="booking-form-wrap">
+          <form id="booking-form">
+            <div class="form-row">
+              <div class="form-group">
+                <label>First Name *</label>
+                <input type="text" name="first_name" required placeholder="Alex"/>
+              </div>
+              <div class="form-group">
+                <label>Last Name *</label>
+                <input type="text" name="last_name" required placeholder="Smith"/>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label>Phone *</label>
+                <input type="tel" name="phone" required placeholder="(919) 555-0100"/>
+              </div>
+              <div class="form-group">
+                <label>Email</label>
+                <input type="email" name="email" placeholder="alex@email.com"/>
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Service Needed *</label>
+              <select name="service" required>
+                <option value="">Select…</option>
+                <option value="auto-full">Automotive — Full Package</option>
+                <option value="auto-partial">Automotive — Partial (Rear / Back)</option>
+                <option value="residential">Residential — Quote Request</option>
+                <option value="commercial">Commercial — Quote Request</option>
+                <option value="ppf">Paint Protection Film</option>
+                <option value="unsure">Not Sure — Need Consultation</option>
+              </select>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label>Vehicle Year / Make / Model</label>
+                <input type="text" name="vehicle" placeholder="2021 Honda Accord"/>
+              </div>
+              <div class="form-group">
+                <label>Preferred Date</label>
+                <input type="date" name="preferred_date"/>
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Notes</label>
+              <textarea name="notes" placeholder="Any specifics, questions, or shade preferences…"></textarea>
+            </div>
+
+            <!-- SMS CONSENT -->
+            <div class="sms-consent">
+              <div class="sms-consent-check">
+                <input type="checkbox" id="sms-opt" name="sms_consent" value="yes"/>
+                <label for="sms-opt">
+                  I agree to receive appointment confirmations and status updates via text message from AD Window Tint.
+                </label>
+              </div>
+              <p class="sms-consent-legal">
+                By checking this box, you consent to receive automated SMS messages from <strong>AD Window Tint</strong> at the mobile number provided. Message frequency varies. Standard message &amp; data rates may apply. Reply <strong>STOP</strong> to unsubscribe at any time. Reply <strong>HELP</strong> for help. Consent is not a condition of purchase. <a href="#" style="color:var(--black);text-decoration:underline">Privacy Policy</a> · <a href="#" style="color:var(--black);text-decoration:underline">Terms of Service</a>
+              </p>
+            </div>
+
+            <button type="submit" class="form-submit" id="book-submit">REQUEST APPOINTMENT</button>
+            <p class="form-note">We'll confirm within 2 hours by phone or text. No payment required to book.</p>
+          </form>
+        </div>
+        <div class="booking-success" id="booking-success">
+          <div class="bs-h">YOU'RE BOOKED.</div>
+          <p class="bs-p">We'll reach out within 2 hours to confirm your appointment and answer any questions. See you soon.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div>
+      <div class="footer-name">AD WINDOW TINT</div>
+      <div class="footer-loc">Clayton, NC · Est. 2020</div>
+    </div>
+    <a href="tel:9190000000" style="font-family:'Bebas Neue',sans-serif;font-size:1.6rem;color:rgba(255,255,255,.6);letter-spacing:.04em">(919) 000-0000</a>
+  </div>
+  <p class="footer-credit">Demo built by <a href="../../index.html">Cary Park Solutions</a> · info@caryparksolutions.com</p>
+</footer>
+
+<script>
+// Mobile nav
+document.getElementById('nav-toggle').addEventListener('click', function() {
+  document.getElementById('mobile-nav').classList.toggle('open');
+});
+function closeMobileNav() {
+  document.getElementById('mobile-nav').classList.remove('open');
+}
+
+// Booking form — replace YOUR_FORM_ID with Formspree ID
+var FORMSPREE_ID = 'YOUR_FORM_ID';
+
+document.getElementById('booking-form').addEventListener('submit', async function(e) {
+  e.preventDefault();
+  var btn = document.getElementById('book-submit');
+  btn.textContent = 'SENDING…';
+  btn.disabled = true;
+
+  if (FORMSPREE_ID === 'YOUR_FORM_ID') {
+    document.getElementById('booking-form-wrap').style.display = 'none';
+    document.getElementById('booking-success').style.display = 'block';
+    return;
+  }
+
+  var data = new FormData(this);
+  try {
+    var res = await fetch('https://formspree.io/f/' + FORMSPREE_ID, {
+      method: 'POST',
+      body: data,
+      headers: { 'Accept': 'application/json' }
+    });
+    if (res.ok) {
+      document.getElementById('booking-form-wrap').style.display = 'none';
+      document.getElementById('booking-success').style.display = 'block';
+    } else {
+      btn.textContent = 'REQUEST APPOINTMENT';
+      btn.disabled = false;
+      alert('Something went wrong. Please call us directly at (919) 000-0000.');
+    }
+  } catch(err) {
+    btn.textContent = 'REQUEST APPOINTMENT';
+    btn.disabled = false;
+    alert('Could not submit. Please call (919) 000-0000 directly.');
+  }
+});
+</script>
+</body>
+</html>
